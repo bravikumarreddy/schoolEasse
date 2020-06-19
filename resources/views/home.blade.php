@@ -57,7 +57,7 @@
                             <div class="panel panel-default" style="background-color: rgba(242,245,245,0.8);">
                                 <div class="panel-body">
                                     <h3>@lang('Welcome to') {{Auth::user()->school->name}}</h3>
-                                    @lang('Your presence and cooperation will help us to improve the education system of our organization.')
+                                    @lang ('Your presence and cooperation will help us to improve the education system of our organization.')
                                 </div>
                             </div>
                             <div class="panel panel-default">

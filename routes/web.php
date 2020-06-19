@@ -53,6 +53,13 @@ Route::get('grades/{student_id}', 'GradeController@index')->middleware(['auth', 
 Route::middleware(['auth', 'accountant'])->prefix('fees')->name('fees.')->group(function () {
     Route::get('all', 'FeeController@index');
     Route::get('create', 'FeeController@create');
+    Route::get('fee_structures', 'FeeStructureController@index');
+    Route::get('collect', 'FeeCollect@index');
+    Route::post('collect/invoice', 'FeeCollect@print');
+    Route::delete('fee_structures', 'FeeStructureController@destroy')->name("FeeStructureDelete");
+    Route::get('fee_structures/create', 'FeeStructureController@create');
+    Route::post('fee_structures/store', 'FeeStructureController@store');
+    Route::post('fee_structures/duplicate', 'FeeStructureController@duplicate');
     Route::post('create', 'FeeController@store');
 });
 

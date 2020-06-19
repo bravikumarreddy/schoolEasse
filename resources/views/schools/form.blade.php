@@ -32,12 +32,11 @@
 
                         <div class="col-md-6">
                             <select id="medium" class="form-control" name="medium">
-                                <option selected="selected">@lang('Bangla')</option>
-                                <option>@lang('English')</option>
+                                <option selected="selected">@lang('English')</option>
+                                <option>@lang('Tamil')</option>
                                 <option>@lang('Hindi')</option>
-                                <option>@lang('Spanish')</option>
-                                <option>@lang('Chinese')</option>
-                                <option>@lang('Arabic')</option>
+                                <option>@lang('Telugu')</option>
+
                             </select>
 
                             @if ($errors->has('medium'))

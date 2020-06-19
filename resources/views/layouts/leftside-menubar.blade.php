@@ -122,9 +122,16 @@
   @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
   <li class="nav-item dropdown">
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">monetization_on</i> <span class="nav-link-text">@lang('Fees Generator')</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
+        class="material-icons">monetization_on</i> <span class="nav-link-text">@lang('Manage Fee')</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
       <!-- Dropdown menu links -->
+
+       <li>
+         <a class="dropdown-item" href="{{ url('fees/fee_structures') }}"><i class="material-icons">view_list</i> <span class="nav-link-text">@lang('Fee Structures')</span></a>
+       </li>
+        <li>
+            <a class="dropdown-item" href="{{ url('fees/collect') }}"><i class="material-icons">money</i> <span class="nav-link-text">@lang('Collect Fees')</span></a>
+        </li>
       <li>
         <a class="dropdown-item" href="{{ url('fees/all') }}"><i class="material-icons">developer_board</i> <span class="nav-link-text">@lang('Generate Form')</span></a>
       </li>
@@ -133,9 +140,7 @@
       </li>
     </ul>
   </li>
-  @endif
-   
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
+
   <li class="nav-item dropdown">
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
         class="material-icons">account_balance_wallet</i> <span class="nav-link-text">@lang('Manage Accounts')</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>

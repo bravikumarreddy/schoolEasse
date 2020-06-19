@@ -127,6 +127,13 @@ class UserService {
                 ->orderBy('name', 'asc')
                 ->paginate(50);
     }
+    public function getAllStudents(){
+        return $this->user->with(['section.class', 'school', 'studentInfo'])
+            ->where('code', auth()->user()->school->code)
+            ->student()
+            ->where('active', 1)
+            ->orderBy('name', 'asc');
+    }
 
     public function getTeachers(){
         return $this->user->with(['section', 'school'])

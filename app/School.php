@@ -29,4 +29,9 @@ class School extends Model
   {
     return $this->hasMany('App\Gradesystem');
   }
+
+    public function fee_structures()
+    {
+        return $this->hasMany("fee_structures");
+    }
 }
