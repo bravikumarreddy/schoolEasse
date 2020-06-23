@@ -17,7 +17,7 @@ class CreateStudentInfosTable extends Migration
           $table->increments('id');
           $table->integer('student_id')->unsigned();
           $table->string('session');
-          $table->string('version');
+          $table->integer('fee_structure')->unsigned()->nullable();
           $table->string('group');
           $table->dateTime('birthday');
           $table->string('religion');
@@ -35,6 +35,12 @@ class CreateStudentInfosTable extends Migration
           $table->integer('mother_annual_income');
           $table->integer('user_id')->unsigned()->nullable();
           $table->timestamps();
+        });
+
+        Schema::table('student_infos', function (Blueprint $table) {
+
+            $table->foreign('fee_structure')->references("id")->on("fee_structures")->onDelete("set null");;
+
         });
     }
 

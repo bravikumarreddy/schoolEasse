@@ -10,21 +10,22 @@
       @endif
     @endif
     @if(\Auth::user()->role == 'admin')
-    <div class="rows" style="font-size:10px;margin-top:5%;">
-      <input type="hidden" id="picPath" name="pic_path">
-      <input type="hidden" id="userIdPic" name="user_id" value="{{$user->id}}">
-      @component('components.file-uploader',['upload_type'=>'profile'])
-      @endcomponent
-    </div>
+        <div class="rows" style="font-size:10px;margin-top:5%;">
+          <input type="hidden" id="picPath" name="pic_path">
+          <input type="hidden" id="userIdPic" name="user_id" value="{{$user->id}}">
+          @component('components.file-uploader',['upload_type'=>'profile'])
+          @endcomponent
+        </div>
     @endif
   </div>
   <div class="col-md-10" id="main-container">
-    <h3>{{$user->name}} <span class="label label-danger">{{ucfirst($user->role)}}</span> <span class="label label-primary">{{ucfirst($user->gender)}}</span>
+    <h3>{{$user->name}}  <span class="label label-danger">{{ucfirst($user->role)}}</span> <span class="label label-primary">{{ucfirst($user->gender)}}</span>
       @if ($user->role == 'teacher' && $user->section_id > 0)
         <small>@lang('Class Teacher of Section'): <span class="label label-info">{{ucfirst($user->section->section_number)}}</span></small>
       @endif
-      
+
       @if($user->role == "student")
+
        <button class="btn btn-xs btn-success pull-right" role="button" id="btnPrint"><i class="material-icons">print</i> @lang('Print Profile')</button>
        <div class="visible-print-block" id="profile-content">
        <div class="row">
@@ -54,16 +55,17 @@
                   <td>{{$user->name}}</td>
                 </tr>
                 <tr>
-                  <td>@lang('Class'):</td>
+                  <td>@lang('Class '):</td>
                   <td>{{$user->section->class->class_number}}</td>
                   <td>@lang('Section'):</td>
                   <td>{{$user->section->section_number}}</td>
                 </tr>
                 <tr>
+
                   <td>@lang('Session'):</td>
                   <td>@isset($user->studentInfo['session']){{$user->studentInfo['session']}}@endisset</td>
-                  <td>@lang('Version'):</td>
-                  <td>@isset($user->studentInfo['version']){{$user->studentInfo['version']}}@endisset</td>
+                  <td>@lang('Fee Structure'):</td>
+                  <td>@isset($user->studentInfo['fee_structure']){{$user->studentInfo['fee_structure']}}@endisset</td>
                 </tr>
                 <tr>
                   <td>@lang('Group'):</td>
@@ -205,8 +207,9 @@
           <td>{{$user->section->section_number}}</td>
         </tr>
         <tr>
-          <td><b>@lang('Version'):</b></td>
-          <td>@isset($user->studentInfo['version']){{$user->studentInfo['version']}}@endisset</td>
+
+          <td><b>@lang('Fee Structure'):</b></td>
+          <td>@isset($user->studentInfo['fee_structure']){{$user->studentInfo['fee_structure']}}@endisset</td>
           <td><b>@lang('Blood Group'):</b></td>
           <td>{{$user->blood_group}}</td>
         </tr>

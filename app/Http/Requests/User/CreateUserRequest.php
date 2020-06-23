@@ -27,6 +27,7 @@ class CreateUserRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name' => 'required|string|max:255',
             'email' => 'sometimes|email|max:255|unique:users',
@@ -40,7 +41,7 @@ class CreateUserRequest extends FormRequest
             'phone_number' => 'required|string|unique:users',
             'address' => 'required|string',
             'session' => 'required',
-            'version' => 'required',
+            'fee_structure' => '',
             'birthday' => 'required',
             'religion' => 'required|string',
         ];

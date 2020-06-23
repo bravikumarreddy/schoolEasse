@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\fee_structure;
 use App\Myclass;
 use App\Section;
 use App\StudentInfo;
@@ -76,6 +77,7 @@ class UserController extends Controller
      */
     public function redirectToRegisterStudent()
     {
+
         $classes = Myclass::query()
             ->bySchool(\Auth::user()->school->id)
             ->pluck('id');
@@ -84,9 +86,12 @@ class UserController extends Controller
             ->whereIn('class_id', $classes)
             ->get();
 
+        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
+
         session([
             'register_role' => 'student',
             'register_sections' => $sections,
+            'fee_structures' => $fee_structures
         ]);
 
         return redirect()->route('register');
@@ -186,8 +191,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+     public function store(CreateUserRequest $request)
     {
+
         DB::transaction(function () use ($request) {
             $password = $request->password;
             $tb = $this->userService->storeStudent($request);
@@ -318,10 +324,14 @@ class UserController extends Controller
             ->bySchool($user->school_id)
             ->get();
 
+        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
+
+
         return view('profile.edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,
+            "fee_structures" => $fee_structures
         ]);
     }
 

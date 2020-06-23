@@ -230,23 +230,31 @@
                             </div>
                         </div>
                         @if(session('register_role', 'student') == 'student')
-                        <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
-                            <label for="version" class="col-md-4 control-label">* @lang('Version')</label>
+
+                        @if(session('fee_structures'))
+                        <div class="form-group{{ $errors->has('fee_structure') ? ' has-error' : '' }}">
+                            <label for="fee_structure" class="col-md-4 control-label"> @lang('Fee Structure')</label>
 
                             <div class="col-md-6">
-                                <select id="version" class="form-control" name="version">
-                                    <option selected="selected">@lang('Bangla')</option>
-                                    <option>@lang('English')</option>
-									<option>@lang('Spanish')</option>
+                                <select id="fee_structure" class="form-control" name="fee_structure" >
+                                    <option selected="selected"></option>
+                                    @foreach (session('fee_structures') as $fee_structure)
+
+                                        <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
+
+                                    @endforeach
                                 </select>
 
-                                @if ($errors->has('version'))
+                                @if ($errors->has('fee_structure'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('version') }}</strong>
+                                    <strong>{{ $errors->first('fee_structure') }}</strong>
                                 </span>
                                 @endif
                             </div>
                         </div>
+                         @endif
+
+
                         <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                             <label for="session" class="col-md-4 control-label">* @lang('Session')</label>
 

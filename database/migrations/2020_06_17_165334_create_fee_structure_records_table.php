@@ -21,6 +21,19 @@ class CreateFeeStructureRecordsTable extends Migration
             $table->timestamps();
 
         });
+
+        Schema::create('instalments', function (Blueprint $table) {
+            $table->integer("fee_structure_id")->unsigned();;
+            $table->integer("number");
+            $table->string("due_date");
+            $table->timestamps();
+
+        });
+        Schema::table('instalments', function (Blueprint $table) {
+
+            $table->foreign('fee_structure_id')->references("id")->on("fee_structures")->onDelete('cascade');;
+
+        });
         Schema::table('fee_structure_records', function (Blueprint $table) {
 
             $table->foreign('fee_structure_id')->references("id")->on("fee_structures")->onDelete('cascade');;

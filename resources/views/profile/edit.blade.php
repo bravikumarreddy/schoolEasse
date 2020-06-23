@@ -168,6 +168,38 @@
                                 @endif
                             </div>
                         </div>
+
+                            @isset($fee_structures)
+                                <div class="form-group{{ $errors->has('fee_structure') ? ' has-error' : '' }}">
+                                    <label for="fee_structure" class="col-md-4 control-label"> @lang('Fee Structure')</label>
+
+                                    <div class="col-md-6">
+                                        <select id="fee_structure" class="form-control" name="fee_structure" >
+                                            @if($user->studentInfo['fee_structure'])
+                                                @foreach ($fee_structures as $fee_structure)
+                                                    @if($user->studentInfo['fee_structure']== $fee_structure->id)
+                                                        <option value="{{$fee_structure->id}}" selected>{{$fee_structure->name}}</option>
+                                                    @else
+                                                    <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <option selected value="">Select Fee Structure</option>
+                                                @foreach ($fee_structures as $fee_structure)
+                                                    <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+
+                                                @if ($errors->has('fee_structure'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('fee_structure') }}</strong>
+                                                    </span>
+                                                @endif
+                                    </div>
+                                </div>
+                            @endisset
+
                         <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                             <label for="session" class="col-md-4 control-label">* @lang('Session')</label>
 

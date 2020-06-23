@@ -5,6 +5,7 @@
 @endif
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2" id="side-navbar">

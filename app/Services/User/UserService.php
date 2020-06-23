@@ -46,7 +46,7 @@ class UserService {
         $info = StudentInfo::firstOrCreate(['student_id' => $id]);
         $info->student_id = $id;
         $info->session = (!empty($request->session)) ? $request->session : '';
-        $info->version = (!empty($request->version)) ? $request->version : '';
+        $info->fee_structure = (!empty($request->fee_structure)) ? $request->fee_structure : '';
         $info->group = (!empty($request->group)) ? $request->group : '';
         $info->birthday = (!empty($request->birthday)) ? $request->birthday : '';
         $info->religion = (!empty($request->religion)) ? $request->religion : '';
