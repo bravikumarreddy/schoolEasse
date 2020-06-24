@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\fee_structure;
+use App\Myclass;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\User\UserService;
@@ -21,9 +22,13 @@ class FeeCollect extends Controller
 
     public function index()
     {
+        $classes = json_encode( Myclass::query()
+            ->bySchool(\Auth::user()->school->id)->get()->all());
+
         $students = $this->userService->getAllStudents()->get()->all();
         $fee_structures = fee_structure::all();
-        return view("/fees/collect",compact("students","fee_structures"));
+
+        return view("/fees/collect",compact("students","fee_structures","classes"));
     }
 
     public function print(Request $request)

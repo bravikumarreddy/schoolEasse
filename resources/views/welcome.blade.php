@@ -80,7 +80,7 @@
                 <div class="title m-b-md">
                     {{config('app.name')}}
                 </div>
-                <div id="example"></div>
+
                 <p style="font-size: 25px;">@lang('Makes managing schools an amazing experience')</p>
                 <div class="links">
                     @if (Route::has('login'))
@@ -96,7 +96,7 @@
         </div>
         <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-        <script src="{{asset('js/app.js')}}"></script>
+        <
         <script>
             // Source: https://codepen.io/quasimondo/pen/lDdrF
             // Author: Mario Klingemann

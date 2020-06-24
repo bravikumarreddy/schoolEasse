@@ -54,6 +54,8 @@ Route::middleware(['auth', 'accountant'])->prefix('fees')->name('fees.')->group(
     Route::get('all', 'FeeController@index');
     Route::get('create', 'FeeController@create');
     Route::get('fee_structures', 'FeeStructureController@index');
+    Route::get('/api/sections/{class_id}', 'FeeStructureController@sections');
+    Route::get('/api/students/{class_id}/{section_id}', 'FeeStructureController@getClassStudents');
     Route::get('collect', 'FeeCollect@index');
     Route::post('collect/invoice', 'FeeCollect@print');
     Route::delete('fee_structures', 'FeeStructureController@destroy')->name("FeeStructureDelete");

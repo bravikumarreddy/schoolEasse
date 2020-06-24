@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\fee_structure;
 use App\fee_structure_records;
+use App\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\User;
+use App\School;
 
 class FeeStructureController extends Controller
 {
@@ -85,6 +88,21 @@ class FeeStructureController extends Controller
         return redirect('fees/fee_structures');
     }
 
+    public function sections(Request $request,$class_id){
+        //dd($class_id);
+        $sections=Section::where("class_id","=",$class_id)->get()->all();
+        return json_encode($sections);
+    }
+
+    public function getClassStudents(Request $request,$class_id,$section_id){
+        $students_with_section = DB::table('users')->where("school_id","=",Auth::user()->school_id)
+            ->join("student_infos","users.id","=","student_infos.student_id")
+            ->join("sections","section_id","=","sections.id")
+            ->where("section_id","=",$section_id)
+            ->get()->all();
+        return json_encode($students_with_section);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -126,7 +144,7 @@ class FeeStructureController extends Controller
      */
     public function show(fee_structure $fee_structure)
     {
-        //
+
     }
 
     /**
