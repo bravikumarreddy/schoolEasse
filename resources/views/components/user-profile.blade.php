@@ -165,22 +165,7 @@
           </div>
         </div>
        </div>
-       <script>
-        $("#btnPrint").on("click", function () {
-            var tableContent = $('#profile-content').html();
-            var printWindow = window.open('', '', 'height=720,width=1280');
-            printWindow.document.write('<html><head>');
-            printWindow.document.write('<link href="{{url('css/app.css')}}" rel="stylesheet">');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write('<div class="container"><div class="col-md-12" id="academic-part">');
-            printWindow.document.write(tableContent);
-            printWindow.document.write('</div></div></body></html>');
-            printWindow.document.close();
-            // var academicPart = printWindow.document.getElementById("academic-part");
-            // academicPart.appendChild(resultTable);
-            printWindow.print();
-          });
-        </script>
+
       @endif
      </h3>
     <div class="table-responsive" style="margin-top: 3%;">

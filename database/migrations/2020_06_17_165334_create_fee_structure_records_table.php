@@ -23,9 +23,11 @@ class CreateFeeStructureRecordsTable extends Migration
         });
 
         Schema::create('instalments', function (Blueprint $table) {
+            $table->id();
             $table->integer("fee_structure_id")->unsigned();;
             $table->integer("number");
             $table->string("due_date");
+            $table->decimal("amount",19,4);
             $table->timestamps();
 
         });

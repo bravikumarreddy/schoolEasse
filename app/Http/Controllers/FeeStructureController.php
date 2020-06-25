@@ -72,15 +72,16 @@ class FeeStructureController extends Controller
         $instalments = $request->input("Instalment");
 
 
-
+        $totalAmount = 0;
         for($i=0 ; $i < count($feeNames); $i++){
             fee_structure_records::create(["fee_structure_id"=>$id,"name"=>$feeNames[$i],"amount"=>$amounts[$i]]);
+            $totalAmount+=$amounts[$i];
         }
 
         $instalments_data=[];
-
+        $instalmentAmount = $totalAmount/count($instalments);
         for($i=0;$i<count($instalments);$i++){
-            array_push($instalments_data,["fee_structure_id"=>$id,"number"=>$i,"due_date"=>$instalments[$i]]);
+            array_push($instalments_data,["fee_structure_id"=>$id,"number"=>$i,"due_date"=>$instalments[$i],"amount"=>$instalmentAmount]);
         }
         DB::table("instalments")->insert($instalments_data);
 
@@ -120,14 +121,16 @@ class FeeStructureController extends Controller
 
         $id = fee_structure::create(['name' => $prev_structure->name, "school_id" => Auth::user()->school_id])->id;
 
+        $totalAmount = 0;
         for($i=0 ; $i < count($prev_records); $i++){
             fee_structure_records::create(["fee_structure_id"=>$id,"name"=>$prev_records[$i]->name,"amount"=>$prev_records[$i]->amount]);
+            $totalAmount+=$prev_records[$i]->amount;
         }
 
         $instalments_data=[];
-
+        $instalmentAmount = $totalAmount/count($prev_instalments);
         for($i=0;$i<count($prev_instalments);$i++){
-            array_push($instalments_data,["fee_structure_id"=>$id,"number"=>$prev_instalments[$i]->number,"due_date"=>$prev_instalments[$i]->due_date]);
+            array_push($instalments_data,["fee_structure_id"=>$id,"number"=>$prev_instalments[$i]->number,"due_date"=>$prev_instalments[$i]->due_date,"amount"=>$instalmentAmount]);
         }
         DB::table("instalments")->insert($instalments_data);
 

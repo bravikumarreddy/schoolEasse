@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationTooltip02">Amount</label>
-                                            <input name="Amount[]" type="number" class="form-control" id="validationTooltip02" placeholder="2000.50"  step="0.01" value="{{$records[$i]->amount}}" required>
+                                            <input name="Amount[]" type="number" class="form-control" id="validationTooltip02" placeholder="2000.50"  step="0.0001" value="{{$records[$i]->amount}}" required>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <br>

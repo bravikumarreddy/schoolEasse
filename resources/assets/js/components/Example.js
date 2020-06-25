@@ -102,9 +102,13 @@ class Example extends React.Component {
                                         <td>{val.section_number}</td>
                                         <td>{val.student_code}</td>
                                         <td>{val.father_name}</td>
-                                        <td><button className="btn-xs btn-success" >
-                                        <small>Collect</small>
-                                        </button></td>
+                                        <td>
+                                            <form id="form-id" method="get" action={"/fees/student/"+val.student_id}>
+                                                <button className="btn-xs btn-success">
+                                                    <small>Collect</small>
+                                                </button>
+                                            </form>
+                                        </td>
 
                                     </tr>
                                 ))}

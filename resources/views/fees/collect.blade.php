@@ -58,14 +58,14 @@
 
 {{--                        </tr>--}}
 {{--                    @endforeach--}}
-                    </tbody>
-                </table>
-                <script src="{{asset('js/app.js')}}"></script>
+{{--                    </tbody>--}}
+{{--                </table>--}}
+
 
             </div>
         </div>
     </div>
-
+    <script src="{{asset('js/app.js')}}"></script>
     </div>
 
 
