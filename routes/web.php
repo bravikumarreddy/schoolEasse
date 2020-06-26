@@ -52,10 +52,12 @@ Route::get('grades/{student_id}', 'GradeController@index')->middleware(['auth', 
 
 Route::middleware(['auth', 'accountant'])->prefix('fees')->name('fees.')->group(function () {
     Route::get('all', 'FeeController@index');
+    Route::get('analytics','AnalyticsController@index');
     Route::get('create', 'FeeController@create');
     Route::get("student/{student_id}","StudentInstalmentsController@index");
     Route::post("student/add","StudentInstalmentsController@addFees");
     Route::post("student/collect","StudentInstalmentsController@collectFees");
+    Route::post("student/delete","StudentInstalmentsController@deleteFees");
     Route::get('fee_structures', 'FeeStructureController@index');
     Route::get('/api/sections/{class_id}', 'FeeStructureController@sections');
     Route::get('/api/students/{class_id}/{section_id}', 'FeeStructureController@getClassStudents');

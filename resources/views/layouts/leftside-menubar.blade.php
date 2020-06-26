@@ -125,7 +125,9 @@
         class="material-icons">monetization_on</i> <span class="nav-link-text">@lang('Manage Fee')</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
       <!-- Dropdown menu links -->
-
+        <li>
+            <a class="dropdown-item" href="{{ url('fees/analytics') }}"><i class="material-icons">insert_chart</i> <span class="nav-link-text">@lang('Analytics')</span></a>
+        </li>
        <li>
          <a class="dropdown-item" href="{{ url('fees/fee_structures') }}"><i class="material-icons">view_list</i> <span class="nav-link-text">@lang('Fee Structures')</span></a>
        </li>

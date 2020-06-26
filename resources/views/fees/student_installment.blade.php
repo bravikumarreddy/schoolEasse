@@ -91,6 +91,9 @@
                         </div>
                     @endif
                 </div>
+
+
+
                 <div class="panel panel-default">
                     <div class="panel-heading">Payment List</div>
                     <div class="panel-body">
@@ -110,7 +113,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            
+
                                 @foreach($fee_list as $instalment)
                                     <tr>
                                     <td>{{$instalment->name}}</td>
@@ -145,7 +148,7 @@
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Add Payment</div>
+                    <div class="panel-heading">Add Fees</div>
                     <div class="panel-body">
                         <br>
                         <form id="form-id" method="post" action="/fees/student/add">
@@ -161,6 +164,12 @@
                                                 <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
                                             @endforeach
                                         </select>
+                                        <br>
+                                        @error('add')
+                                            <div class="text-danger">
+                                                <strong>Already Existis</strong>
+                                            </div>
+                                        @enderror
                                     </div>
                                 <div class="col-md-2 mb-3">
 
@@ -181,8 +190,51 @@
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Delete Payment</div>
+                    <div class="panel-heading">Delete Fees</div>
                     <div class="panel-body">
+                        <br>
+                        <form id="form-id" method="post" action="/fees/student/delete">
+                            @csrf
+                            <input type="hidden" name="student_id" value="{{$user->id}}">
+                            <div class="col-md-4 mb-3">
+                                <div class="row">
+                                    <div class="col-md-10 mb-3">
+
+                                        <select id="fee_structure"  class="form-control" name="fee_structure">
+                                            <option value="">Select Fee Structure</option>
+                                            @foreach($existing_fee_structures as $fee_structure)
+                                                <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <br>
+                                        @error('delete')
+                                        <div class="text-danger">
+                                            <strong>Already Existis</strong>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+
+                                        <button class="btn btn-danger" type="submit">
+                                            <small>Delete</small>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Transactions</div>
+                    <div class="panel-body">
+                        <br>
 
                     </div>
                 </div>

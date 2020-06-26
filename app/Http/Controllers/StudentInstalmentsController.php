@@ -21,7 +21,8 @@ class StudentInstalmentsController extends Controller
         //
         $user = User::where("id","=",$student_id)->first();
         $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
-
+        $existing = student_instalments::where("student_id","=",$student_id)->get()->pluck('fee_structure_id')->unique()->all();
+        $existing_fee_structures = fee_structure::whereIn('id', $existing)->get()->all();
         $fee_list = DB::table('student_instalments')->where("student_id","=",$student_id)
                     ->select('student_instalments.id as student_instalment_id','student_instalments.paid as paid', "fee_structures.*" , "instalments.*"  )
                     ->join( "instalments", "student_instalments.instalment_id","=" ,"instalments.id" )
@@ -29,17 +30,21 @@ class StudentInstalmentsController extends Controller
             ->get()->all();
          //dd($fee_list);
 
-        return view("fees.student_installment",compact("user","fee_structures","fee_list"));
+        return view("fees.student_installment",compact("user","fee_structures","fee_list","existing_fee_structures"));
     }
 
     public function addFees(Request $request)
     {
-        //
-//        $user = User::where("id","=",$student_id)->first();
-//        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
 
         $student_id = $request->student_id;
         $fee_structure_id = $request->fee_structure;
+        $check = student_instalments::where("fee_structure_id","=",$fee_structure_id)
+            ->where("student_id","=",$student_id)
+            ->get()->all();
+
+        if(count($check)>0){
+           return redirect()->back()->withErrors(['add'=>'already exists']);
+        }
 
         $instalments= DB::table("instalments")->where("fee_structure_id","=",$fee_structure_id)->get()->all();
 
@@ -53,6 +58,15 @@ class StudentInstalmentsController extends Controller
 
         return redirect('fees/student/'.$student_id);
         //return view("fees.student_installment",compact("user","fee_structures"));
+    }
+    public function deleteFees(Request $request)
+    {
+
+        $student_id = $request->student_id;
+        $fee_structure_id = $request->fee_structure;
+        student_instalments::where("fee_structure_id","=",$fee_structure_id)
+            ->where("student_id","=",$student_id)->delete();
+        return redirect('fees/student/'.$student_id);
     }
     public function collectFees(Request $request)
     {

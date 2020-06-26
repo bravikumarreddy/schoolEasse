@@ -45,15 +45,15 @@
 
                                     </form>
                                 </td>
-                                <td>
-                                    <form id="form-id" method="get" action="/fees/fee_structures/create">
-                                        <input type="hidden" name="id" value="{{$fee_structure->id}}">
-                                        <button class="btn-xs btn-warning" type="submit">
-                                            <small>@lang('Edit')</small>
-                                        </button>
+{{--                                <td>--}}
+{{--                                    <form id="form-id" method="get" action="/fees/fee_structures/create">--}}
+{{--                                        <input type="hidden" name="id" value="{{$fee_structure->id}}">--}}
+{{--                                        <button class="btn-xs btn-warning" type="submit">--}}
+{{--                                            <small>@lang('Edit')</small>--}}
+{{--                                        </button>--}}
 
-                                    </form>
-                                </td>
+{{--                                    </form>--}}
+{{--                                </td>--}}
                                 <td>
                                     <form id="form-id" method="post" action="/fees/fee_structures">
                                         @csrf
