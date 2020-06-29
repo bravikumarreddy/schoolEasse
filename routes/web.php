@@ -277,5 +277,11 @@ Route::prefix('emails')->group(function () {
 Route::middleware(['auth', 'student'])->prefix('stripe')->group(function () {
     Route::get('charge', 'CashierController@index');
     Route::post('charge', 'CashierController@store');
-    Route::get('receipts', 'PaymentController@index');
+
+});
+
+Route::middleware(['auth', 'student'])->group(function () {
+    Route::get('payment', 'PaymentsController@index');
+    Route::post('charge', 'CashierController@store');
+
 });

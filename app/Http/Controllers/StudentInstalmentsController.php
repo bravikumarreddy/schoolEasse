@@ -20,6 +20,9 @@ class StudentInstalmentsController extends Controller
     {
         //
         $user = User::where("id","=",$student_id)->first();
+        if($user->role != "student"){
+            abort(404);
+        }
         $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
         $existing = student_instalments::where("student_id","=",$student_id)->get()->pluck('fee_structure_id')->unique()->all();
         $existing_fee_structures = fee_structure::whereIn('id', $existing)->get()->all();

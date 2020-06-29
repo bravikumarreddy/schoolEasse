@@ -13,35 +13,38 @@
                     <div class="col-md-10" id="main-container">
                         <div class="row">
 
-                                <div class=" col-md-6" >
-                                    <canvas id="myChart" width="100px" height="100px"></canvas>
+
+                                <div class="col-md-offset-1 col-md-4" >
+
+
+                                         <canvas id="myChart" width="100px" height="100px"></canvas>
+
                                 </div>
 
 
 
-                                <div class=" col-md-6" >
+
+                            <div class=" col-md-offset-1 col-md-4" >
+
+
                                     <canvas id="doughnut" width="100px" height="100px"></canvas>
-                                </div>
+
+                            </div>
 
                         </div>
                         <br>
                         <br>
                         <br>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-offset-1 col-md-4" >
                                 <canvas id="lineChart" width="100px" height="100px"></canvas>
                             </div>
-                            <div class=" col-md-6" >
+                            <div class="col-md-offset-1 col-md-4" >
                                 <canvas id="pie" width="100px" height="100px"></canvas>
                             </div>
                         </div>
 
                     </div>
-
-
-
-
-
 
 
 
