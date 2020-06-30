@@ -15,28 +15,30 @@
         </div>
         <div class="col-md-10" id="main-container">
             <h2>@lang('All Classes and Sections')</h2>
-            <div class="panel panel-default" id="cls-sec">
+            <div id="accordion">
+                <div class="card border-0" id="cls-sec">
               @if(count($classes) > 0)
                 @foreach ($classes as $class)
-                    <div class="panel panel-default">
-                        <div class="page-panel-title" role="tab" id="heading{{$class->id}}">
+                    <div class="card border-0">
+                        <div class="card-title" id="heading{{$class->id}}">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <a class="panel-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$class->id}}" aria-expanded="false" aria-controls="collapse{{$class->id}}">{{$class->class_number}} {{ucfirst($class->group)}}</a>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <a class="panel-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$class->id}}" aria-expanded="false" aria-controls="collapse{{$class->id}}"><small><b>@lang('Click to view all Sections under this Class') <i class="material-icons">keyboard_arrow_down</i></b></small></a>
-                                    </div>
+                                    <h4 class="col-md-4">
+                                        <a class="card-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$class->id}}" aria-expanded="false" aria-controls="collapse{{$class->id}}">{{$class->class_number}} {{ucfirst($class->group)}}</a>
+                                    </h4>
+                                    <h4 class="col-md-4">
+                                        <a class="card-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$class->id}}" aria-expanded="false" aria-controls="collapse{{$class->id}}"><small><b>@lang('Click to view all Sections under this Class') <i class="material-icons">keyboard_arrow_down</i></b></small></a>
+                                    </h4>
                                     @if(isset($_GET['course']) && $_GET['course'] == 1)
                                     <div class="col-md-4">
-                                        <a role="button" class="btn btn-info btn-xs" href="{{url('academic/syllabus/'.$class->id)}}"><i class="material-icons">visibility</i> @lang('View Syllabus for this Class')</a>
+                                        <a role="button" class="btn btn-info btn-sm " href="{{url('academic/syllabus/'.$class->id)}}"><i class="material-icons">visibility</i> @lang('View Syllabus for this Class')</a>
                                     </div>
                                     @endif
                                 </div>
                         </div>
-                        <div id="collapse{{$class->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$class->id}}">
-                            <div class="panel-body">
-                                <table class="table table-bordered table-striped">
+
+                        <div id="collapse{{$class->id}}" class="collapse" role="tabpanel" aria-labelledby="heading{{$class->id}}">
+                            <div class="card-body">
+                                <table class="table table-bordered ">
                                     <thead>
                                         <tr>
                                             <th>@lang('Section Name')</th>
@@ -63,12 +65,12 @@
                                                 @foreach ($exams as $ex)
                                                     @if ($ex->class_id == $class->id)
                                                         <td>
-                                                            <a role="button" class="btn btn-primary btn-xs" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">visibility</i> @lang('View Today\'s Attendance')</a>
+                                                            <a role="button" class="btn btn-primary btn-sm" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">visibility</i> @lang('View Today\'s Attendance')</a>
                                                         </td>
                                                     @endif
                                                 @endforeach
                                             <td>
-                                                <a role="button" class="btn btn-danger btn-xs" href="{{url('attendances/'.$section->id)}}"><i class="material-icons">visibility</i> @lang('View Each Student\'s Attendance')</a>
+                                                <a role="button" class="btn btn-danger btn-sm" href="{{url('attendances/'.$section->id)}}"><i class="material-icons">visibility</i> @lang('View Each Student\'s Attendance')</a>
                                             </td>
                                             <td>
                                                 <?php
@@ -79,7 +81,7 @@
                                                         <?php
                                                             $ce = 1;
                                                         ?>
-                                                        <a role="button" class="btn btn-info btn-xs" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">spellcheck</i> @lang('Take Attendance')</a>
+                                                        <a role="button" class="btn btn-info btn-sm" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">spellcheck</i> @lang('Take Attendance')</a>
                                                     @endif
                                                 @endforeach
                                                 @if($ce == 0)
@@ -89,13 +91,13 @@
                                             @endif
                                             @if(isset($_GET['course']) && $_GET['course'] == 1)
                                             <td>
-                                                <a role="button" class="btn btn-info btn-xs" href="{{url('courses/0/'.$section->id)}}"><i class="material-icons">visibility</i> @lang('View Courses under this section')</a>
+                                                <a role="button" class="btn btn-info btn-sm" href="{{url('courses/0/'.$section->id)}}"><i class="material-icons">visibility</i> @lang('View Courses under this section')</a>
                                             </td>
                                             <td>
-                                                <a role="button" class="btn btn-danger btn-xs" href="{{url('section/students/'.$section->id.'?section=1')}}"><i class="material-icons">visibility</i> @lang('View Students of this section')</a>
+                                                <a role="button" class="btn btn-danger btn-sm" href="{{url('section/students/'.$section->id.'?section=1')}}"><i class="material-icons">visibility</i> @lang('View Students of this section')</a>
                                             </td>
                                             <td>
-                                                <a role="button" class="btn btn-primary btn-xs" href="{{url('academic/routine/'.$section->id)}}"><i class="material-icons">visibility</i> @lang('View Routines for this section')</a>
+                                                <a role="button" class="btn btn-primary btn-sm" href="{{url('academic/routine/'.$section->id)}}"><i class="material-icons">visibility</i> @lang('View Routines for this section')</a>
                                             </td>
                                             @endif
                                             </tr>
@@ -113,7 +115,9 @@
                 </div>
               @endif
             </div>
+            </div>
           </div>
+
     </div>
 </div>
 @endsection

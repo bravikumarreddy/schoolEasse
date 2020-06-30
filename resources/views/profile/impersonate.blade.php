@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="panel panel-default">
-        <table class="table">
+        <table class="table table-borderless">
             <thead>
                 <tr>
                     <th>@lang('ID')</th>
@@ -24,7 +24,7 @@
                         <td>{{ $other_user->role }}</td>
                         <td>
                             <input type="hidden" name="id" value="{{$other_user->id}}" />
-                            <button class="btn btn-default">@lang('Impersonate')</button>
+                            <button class="btn btn-success">@lang('Impersonate')</button>
                         </td>
                     </tr>
                 </form>

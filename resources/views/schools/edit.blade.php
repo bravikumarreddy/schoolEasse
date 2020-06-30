@@ -3,44 +3,45 @@
 @section('title', __('Edit School'))
 
 @section('content')
-    <div class="panel panel-default">
+    <div class="card border-0">
         <div class="panel-body">
-            <h2 class="text-center">@lang('Edit') {{$school->name}}</h2>
+            <h3 class="text-center p-3">@lang('Edit') {{$school->name}}</h3>
 
-            <form class="form-horizontal" action="{{ route('schools.update', $school) }}" method="post">
+            <form  action="{{ route('schools.update', $school) }}" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 {{ csrf_field() }}
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-4 control-label">@lang('School Name')</label>
 
-                    <div class="col-md-6">
-                        <input id="name" type="text" class="form-control" name="name" value="{{ $school->name }}" placeholder="@lang('School Name')" required>
+                <div class="form-group offset-3 row">
+                    <label for="name" class="col-form-label">@lang('School Name')</label>
+
+                    <div class="col-md-8">
+                        <input id="name" type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $school->name }}"  placeholder="@lang('School Name')" required>
 
                         @if ($errors->has('name'))
-                            <span class="help-block">
+                            <div class="invalid-feedback d-block ">
                                 <strong>{{ $errors->first('name') }}</strong>
-                            </span>
+                            </div>
                         @endif
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                    <label for="about" class="col-md-4 control-label">@lang('About School')</label>
+                <div class="form-group offset-3 row">
+                    <label for="about" class="col-form-label">@lang('About School')</label>
 
-                    <div class="col-md-6">
-                        <textarea id="about" type="text" class="form-control" name="about"
+                    <div class="col-md-8">
+                        <textarea id="about" type="text" class="form-control {{ $errors->has('about') ? ' is-invalid' : '' }} " name="about"
                             placeholder="@lang('About School')" required>{{ $school->about }}</textarea>
 
                         @if ($errors->has('about'))
-                            <span class="help-block">
+                            <div class="invalid-feedback d-block ">
                                 <strong>{{ $errors->first('about') }}</strong>
-                            </span>
+                            </div>
                         @endif
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-8">
+                <div class="form-group offset-4 row">
+                    <div class="offset-2 col-md-8">
                         <a href="{{ route('schools.index') }}" class="btn btn-primary">@lang('Back')</a>
                         <button type="submit" class="btn btn-danger">@lang('Save')</button>
                     </div>

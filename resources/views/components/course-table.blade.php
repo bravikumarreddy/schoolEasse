@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-bordered table-striped table-data-div table-hover">
+  <table class="table table-sm table-bordered table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -53,7 +53,7 @@
 
         @if($course->exam_id != 0)
           <td>
-            <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-xs"><i class="material-icons">message</i> @lang('Message Students')</a>
+            <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-sm"><i class="material-icons"> message</i> @lang('Message Students')</a>
           </td>
         @else
           <td><small>@lang('Save under Exam to Add Student')</small></td>
@@ -61,7 +61,7 @@
 
         @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
           <td>
-            <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">spellcheck</i> @lang('Take Attendance')</a>
+            <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-sm"><i class="material-icons">spellcheck</i> @lang('Take Attendance')</a>
           </td>
         @else
           <td><small>@lang('Save under Exam to Take Attendance')</small></td>
@@ -71,10 +71,10 @@
 
       @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
         <td>
-          <a href="{{url('grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-danger btn-xs"><i class="material-icons">assessment</i> @lang('Submit Grade')</a>
+          <a href="{{url('grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-danger btn-sm"><i class="material-icons">assessment</i> @lang('Submit Grade')</a>
         </td>
         <td>
-          <a href="{{url('grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-success btn-xs"><i class="material-icons">bar_chart</i> @lang('View Marks')</a>
+          <a href="{{url('grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-success btn-sm"><i class="material-icons">bar_chart</i> @lang('View Marks')</a>
         </td>
       @endif
 

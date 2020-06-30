@@ -1,13 +1,15 @@
-<div class="panel panel-default">
-    <div class="page-panel-title" role="tab" id="heading{{$exam->id}}">
-      <a class="panel-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$exam->id}}" aria-expanded="false" aria-controls="collapse{{$exam->id}}">
+<div class="card border-0 ">
+    <div class="card-heading" role="tab" id="heading{{$exam->id}}">
+      <a class="card-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$exam->id}}" aria-expanded="false" aria-controls="collapse{{$exam->id}}">
         <h5>
-          {{$exam->exam_name}} <span class="pull-right"><small>@lang('Click to view all courses under this Exam') <i class="material-icons">keyboard_arrow_down</i></small></span>
+          {{$exam->exam_name}} <span class="float-right"><small>@lang('Click to view all courses under this Exam') <i class="material-icons">keyboard_arrow_down</i></small></span>
         </h5>
       </a>
     </div>
-    <div id="collapse{{$exam->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$exam->id}}">
-      <div class="panel-body">
+
+
+    <div id="collapse{{$exam->id}}" class="collapse" role="tabpanel" aria-labelledby="heading{{$exam->id}}">
+      <div class="card-body">
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>

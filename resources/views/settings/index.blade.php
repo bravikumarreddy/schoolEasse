@@ -9,10 +9,11 @@
                 @include('layouts.leftside-menubar')
             </div>
             <div class="col-md-10" id="main-container">
-                <div class="panel panel-default">
-                    <div class="page-panel-title">@lang('Academic Settings')</div>
-                    <div class="panel-body table-responsive">
-                        <table class="table table-condensed">
+                <div class="card border-0">
+
+                    <div class="card-body table-responsive">
+                        <h4 class="card-title">@lang('Academic Settings')</h4>
+                        <table class="table table-condensed table-borderless">
                             <thead>
                                 <tr>
                                     <th scope="col">@lang('Name')</th>
@@ -127,7 +128,7 @@
                         </table>
 
                         <h4>@lang('Add Users')</h4>
-                        <table class="table table-condensed" style="width:600px">
+                        <table class="table table-condensed table-borderless" style="width:600px">
                             <thead>
                                 <tr>
                                     <th scope="col">+@lang('Student')</th>
@@ -141,19 +142,19 @@
                                     <td>
                                         <a class="btn btn-info btn-sm" href="{{url('register/student')}}">+ @lang('Add Student')</a>
                                         <br>
-                                        <h5>@lang('Or, Mass upload Excel')</h5>
+                                        <h6 class="pb-3 pt-3">@lang('Or, Mass upload Excel')</h6>
                                         @component('components.excel-upload-form', ['type'=>'student'])
                                         @endcomponent
                                     </td>
                                     <td>
                                         <a class="btn btn-success btn-sm" href="{{url('register/teacher')}}">+ @lang('Add Teacher')</a>
                                         <br>
-                                        <h5>@lang('Or, Mass upload Excel')</h5>
+                                        <h6 class="pb-3 pt-3">@lang('Or, Mass upload Excel')</h6>
                                         @component('components.excel-upload-form', ['type'=>'teacher'])
                                         @endcomponent
                                     </td>
                                     <td>
-                                        <a class="btn btn-default btn-sm" href="{{url('register/accountant')}}">+ @lang('Add Accountant')</a>
+                                        <a class="btn btn-secondary btn-sm" href="{{url('register/accountant')}}">+ @lang('Add Accountant')</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-warning btn-sm" href="{{url('register/librarian')}}">+ @lang('Add Librarian')</a>
@@ -163,7 +164,7 @@
                         </table>
 
                         <h4>@lang('Upload')</h4>
-                        <table class="table table-condensed" style="width:400px">
+                        <table class="table table-condensed table-borderless" style="width:400px">
                             <thead>
                                 <tr>
                                     <th scope="col">+@lang('Notice')</th>

@@ -19,9 +19,9 @@
     @endif
   </div>
   <div class="col-md-10" id="main-container">
-    <h3>{{$user->name}}  <span class="label label-danger">{{ucfirst($user->role)}}</span> <span class="label label-primary">{{ucfirst($user->gender)}}</span>
+    <h3>{{$user->name}}  <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-primary">{{ucfirst($user->gender)}}</span>
       @if ($user->role == 'teacher' && $user->section_id > 0)
-        <small>@lang('Class Teacher of Section'): <span class="label label-info">{{ucfirst($user->section->section_number)}}</span></small>
+        <small>@lang('Class Teacher of Section'): <span class="badge badge-info">{{ucfirst($user->section->section_number)}}</span></small>
       @endif
 
       @if($user->role == "student")

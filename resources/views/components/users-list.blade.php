@@ -1,6 +1,6 @@
 {{$users->links()}}
-<div class="table-responsive">
-<table class="table table-bordered table-data-div table-condensed table-striped table-hover">
+<div class="table-responsive-sm">
+<table class="table table-sm table-bordered table-data-div table-condensed table-striped table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -56,7 +56,7 @@
       @if(Auth::user()->role == 'admin')
         @if (!Session::has('section-attendance'))
         <td>
-          <a class="btn btn-xs btn-danger" href="{{url('edit/user/'.$user->id)}}">@lang('Edit')</a>
+          <a class="btn pl-1 pr-1 pt-0 pb-0 m-0 btn-sm btn-danger" href="{{url('edit/user/'.$user->id)}}">@lang('Edit')</a>
         </td>
         @endif
       @endif
@@ -77,7 +77,7 @@
           </small></td>
       @if($user->role == 'student')
         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-          <td><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">@lang('View Attendance')</a></small></td>
+          <td><small><a class="pl-1 pr-1 pt-0 pb-0 m-0 btn btn-sm btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">@lang('View Attendance')</a></small></td>
           {{--@if (!Session::has('section-attendance'))
           <td><small><a class="btn btn-xs btn-success" role="button" href="{{url('grades/'.$user->id)}}">@lang('View Marks')</a></small></td>
           @endif --}}
@@ -88,9 +88,9 @@
           @isset($user->studentInfo['session'])
             {{$user->studentInfo['session']}}
             @if($user->studentInfo['session'] == now()->year || $user->studentInfo['session'] > now()->year)
-              <span class="label label-success">@lang('Promoted/New')</span>
-            @else
-              <span class="label label-danger">@lang('Not Promoted')</span>
+             <h6><span class="badge badge-success">@lang('Promoted/New')</span></h6>
+                  @else
+              <span class="badge badge-danger">@lang('Not Promoted')</span>
             @endif
           @endisset
           </small>

@@ -9,29 +9,30 @@
             {{ csrf_field() }}
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">@lang('Create School')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">@lang('Create School')</h4>
+
                 </div>
                 <div class="modal-body">
-                    <div class="form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
-                        <label for="name" class="col-md-4 control-label">@lang('School Name')</label>
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label">@lang('School Name')</label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="@lang('School Name')" required>
+                            <input id="name" type="text" class="form-control{{ $errors->has('school_name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="@lang('School Name')" required>
 
                             @if ($errors->has('name'))
-                                <span class="help-block">
+                                <div class="invalid-feedback d-block">
                                     <strong>{{ $errors->first('name') }}</strong>
-                                </span>
+                                </div>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('medium') ? ' has-error' : '' }}">
-                        <label for="medium" class="col-md-4 control-label">@lang('School Medium')</label>
+                    <div class="form-group row">
+                        <label for="medium" class="col-md-4 col-form-label">@lang('School Medium')</label>
 
                         <div class="col-md-6">
-                            <select id="medium" class="form-control" name="medium">
+                            <select id="medium" class="form-control{{ $errors->has('medium') ? ' is-invalid' : '' }}" name="medium">
                                 <option selected="selected">@lang('English')</option>
                                 <option>@lang('Tamil')</option>
                                 <option>@lang('Hindi')</option>
@@ -40,37 +41,37 @@
                             </select>
 
                             @if ($errors->has('medium'))
-                                <span class="help-block">
+                                <div class="invalid-feedback d-block">
                                     <strong>{{ $errors->first('medium') }}</strong>
-                                </span>
+                                </div>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('established') ? ' has-error' : '' }}">
-                        <label for="established" class="col-md-4 control-label">@lang('School Established')</label>
+                    <div class="form-group row">
+                        <label for="established" class="col-md-4 col-form-label">@lang('School Established')</label>
 
                         <div class="col-md-6">
-                            <input id="established" type="text" class="form-control" name="established" value="{{ old('established') }}" placeholder="@lang('School Established')" required>
+                            <input id="established" type="text" class="form-control{{ $errors->has('established') ? ' is-invalid' : '' }}" name="established" value="{{ old('established') }}" placeholder="@lang('School Established')" required>
 
                             @if ($errors->has('established'))
-                                <span class="help-block">
+                                <div class="invalid-feedback d-block">
                                     <strong>{{ $errors->first('established') }}</strong>
-                                </span>
+                                </div>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                        <label for="about" class="col-md-4 control-label">@lang('About')</label>
+                    <div class="form-group row">
+                        <label for="about" class="col-md-4 col-form-label">@lang('About')</label>
 
                         <div class="col-md-6">
-                            <textarea id="about" class="form-control" rows="3" name="about" placeholder="@lang('About School')" required>{{ old('about') }}</textarea>
+                            <textarea id="about" class="form-control{{ $errors->has('about') ? ' is-invalid' : '' }}" rows="3" name="about" placeholder="@lang('About School')" required>{{ old('about') }}</textarea>
 
                             @if ($errors->has('about'))
-                                <span class="help-block">
+                                <div class="invalid-feedback d-block">
                                     <strong>{{ $errors->first('about') }}</strong>
-                                </span>
+                                </div>
                             @endif
                         </div>
                     </div>

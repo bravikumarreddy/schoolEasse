@@ -9,16 +9,17 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
-            <div class="panel panel-default">
-                <div class="page-panel-title">@lang('Add Form Field')
-              </div>
+            <div class="card border-0">
+
                 <div class="panel-body">
+                    <h4 class="card-title">@lang('Add Form Field')
+                    </h4>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form class="form-horizontal" action="{{url('fees/create')}}" method="post">
+                    <form action="{{url('fees/create')}}" method="post">
                       {{ csrf_field() }}
                       <div class="form-group{{ $errors->has('fee_name') ? ' has-error' : '' }}">
                           <label for="fee_name" class="col-md-4 control-label">@lang('Form Field Name')</label>

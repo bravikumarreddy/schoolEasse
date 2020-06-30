@@ -5,13 +5,13 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-md-12" id="main-container">
-            <div class="panel panel-default">
-                <div class="panel-body table-responsive">
+            <div class="card border-0">
+                <div class="card-body table-responsive">
                     @include('schools.form')
-                    <h2>@lang('School List')</h2>
-                    <h4>@lang('Manage Departments, Classs, Sections, Student Promotion, Course')</h4>
-                    <table class="table table-condensed">
-                        <thead>
+                    <h3 class="card-title p-2 m-2">@lang('School List')</h3>
+
+                    <table class="table table-borderless">
+                        <thead >
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">@lang('Name')</th>

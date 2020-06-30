@@ -10,15 +10,17 @@
         </div>
         <div class="col-md-8" id="main-container">
             @if(Auth::user()->role != 'student')
-            <ol class="breadcrumb" style="margin-top: 3%;">
-                <li><a href="{{url('grades/all-exams-grade')}}" style="color:#3b80ef;">@lang('Grades')</a></li>
-                <li class="active">@lang('Section Grade')</li>
-            </ol>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="margin-top: 3%;">
+                        <li class="breadcrumb-item" ><a href="{{url('grades/all-exams-grade')}}" style="color:#3b80ef;">@lang('Grades')</a></li>
+                        <li class="breadcrumb-item active">@lang('Section Grade')</li>
+                    </ol>
+                </nav>
             @endif
             <h2>@lang('Marks and Grades')</h2>
-            <div class="panel panel-default">
+            <div class="card border-0">
               @if(count($grades) > 0)
-                <div class="panel-body">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

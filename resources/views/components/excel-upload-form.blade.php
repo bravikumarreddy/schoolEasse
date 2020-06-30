@@ -4,5 +4,5 @@
     <div class="form-group">
         <input type="file" name="file">
     </div>
-    <input type="submit" class="btn btn-default btn-sm" value="@lang('Upload')">
+    <input type="submit" class="btn btn-secondary btn-sm" value="@lang('Upload')">
 </form>

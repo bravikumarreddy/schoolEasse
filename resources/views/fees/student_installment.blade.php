@@ -31,7 +31,7 @@
 
                                     </div>
                                     <div class="col-md-10" id="main-container">
-                                        <h3>{{$user->name}}  <span class="label label-danger">{{ucfirst($user->role)}}</span> <span class="label label-primary">{{ucfirst($user->gender)}}</span>
+                                        <h3>{{$user->name}}  <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-primary">{{ucfirst($user->gender)}}</span>
 
                                         </h3>
                                         <div class="table-responsive" style="margin-top: 3%;">
@@ -121,10 +121,10 @@
                                     <td>
                                         @if($instalment->paid)
 
-                                            <span class="label label-info">paid</span>
+                                            <span class="badge badge-info">paid</span>
 
                                         @else
-                                            <span class="label label-danger">unpaid</span>
+                                            <span class="badge badge-danger">unpaid</span>
                                         @endif</td>
                                     <td>{{$instalment->due_date}}</td>
                                     <td>{{$instalment->amount}}</td>

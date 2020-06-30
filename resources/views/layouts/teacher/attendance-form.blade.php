@@ -39,11 +39,11 @@
           <td>{{$attendance->student->student_code}}</td>
           <td>
             @if($attendance->present === 1)
-              <span class="label label-success attdState">@lang('Present')</span>
+              <span class="badge badge-success attdState">@lang('Present')</span>
             @elseif($attendance->present === 2)
-              <span class="label label-warning attdState">@lang('Escaped')</span>
+              <span class="badge badge-warning attdState">@lang('Escaped')</span>
             @else
-              <span class="label label-danger attdState">@lang('Absent')</span>
+              <span class="badge badge-danger attdState">@lang('Absent')</span>
             @endif
             <a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
           </td>
@@ -85,7 +85,7 @@
         <tr>
           <th scope="row">{{($loop->index + 1)}}</th>
           <td>{{$student->student_code}}</td>
-          <td><span class="label label-success attdState">@lang('Present')</span> {{$student->name}}</td>
+          <td><span class="badge badge-success attdState">@lang('Present')</span> {{$student->name}}</td>
           <td>
             <div class="form-check">
               <input class="form-check-input position-static" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>

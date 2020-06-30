@@ -9,19 +9,22 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
-            <div class="panel panel-default">
+            <div class="card">
               @if(count($users) > 0)
               @foreach ($users as $user)
                 @if (Session::has('section-attendance'))
-                <ol class="breadcrumb" style="margin-top: 3%;">
-                    <li><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">@lang('Classes &amp; Sections')</a></li>
-                    <li class="active">{{ucfirst($user->role)}}s</li>
-                </ol>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="margin-top: 3%;">
+                        <li class="breadcrumb-item" ><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">@lang('Classes &amp; Sections')</a></li>
+                        <li class="breadcrumb-item active">{{ucfirst($user->role)}}s</li>
+                    </ol>
+                </nav>
                 @endif
-                <div class="page-panel-title">@lang('List of all') {{ucfirst($user->role)}}s</div>
+
                  @break($loop->first)
               @endforeach
-                <div class="panel-body">
+                <div class="card-body">
+                    <h4 class="card-title">@lang('List of all') {{ucfirst($user->role)}}s</h4>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -34,7 +37,7 @@
                     @endcomponent
                 </div>
               @else
-                <div class="panel-body">
+                <div class="card-body">
                     @lang('No Related Data Found.')
                 </div>
               @endif

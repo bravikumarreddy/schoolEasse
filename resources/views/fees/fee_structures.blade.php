@@ -13,12 +13,12 @@
 
                 <h4>Fee Structures</h4>
                 <br>
-                <a class="btn btn-sm btn-success btn-block" role="button" href="/fees/fee_structures/create" >
+                <a class="btn btn-success btn-block" role="button" href="/fees/fee_structures/create" >
                     + Create new fee structure
                 </a>
-                <br>
-                <br>
-                    <table class="table table-striped">
+                <br class="border-0" >
+                <br class="border-0">
+                    <table class="table table-sm table-borderless">
                         <thead>
                         <tr>
                             <th scope="col">Index</th>
@@ -39,8 +39,8 @@
                                     <form id="form-id" method="post" action="/fees/fee_structures/duplicate">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$fee_structure->id}}">
-                                        <button class="btn-xs btn-info" type="submit">
-                                            <small>@lang('Duplicate')</small>
+                                        <button class="btn-sm btn-info" type="submit">
+                                            @lang('Duplicate')
                                         </button>
 
                                     </form>
@@ -59,8 +59,8 @@
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{$fee_structure->id}}">
-                                        <button class="btn-xs btn-danger" type="submit">
-                                            <small>@lang('Delete')</small>
+                                        <button class="btn-sm btn-danger" type="submit">
+                                            @lang('Delete')
                                         </button>
 
                                     </form>

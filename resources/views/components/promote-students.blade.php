@@ -34,9 +34,9 @@
                         <small>
                             {{$student->session}}
                             @if($student->session == now()->year || $student->session > now()->year)
-                            <span class="label label-success">@lang('Promoted/New')</span>
+                            <span class="badge badge-success">@lang('Promoted/New')</span>
                             @else
-                            <span class="label label-danger">@lang('Not Promoted')</span>
+                            <span class="badge badge-danger">@lang('Not Promoted')</span>
                             @endif
                         </small>
                     </td>

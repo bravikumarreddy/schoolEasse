@@ -5,13 +5,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2" id="main-container">
-            <div class="panel panel-default">
-                <div class="page-panel-title">@lang('Login')</div>
+        <div class="col-md-12" id="main-container">
+            <div class="card border-0">
+
                 
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
+                    <div class="alert alert-danger mt-2" role="alert">
+                        <ul class="m-0">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -19,36 +19,42 @@
                     </div>
                 @endif
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                <div class="card-body">
+                    <h3 class="card-title">@lang('Login')</h3>
+
+
+                    <form  method="POST" class="offset-3" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">@lang('E-Mail Or Phone Number')</label>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">@lang('E-Mail Or Phone Number')</label>
+                            <div class="col-sm-4">
+                                <input id="email" type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
-                            <div class="col-md-6">
-                                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <div class="invalid-feedback d-block">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                             </div>
+
+
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">@lang('Password')</label>
+                        <div class="form-group row ">
+                            <label for="password" class="col-sm-3 col-form-label">@lang('Password')</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
+                            <div class="col-sm-4">
+                                <input id="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <div class="invalid-feedback d-block">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                             </div>
+
+
                         </div>
                         {{--
                         <div class="form-group">
@@ -61,8 +67,8 @@
                             </div>
                         </div>
                         --}}
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
+                        <div class="form-group row">
+                            <div class="col-sm-7 text-right">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('Login')
                                 </button>

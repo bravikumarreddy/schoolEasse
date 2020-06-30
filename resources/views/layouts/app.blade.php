@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,8 +14,9 @@
         'librarian'))?Auth::user()->school->name:config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ url('css/loader.css') }}">
-
+    <script src="{{ url('js/bootstrap4.js') }}"></script>
     <script src="{{ url('js/vendors.js') }}"></script>
+
 
     <script type="text/javascript">
         $.ajaxSetup({
@@ -24,7 +25,10 @@
             }
         });
     </script>
+
     <script src="{{ url('js/application.js') }}"></script>
+
+
     @yield('after_scripts')
 </head>
 
@@ -38,7 +42,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons&style=normal&weight=400"
       rel="stylesheet">
     <link rel="stylesheet" href="{{ url('css/vendors.css') }}" id="bootswatch-print-id">
+    <link rel="stylesheet" href="{{ url('css/app.css') }}">
     <link rel="stylesheet" href="{{ url('css/application.css') }}">
+
 </body>
 
 </html>

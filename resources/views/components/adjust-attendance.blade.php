@@ -19,7 +19,7 @@
                     </td>
                     <td>
                         @if($att->present === 0)
-                            <span class="label label-danger attdState">@lang('Absent')</span>
+                            <span class="badge badge-danger attdState">@lang('Absent')</span>
                         @endif
                     </td>
                     <td>{{$att->created_at}}</td>

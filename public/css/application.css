@@ -1,4 +1,4 @@
-.navbar-default .navbar-toggle .icon-bar {
+.navbar-light .navbar-toggler .icon-bar {
     background-color: #888;
 }
 
@@ -23,11 +23,6 @@ a:focus {
     box-shadow: none;
 }
 
-.panel-default {
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-}
 
 .text-white {
     color: #fff !important;
@@ -70,47 +65,8 @@ a:focus {
     background-color: #343a40 !important;
 }
 
-.card {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
-}
-
-.card-header:first-child {
-    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-}
-
-.card-header {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: rgba(0, 0, 0, .03);
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-}
-
-.card-title {
-    margin-bottom: .75rem;
-}
-
-.card-body {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem;
-}
-
-.card-text:last-child {
-    margin-bottom: 0;
+.bg-white {
+    background-color: #ffffff !important;
 }
 
 .material-icons {
@@ -154,31 +110,38 @@ a:focus {
     background-color: #fff;
     padding-top: 1%;
     padding-right: 0%;
-    font-size: 13px;
+    font-size: 0.9rem;
     font-weight: bold;
+    padding: 0;
 }
 
 .navbar-nav .open .dropdown-menu {
     background-color: #fff;
 }
 
-.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+.navbar-white .navbar-nav .open .dropdown-menu>li>a {
     color: #000;
 }
 
-.navbar-default .navbar-nav .open .dropdown-menu>.active>a {
+.navbar-white .navbar-nav .open .dropdown-menu>.active>a {
     color: #fff;
 }
 
-.navbar-default .navbar-nav>.open>a,
-.navbar-default .navbar-nav>.open>a:hover,
-.navbar-default .navbar-nav>.open>a:focus {
-    color: #000;
+.navbar-white .navbar-nav>.open>a,
+.navbar-white .navbar-nav>.open>a:hover,
+.navbar-white .navbar-nav>.open>a:focus {
+    color: #000000;
     background-color: #f9fafa;
 }
 
 .dropdown-menu>li>a:hover,
 .dropdown-menu>li>a:focus {
+    color: #000;
+    background-color: #f9fafa;
+}
+
+.nav>li>a:hover,
+.nav>li>a:focus {
     color: #000;
     background-color: #f9fafa;
 }
@@ -199,7 +162,7 @@ a:focus {
 }
 
 .table th {
-    font-size: 12px;
+    font-size: 0.9rem;
 }
 
 .nav-link-align-btn {
@@ -207,4 +170,8 @@ a:focus {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
     line-height: 60px !important;
+}
+
+.col-form-label{
+    font-weight: bolder;
 }

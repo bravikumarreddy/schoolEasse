@@ -7,15 +7,17 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
-            <div class="panel panel-default">
-                <div class="page-panel-title">@lang('All Active Examinations')</div>
+            <div class="card  border-0 ">
 
-                <div class="panel-body">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="card-body">
+                    <h4 class="card-title">@lang('All Active Examinations')</h4>
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
                     @if(count($exams) > 0)
                         @foreach($exams as $exam)
                             @component('components.active-exams',['exam'=>$exam,'courses'=>$courses])
                             @endcomponent
+
                         @endforeach
                     @endif
                     </div>

@@ -43,10 +43,10 @@ class Example extends React.Component {
         const classes = JSON.parse(this.props.classes);
         return (
             <div>
-                <div className="panel panel-info ">
-                    <div className="panel-heading">Select Class And Section</div>
-                    <div className="panel-body">
-                        <div className="form-group">
+                <div className="card border-info mt-4">
+                    <div className="card-header text-white bg-info">Select Class And Section</div>
+                    <div className="card-body">
+                        <div className="form-group row">
                             <div className="col-md-4 mb-3">
                                 <label htmlFor="fee_structure" className="control-label">Select Class</label>
                                 <select value={this.state.class} id="fee_structure"  className="form-control" name="fee_structure"
@@ -75,11 +75,11 @@ class Example extends React.Component {
 
                 </div>
                 {this.state.studentList.length ?
-                    <div className="panel panel-warning ">
-                        <div className="panel-heading">Student List</div>
-                        <div className="panel-body">
+                    <div className="card border-warning mt-4 ">
+                        <div className="card-header text-white bg-warning">Student List</div>
+                        <div className="card-body">
 
-                            <table className="table table-data-div table-striped table-hover">
+                            <table className="table table-data-div table-light table-hover">
                                 <thead>
                                 <tr>
                                     <th>Name</th>

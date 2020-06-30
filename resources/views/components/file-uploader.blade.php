@@ -27,10 +27,10 @@
             @endforeach
         </select>
     @endif
-  <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">
-  <br/>
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+
+  <input class="form-control-sm p-0 mt-2 mb-2" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">
+  <div class="progress mb-3">
+    <div class="progress-bar  progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
       <div class="text-xs-center" id="up-prog-info">0% @lang('uploaded')</div>
     </div>
   </div>

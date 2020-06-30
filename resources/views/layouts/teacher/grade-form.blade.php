@@ -5,55 +5,55 @@
   }
 </style>
 <div class="col-md-12" id="grade-labels">
-  <span class="label label-danger checkbox-inline">
+  <span class="badge badge-danger checkbox-inline">
     <input type="checkbox" name="attendance" value="4" checked> @lang('Attendance')
   </span>
-  <span class="label label-primary checkbox-inline">
+  <span class="badge badge-primary checkbox-inline">
     <input type="checkbox" name="quiz[]" value="5" checked> @lang('Quiz') 1
   </span>
-  <span class="label label-primary checkbox-inline">
+  <span class="badge badge-primary checkbox-inline">
     <input type="checkbox" name="quiz[]" value="6"> @lang('Quiz') 2
   </span>
-  <span class="label label-primary checkbox-inline">
+  <span class="badge badge-primary checkbox-inline">
     <input type="checkbox" name="quiz[]" value="7"> @lang('Quiz') 3
   </span>
-  <span class="label label-primary checkbox-inline">
+  <span class="badge badge-primary checkbox-inline">
     <input type="checkbox" name="quiz[]" value="8"> @lang('Quiz') 4
   </span>
-  <span class="label label-primary checkbox-inline">
+  <span class="badge badge-primary checkbox-inline">
     <input type="checkbox" name="quiz[]" value="9"> @lang('Quiz') 5
   </span>
-  <span class="label label-success checkbox-inline">
+  <span class="badge badge-success checkbox-inline">
     <input type="checkbox" name="assignment[]" value="10" checked> @lang('Assignment') 1
   </span>
-  <span class="label label-success checkbox-inline">
+  <span class="badge badge-success checkbox-inline">
     <input type="checkbox" name="assignment[]" value="11"> @lang('Assignment') 2
   </span>
-  <span class="label label-success checkbox-inline">
+  <span class="badge badge-success checkbox-inline">
     <input type="checkbox" name="assignment[]" value="12"> @lang('Assignment') 3
   </span>
-  <span class="label label-info checkbox-inline">
+  <span class="badge badge-info checkbox-inline">
     <input type="checkbox" name="ct[]" value="13" checked> @lang('Class Test') 1
   </span>
-  <span class="label label-info checkbox-inline">
+  <span class="badge badge-info checkbox-inline">
     <input type="checkbox" name="ct[]" value="14"> @lang('Class Test') 2
   </span>
-  <span class="label label-info checkbox-inline">
+  <span class="badge badge-info checkbox-inline">
     <input type="checkbox" name="ct[]" value="15"> @lang('Class Test') 3
   </span>
-  <span class="label label-info checkbox-inline">
+  <span class="badge badge-info checkbox-inline">
     <input type="checkbox" name="ct[]" value="16"> @lang('Class Test') 4
   </span>
-  <span class="label label-info checkbox-inline">
+  <span class="badge badge-info checkbox-inline">
     <input type="checkbox" name="ct[]" value="17"> @lang('Class Test') 5
   </span>
-  <span class="label label-default checkbox-inline">
+  <span class="badge badge-default checkbox-inline">
     <input type="checkbox" name="few" value="18">@lang('Final Exam Written')
   </span>
-  <span class="label label-default checkbox-inline">
+  <span class="badge badge-default checkbox-inline">
     <input type="checkbox" name="fem" value="19">@lang('Final Exam MCQ')
   </span>
-  <span class="label label-warning checkbox-inline">
+  <span class="badge badge-warning checkbox-inline">
     <input type="checkbox" name="practical" value="20">@lang('Practical')
   </span>
 </div>

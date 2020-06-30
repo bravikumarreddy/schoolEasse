@@ -10,14 +10,16 @@
         </div>
         <div class="col-md-10" id="main-container">
             @if(Auth::user()->role != 'student')
-            <ol class="breadcrumb" style="margin-top: 3%;">
-                <li><a href="{{url('grades/all-exams-grade')}}" style="color:#3b80ef;">@lang('Grades')</a></li>
-                <li><a href="{{url()->previous()}}" style="color:#3b80ef;">@lang('Section Students')</a></li>
-                <li class="active">@lang('History')</li>
-            </ol>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="margin-top: 3%;">
+                        <li class="breadcrumb-item" ><a href="{{url('grades/all-exams-grade')}}" style="color:#3b80ef;">@lang('Grades')</a></li>
+                        <li class="breadcrumb-item" ><a href="{{url()->previous()}}" style="color:#3b80ef;">@lang('Section Students')</a></li>
+                        <li class="breadcrumb-item active">@lang('History')</li>
+                    </ol>
+                </nav>
             @endif
-            <h2>@lang('Marks and Grades History')</h2>
-            <div class="panel panel-default">
+            <h4 class="p-3">@lang('Marks and Grades History')</h4>
+            <div class="card border-0">
               @if(count($grades) > 0)
               @foreach ($grades as $grade)
                 <?php
@@ -25,10 +27,11 @@
                     $classNumber = $grade->student->section->class->class_number;
                     $sectionNumber = $grade->student->section->section_number;
                 ?>
-                <div class="page-panel-title"><b>@lang('Student Code')</b> - {{$grade->student->student_code}} &nbsp;<b>@lang('Name')</b> -  {{$grade->student->name}} &nbsp;<b>@lang('Class')</b> - {{$grade->student->section->class->class_number}} &nbsp;<b>@lang('Section')</b> - {{$grade->student->section->section_number}}</div>
                  @break($loop->first)
-              @endforeach
-                <div class="panel-body">
+                    <h4 class="card-title"><b>@lang('Student Code')</b> - {{$grade->student->student_code}} &nbsp;<b>@lang('Name')</b> -  {{$grade->student->name}} &nbsp;<b>@lang('Class')</b> - {{$grade->student->section->class->class_number}} &nbsp;<b>@lang('Section')</b> - {{$grade->student->section->section_number}}</h4>
+
+                    @endforeach
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -38,7 +41,7 @@
                     @include('layouts.student.grade-table')
                 </div>
               @else
-                <div class="panel-body">
+                <div class="card-body">
                     @lang('No Related Data Found.')
                 </div>
               @endif

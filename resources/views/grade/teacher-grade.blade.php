@@ -42,7 +42,7 @@
                     <div class="col-md-4">
                       <div class="alert alert-info" role="alert">
                         <ul>
-                          <li>@lang('Quiz Counted Best') <span class="label label-success">{{$grade->course->quiz_count}}</span></li>
+                          <li>@lang('Quiz Counted Best') <span class="badge badge-success">{{$grade->course->quiz_count}}</span></li>
                         </ul>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
                       <div class="col-md-4">
                         <div class="alert alert-info" role="alert">
                         <ul>
-                          <li>@lang('Assignment Counted Best ')<span class="label label-success">{{$grade->course->assignment_count}}</span></li>
+                          <li>@lang('Assignment Counted Best ')<span class="badge badge-success">{{$grade->course->assignment_count}}</span></li>
                         </ul>
                         </div>
                       </div>
@@ -60,7 +60,7 @@
                       <div class="col-md-4">
                         <div class="alert alert-info" role="alert">
                         <ul>
-                          <li>@lang('Class Test Counted Best') <span class="label label-success">{{$grade->course->ct_count}}</span></li>
+                          <li>@lang('Class Test Counted Best') <span class="badge badge-success">{{$grade->course->ct_count}}</span></li>
                         </ul>
                         </div>
                       </div>

@@ -53,9 +53,9 @@
                                         <div class="media-body">
                                         <strong class="notification-title"><a href="#">{{$message->teacher->name}}</a> . {{$message->teacher->department->department_name ?? null}}
                                             @if($message->active == 1)
-                                                <span class="label label-danger">@lang('New')</span></strong>
+                                                <span class="badge badge-danger">@lang('New')</span></strong>
                                             @else
-                                                <span class="label label-default">@lang('Seen')</span></strong>
+                                                <span class="badge badge-default">@lang('Seen')</span></strong>
                                             @endif
                                         <p class="notification-desc">{!!$message->message!!}</p>
 

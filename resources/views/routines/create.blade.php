@@ -9,10 +9,11 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
-            <div class="panel panel-default">
-                <div class="page-panel-title">@lang('Add Routine')
-              </div>
+            <div class="card border-0">
+
                 <div class="panel-body">
+                    <h4 class="card-title">@lang('Add Routine')
+                    </h4>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
