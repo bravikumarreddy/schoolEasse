@@ -234,7 +234,7 @@
                 //console.log($(location).attr('protocol') +$(this).attr('href') + " <- a");
                 //console.log($(location).attr('href') + " <- location");
 
-                if($(location).attr('protocol') +$(this).attr('href')  == $(location).attr('href')){
+                if($(this).attr('href')  == $(location).attr('href')){
                     $(this).closest('li').closest('ul').closest('li').addClass('active');
                     $(this).closest('li').addClass('active');
                 }
@@ -245,10 +245,10 @@
 
         $('.dropdown-item').each(function(){
                 var alink = $(this).attr('href');
-                console.log($(location).attr('protocol') +$(this).attr('href') + " <- a");
+                console.log($(this).attr('href') + " <- a");
                 //console.log($(location).attr('href') + " <- location");
 
-                if($(location).attr('protocol') +$(this).attr('href')  == $(location).attr('href')){
+                if($(this).attr('href')  == $(location).attr('href')){
                     $(this).closest('li').closest('ul').closest('li').addClass('active');
 
                 }

@@ -18,6 +18,8 @@ class Example extends React.Component {
         this.getStudents = this.getStudents.bind(this);
     }
 
+
+
     async getSectionsClasses(value){
         if(value==""){
             this.setState({"class":value});

@@ -66,6 +66,9 @@
         </div>
     </div>
     <script src="{{asset('js/app.js')}}"></script>
+    <script>
+        var myTable = $('.table-data-div').DataTable({ paging: false });
+    </script>
     </div>
 
 
