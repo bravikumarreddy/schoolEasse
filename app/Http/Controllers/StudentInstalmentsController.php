@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\fee_structure;
+use App\FeeGroups;
 use App\student_instalments;
+use App\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,10 @@ class StudentInstalmentsController extends Controller
         if($user->role != "student"){
             abort(404);
         }
-        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
+        $fee_structures = FeeGroups::where("school_id","=",Auth::user()->school_id)
+            ->join('fee_structures',"fee_groups.id","=","fee_group_id")
+            ->get()->all();
+
         $existing = student_instalments::where("student_id","=",$student_id)->get()->pluck('fee_structure_id')->unique()->all();
         $existing_fee_structures = fee_structure::whereIn('id', $existing)->get()->all();
         $fee_list = DB::table('student_instalments')->where("student_id","=",$student_id)
@@ -32,8 +37,9 @@ class StudentInstalmentsController extends Controller
                     ->join( "fee_structures", "student_instalments.fee_structure_id","=" ,"fee_structures.id" )
             ->get()->all();
          //dd($fee_list);
+        $transactions = Transactions::where("student_id","=",$student_id)->get()->all();
 
-        return view("fees.student_installment",compact("user","fee_structures","fee_list","existing_fee_structures"));
+        return view("fees.student_installment",compact("user","fee_structures","fee_list","existing_fee_structures","transactions"));
     }
 
     public function addFees(Request $request)
@@ -75,6 +81,25 @@ class StudentInstalmentsController extends Controller
     {
 
         $student_id = $request->student_id;
+        $data=student_instalments::where("student_instalments.id","=",$request->student_instalment_id)
+            ->select("fee_structures.name as fee_structure","instalments.amount as amount","instalments.number as number","fee_structures.total_amount as fee_structure_amount" )
+            ->join("instalments","instalment_id","=","instalments.id")
+          ->join("fee_structures","student_instalments.fee_structure_id","=","fee_structures.id")
+
+            ->get()->all();
+
+
+
+        //dd($data[0]->fee_structure);
+        $transaction = new Transactions();
+        $transaction->student_id = $student_id;
+        $transaction->fee_structure = $data[0]->fee_structure;
+        $transaction->amount = $data[0]->amount;
+        $transaction->Instalment_number = $data[0]->number;
+        $transaction->transaction_date = date("Y-m-d");
+        $transaction->fee_structure_amount = $data[0]->fee_structure_amount;
+        $transaction->save();
+
         student_instalments::where('id', $request->student_instalment_id)
             ->update(['paid' => 1]);
 

@@ -33,7 +33,7 @@ class CreateFeeStructureRecordsTable extends Migration
         });
         Schema::table('instalments', function (Blueprint $table) {
 
-            $table->foreign('fee_structure_id')->references("id")->on("fee_structures")->onDelete('cascade');;
+            $table->foreign('fee_structure_id')->references("id")->on("fee_structures")->onDelete('cascade');
 
         });
         Schema::table('fee_structure_records', function (Blueprint $table) {

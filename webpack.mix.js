@@ -28,6 +28,9 @@ mix.styles([
 mix.react('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css');
 
+mix.react('resources/assets/js/fee_groups.js', 'public/js')
+
+
 mix.js('resources/assets/js/chart.js', 'public/js');
 
 mix.js('resources/assets/js/bootstrap4.js', 'public/js');

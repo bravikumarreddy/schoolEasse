@@ -22,10 +22,9 @@
 
                             <div class="form-group row">
 
-
                                 <div class="col-md-4 mb-3">
                                     <label class="col-form-label"  for="name">Fee Structure Name</label>
-                                    <input id="name" type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="5th Class" value="{{  $fee_structure->name ?? ""}}" required>
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="5th Class" value="{{  $fee_structure->name ?? ""}}" required>
 
                                     @isset($records)
                                         <input type="hidden" name="id" value="{{$fee_structure->id}}">

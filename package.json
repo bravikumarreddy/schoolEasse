@@ -41,6 +41,10 @@
         "datatables.net-bs4": "^1.10.21",
         "datepicker-bootstrap": "^1.9.13",
         "extract-text-webpack-plugin": "^4.0.0-beta.0",
-        "node-sass": "^4.14.1"
+        "node-sass": "^4.14.1",
+        "react-bootstrap-date-picker": "^5.1.0",
+        "react-date-picker": "^8.0.1",
+        "react-datepicker": "^3.0.0",
+        "react-router-dom": "^5.2.0"
     }
 }

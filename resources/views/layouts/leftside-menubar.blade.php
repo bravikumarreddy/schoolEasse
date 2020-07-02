@@ -117,7 +117,7 @@
             <a class="dropdown-item" href="{{ url('fees/analytics') }}"><i class="material-icons">insert_chart</i> <span class="nav-link-text p-2">@lang('Analytics')</span></a>
         </li>
        <li>
-         <a class="dropdown-item" href="{{ url('fees/fee_structures') }}"><i class="material-icons">view_list</i> <span class="nav-link-text p-2">@lang('Fee Structures')</span></a>
+         <a class="dropdown-item" href="{{ url('fees/fee_groups') }}"><i class="material-icons">view_list</i> <span class="nav-link-text p-2">@lang('Fee Structures')</span></a>
        </li>
         <li>
             <a class="dropdown-item" href="{{ url('fees/collect') }}"><i class="material-icons">money</i> <span class="nav-link-text p-2">@lang('Collect Fees')</span></a>

@@ -50,6 +50,16 @@ Route::middleware(['auth', 'teacher'])->prefix('grades')->group(function () {
 
 Route::get('grades/{student_id}', 'GradeController@index')->middleware(['auth', 'teacher.student']);
 
+Route::middleware(['auth', 'accountant'])->prefix('fees/fee_groups')->group(function(){
+    Route::get('/','FeeGroupsController@index');
+    Route::post('create','FeeGroupsController@create');
+    Route::get('api/fee_structures/{fee_group_id}','FeeGroupsController@getFeeStructures');
+    Route::post('delete', 'FeeGroupsController@destroy');
+    Route::post('fee_structure/create', 'FeeStructureController@store');
+    Route::post('fee_structure/delete', 'FeeStructureController@destroy');
+   // Route::any( '(.*)', 'FeeGroupsConroller@index');
+});
+
 Route::middleware(['auth', 'accountant'])->prefix('fees')->name('fees.')->group(function () {
     Route::get('all', 'FeeController@index');
     Route::get('analytics','AnalyticsController@index');

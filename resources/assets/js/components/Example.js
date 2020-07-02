@@ -77,11 +77,11 @@ class Example extends React.Component {
 
                 </div>
                 {this.state.studentList.length ?
-                    <div className="card border-warning mt-4 ">
+                    <div className="card border-warning mt-4 mb-4">
                         <div className="card-header text-white bg-warning">Student List</div>
                         <div className="card-body">
 
-                            <table className="table table-data-div table-light table-hover">
+                            <table className="table table-data-div table-hover">
                                 <thead>
                                 <tr>
                                     <th>Name</th>

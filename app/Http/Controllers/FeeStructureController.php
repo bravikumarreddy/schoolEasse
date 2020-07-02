@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\fee_structure;
 use App\fee_structure_records;
+use App\FeeGroups;
 use App\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +21,11 @@ class FeeStructureController extends Controller
      */
     public function index()
     {
+        return view("fees.fee_groups");
         //
-        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
+        //$fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
 
-        return view("fees.fee_structures",compact("fee_structures"));
+       // return view("fees.fee_structures",compact("fee_structures"));
     }
 
     /**
@@ -56,21 +58,26 @@ class FeeStructureController extends Controller
     public function store(Request $request)
     {
         //
+        //fee_groups::
 
-        if($request->id){
-            $id = $request->id;
-            fee_structure_records::where('fee_structure_id' ,"=",$request->id)->delete();
-            DB::table("instalments")->where("fee_structure_id","=",$request->id)->delete();
-            fee_structure::where("id",$request->id)->update(["name"=>$request->input('name')]);
-        }
-        else {
-            $id = fee_structure::create(['name' => $request->input('name'), "school_id" => Auth::user()->school_id])->id;
-        }
+        $fee_group_id = $request->input('fee_group_id');
+
+        $fee_structure = new fee_structure();
+
+        $fee_structure->fee_group_id = $fee_group_id;
+        $fee_structure->name = $request->input('name');
+        $fee_structure->total_instalments = $request->input('totalInstalments');
+        $fee_structure->total_amount = $request->input('totalAmount');
+        $fee_structure->save();
+
+        $id = $fee_structure->id;
+
+
 
         $feeNames = $request->input("FeeName");
         $amounts = $request->input("Amount");
         $instalments = $request->input("Instalment");
-
+        $instalmentAmount = $request->input("InsAmount");
 
         $totalAmount = 0;
         for($i=0 ; $i < count($feeNames); $i++){
@@ -79,14 +86,14 @@ class FeeStructureController extends Controller
         }
 
         $instalments_data=[];
-        $instalmentAmount = $totalAmount/count($instalments);
+
         for($i=0;$i<count($instalments);$i++){
-            array_push($instalments_data,["fee_structure_id"=>$id,"number"=>$i,"due_date"=>$instalments[$i],"amount"=>$instalmentAmount]);
+            array_push($instalments_data,["fee_structure_id"=>$id,"number"=>$i,"due_date"=>$instalments[$i],"amount"=>$instalmentAmount[$i]]);
         }
         DB::table("instalments")->insert($instalments_data);
 
 
-        return redirect('fees/fee_structures');
+        return redirect('fees/fee_groups');
     }
 
     public function sections(Request $request,$class_id){
@@ -186,6 +193,6 @@ class FeeStructureController extends Controller
         $fee_structure = fee_structure::find($request->id);
         $fee_structure->delete();
 
-        return redirect('fees/fee_structures');
+        return redirect('fees/fee_groups');
     }
 }

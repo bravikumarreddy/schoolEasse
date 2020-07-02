@@ -13,9 +13,9 @@
                 @include('layouts.leftside-menubar')
             </div>
             <div class="col-md-10" id="main-container">
-                <div class="panel panel-default">
+                <div class="card m-3">
                     @if(count(array($user)) > 0)
-                        <div class="panel-body">
+                        <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2" align="center">
                                         <div style="height: 70px;"></div>
@@ -94,9 +94,9 @@
 
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Payment List</div>
-                    <div class="panel-body">
+                <div class="card m-3">
+                    <h4 class="card-header">Payment List</h4>
+                    <div class="card-body">
 
                         <table class="table table-striped table-hover">
                             <thead>
@@ -147,9 +147,9 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Add Fees</div>
-                    <div class="panel-body">
+                <div class="card m-3" >
+                    <h4 class="card-header">Add Fees</h4>
+                    <div class="card-body">
                         <br>
                         <form id="form-id" method="post" action="/fees/student/add">
                             @csrf
@@ -158,7 +158,7 @@
                             <div class="row">
                                     <div class="col-md-10 mb-3">
 
-                                        <select id="fee_structure"  class="form-control" name="fee_structure">
+                                        <select id="fee_structure"  class="custom-select form-control" name="fee_structure">
                                             <option value="">Select Fee Structure</option>
                                             @foreach($fee_structures as $fee_structure)
                                                 <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
@@ -189,9 +189,9 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Delete Fees</div>
-                    <div class="panel-body">
+                <div class="card m-3">
+                    <h4 class="card-header">Delete Fees</h4>
+                    <div class="card-body">
                         <br>
                         <form id="form-id" method="post" action="/fees/student/delete">
                             @csrf
@@ -200,7 +200,7 @@
                                 <div class="row">
                                     <div class="col-md-10 mb-3">
 
-                                        <select id="fee_structure"  class="form-control" name="fee_structure">
+                                        <select id="fee_structure"  class=" custom-select form-control" name="fee_structure">
                                             <option value="">Select Fee Structure</option>
                                             @foreach($existing_fee_structures as $fee_structure)
                                                 <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
@@ -208,9 +208,7 @@
                                         </select>
                                         <br>
                                         @error('delete')
-                                        <div class="text-danger">
-                                            <strong>Already Existis</strong>
-                                        </div>
+
                                         @enderror
                                     </div>
                                     <div class="col-md-2 mb-3">
@@ -231,10 +229,37 @@
                     </div>
                 </div>
 
-                <div class="panel panel-warning">
-                    <div class="panel-heading">Transactions</div>
-                    <div class="panel-body">
+                <div class="card m-3">
+                    <div class="card-header">Transactions</div>
+                    <div class="card-body">
                         <br>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+
+                                <th scope="col">Fee Structure Name</th>
+                                <th scope="col">Amount Paid</th>
+                                <th scope="col">Installment number</th>
+                                <th scope="col">Transaction date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        @foreach($transactions as $transaction)
+
+
+
+                                <tr>
+
+                                    <td>{{$transaction->fee_structure}}</td>
+                                    <td>{{ $transaction->amount }}</td>
+                                    <td>{{$transaction->Instalment_number +1}}</td>
+                                    <td>{{$transaction->transaction_date}}</td>
+                                </tr>
+
+
+                        @endforeach
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>

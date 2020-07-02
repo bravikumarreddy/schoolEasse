@@ -41,7 +41,7 @@
                                                         <h4 class="modal-title" id="departmentModalLabel">@lang('Create Department')</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form class="form-horizontal" action="{{url('school/add-department')}}" method="post">
+                                                        <form action="{{url('school/add-department')}}" method="post">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
                                                                 <label for="department_name" class="col-sm-2 control-label">@lang('Department Name')</label>
@@ -50,7 +50,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <div class="col-sm-offset-2 col-sm-10">
+                                                                <div class="offset-2 col-sm-10">
                                                                     <button type="submit" class="btn btn-danger btn-sm">@lang('Submit')</button>
                                                                 </div>
                                                             </div>
