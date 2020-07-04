@@ -27,8 +27,8 @@
                         {{ csrf_field() }}
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">@lang('E-Mail Or Phone Number')</label>
-                            <div class="col-sm-4">
+                            <label for="email" class="col-3 col-form-label">@lang('E-Mail Or Phone Number')</label>
+                            <div class="col-4">
                                 <input id="email" type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
 
@@ -43,9 +43,9 @@
                         </div>
 
                         <div class="form-group row ">
-                            <label for="password" class="col-sm-3 col-form-label">@lang('Password')</label>
+                            <label for="password" class="col-3 col-form-label">@lang('Password')</label>
 
-                            <div class="col-sm-4">
+                            <div class="col-4">
                                 <input id="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                                 @if ($errors->has('password'))
                                     <div class="invalid-feedback d-block">
@@ -68,7 +68,7 @@
                         </div>
                         --}}
                         <div class="form-group row">
-                            <div class="col-sm-7 text-right">
+                            <div class="col-7 text-right">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('Login')
                                 </button>

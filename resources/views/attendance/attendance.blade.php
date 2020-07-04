@@ -13,17 +13,17 @@
                 <li><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">@lang('All Classes') &amp; @lang('Sections')</a></li>
                 <li class="active">@lang('Attendance')</li>
             </ol>
-            <h2>@lang('Take Attendance')</h2>
-            <div class="panel panel-default">
+            <h3>@lang('Take Attendance')</h3>
+            <div class="card border-0">
                 @if(count($students) > 0)
                 @foreach ($students as $student)
-                  <div class="page-panel-title">
+                  <h4 class="card-title m-3">
                     <b>Section</b> - {{ $student->section->section_number}} &nbsp; <b>Class</b> - {{$student->section->class->class_number}}
                     <span class="pull-right"><b>@lang('Current Date Time'):</b> &nbsp;{{ Carbon\Carbon::now()->format('h:i A d/m/Y')}}</span>
-                  </div>
+                  </h4>
                    @break($loop->first)
                 @endforeach
-                <div class="panel-body">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -33,9 +33,9 @@
                     @include('layouts.teacher.attendance-form')
                 </div>
                 @else
-                <div class="panel-body">
-                    @lang('No Related Data Found.')
-                </div>
+                    <div class="panel-body">
+                        @lang('No Related Data Found.')
+                    </div>
                 @endif
             </div>
         </div>

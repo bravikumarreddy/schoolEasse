@@ -210,13 +210,12 @@ class FeeGroups extends React.Component {
 
 
                                 <div className="card border-light mt-4">
-                                    <h5 className="card-header  bg-light">Fee Structures</h5>
-                                    <div className="card-body">
-                                        <h5 className="card-title"> Fee Group - <span className="text-info text" style={{"fontWeight": "bold"}} >{this.state.fee_group_text}</span> </h5>
+                                    <h5 className="card-header" > Fee Structures</h5>
+                                    <div className="card-body p-0">
 
                                         {this.state.fee_structures.length ?
-                                            <table className="table table-data-div m-4 table-striped table-hover">
-                                                <thead>
+                                            <table className="table mt-4 table-data-div   table-hover  table-bordered">
+                                                <thead className="thead-light">
                                                 <tr>
                                                     <th>Fee Structure Name</th>
                                                     <th>Instalments</th>
@@ -238,7 +237,7 @@ class FeeGroups extends React.Component {
                                                             <form id="form-id" method="post" action="/fees/fee_groups/fee_structure/delete">
                                                                 <input type="hidden" name="_token" value={csrf_token} />
                                                                 <input type="hidden" name="id" value={val.id}/>
-                                                                <button className="btn-sm btn-danger">
+                                                                <button type="button" className="btn btn-sm btn-danger">
                                                                     <small>Delete</small>
                                                                 </button>
                                                             </form>
@@ -246,7 +245,7 @@ class FeeGroups extends React.Component {
                                                         <td>
 
 
-                                                                <button className="btn-sm btn-warning">
+                                                                <button className="btn btn-sm btn-warning">
                                                                     <small>View</small>
                                                                 </button>
 
@@ -263,7 +262,7 @@ class FeeGroups extends React.Component {
 
 
 
-                                        <div className="text-center">
+                                        <div className="text-center mb-4 mt-4">
 
                                             <button type="button" data-toggle="modal"  className="btn btn-success" data-target="#FeeStructureCreate"> Create new Fee Structure </button>
                                         </div>
@@ -338,7 +337,7 @@ class FeeGroups extends React.Component {
                                                                                    <br/>
                                                                                    <br/>
                                                                                             <button
-                                                                                                className="btn-sm  btn-danger"
+                                                                                                className="btn btn-sm  btn-danger"
                                                                                                 id="removeBtn"
                                                                                                 onClick={()=>{this.deleteRecord(index)}}
                                                                                                 type="button">
@@ -407,7 +406,7 @@ class FeeGroups extends React.Component {
                                                                                 <br/>
                                                                                 <br/>
                                                                                 <button
-                                                                                    className="btn-sm  btn-danger"
+                                                                                    className="btn btn-sm  btn-danger"
                                                                                     id="removeBtn"
                                                                                     onClick={()=>{this.deleteInstalment(index)}}
                                                                                     type="button">
@@ -486,7 +485,7 @@ class FeeGroups extends React.Component {
                                         <form className="float-right" id="form-id" method="post" action="/fees/fee_groups/delete">
                                             <input type="hidden" name="_token" value={csrf_token} />
                                             <input type="hidden" name="id" value={this.state.fee_group}/>
-                                            <button type="submit" className="btn-sm btn-danger">
+                                            <button type="submit" className=" btn btn-sm btn-danger">
                                                 Delete Fee Group
                                             </button>
                                         </form>

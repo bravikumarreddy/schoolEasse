@@ -106,7 +106,7 @@ class Example extends React.Component {
                                         <td>{val.father_name}</td>
                                         <td>
                                             <form id="form-id" method="get" action={"/fees/student/"+val.student_id}>
-                                                <button className="btn-xs btn-success">
+                                                <button className="btn btn-sm btn-success">
                                                     <small>Collect</small>
                                                 </button>
                                             </form>

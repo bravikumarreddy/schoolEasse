@@ -62285,7 +62285,7 @@ var Example = /*#__PURE__*/function (_React$Component) {
           method: "get",
           action: "/fees/student/" + val.student_id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn-xs btn-success"
+          className: "btn btn-sm btn-success"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "Collect")))));
       }))))) : "");
     }

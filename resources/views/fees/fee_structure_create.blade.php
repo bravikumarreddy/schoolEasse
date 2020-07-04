@@ -184,7 +184,7 @@
                                 <div class="col-md-4 mb-3">
                                     <br>
                                     <br>
-                                    <button class="btn-sm btn-xs btn-danger" id="removeBtn" type="button">Delete</button>
+                                    <button class="btn-sm btn btn-danger" id="removeBtn" type="button">Delete</button>
                                 </div>
 
 

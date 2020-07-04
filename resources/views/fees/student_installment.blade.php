@@ -94,12 +94,12 @@
 
 
 
-                <div class="card m-3">
+                <div class="card m-3 ">
                     <h4 class="card-header">Payment List</h4>
-                    <div class="card-body">
-
-                        <table class="table table-striped table-hover">
-                            <thead>
+                    <div class="card-body ">
+                        @if(count($fee_list) >0)
+                        <table class="table table-bordered table table-hover ">
+                            <thead class="thead-light">
                             <tr>
                                 <th>Fee Structure Name</th>
                                 <th>Instalment Number</th>
@@ -107,7 +107,7 @@
                                 <th>Due Date</th>
                                 <th>Amount </th>
                                 <th></th>
-                                <th></th>
+
 
 
                             </tr>
@@ -134,7 +134,7 @@
                                                 <input type="hidden" name="student_instalment_id" value="{{$instalment->student_instalment_id}}">
                                                 <input type="hidden" name="student_id" value="{{$user->id}}">
                                                 @csrf
-                                                <button class="btn-xs btn-success">
+                                                <button class="btn btn-sm btn-success">
                                                     <small>Collect</small>
                                                 </button>
                                             </form>
@@ -144,6 +144,7 @@
 
                             </tbody>
                         </table>
+                            @endif
                     </div>
                 </div>
 

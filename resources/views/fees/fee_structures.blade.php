@@ -39,7 +39,7 @@
                                     <form id="form-id" method="post" action="/fees/fee_structures/duplicate">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$fee_structure->id}}">
-                                        <button class="btn-sm btn-info" type="submit">
+                                        <button class="btn btn-sm btn-info" type="submit">
                                             @lang('Duplicate')
                                         </button>
 
@@ -59,7 +59,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{$fee_structure->id}}">
-                                        <button class="btn-sm btn-danger" type="submit">
+                                        <button class=" btn btn-sm btn-danger" type="submit">
                                             @lang('Delete')
                                         </button>
 

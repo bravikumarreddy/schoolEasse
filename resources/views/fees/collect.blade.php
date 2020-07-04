@@ -14,7 +14,8 @@
 
                 <h4>Collect Fees</h4>
 
-                <div id="example" classes={{$classes}}>
+
+                <div id="example" classes="{{$classes}}">
 
                 </div>
 {{--                <table class="table table-striped">--}}
