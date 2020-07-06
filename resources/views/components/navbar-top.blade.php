@@ -33,7 +33,7 @@
                             $mc = \App\Notification::where('student_id',\Auth::user()->id)->where('active',1)->count();
                         ?>
                         @if($mc > 0)
-                        <span class="badge badge-danger" style="vertical-align: middle;border-style: none;border-radius: 50%;width: 30px;height: 30px;">{{$mc}}</span>
+                        <h7><span class="badge badge-danger" style="vertical-align: middle;border-style: none;border-radius: 50%;width: 20px;height: 20px;">{{$mc}}</span></h7>
                         @endif
                     </a>
                 </li>

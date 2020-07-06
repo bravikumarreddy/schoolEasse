@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\AttendanceCheck;
 use App\DailyAttendance;
+use App\Myclass;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class DailyAttendanceController extends Controller
 {
     /**
@@ -15,7 +20,92 @@ class DailyAttendanceController extends Controller
     public function index()
     {
         //
+        $classes = json_encode( Myclass::query()
+            ->bySchool(\Auth::user()->school->id)->get()->all());
+
+        return view('attendance.daily-attendance',compact("classes"));
     }
+
+    public function takeAttendance(Request $request)
+    {
+
+        //dd($request);
+        $section_id = $request->input('section');
+        $session = $request->input('session');
+        $date = $request->input('date');
+        $selectStudents =$request->input('selectStudents');
+        if($selectStudents==null){
+            $selectStudents=[];
+        }
+        DailyAttendance::where("date" ,"=",$date)
+                    ->where("session","=",$session)
+                    ->where("section_id","=",$section_id)
+                    ->delete();
+
+        AttendanceCheck::where("date" ,"=",$date)
+            ->where("session","=",$session)
+            ->where("section_id","=",$section_id)
+            ->delete();
+
+
+        $students_with_section = DB::table('users')->where("school_id","=",Auth::user()->school_id)
+            ->where('role',"=","student")
+            ->whereNotIn("users.id" ,$selectStudents)
+            ->join("sections","section_id","=","sections.id")
+            ->where("section_id","=",$section_id)
+            ->select("users.id as user_id")
+
+            ->get()->all();
+
+
+
+
+        $attendance_check = new AttendanceCheck();
+        $attendance_check->user_id =Auth::user()->id;
+        $attendance_check->date = $date;
+        $attendance_check->section_id = $section_id;
+        $attendance_check->session = $session;
+        $attendance_check->save();
+
+        for($i=0;$i<count($students_with_section);$i++){
+            $daily_attendance_record = new DailyAttendance();
+            $daily_attendance_record->student_id = $students_with_section[$i]->user_id;
+            $daily_attendance_record->section_id = $section_id;
+            $daily_attendance_record->session =  $session;
+            $daily_attendance_record->date =  $date;
+            $daily_attendance_record->save();
+
+        }
+
+        return redirect('/attendance/daily-attendance');
+    }
+
+    public function checkAttendance(Request $request){
+        $section_id = $request->input('section_id');
+        $session = $request->input('session');
+        $date = $request->input('date');
+
+        $user = AttendanceCheck::
+            where("date","=",$date)
+            ->where("session","=",$session)
+            ->where("section_id","=",$section_id)
+        ->first();
+
+        if($user != null){
+            $user =User::find( $user->user_id)->first()->name;
+
+        }
+        return json_encode($user);
+    }
+    public function  student(){
+        $absent_details = DailyAttendance::
+            where("student_id","=",Auth::user()->id)
+            ->get()->all();
+
+        return view("attendance.calendar",compact('absent_details'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

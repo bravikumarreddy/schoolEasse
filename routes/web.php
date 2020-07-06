@@ -31,6 +31,10 @@ Route::middleware(['auth'])->group(function () {
     //     $attendances = App\Attendance::with(['student'])->where('section_id', $section_id)->get();
     //   }
     // });
+    Route::get('attendance/daily-attendance', 'DailyAttendanceController@index')->middleware(['teacher']);
+    Route::post('attendance/daily-attendance/submit', 'DailyAttendanceController@takeAttendance')->middleware(['teacher']);
+    Route::get('api/attendance/daily-attendance/checkAttendance', 'DailyAttendanceController@checkAttendance')->middleware(['teacher']);
+    Route::get('/attendance/daily-attendance/calender', 'DailyAttendanceController@student')->middleware(['student']);
     Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt')->middleware(['teacher']);
     Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
     Route::get('attendances/{section_id}', 'AttendanceController@sectionIndex')->middleware(['teacher']);

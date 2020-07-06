@@ -50,8 +50,8 @@ class Example extends React.Component {
                     <div className="card-body">
                         <div className="form-group row">
                             <div className="col-md-4 mb-3">
-                                <label htmlFor="fee_structure" className="control-label">Select Class</label>
-                                <select value={this.state.class} id="fee_structure"  className="form-control" name="fee_structure"
+                                <label htmlFor="fee_structure" className="col-form-label">Select Class</label>
+                                <select value={this.state.class} id="fee_structure"  className="form-control custom-select" name="fee_structure"
                                  onChange={ (event)=> this.getSectionsClasses(event.target.value)}>
                                     <option value="">Class</option>
                                     { classes.map( val => (
@@ -61,8 +61,8 @@ class Example extends React.Component {
 
                             </div>
                             <div className="col-md-4 mb-3">
-                                <label htmlFor="fee_structure" className="control-label">Select Section</label>
-                                <select disabled= { this.state.class ? false:true } value={this.state.section} id="fee_structure"  className="form-control" name="fee_structure"
+                                <label htmlFor="fee_structure" className="col-form-label">Select Section</label>
+                                <select disabled= { this.state.class ? false:true } value={this.state.section} id="fee_structure"  className="form-control custom-select" name="fee_structure"
                                         onChange={(event)=> this.getStudents(event.target.value)}>
                                     <option value="">Section</option>
                                     { this.state.sectionOptions.map( val => (

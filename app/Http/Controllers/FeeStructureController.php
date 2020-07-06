@@ -103,11 +103,14 @@ class FeeStructureController extends Controller
     }
 
     public function getClassStudents(Request $request,$class_id,$section_id){
+
         $students_with_section = DB::table('users')->where("school_id","=",Auth::user()->school_id)
             ->join("student_infos","users.id","=","student_infos.student_id")
             ->join("sections","section_id","=","sections.id")
             ->where("section_id","=",$section_id)
             ->get()->all();
+
+       // dd(count($students_with_section),count($students_with_section_count));
         return json_encode($students_with_section);
     }
 

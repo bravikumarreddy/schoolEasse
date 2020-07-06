@@ -3,7 +3,9 @@
 @section('title', __('All Fees'))
 
 @section('content')
-
+    <script>
+        var csrf_token = '<?php echo csrf_token(); ?>';
+    </script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2" id="side-navbar">
@@ -12,10 +14,10 @@
             <div class="col-md-10" id="main-container">
                 <br>
 
-                <h4>Collect Fees</h4>
+                <h4>Attendance</h4>
 
 
-                <div id="example" classes="{{$classes}}">
+                <div id="daily-attendance" classes="{{$classes}}">
 
                 </div>
 
@@ -24,7 +26,7 @@
             </div>
         </div>
     </div>
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/daily-attendance.js')}}"></script>
     <script>
         var myTable = $('.table-data-div').DataTable({ paging: false });
     </script>

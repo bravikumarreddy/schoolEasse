@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
     data_table_div()
     all_images()
     datepicker_format()
+
 })
 
 function loader_fade_out() {

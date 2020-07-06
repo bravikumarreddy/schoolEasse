@@ -14,9 +14,22 @@ class CreateAttendanceChecksTable extends Migration
     public function up()
     {
         Schema::create('attendance_checks', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+
+            $table->integer("user_id")->unsigned();
+            $table->integer('section_id')->unsigned();
+            $table->string("date");
+            $table->string("session");
             $table->timestamps();
         });
+
+        Schema::table('attendance_checks', function (Blueprint $table) {
+
+            $table->foreign('section_id')->references("id")->on("sections")->onDelete('cascade');
+
+
+        });
+
     }
 
     /**

@@ -32,7 +32,7 @@
         <a class="dropdown-item" href="#"><i class="material-icons">contacts</i> <span class="nav-link-text p-2">@lang('Teacher Attendance')</span></a>
       </li>
       <li class="nav-item">
-        <a class="dropdown-item" href="{{url('school/sections?att=1')}}"><i class="material-icons">contacts</i> <span
+        <a class="dropdown-item" href="{{url('attendance/daily-attendance')}}"><i class="material-icons">contacts</i> <span
             class="nav-link-text p-2">@lang('Student Attendance')</span></a>
       </li>
       <li class="nav-item">
@@ -164,8 +164,10 @@
   @endif
   @if(Auth::user()->role == 'student')
   <li class="nav-item">
-    <a class="nav-link active" href="{{ url('attendances/0/'.Auth::user()->id.'/0') }}"><i class="material-icons">date_range</i>
-      <span class="nav-link-text p-2">@lang('My Attendance')</span></a>
+{{--    <a class="nav-link active" href="{{ url('attendances/0/'.Auth::user()->id.'/0') }}"><i class="material-icons">date_range</i>--}}
+        <a class="nav-link active" href="{{ url('/attendance/daily-attendance/calender') }}"><i class="material-icons">date_range</i>
+            <span class="nav-link-text p-2">@lang('My Attendance')</span>
+        </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ url('courses/0/'.Auth::user()->section_id) }}"><i class="material-icons">subject</i>
@@ -227,7 +229,7 @@
 
 
         $('.nav-item.active').removeClass('active');
-        console.log($('.nav-item.active'));
+        //console.log($('.nav-item.active'));
 
         $('.nav-link').each(function(){
                 var alink = $(this).attr('href');
@@ -245,7 +247,7 @@
 
         $('.dropdown-item').each(function(){
                 var alink = $(this).attr('href');
-                console.log($(this).attr('href') + " <- a");
+                //console.log($(this).attr('href') + " <- a");
                 //console.log($(location).attr('href') + " <- location");
 
                 if($(this).attr('href')  == $(location).attr('href')){

@@ -29,6 +29,7 @@ mix.react('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.react('resources/assets/js/fee_groups.js', 'public/js')
+mix.react('resources/assets/js/daily-attendance.js', 'public/js')
 
 
 mix.js('resources/assets/js/chart.js', 'public/js');
@@ -55,7 +56,9 @@ mix.styles([
     'resources/assets/theme/vendors/css/bootstrap-datepicker3.min.css',
     //'resources/assets/theme/vendors/css/flatly.bootstrap-3.3.7.min.css',
     //'resources/assets/theme/vendors/css/flatly.bootstrap-4.min.css',
-    "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+    "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css",
+    'node_modules/@fullcalendar/daygrid/main.css',
+
 ], 'public/css/vendors.css')
 
 

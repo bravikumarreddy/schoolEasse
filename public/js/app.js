@@ -62232,11 +62232,11 @@ var Example = /*#__PURE__*/function (_React$Component) {
         className: "col-md-4 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         htmlFor: "fee_structure",
-        className: "control-label"
+        className: "col-form-label"
       }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         value: this.state["class"],
         id: "fee_structure",
-        className: "form-control",
+        className: "form-control custom-select",
         name: "fee_structure",
         onChange: function onChange(event) {
           return _this2.getSectionsClasses(event.target.value);
@@ -62252,12 +62252,12 @@ var Example = /*#__PURE__*/function (_React$Component) {
         className: "col-md-4 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         htmlFor: "fee_structure",
-        className: "control-label"
+        className: "col-form-label"
       }, "Select Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         disabled: this.state["class"] ? false : true,
         value: this.state.section,
         id: "fee_structure",
-        className: "form-control",
+        className: "form-control custom-select",
         name: "fee_structure",
         onChange: function onChange(event) {
           return _this2.getStudents(event.target.value);

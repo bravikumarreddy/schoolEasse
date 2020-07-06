@@ -14,11 +14,19 @@ class CreateDailyAttendancesTable extends Migration
     public function up()
     {
         Schema::create('daily_attendances', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('student_id')->unsigned();
-            $table->string('Session');
-         // $table->integer()
+            $table->string('session');
+            $table->string('date');
+            $table->integer('section_id')->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('daily_attendances', function (Blueprint $table) {
+
+            $table->foreign('student_id')->references("id")->on("users")->onDelete('cascade');
+            $table->foreign('section_id')->references("id")->on("sections")->onDelete('cascade');
+
         });
     }
 
