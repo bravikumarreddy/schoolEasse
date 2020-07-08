@@ -189,6 +189,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       classes: "",
       "class": "",
+      classLoading: false,
       className: "",
       subjects: [],
       createSubjectName: "",
@@ -198,7 +199,8 @@ var Class = /*#__PURE__*/function (_React$Component) {
       teacherSubjects: [],
       teachers: [],
       selectedTeacher: "",
-      subjectId: ""
+      subjectId: "",
+      teachersLoading: false
     };
     _this.getClasses = _this.getClasses.bind(_assertThisInitialized(_this));
     _this.getSubjects = _this.getSubjects.bind(_assertThisInitialized(_this));
@@ -259,9 +261,9 @@ var Class = /*#__PURE__*/function (_React$Component) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 this.setState({
-                  "class": class_id,
                   className: className,
-                  section: ""
+                  section: "",
+                  classLoading: true
                 });
                 _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects", {
@@ -282,8 +284,10 @@ var Class = /*#__PURE__*/function (_React$Component) {
               case 6:
                 sectionsRes = _context2.sent;
                 this.setState({
+                  "class": class_id,
                   subjects: res.data,
-                  sections: sectionsRes.data
+                  sections: sectionsRes.data,
+                  classLoading: false
                 });
                 console.log(res.data);
 
@@ -310,7 +314,11 @@ var Class = /*#__PURE__*/function (_React$Component) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                this.setState({
+                  section: "",
+                  classLoading: true
+                });
+                _context3.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects/create", {
                   params: {
                     class_id: this.state["class"],
@@ -318,15 +326,15 @@ var Class = /*#__PURE__*/function (_React$Component) {
                   }
                 });
 
-              case 2:
+              case 3:
                 res = _context3.sent;
                 console.log(res.data);
                 this.setState({
                   subjects: res.data,
-                  section: ""
+                  classLoading: false
                 });
 
-              case 5:
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -349,7 +357,11 @@ var Class = /*#__PURE__*/function (_React$Component) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
+                this.setState({
+                  section: "",
+                  classLoading: true
+                });
+                _context4.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects/delete", {
                   params: {
                     class_id: this.state["class"],
@@ -357,15 +369,15 @@ var Class = /*#__PURE__*/function (_React$Component) {
                   }
                 });
 
-              case 2:
+              case 3:
                 res = _context4.sent;
                 console.log(res.data);
                 this.setState({
                   subjects: res.data,
-                  section: ""
+                  classLoading: false
                 });
 
-              case 5:
+              case 6:
               case "end":
                 return _context4.stop();
             }
@@ -390,8 +402,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
               case 0:
                 console.log(section_id, section_name);
                 this.setState({
-                  section: section_id,
-                  sectionName: section_name
+                  teachersLoading: true
                 });
                 _context5.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects", {
@@ -408,6 +419,9 @@ var Class = /*#__PURE__*/function (_React$Component) {
               case 7:
                 teachersRes = _context5.sent;
                 this.setState({
+                  teachersLoading: false,
+                  section: section_id,
+                  sectionName: section_name,
                   teacherSubjects: res.data,
                   teachers: teachersRes.data
                 });
@@ -438,7 +452,10 @@ var Class = /*#__PURE__*/function (_React$Component) {
               case 0:
                 event.preventDefault();
                 console.log(this.state.subjectId);
-                _context6.next = 4;
+                this.setState({
+                  teachersLoading: true
+                });
+                _context6.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/assign", {
                   params: {
                     section_id: this.state.section,
@@ -447,14 +464,15 @@ var Class = /*#__PURE__*/function (_React$Component) {
                   }
                 });
 
-              case 4:
+              case 5:
                 res = _context6.sent;
                 console.log(res);
                 this.setState({
-                  teacherSubjects: res.data
+                  teacherSubjects: res.data,
+                  teachersLoading: false
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context6.stop();
             }
@@ -477,8 +495,11 @@ var Class = /*#__PURE__*/function (_React$Component) {
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
+                this.setState({
+                  teachersLoading: true
+                });
                 console.log(this.state.subjectId);
-                _context7.next = 3;
+                _context7.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/remove", {
                   params: {
                     section_id: this.state.section,
@@ -486,14 +507,15 @@ var Class = /*#__PURE__*/function (_React$Component) {
                   }
                 });
 
-              case 3:
+              case 4:
                 res = _context7.sent;
                 console.log(res);
                 this.setState({
-                  teacherSubjects: res.data
+                  teacherSubjects: res.data,
+                  teachersLoading: false
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context7.stop();
             }
@@ -540,7 +562,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
           key: val.id,
           value: val.id
         }, val.class_number);
-      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null), this.state["class"] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null), this.state["class"] && this.state.classLoading == false ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-dark mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-dark"
@@ -605,7 +627,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
           key: val.id,
           value: val.id
         }, val.section_number);
-      })))))) : "", this.state.section && this.state["class"] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : ""), this.state.section && this.state["class"] && this.state.teachersLoading == false ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-orange mt-4 mb-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-orange"
@@ -667,7 +689,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
             });
           }
         }, "Assign Selected Teacher"));
-      }))))) : "");
+      }))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.teachersLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : ""));
     }
   }]);
 

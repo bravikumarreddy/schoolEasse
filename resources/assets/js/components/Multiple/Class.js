@@ -9,6 +9,7 @@ class Class extends React.Component {
         this.state={
             classes:"",
             class:"",
+            classLoading:false,
             className:"",
             subjects:[],
             createSubjectName:"",
@@ -18,7 +19,8 @@ class Class extends React.Component {
             teacherSubjects:[],
             teachers:[],
             selectedTeacher:"",
-            subjectId:""
+            subjectId:"",
+            teachersLoading:false
 
         }
         this.getClasses = this.getClasses.bind(this);
@@ -47,7 +49,8 @@ class Class extends React.Component {
 
     async getSubjects(class_id,className){
 
-        this.setState({class:class_id,className:className,section:""});
+        this.setState({className:className,section:"",classLoading:true });
+
         var res = await axios.get(`/api/subjects`,{
             params:{
                 class_id : class_id,
@@ -62,12 +65,12 @@ class Class extends React.Component {
 
         });
 
-        this.setState({subjects:res.data,sections:sectionsRes.data});
+        this.setState({class:class_id,subjects:res.data,sections:sectionsRes.data,classLoading:false});
         console.log(res.data);
     }
 
     async createSubjects(){
-
+        this.setState({section:"",classLoading:true});
         var res = await axios.get(`/api/subjects/create`,{
             params:{
                 class_id : this.state.class,
@@ -76,11 +79,12 @@ class Class extends React.Component {
 
         });
         console.log(res.data);
-        this.setState({subjects:res.data,section:""});
+        this.setState({subjects:res.data,classLoading:false});
 
     }
 
     async deleteSubjects(subject_id){
+        this.setState({section:"",classLoading:true});
         var res = await axios.get(`/api/subjects/delete`,{
             params:{
                 class_id : this.state.class,
@@ -88,12 +92,12 @@ class Class extends React.Component {
             }
         });
         console.log(res.data);
-        this.setState({subjects:res.data,section:""});
+        this.setState({subjects:res.data,classLoading:false});
     }
 
     async getTeacherSubjects(section_id,section_name){
         console.log(section_id,section_name);
-        this.setState({section:section_id,sectionName:section_name});
+        this.setState({teachersLoading:true});
         var res = await axios.get(`/api/teacher_subjects`,{
             params:{
                 section_id : section_id
@@ -102,13 +106,14 @@ class Class extends React.Component {
 
         var teachersRes = await axios.get(`/api/teachers`);
 
-        this.setState({teacherSubjects:res.data,teachers:teachersRes.data})
+        this.setState({teachersLoading:false,section:section_id,sectionName:section_name,teacherSubjects:res.data,teachers:teachersRes.data})
         console.log(res);
     }
 
     async assignTeacher(event){
         event.preventDefault();
         console.log(this.state.subjectId);
+        this.setState({teachersLoading:true})
         var res = await axios.get(`/api/teacher_subjects/assign`,{
             params:{
                 section_id : this.state.section,
@@ -118,12 +123,12 @@ class Class extends React.Component {
         });
         console.log(res);
 
-        this.setState({teacherSubjects:res.data})
+        this.setState({teacherSubjects:res.data,teachersLoading:false})
 
     }
 
     async removeTeacher(teacher_subject_id){
-
+        this.setState({teachersLoading:true})
         console.log(this.state.subjectId);
         var res = await axios.get(`/api/teacher_subjects/remove`,{
             params:{
@@ -134,7 +139,7 @@ class Class extends React.Component {
         });
         console.log(res);
 
-        this.setState({teacherSubjects:res.data})
+        this.setState({teacherSubjects:res.data,teachersLoading:false})
 
     }
 
@@ -174,7 +179,7 @@ class Class extends React.Component {
                 }
 
                 {
-                    this.state.class ?
+                    this.state.class && this.state.classLoading==false ?
                         <div className="card border-dark mt-4">
                             <div className="card-header text-white bg-dark">Class {this.state.className} - Subjects</div>
                             <div className="card-body">
@@ -233,11 +238,17 @@ class Class extends React.Component {
                         </div>
 
                         :
-                        ""
+                        <div>
+                        { this.state.classLoading ?
+                                <Loader></Loader>:""
+
+                        }
+                        </div>
+
 
                 }
                 {
-                    this.state.section && this.state.class ?
+                    this.state.section && this.state.class && this.state.teachersLoading==false ?
                         <div className="card border-orange mt-4 mb-4">
                             <div className="card-header text-white bg-orange">Class {this.state.className} Section {this.state.sectionName} - Assign Teachers</div>
                             <div className="card-body">
@@ -287,7 +298,14 @@ class Class extends React.Component {
 
                             </div>
                         </div>:
-                    ""
+                    <div>
+                        {
+                            this.state.teachersLoading ?
+                                <Loader>
+
+                                </Loader>:""
+                        }
+                    </div>
 
                 }
             </div>
