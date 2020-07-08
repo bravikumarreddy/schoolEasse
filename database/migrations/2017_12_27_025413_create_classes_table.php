@@ -20,6 +20,8 @@ class CreateClassesTable extends Migration
             $table->string('group');
             $table->timestamps();
         });
+
+
     }
 
     /**

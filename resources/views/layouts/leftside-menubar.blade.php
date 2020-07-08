@@ -41,7 +41,9 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('school/sections?course=1') }}"><i class="material-icons">class</i> <span class="nav-link-text p-2">@lang('Classes &amp; Sections')</span></a>
+{{--    <a class="nav-link" href="{{ url('school/sections?course=1') }}"><i class="material-icons">class</i> <span class="nav-link-text p-2">@lang('Classes &amp; Sections')</span></a>--}}
+      <a class="nav-link" href="{{ url('school/classes') }}"><i class="material-icons">class</i> <span class="nav-link-text p-2">@lang('Classes &amp; Sections')</span></a>
+
   </li>
   @endif
   @if(Auth::user()->role != 'student')
@@ -173,6 +175,7 @@
     <a class="nav-link" href="{{ url('courses/0/'.Auth::user()->section_id) }}"><i class="material-icons">subject</i>
       <span class="nav-link-text p-2">@lang('My Courses')</span></a>
   </li>
+
   <li class="nav-item">
     <a class="nav-link" href="{{ url('grades/'.Auth::user()->id) }}"><i class="material-icons">bubble_chart</i> <span
         class="nav-link-text p-2">@lang('My Grade')</span></a>
@@ -220,6 +223,10 @@
     <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i class="material-icons">import_contacts</i>
       <span class="nav-link-text p-2">@lang('My Courses')</span></a>
   </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('teacher_subjects/') }}"><i class="material-icons">import_contacts</i>
+                <span class="nav-link-text p-2">@lang('My Subjects')</span></a>
+        </li>
   @endif
 </ul>
 <script>

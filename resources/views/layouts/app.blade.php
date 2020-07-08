@@ -14,6 +14,7 @@
         'librarian'))?Auth::user()->school->name:config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ url('css/loader.css') }}">
+
     <script src="{{ url('js/bootstrap4.js') }}"></script>
     <script src="{{ url('js/vendors.js') }}"></script>
 
@@ -38,7 +39,7 @@
         @include('components.navbar-top')
         @yield('content')
     </div>
-
+    <script src="{{asset('js/multiple.js')}}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons&style=normal&weight=400"
       rel="stylesheet">
     <link rel="stylesheet" href="{{ url('css/vendors.css') }}" id="bootswatch-print-id">

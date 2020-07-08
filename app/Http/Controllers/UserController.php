@@ -86,12 +86,12 @@ class UserController extends Controller
             ->whereIn('class_id', $classes)
             ->get();
 
-        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
+     //   $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
 
         session([
             'register_role' => 'student',
             'register_sections' => $sections,
-            'fee_structures' => $fee_structures
+            //'fee_structures' => $fee_structures
         ]);
 
         return redirect()->route('register');
@@ -324,14 +324,14 @@ class UserController extends Controller
             ->bySchool($user->school_id)
             ->get();
 
-        $fee_structures = fee_structure::where("school_id","=",Auth::user()->school_id)->get()->all();
+
 
 
         return view('profile.edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,
-            "fee_structures" => $fee_structures
+
         ]);
     }
 
@@ -436,5 +436,11 @@ class UserController extends Controller
       // ]):response()->json([
       //   'status' => 'error'
       // ]);
+    }
+
+    public function apiGetTeachers(){
+        $teachers = User::where("school_id","=",Auth::user()->school_id)
+            ->where("role","=","teacher")->get()->all();
+        return json_encode($teachers);
     }
 }

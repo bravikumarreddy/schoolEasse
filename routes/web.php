@@ -114,6 +114,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth', 'student']);
 
 Route::middleware(['auth', 'teacher'])->group(function () {
+
     Route::get('course/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'CourseController@course');
     Route::post('courses/create', 'CourseController@create');
     // Route::post('courses/save-under-exam', 'CourseController@update');
@@ -137,7 +138,8 @@ Route::middleware(['auth', 'admin'])->prefix('academic')->name('academic.')->gro
 });
 
 Route::middleware(['auth', 'admin'])->prefix('exams')->name('exams.')->group(function () {
-    Route::get('/', 'ExamController@index');
+   // Route::get('/', 'ExamController@index');
+    Route::get('/', 'ExamController@manage');
     Route::get('create', 'ExamController@create');
     Route::post('create', 'ExamController@store');
     Route::post('activate-exam', 'ExamController@update');
@@ -145,6 +147,7 @@ Route::middleware(['auth', 'admin'])->prefix('exams')->name('exams.')->group(fun
 
 Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('exams/active', 'ExamController@indexActive');
+    Route::get('school/classes', 'SectionController@classes');
     Route::get('school/sections', 'SectionController@index');
 });
 
@@ -299,3 +302,5 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::post('charge', 'CashierController@store');
 
 });
+
+Route::impersonate();

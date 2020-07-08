@@ -2,6 +2,21 @@
 
 use Illuminate\Http\Request;
 
+Route::middleware(['auth', 'teacher'])->group(function () {
+    Route::get('/classes', 'SectionController@apiGetClasses');
+    Route::get('/subjects', 'SubjectsController@apiGetSubjects');
+    Route::get('/subjects/create', 'SubjectsController@apiCreateSubjects');
+    Route::get('/subjects/delete', 'SubjectsController@apiDeleteSubjects');
+    Route::get('/sections', 'SectionController@apiGetSections');
+    Route::get('/teacher_subjects/assign', 'TeacherSubjectController@assignTeacher');
+    Route::get('/teacher_subjects/remove', 'TeacherSubjectController@removeTeacher');
+    Route::get('/teacher_subjects', 'TeacherSubjectController@apiGetTeacherSubjects');
+    Route::get('/teachers', 'UserController@apiGetTeachers');
+
+});
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

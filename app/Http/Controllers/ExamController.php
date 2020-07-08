@@ -24,6 +24,12 @@ class ExamController extends Controller
         return view('exams.all',compact('exams'));
     }
 
+    public function manage()
+    {
+
+        return view('exams.manage');
+    }
+
     public function indexActive(){
         $exams = $this->examService->getActiveExamsBySchoolId();
         $this->examService->examIds = $exams->pluck('id')->toArray();

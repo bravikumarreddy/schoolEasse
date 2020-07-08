@@ -33,6 +33,22 @@ class SectionController extends Controller
         'exams'=>$exams
       ]);
      }
+      public function apiGetClasses()
+      {
+
+          $classes = \App\Myclass::bySchool(\Auth::user()->school->id)
+              ->get()->all();
+
+          return json_encode($classes);
+      }
+
+    public function apiGetSections(Request $request)
+    {
+        $class_id = $request->input('class_id');
+        $sections=Section::where("class_id","=",$class_id)->get()->all();
+
+        return json_encode($sections);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -42,6 +58,12 @@ class SectionController extends Controller
     public function create()
     {
         //
+    }
+
+    public function classes()
+    {
+        //
+        return view("school.classes");
     }
 
     /**

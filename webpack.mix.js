@@ -8,7 +8,15 @@
  | file for the application as well as bundling up all the JS files.
  |
  */
+
 let mix = require('laravel-mix');
+
+mix.babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
+
+});
+
+
 
 
 mix.scripts([
@@ -25,14 +33,14 @@ mix.styles([
 
 
 
-mix.react('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+
 
 mix.react('resources/assets/js/fee_groups.js', 'public/js')
 mix.react('resources/assets/js/daily-attendance.js', 'public/js')
 
 
 mix.js('resources/assets/js/chart.js', 'public/js');
+ mix.js('resources/assets/js/multiple.js', 'public/js');
 
 mix.js('resources/assets/js/bootstrap4.js', 'public/js');
 

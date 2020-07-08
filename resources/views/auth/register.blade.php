@@ -235,28 +235,7 @@
                         </div>
                         @if(session('register_role', 'student') == 'student')
 
-                        @if(session('fee_structures'))
-                        <div class="form-group row">
-                            <label for="fee_structure" class="col-md-4 col-form-label"> @lang('Fee Structure')</label>
 
-                            <div class="col-md-6">
-                                <select id="fee_structure" class="form-control {{ $errors->has('fee_structure') ? ' is-invalid' : '' }}" name="fee_structure" >
-                                    <option selected="selected"></option>
-                                    @foreach (session('fee_structures') as $fee_structure)
-
-                                        <option value="{{$fee_structure->id}}">{{$fee_structure->name}}</option>
-
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('fee_structure'))
-                                <div class="invalid-feedback d-block">
-                                    <strong>{{ $errors->first('fee_structure') }}</strong>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                         @endif
 
 
                         <div class="form-group row">
