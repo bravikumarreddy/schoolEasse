@@ -50561,7 +50561,10 @@ var Class = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
 });
 var Exam = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
+});
+var TeacherSubjects = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
 });
 
 var Multiple = /*#__PURE__*/function (_React$Component) {
@@ -50582,7 +50585,9 @@ var Multiple = /*#__PURE__*/function (_React$Component) {
         path: "/school/classes"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Class, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/exams"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Exam, null)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Exam, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/teacher_subjects"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TeacherSubjects, null)))));
     }
   }]);
 

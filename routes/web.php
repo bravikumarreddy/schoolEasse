@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'teacher'])->prefix('grades')->group(function () {
+
     Route::get('all-exams-grade', 'GradeController@allExamsGrade');
     Route::get('section/{section_id}', 'GradeController@gradesOfSection');
     Route::get('t/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@tindex')->name('teacher-grade');
@@ -114,7 +115,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth', 'student']);
 
 Route::middleware(['auth', 'teacher'])->group(function () {
-
+    Route::get('teacher_subjects', 'TeacherSubjectController@index');
     Route::get('course/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'CourseController@course');
     Route::post('courses/create', 'CourseController@create');
     // Route::post('courses/save-under-exam', 'CourseController@update');

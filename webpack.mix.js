@@ -14,8 +14,10 @@ let mix = require('laravel-mix');
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 
+
 });
 
+const fs = require('fs');
 
 
 

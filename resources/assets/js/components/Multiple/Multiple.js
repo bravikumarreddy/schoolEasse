@@ -13,6 +13,8 @@ const Class = loadable(() => import('./Class'))
 
 const Exam = loadable(() => import('./Exam'))
 
+const TeacherSubjects = loadable(() => import('./TeacherSubjects'))
+
 class Multiple extends React.Component {
 
     constructor(props) {
@@ -37,6 +39,10 @@ class Multiple extends React.Component {
                     </Route>
                     <Route path="/exams">
                         <Exam />
+                    </Route>
+
+                    <Route path="/teacher_subjects">
+                        <TeacherSubjects />
                     </Route>
 
                 </Switch>

@@ -8,10 +8,17 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('/subjects/create', 'SubjectsController@apiCreateSubjects');
     Route::get('/subjects/delete', 'SubjectsController@apiDeleteSubjects');
     Route::get('/sections', 'SectionController@apiGetSections');
+    Route::get('/teacher_subjects/my_subjects', 'TeacherSubjectController@getMySubjects');
     Route::get('/teacher_subjects/assign', 'TeacherSubjectController@assignTeacher');
     Route::get('/teacher_subjects/remove', 'TeacherSubjectController@removeTeacher');
     Route::get('/teacher_subjects', 'TeacherSubjectController@apiGetTeacherSubjects');
     Route::get('/teachers', 'UserController@apiGetTeachers');
+    Route::get('/class_exams/create', 'ClassExamController@apiCreateClassExams');
+    Route::get('/class_exams/delete', 'ClassExamController@apiDeleteClassExams');
+    Route::get('/exam_marks/get_students', 'ExamMarksController@apiGetStudents');
+    Route::get('/exam_marks/submit_marks', 'ExamMarksController@apiSubmitMarks');
+    Route::get('/exam_marks/remove_marks', 'ExamMarksController@apiRemoveMarks');
+    Route::get('/class_exams', 'ClassExamController@apiGetClassExams');
 
 });
 

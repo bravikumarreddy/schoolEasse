@@ -680,7 +680,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return _this2.removeTeacher(val.teacher_subject_id);
           }
-        }, "Delete Teacher")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        }, "Remove Teacher")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "submit",
           className: "btn btn-success ml-2 mr-2 ",
           onClick: function onClick() {

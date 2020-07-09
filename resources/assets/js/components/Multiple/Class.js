@@ -278,7 +278,7 @@ class Class extends React.Component {
                                                     <h4 className="m-0"> <span
                                                         className="badge badge-secondary">{val.teacher_name}</span></h4>
                                                     <button type="button" className="btn btn-danger ml-2 mr-2 "  onClick={()=>this.removeTeacher(val.teacher_subject_id)}>
-                                                       Delete Teacher
+                                                       Remove Teacher
                                                     </button>
                                                     </div>
                                                     :

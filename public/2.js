@@ -1,9 +1,41 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./resources/assets/js/components/Multiple/Class.js":
-/*!**********************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/Class.js ***!
-  \**********************************************************/
+/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
+/*!**********************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Loader() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border   m-5",
+    role: "status",
+    style: {
+      width: "3rem",
+      height: "3rem"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Loading...")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Multiple/Exam.js":
+/*!*********************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Exam.js ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,9 +45,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 
 
 function _typeof(obj) {
@@ -175,15 +207,15 @@ function _getPrototypeOf(o) {
 
 
 
-var Class = /*#__PURE__*/function (_React$Component) {
-  _inherits(Class, _React$Component);
+var Exam = /*#__PURE__*/function (_React$Component) {
+  _inherits(Exam, _React$Component);
 
-  var _super = _createSuper(Class);
+  var _super = _createSuper(Exam);
 
-  function Class(props) {
+  function Exam(props) {
     var _this;
 
-    _classCallCheck(this, Class);
+    _classCallCheck(this, Exam);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -191,29 +223,17 @@ var Class = /*#__PURE__*/function (_React$Component) {
       "class": "",
       classLoading: false,
       className: "",
-      subjects: [],
-      createSubjectName: "",
-      sections: [],
-      section: "",
-      sectionName: "",
-      teacherSubjects: [],
-      teachers: [],
-      selectedTeacher: "",
-      subjectId: "",
-      teachersLoading: false
+      classExams: [],
+      createExamName: ""
     };
     _this.getClasses = _this.getClasses.bind(_assertThisInitialized(_this));
-    _this.getSubjects = _this.getSubjects.bind(_assertThisInitialized(_this));
-    _this.createSubjects = _this.createSubjects.bind(_assertThisInitialized(_this));
-    _this.deleteSubjects = _this.deleteSubjects.bind(_assertThisInitialized(_this));
-    _this.getTeacherSubjects = _this.getTeacherSubjects.bind(_assertThisInitialized(_this));
-    _this.getTeacherSubjects = _this.getTeacherSubjects.bind(_assertThisInitialized(_this));
-    _this.assignTeacher = _this.assignTeacher.bind(_assertThisInitialized(_this));
-    _this.removeTeacher = _this.removeTeacher.bind(_assertThisInitialized(_this));
+    _this.getExams = _this.getExams.bind(_assertThisInitialized(_this));
+    _this.deleteExam = _this.deleteExam.bind(_assertThisInitialized(_this));
+    _this.createExam = _this.createExam.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Class, [{
+  _createClass(Exam, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getClasses();
@@ -228,7 +248,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/classes");
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/classes");
 
               case 2:
                 res = _context.sent;
@@ -252,21 +272,20 @@ var Class = /*#__PURE__*/function (_React$Component) {
       return getClasses;
     }()
   }, {
-    key: "getSubjects",
+    key: "getExams",
     value: function () {
-      var _getSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(class_id, className) {
-        var res, sectionsRes;
+      var _getExams = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(class_id, className) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 this.setState({
                   className: className,
-                  section: "",
                   classLoading: true
                 });
                 _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects", {
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams", {
                   params: {
                     class_id: class_id
                   }
@@ -274,24 +293,14 @@ var Class = /*#__PURE__*/function (_React$Component) {
 
               case 3:
                 res = _context2.sent;
-                _context2.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
-                  params: {
-                    class_id: class_id
-                  }
+                console.log(res.data);
+                this.setState({
+                  "class": class_id,
+                  classExams: res.data,
+                  classLoading: false
                 });
 
               case 6:
-                sectionsRes = _context2.sent;
-                this.setState({
-                  "class": class_id,
-                  subjects: res.data,
-                  sections: sectionsRes.data,
-                  classLoading: false
-                });
-                console.log(res.data);
-
-              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -299,30 +308,29 @@ var Class = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function getSubjects(_x, _x2) {
-        return _getSubjects.apply(this, arguments);
+      function getExams(_x, _x2) {
+        return _getExams.apply(this, arguments);
       }
 
-      return getSubjects;
+      return getExams;
     }()
   }, {
-    key: "createSubjects",
+    key: "deleteExam",
     value: function () {
-      var _createSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var _deleteExam = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(exam_id) {
         var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 this.setState({
-                  section: "",
                   classLoading: true
                 });
                 _context3.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects/create", {
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams/delete", {
                   params: {
                     class_id: this.state["class"],
-                    name: this.state.createSubjectName
+                    exam_id: exam_id
                   }
                 });
 
@@ -330,7 +338,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
                 res = _context3.sent;
                 console.log(res.data);
                 this.setState({
-                  subjects: res.data,
+                  classExams: res.data,
                   classLoading: false
                 });
 
@@ -342,30 +350,29 @@ var Class = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function createSubjects() {
-        return _createSubjects.apply(this, arguments);
+      function deleteExam(_x3) {
+        return _deleteExam.apply(this, arguments);
       }
 
-      return createSubjects;
+      return deleteExam;
     }()
   }, {
-    key: "deleteSubjects",
+    key: "createExam",
     value: function () {
-      var _deleteSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(subject_id) {
+      var _createExam = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 this.setState({
-                  section: "",
                   classLoading: true
                 });
                 _context4.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects/delete", {
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams/create", {
                   params: {
                     class_id: this.state["class"],
-                    subject_id: subject_id
+                    exam_name: this.state.createExamName
                   }
                 });
 
@@ -373,7 +380,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
                 res = _context4.sent;
                 console.log(res.data);
                 this.setState({
-                  subjects: res.data,
+                  classExams: res.data,
                   classLoading: false
                 });
 
@@ -385,149 +392,11 @@ var Class = /*#__PURE__*/function (_React$Component) {
         }, _callee4, this);
       }));
 
-      function deleteSubjects(_x3) {
-        return _deleteSubjects.apply(this, arguments);
+      function createExam() {
+        return _createExam.apply(this, arguments);
       }
 
-      return deleteSubjects;
-    }()
-  }, {
-    key: "getTeacherSubjects",
-    value: function () {
-      var _getTeacherSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(section_id, section_name) {
-        var res, teachersRes;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                console.log(section_id, section_name);
-                this.setState({
-                  teachersLoading: true
-                });
-                _context5.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects", {
-                  params: {
-                    section_id: section_id
-                  }
-                });
-
-              case 4:
-                res = _context5.sent;
-                _context5.next = 7;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teachers");
-
-              case 7:
-                teachersRes = _context5.sent;
-                this.setState({
-                  teachersLoading: false,
-                  section: section_id,
-                  sectionName: section_name,
-                  teacherSubjects: res.data,
-                  teachers: teachersRes.data
-                });
-                console.log(res);
-
-              case 10:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function getTeacherSubjects(_x4, _x5) {
-        return _getTeacherSubjects.apply(this, arguments);
-      }
-
-      return getTeacherSubjects;
-    }()
-  }, {
-    key: "assignTeacher",
-    value: function () {
-      var _assignTeacher = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(event) {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                event.preventDefault();
-                console.log(this.state.subjectId);
-                this.setState({
-                  teachersLoading: true
-                });
-                _context6.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/assign", {
-                  params: {
-                    section_id: this.state.section,
-                    subject_id: this.state.subjectId,
-                    teacher_id: this.state.selectedTeacher
-                  }
-                });
-
-              case 5:
-                res = _context6.sent;
-                console.log(res);
-                this.setState({
-                  teacherSubjects: res.data,
-                  teachersLoading: false
-                });
-
-              case 8:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
-
-      function assignTeacher(_x6) {
-        return _assignTeacher.apply(this, arguments);
-      }
-
-      return assignTeacher;
-    }()
-  }, {
-    key: "removeTeacher",
-    value: function () {
-      var _removeTeacher = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(teacher_subject_id) {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                this.setState({
-                  teachersLoading: true
-                });
-                console.log(this.state.subjectId);
-                _context7.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/remove", {
-                  params: {
-                    section_id: this.state.section,
-                    teacher_subject_id: teacher_subject_id
-                  }
-                });
-
-              case 4:
-                res = _context7.sent;
-                console.log(res);
-                this.setState({
-                  teacherSubjects: res.data,
-                  teachersLoading: false
-                });
-
-              case 7:
-              case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7, this);
-      }));
-
-      function removeTeacher(_x7) {
-        return _removeTeacher.apply(this, arguments);
-      }
-
-      return removeTeacher;
+      return createExam;
     }()
   }, {
     key: "render",
@@ -553,7 +422,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
         className: "form-control custom-select",
         name: "fee_structure",
         onChange: function onChange(event) {
-          _this2.getSubjects(event.target.value, event.target.options[event.target.options.selectedIndex].text);
+          _this2.getExams(event.target.value, event.target.options[event.target.options.selectedIndex].text);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: ""
@@ -562,22 +431,22 @@ var Class = /*#__PURE__*/function (_React$Component) {
           key: val.id,
           value: val.id
         }, val.class_number);
-      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null), this.state["class"] && this.state.classLoading == false ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-dark mt-4"
+      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null), this.state.classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state["class"] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-orange mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-dark"
-      }, "Class ", this.state.className, " - Subjects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-orange"
+      }, "Class ", this.state.className, " - Exams"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
         className: "list-group col-6"
-      }, this.state.subjects.map(function (val) {
+      }, this.state.classExams.map(function (val) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
           key: val.id,
           className: "list-group-item d-flex justify-content-between align-items-center "
-        }, val.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        }, val.exam_name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           className: "btn btn-sm btn-danger ml-2",
           onClick: function onClick() {
-            _this2.deleteSubjects(val.id);
+            _this2.deleteExam(val.id);
           }
         }, "Delete"));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -587,7 +456,7 @@ var Class = /*#__PURE__*/function (_React$Component) {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
 
-          _this2.createSubjects();
+          _this2.createExam();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
@@ -595,140 +464,25 @@ var Class = /*#__PURE__*/function (_React$Component) {
         type: "text",
         className: "form-control",
         id: "createSubjectName",
-        placeholder: "Subject name",
-        value: this.state.createSubjectName,
+        placeholder: "Exam name",
+        value: this.state.createExamName,
         required: true,
         onChange: function onChange(event) {
           return _this2.setState({
-            createSubjectName: event.target.value
+            createExamName: event.target.value
           });
         }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-success ml-2 "
-      }, "Create subject"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row  mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "sections",
-        className: "col-form-label"
-      }, "Select Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        id: "sections",
-        value: this.state.section,
-        className: "form-control custom-select",
-        onChange: function onChange(event) {
-          _this2.getTeacherSubjects(event.target.value, event.target.options[event.target.options.selectedIndex].text);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Section"), this.state.sections.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-          key: val.id,
-          value: val.id
-        }, val.section_number);
-      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : ""), this.state.section && this.state["class"] && this.state.teachersLoading == false ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-orange mt-4 mb-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-orange"
-      }, "Class ", this.state.className, " Section ", this.state.sectionName, " - Assign Teachers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        onSubmit: function onSubmit(event) {
-          return _this2.assignTeacher(event);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "teachers",
-        className: "col-form-label"
-      }, "Select teacher"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.selectedTeacher,
-        id: "teachers",
-        className: "form-control custom-select",
-        name: "teachers",
-        onChange: function onChange(event) {
-          _this2.setState({
-            selectedTeacher: event.target.value
-          });
-        },
-        required: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Teacher"), this.state.teachers.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-          key: val.id,
-          value: val.id
-        }, val.name);
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-8"
-      }, this.state.teacherSubjects.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: val.id,
-          className: "list-group-item d-flex justify-content-between align-items-center "
-        }, val.name, val.teacher_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-          className: "m-0"
-        }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "badge badge-secondary"
-        }, val.teacher_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-danger ml-2 mr-2 ",
-          onClick: function onClick() {
-            return _this2.removeTeacher(val.teacher_subject_id);
-          }
-        }, "Delete Teacher")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "submit",
-          className: "btn btn-success ml-2 mr-2 ",
-          onClick: function onClick() {
-            _this2.setState({
-              subjectId: val.id
-            });
-          }
-        }, "Assign Selected Teacher"));
-      }))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.teachersLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : ""));
+      }, "Create subject"))))) : ""));
     }
   }]);
 
-  return Class;
+  return Exam;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Class);
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
-/*!**********************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function Loader() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "spinner-border   m-5",
-    role: "status",
-    style: {
-      width: "3rem",
-      height: "3rem"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Loading...")));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Loader);
+/* harmony default export */ __webpack_exports__["default"] = (Exam);
 
 /***/ })
 

@@ -16,7 +16,7 @@ class TeacherSubjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('subjects.teacher_subjects');
     }
 
     public function apiGetTeacherSubjects(Request $request){
@@ -42,20 +42,12 @@ class TeacherSubjectController extends Controller
 
         TeacherSubject::where('id','=',$teacher_subject_id)->delete();
 
-        $teacherSubjects = Section::where("sections.id","=",$section_id)
-            ->select('sections.id as section_id',"subjects.*","teacher_subjects.id as teacher_subject_id","teacher_subjects.teacher_id as teacher_id","teacher_name as teacher_name")
-            ->join("subjects","sections.class_id","=","subjects.class_id")
-            ->leftJoin("teacher_subjects" ,function ($join) {
-                $join->on("subjects.id","=","teacher_subjects.subject_id")
-                    ->on("sections.id","=","teacher_subjects.section_id");
-            })
-            ->get()->all();
-
-        //->leftJoin("teacher_subjects","subjects.id","=","teacher_subjects.subject_id")
+        return $this->apiGetTeacherSubjects($request);
 
 
-        return json_encode($teacherSubjects);
     }
+
+
     public function assignTeacher(Request $request){
 
             $section_id  = $request->input('section_id');
@@ -70,20 +62,22 @@ class TeacherSubjectController extends Controller
             $teacherSubject->teacher_name = $user->name;
             $teacherSubject->save();
 
-        $teacherSubjects = Section::where("sections.id","=",$section_id)
-            ->select('sections.id as section_id',"subjects.*","teacher_subjects.id as teacher_subject_id","teacher_subjects.teacher_id as teacher_id","teacher_name as teacher_name")
-            ->join("subjects","sections.class_id","=","subjects.class_id")
-            ->leftJoin("teacher_subjects" ,function ($join) {
-                $join->on("subjects.id","=","teacher_subjects.subject_id")
-                    ->on("sections.id","=","teacher_subjects.section_id");
-            })
-            ->get()->all();
-
-        return json_encode($teacherSubjects);
-
+        return $this->apiGetTeacherSubjects($request);
 
     }
 
+    public function getMySubjects(){
+        $user_id = \Auth::user()->id;
+
+        $my_subjects = TeacherSubject::where("teacher_id","=",$user_id)
+            ->join("subjects","subject_id","=","subjects.id")
+            ->join("classes","class_id","=","classes.id")
+            ->join("sections","section_id","=","sections.id")
+            ->get();
+
+        return json_encode($my_subjects);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
