@@ -147,7 +147,7 @@ class Exam extends React.Component {
                                                                onChange={event => this.setState({createExamName:event.target.value})}/>
                                                     </div>
                                                     <button type="submit"  className="btn btn-success ml-2 ">
-                                                        Create subject
+                                                        Create Exam
                                                     </button>
 
                                                 </form>

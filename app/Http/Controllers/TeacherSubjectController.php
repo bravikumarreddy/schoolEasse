@@ -19,16 +19,26 @@ class TeacherSubjectController extends Controller
         return view('subjects.teacher_subjects');
     }
 
-    public function apiGetTeacherSubjects(Request $request){
-        $section_id = $request->input('section_id');
-        $teacherSubjects = Section::where("sections.id","=",$section_id)
+    public function teacherSubjects($section_id){
+
+        return Section::where("sections.id","=",$section_id)
             ->select('sections.id as section_id',"subjects.*","teacher_subjects.id as teacher_subject_id","teacher_subjects.teacher_id as teacher_id","teacher_name as teacher_name")
             ->join("subjects","sections.class_id","=","subjects.class_id")
             ->leftJoin("teacher_subjects" ,function ($join) {
                 $join->on("subjects.id","=","teacher_subjects.subject_id")
-                 ->on("sections.id","=","teacher_subjects.section_id");
+                    ->on("sections.id","=","teacher_subjects.section_id");
             })
             ->get()->all();
+    }
+
+
+
+
+
+
+    public function apiGetTeacherSubjects(Request $request){
+        $section_id = $request->input('section_id');
+        $teacherSubjects = $this->teacherSubjects($section_id);
 
             //->leftJoin("teacher_subjects","subjects.id","=","teacher_subjects.subject_id")
 

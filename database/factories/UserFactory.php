@@ -53,7 +53,7 @@ $factory->define(User::class, function (Faker $faker) {
           else return factory(Department::class)->create()->id;
         },
         'blood_group'    => $faker->randomElement(['a+', 'b+', 'ab', 'o+']),
-        'nationality'    => 'Bangladeshi',
+        'nationality'    => 'Indian',
         'gender'         => $faker->randomElement(['male', 'female']),
         'stripe_id' => null,
         'card_brand' => null,

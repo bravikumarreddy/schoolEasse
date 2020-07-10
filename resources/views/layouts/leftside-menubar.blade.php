@@ -28,16 +28,16 @@
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
         class="material-icons">date_range</i> <span class="nav-link-text p-2">@lang('Attendance')</span> <i class="material-icons float-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
-      <li class="nav-item">
-        <a class="dropdown-item" href="#"><i class="material-icons">contacts</i> <span class="nav-link-text p-2">@lang('Teacher Attendance')</span></a>
-      </li>
+{{--      <li class="nav-item">--}}
+{{--        <a class="dropdown-item" href="#"><i class="material-icons">contacts</i> <span class="nav-link-text p-2">@lang('Teacher Attendance')</span></a>--}}
+{{--      </li>--}}
       <li class="nav-item">
         <a class="dropdown-item" href="{{url('attendance/daily-attendance')}}"><i class="material-icons">contacts</i> <span
             class="nav-link-text p-2">@lang('Student Attendance')</span></a>
       </li>
-      <li class="nav-item">
-        <a class="dropdown-item" href="#"><i class="material-icons">account_balance_wallet</i> <span class="nav-link-text p-2">@lang('Staff Attendance')</span></a>
-      </li>
+{{--      <li class="nav-item">--}}
+{{--        <a class="dropdown-item" href="#"><i class="material-icons">account_balance_wallet</i> <span class="nav-link-text p-2">@lang('Staff Attendance')</span></a>--}}
+{{--      </li>--}}
     </ul>
   </li>
   <li class="nav-item">
@@ -62,13 +62,13 @@
         class="material-icons">line_style</i> <span class="nav-link-text p-2">@lang('Exams')</span> <i class="material-icons float-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
       <!-- Dropdown menu links -->
-      <li>
-        <a class="dropdown-item" href="{{ url('exams/create') }}"><i class="material-icons">note_add</i> <span class="nav-link-text p-2">@lang('Add Examination')</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('exams/active') }}"><i class="material-icons">developer_board</i> <span
-            class="nav-link-text p-2">@lang('Active Exams')</span></a>
-      </li>
+{{--      <li>--}}
+{{--        <a class="dropdown-item" href="{{ url('exams/create') }}"><i class="material-icons">note_add</i> <span class="nav-link-text p-2">@lang('Add Examination')</span></a>--}}
+{{--      </li>--}}
+{{--      <li>--}}
+{{--        <a class="dropdown-item" href="{{ url('exams/active') }}"><i class="material-icons">developer_board</i> <span--}}
+{{--            class="nav-link-text p-2">@lang('Active Exams')</span></a>--}}
+{{--      </li>--}}
       <li>
         <a class="dropdown-item" href="{{ url('exams') }}"><i class="material-icons">settings</i> <span class="nav-link-text p-2">@lang('Manage Examinations')</span></a>
       </li>
@@ -172,13 +172,18 @@
         </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('courses/0/'.Auth::user()->section_id) }}"><i class="material-icons">subject</i>
-      <span class="nav-link-text p-2">@lang('My Courses')</span></a>
+{{--    <a class="nav-link" href="{{ url('courses/0/'.Auth::user()->section_id) }}"><i class="material-icons">subject</i>--}}
+        <a class="nav-link" href="{{ url('subjects/student') }}"><i class="material-icons">subject</i>
+            <span class="nav-link-text p-2">@lang('My Subjects')</span></a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('grades/'.Auth::user()->id) }}"><i class="material-icons">bubble_chart</i> <span
-        class="nav-link-text p-2">@lang('My Grade')</span></a>
+{{--    <a class="nav-link" href="{{ url('grades/'.Auth::user()->id) }}">--}}
+        <a class="nav-link" href="{{ url('marks/student') }}">
+
+        <i class="material-icons">bubble_chart</i>
+        <span
+        class="nav-link-text p-2">@lang('My Marks')</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('payment')}}"><i class="material-icons">payment</i> <span class="nav-link-text p-2">@lang('Payment')</span></a>
@@ -219,14 +224,17 @@
   </li>
   @endif
   @if(Auth::user()->role == 'teacher')
-  <li class="nav-item">
-    <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i class="material-icons">import_contacts</i>
-      <span class="nav-link-text p-2">@lang('My Courses')</span></a>
-  </li>
+{{--  <li class="nav-item">--}}
+{{--    <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i class="material-icons">import_contacts</i>--}}
+{{--      <span class="nav-link-text p-2">@lang('My Courses')</span></a>--}}
+{{--  </li>--}}
+
         <li class="nav-item">
             <a class="nav-link" href="{{ url('teacher_subjects/') }}"><i class="material-icons">import_contacts</i>
                 <span class="nav-link-text p-2">@lang('My Subjects')</span></a>
         </li>
+
+
   @endif
 </ul>
 <script>

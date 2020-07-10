@@ -475,7 +475,7 @@ var Exam = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-success ml-2 "
-      }, "Create subject"))))) : ""));
+      }, "Create Exam"))))) : ""));
     }
   }]);
 

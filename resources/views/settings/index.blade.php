@@ -35,22 +35,23 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
+                                                        <h4 class="modal-title" id="departmentModalLabel">@lang('Create Department')</h4>
+
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
-                                                        <h4 class="modal-title" id="departmentModalLabel">@lang('Create Department')</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="{{url('school/add-department')}}" method="post">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
-                                                                <label for="department_name" class="col-sm-2 control-label">@lang('Department Name')</label>
+                                                                <label for="department_name" class="col-sm-6 control-label">@lang('Department Name')</label>
                                                                 <div class="col-sm-10">
                                                                     <input type="text" class="form-control" id="department_name" name="department_name" placeholder="@lang('English, Mathematics,...')">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <div class="offset-2 col-sm-10">
+                                                                <div class="col-sm-10">
                                                                     <button type="submit" class="btn btn-danger btn-sm">@lang('Submit')</button>
                                                                 </div>
                                                             </div>
@@ -83,30 +84,31 @@
                                                             <div class="modal-dialog modal-lg" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
+                                                                        <h4 class="modal-title" id="myModalLabel">@lang('All Sections of Class') {{$class->class_number}}</h4>
+
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
-                                                                        <h4 class="modal-title" id="myModalLabel">@lang('All Sections of Class') {{$class->class_number}}</h4>
                                                                     </div>
                                                                     <div class="modal-body">
-																		<div class="form-check">
-																			<?php 
-																				$checked = Session::has('ignoreSessions') ? (Session::get('ignoreSessions') == "true" ? "checked='checked'" : "") : "";
-																			?>
-																			<input class="form-check-input position-static" type="checkbox" name="ignoreSessionsCheck" id="ignoreSessionsId" <?php echo $checked ?>>
-																			@lang("Ignore Sessions when listing students for promoting")
-																		</div>
-                                                                        <ul class="list-group">
+{{--																		<div class="form-check m-2">--}}
+{{--																			<?php --}}
+{{--																				$checked = Session::has('ignoreSessions') ? (Session::get('ignoreSessions') == "true" ? "checked='checked'" : "") : "";--}}
+{{--																			?>--}}
+{{--																			<input class="form-check-input position-static " type="checkbox" name="ignoreSessionsCheck" id="ignoreSessionsId" <?php echo $checked ?>>--}}
+{{--																			@lang("Ignore Sessions when listing students for promoting")--}}
+{{--																		</div>--}}
+                                                                        <ul class="list-group  mb-4">
                                                                             @foreach($sections as $section)
                                                                                 @if($section->class_id == $class->id)
                                                                                     <li class="list-group-item">@lang('Section') {{$section->section_number}} &nbsp;
-                                                                                        <a class="btn btn-xs btn-warning" href="{{url('courses/0/'.$section->id)}}">@lang('View All Assigned Courses')</a>
-                                                                                        <span class="pull-right"> &nbsp;&nbsp;
-                                                                                            <a  class="btn btn-xs btn-success" href="{{url('school/promote-students/'.$section->id)}}">+ @lang('Promote Students')</a>
-                                                                                            {{-- &nbsp;<a class="btn btn-xs btn-primary" href="{{url('register/student/'.$section->id)}}">+ @lang('Register Student')</a> --}}
-                                                                                        </span>
-                                                                                        @include('layouts.master.add-course-form')
-                                                                                    </li>
+{{--                                                                                        <a class="btn btn-xs btn-warning" href="{{url('courses/0/'.$section->id)}}">@lang('View All Assigned Courses')</a>--}}
+{{--                                                                                        <span class="pull-right"> &nbsp;&nbsp;--}}
+{{--                                                                                            <a  class="btn btn-xs btn-success" href="{{url('school/promote-students/'.$section->id)}}">+ @lang('Promote Students')</a>--}}
+{{--                                                                                            --}}{{-- &nbsp;<a class="btn btn-xs btn-primary" href="{{url('register/student/'.$section->id)}}">+ @lang('Register Student')</a> --}}
+{{--                                                                                        </span>--}}
+{{--                                                                                        @include('layouts.master.add-course-form')--}}
+{{--                                                                                    </li>--}}
                                                                                 @endif
                                                                             @endforeach
                                                                         </ul>

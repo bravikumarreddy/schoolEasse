@@ -13,9 +13,9 @@
                 @include('layouts.leftside-menubar')
             </div>
             <div class="col-md-10" id="main-container">
-                <div class="panel panel-default">
+                <div class="card border-0">
                     @if(count(array($user)) > 0)
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
 
                                 <div class="col-md-10" id="main-container">
@@ -82,9 +82,9 @@
 
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Payment List</div>
-                    <div class="panel-body">
+                <div class="card border-0">
+                    <h4 class="card-heading">Payment List</h4>
+                    <div class="card-body">
 
                         <table class="table table-striped table-hover">
                             <thead>
@@ -135,9 +135,9 @@
                     </div>
                 </div>
 
-                <div class="panel panel-warning">
-                    <div class="panel-heading">Transactions</div>
-                    <div class="panel-body">
+                <div class="card border-0">
+                    <h4 class="card-heading">Transactions</h4>
+                    <div class="card-body">
                         <br>
 
                     </div>

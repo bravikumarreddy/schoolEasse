@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Section;
 use App\Subjects;
+use App\TeacherSubject;
 use Illuminate\Http\Request;
 
 class SubjectsController extends Controller
@@ -16,6 +17,22 @@ class SubjectsController extends Controller
     public function index()
     {
         //
+    }
+
+
+    public function studentSubjects(){
+        $section_id = \Auth::user()->section_id;
+        $teachers = TeacherSubject::where("section_id","=",$section_id);
+
+        $subjects = Section::where('sections.id',"=",$section_id)
+            ->join('subjects',"sections.class_id","=","subjects.class_id")
+            ->leftJoinSub($teachers,"teachers",function ($join){
+                $join->on('sections.id','=',"teachers.section_id")
+                    ->on('subjects.id','=','teachers.subject_id');
+            })
+            ->get()->all();
+       // dd($subjects);
+        return view('subjects.student',compact('subjects'));
     }
 
     public function apiGetSubjects( Request $request)

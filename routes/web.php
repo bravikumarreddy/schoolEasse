@@ -269,7 +269,9 @@ Route::middleware(['auth', 'master.admin'])->group(function () {
 //     $pdf = PDF::loadView('pdf.result-pdf', ['grades' => $grades, 'user'=>$data]);
 // 		return $pdf->stream('result.pdf');
 //   });
-});
+    });
+
+
 Route::middleware(['auth', 'teacher'])->group(function () {
     Route::post('calculate-marks', 'GradeController@calculateMarks');
     Route::post('message/students', 'NotificationController@store');
@@ -299,6 +301,8 @@ Route::middleware(['auth', 'student'])->prefix('stripe')->group(function () {
 });
 
 Route::middleware(['auth', 'student'])->group(function () {
+    Route::get('subjects/student','SubjectsController@studentSubjects');
+    Route::get('marks/student','ExamMarksController@studentMarks');
     Route::get('payment', 'PaymentsController@index');
     Route::post('charge', 'CashierController@store');
 

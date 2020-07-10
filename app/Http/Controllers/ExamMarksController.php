@@ -18,7 +18,15 @@ class ExamMarksController extends Controller
     {
         //
     }
+    public function studentMarks(Request $request){
+        $student_id = Auth::user()->id;
+        $all_exams = ExamMarks::where('student_id',"=",$student_id)
+                     ->join('class_exams','exam_id',"=","class_exams.id")
+                     ->join("subjects","subject_id","=","subjects.id")
+                     ->get()->groupBy(['exam_id','exam_name']);
 
+        return view('marks.student',compact("all_exams"));
+    }
     public function apiGetStudents(Request $request){
 
         $section_id = $request->input('section_id');
@@ -39,11 +47,7 @@ class ExamMarksController extends Controller
              })
             ->orderBy('name', 'asc')
             ->get();
-//            ->leftJoin("exam_marks", function ($join ) {
-//                $join->on("exam_marks.student_id" ,"=","users.id")
-//                    ->where("subject_id","=",$subject_id)
-//                    ->where("exam_id","=",$exam_id)
-//                });
+
 
 
 
