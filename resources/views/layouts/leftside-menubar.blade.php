@@ -23,21 +23,27 @@
   <li class="nav-item active ">
     <a class="nav-link" href="{{ url('home') }}"><i class="material-icons">dashboard</i> <span class="nav-link-text p-2">@lang('Dashboard')</span></a>
   </li>
+    <li class="nav-item">
+        {{--    <a class="nav-link active" href="{{ url('attendances/0/'.Auth::user()->id.'/0') }}"><i class="material-icons">date_range</i>--}}
+        <a class="nav-link active" href="{{ url('/attendance/daily-attendance/calender') }}"><i class="material-icons">table_view</i>
+            <span class="nav-link-text p-2">@lang('My Calendar')</span>
+        </a>
+    </li>
   @if(Auth::user()->role == 'admin')
   <li class="nav-item dropdown">
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
         class="material-icons">date_range</i> <span class="nav-link-text p-2">@lang('Attendance')</span> <i class="material-icons float-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
-{{--      <li class="nav-item">--}}
-{{--        <a class="dropdown-item" href="#"><i class="material-icons">contacts</i> <span class="nav-link-text p-2">@lang('Teacher Attendance')</span></a>--}}
-{{--      </li>--}}
+      <li class="nav-item">
+        <a class="dropdown-item" href="{{url('attendance/daily-attendance/teachers')}}"><i class="material-icons">contacts</i> <span class="nav-link-text p-2">@lang('Teacher Attendance')</span></a>
+      </li>
       <li class="nav-item">
         <a class="dropdown-item" href="{{url('attendance/daily-attendance')}}"><i class="material-icons">contacts</i> <span
             class="nav-link-text p-2">@lang('Student Attendance')</span></a>
       </li>
-{{--      <li class="nav-item">--}}
-{{--        <a class="dropdown-item" href="#"><i class="material-icons">account_balance_wallet</i> <span class="nav-link-text p-2">@lang('Staff Attendance')</span></a>--}}
-{{--      </li>--}}
+      <li class="nav-item">
+        <a class="dropdown-item" href="{{url('attendance/daily-attendance/staff')}}"><i class="material-icons">account_balance_wallet</i> <span class="nav-link-text p-2">@lang('Staff Attendance')</span></a>
+      </li>
     </ul>
   </li>
   <li class="nav-item">
@@ -48,8 +54,9 @@
   @endif
   @if(Auth::user()->role != 'student')
   <li class="nav-item">
-    <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}"><i class="material-icons">contacts</i>
-      <span class="nav-link-text p-2">@lang('Students')</span></a>
+{{--    <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}"><i class="material-icons">contacts</i>--}}
+        <a class="nav-link" href="{{url('lists/students')}}"><i class="material-icons">contacts</i>
+            <span class="nav-link-text p-2">@lang('Students')</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}"><i class="material-icons">contacts</i>
@@ -165,12 +172,7 @@
   </li>
   @endif
   @if(Auth::user()->role == 'student')
-  <li class="nav-item">
-{{--    <a class="nav-link active" href="{{ url('attendances/0/'.Auth::user()->id.'/0') }}"><i class="material-icons">date_range</i>--}}
-        <a class="nav-link active" href="{{ url('/attendance/daily-attendance/calender') }}"><i class="material-icons">date_range</i>
-            <span class="nav-link-text p-2">@lang('My Attendance')</span>
-        </a>
-  </li>
+
   <li class="nav-item">
 {{--    <a class="nav-link" href="{{ url('courses/0/'.Auth::user()->section_id) }}"><i class="material-icons">subject</i>--}}
         <a class="nav-link" href="{{ url('subjects/student') }}"><i class="material-icons">subject</i>

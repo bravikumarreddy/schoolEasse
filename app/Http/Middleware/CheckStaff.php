@@ -15,6 +15,10 @@ class CheckStaff
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $user = \Auth::user();
+        if ($user->hasRole('teacher') || $user->hasRole('admin')  || $user->hasRole('librarian') || $user->hasRole('accountant') || $user->hasRole('librarian')  ) {
+            return $next($request);
+        }
+        return redirect('home');
     }
 }

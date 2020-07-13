@@ -50,6 +50,12 @@ class TeacherSubjects extends React.Component {
             sectionId:section_id,
             classExams:res.data
         })
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     async getStudents(exam_id){
@@ -130,8 +136,8 @@ class TeacherSubjects extends React.Component {
                         <React.Fragment>
                             {
                                 this.state.mySubjects ?
-                                    <div className="card border-dark mt-4">
-                                        <div className="card-header text-white bg-dark"> My Subjects</div>
+                                    <div className="card border-dark mb-5 mt-4">
+                                        <div className="card-header text-white bg-dark "> My Subjects</div>
                                         <div className="card-body">
 
                                             <ul className="list-group col-12">
@@ -150,9 +156,9 @@ class TeacherSubjects extends React.Component {
                                                             </span>
 
                                                             <span className="col-2 d-flex justify-content-between align-items-center">
-                                                                    <button className="btn btn-sm btn-warning" onClick={( )=>{ }} >
-                                                                            View
-                                                                    </button>
+                                                                    <a className="btn btn-sm btn-warning" href={`attendance/daily-attendance/${val.class_id}/${val.section_id}` }  >
+                                                                            Take Attendance
+                                                                    </a>
                                                             </span>
 
                                                             </div>

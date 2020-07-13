@@ -31,10 +31,11 @@ Route::middleware(['auth'])->group(function () {
     //     $attendances = App\Attendance::with(['student'])->where('section_id', $section_id)->get();
     //   }
     // });
+    Route::get('attendance/daily-attendance/{class}/{section}', 'DailyAttendanceController@classSection')->middleware(['teacher']);
     Route::get('attendance/daily-attendance', 'DailyAttendanceController@index')->middleware(['teacher']);
     Route::post('attendance/daily-attendance/submit', 'DailyAttendanceController@takeAttendance')->middleware(['teacher']);
     Route::get('api/attendance/daily-attendance/checkAttendance', 'DailyAttendanceController@checkAttendance')->middleware(['teacher']);
-    Route::get('/attendance/daily-attendance/calender', 'DailyAttendanceController@student')->middleware(['student']);
+    Route::get('/attendance/daily-attendance/calender', 'DailyAttendanceController@student');
     Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt')->middleware(['teacher']);
     Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
     Route::get('attendances/{section_id}', 'AttendanceController@sectionIndex')->middleware(['teacher']);
@@ -101,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
         Route::post('user/config/impersonate', 'UserController@impersonate');
     }
-
+    Route::get('/lists/students', 'UserController@studentList');
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
     Route::get('users/{school_code}/{role}', 'UserController@indexOther');
     Route::get('user/{user_code}', 'UserController@show');
@@ -115,6 +116,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth', 'student']);
 
 Route::middleware(['auth', 'teacher'])->group(function () {
+
     Route::get('teacher_subjects', 'TeacherSubjectController@index');
     Route::get('course/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'CourseController@course');
     Route::post('courses/create', 'CourseController@create');
@@ -124,6 +126,7 @@ Route::middleware(['auth', 'teacher'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->prefix('academic')->name('academic.')->group(function () {
+
     Route::get('syllabus', 'SyllabusController@index');
     Route::get('syllabus/{class_id}', 'SyllabusController@create');
     Route::get('notice', 'NoticeController@create');
@@ -247,10 +250,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
     Route::get('edit/course/{id}', 'CourseController@edit');
     Route::post('edit/course/{id}', 'CourseController@updateNameAndTime');
+    Route::post("/attendance/daily-attendance/teachers/submit",'StaffAttendanceController@takeTeacherAttendance');
 });
 
 //use PDF;
 Route::middleware(['auth', 'master.admin'])->group(function () {
+
     Route::get('edit/user/{id}', 'UserController@edit');
     Route::post('edit/user', 'UserController@update');
     Route::post('upload/file', 'UploadController@upload');
@@ -271,10 +276,18 @@ Route::middleware(['auth', 'master.admin'])->group(function () {
 //   });
     });
 
+Route::middleware(['auth', 'staff'])->group(function () {
+    Route::get('attendance/daily-attendance/teachers', 'StaffAttendanceController@teacherAttendance');
+    Route::get('attendance/daily-attendance/staff', 'StaffAttendanceController@staffAttendance');
+    Route::post("/attendance/daily-attendance/staff/submit",'StaffAttendanceController@takeStaffAttendance');
+
+});
 
 Route::middleware(['auth', 'teacher'])->group(function () {
+
     Route::post('calculate-marks', 'GradeController@calculateMarks');
     Route::post('message/students', 'NotificationController@store');
+
 });
 // Route::middleware(['auth'])->group(function (){
 //   Route::get('download/pdf', function(){

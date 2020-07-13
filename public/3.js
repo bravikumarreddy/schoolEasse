@@ -305,8 +305,13 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
                   sectionId: section_id,
                   classExams: res.data
                 });
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  left: 0,
+                  behavior: 'smooth'
+                });
 
-              case 6:
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -477,9 +482,9 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjectsLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjects ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-dark mt-4"
+        className: "card border-dark mb-5 mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-dark"
+        className: "card-header text-white bg-dark "
       }, " My Subjects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
@@ -505,10 +510,10 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
           }
         }, "Assign Marks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
           className: "btn btn-sm btn-warning",
-          onClick: function onClick() {}
-        }, "View"))));
+          href: "attendance/daily-attendance/".concat(val.class_id, "/").concat(val.section_id)
+        }, "Take Attendance"))));
       })))) : " No subjects are assigned "), this.state.classId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-indigo mt-4 mb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

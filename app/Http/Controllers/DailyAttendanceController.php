@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AttendanceCheck;
 use App\DailyAttendance;
 use App\Myclass;
+use App\StaffAttendance;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class DailyAttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -24,6 +26,13 @@ class DailyAttendanceController extends Controller
             ->bySchool(\Auth::user()->school->id)->get()->all());
 
         return view('attendance.daily-attendance',compact("classes"));
+    }
+    public function classSection(Request $request,$class,$section){
+
+        $classes = json_encode( Myclass::query()
+            ->bySchool(\Auth::user()->school->id)->get()->all());
+
+        return view('attendance.daily-attendance',compact("classes","class","section"));
     }
 
     public function takeAttendance(Request $request)
@@ -98,11 +107,25 @@ class DailyAttendanceController extends Controller
         return json_encode($user);
     }
     public function  student(){
-        $absent_details = DailyAttendance::
-            where("student_id","=",Auth::user()->id)
-            ->get()->all();
 
-        return view("attendance.calendar",compact('absent_details'));
+        $role = Auth::user()->role;
+
+        if($role=='student'){
+
+            $absent_details = DailyAttendance::
+            where("student_id","=",Auth::user()->id)
+                ->get()->all();
+
+            return view("attendance.calendar",compact('absent_details'));
+        }
+        else {
+            $absent_details = StaffAttendance::
+            where("user_id","=",Auth::user()->id)
+                ->get()->all();
+            return view("attendance.calendar",compact('absent_details'));
+        }
+
+
     }
 
 

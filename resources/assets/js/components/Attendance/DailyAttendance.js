@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import $ from 'jquery';
 
 class DailyAttendance extends React.Component {
 
@@ -16,10 +17,12 @@ class DailyAttendance extends React.Component {
             studentList:[],
             selectAll:true,
             selectStudentsList:[],
-            date:"",
+            date:Date.now(),
             checkAttendance:null
 
         }
+        console.log(this.props)
+
         this.getSectionsClasses = this.getSectionsClasses.bind(this);
         this.getStudents = this.getStudents.bind(this);
         this.selectAll = this.selectAll.bind(this);
@@ -27,7 +30,20 @@ class DailyAttendance extends React.Component {
         this.changeSelection = this.changeSelection.bind(this);
         this.getDateString = this.getDateString.bind(this);
     }
-     selectAll(event){
+
+    async componentDidMount() {
+        if(this.props.class_id){
+            this.setState({class:this.props.class_id});
+        }
+
+        await this.getSectionsClasses(this.props.class_id);
+
+        if(this.props.section_id){
+            this.setState({section:this.props.section_id});
+        }
+    }
+
+    selectAll(event){
         var selectStudentsList=[];
         for(var i=0;i<this.state.selectStudentsList.length;i++){
             selectStudentsList.push(!this.state.selectAll);
@@ -35,19 +51,25 @@ class DailyAttendance extends React.Component {
         console.log((event.target.value))
         this.setState({"selectAll":!this.state.selectAll,selectStudentsList:selectStudentsList});
     }
+
     async getSectionsClasses(value){
         if(value==""){
             this.setState({"class":value,"studentList":[]});
             return;
         }
-        var v= await axios.get(`/fees/api/sections/${value}`);
+        let v= await axios.get(`/api/sections`,{
+            params:{
+                class_id : value,
+            }
+
+        });
         console.log(v.data);
         this.setState({"class":value,"sectionOptions":v.data,"section":"","studentList":[]});
 
     }
     async setSection(value){
         console.log(value)
-        this.setState({"section":value,"studentList":[],date:""});
+        this.setState({"section":value,"studentList":[],date:Date.now()});
     }
     changeSelection(index){
         var selectStudentsList = this.state.selectStudentsList;
@@ -74,7 +96,7 @@ class DailyAttendance extends React.Component {
         this.setState({checkAttendance:checkAttendance.data});
         console.log(checkAttendance)
 
-        var v = await axios.get(`/fees/api/students/${classId}/${sectionId}`);
+        var v = await axios.get(`/api/students/${sectionId}`);
         console.log(v);
 
         var selectStudentsList=[];
@@ -155,7 +177,7 @@ class DailyAttendance extends React.Component {
                                 : " "
                             }
 
-                            {this.state.date ?
+                            {this.state.date && this.state.section ?
                                 <div className="col-md-3 mb-3">
                                     <label htmlFor="fee_structure" className="col-form-label">Select Session</label>
                                     <select value={this.state.session} id="fee_structure" className=" custom-select form-control"
@@ -198,7 +220,7 @@ class DailyAttendance extends React.Component {
                             <input type="hidden" name="session" value={this.state.session}/>
 
 
-                            <table className="table table-bordered table-hover">
+                            <table ref={el => this.el = el} className="table table-bordered  table-hover">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
@@ -287,5 +309,7 @@ export default DailyAttendance;
 
 if (document.getElementById('daily-attendance')) {
     var classes =  document.getElementById('daily-attendance').getAttribute('classes');
-    ReactDOM.render(<DailyAttendance classes={classes}/>, document.getElementById('daily-attendance'));
+    var class_id =  document.getElementById('daily-attendance').getAttribute('class');
+    var section_id =  document.getElementById('daily-attendance').getAttribute('section');
+    ReactDOM.render(<DailyAttendance classes={classes} class_id={class_id} section_id={section_id} />, document.getElementById('daily-attendance'));
 }

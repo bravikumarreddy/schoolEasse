@@ -52,7 +52,8 @@
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new Calendar(calendarEl, {
-                plugins: [ dayGridPlugin ,bootstrapPlugin],
+                plugins: [ dayGridPlugin ,bootstrapPlugin ],
+                headerToolbar: { center: 'dayGridMonth,timeGridWeek' },
                 dayMaxEvents: 1, // for all non-TimeGrid views
 
                 events: [

@@ -13,7 +13,13 @@ const Class = loadable(() => import('./Class'))
 
 const Exam = loadable(() => import('./Exam'))
 
+const StudentList = loadable(() => import('./StudentList'))
+
 const TeacherSubjects = loadable(() => import('./TeacherSubjects'))
+
+const TeacherAttendance = loadable(() => import('../Attendance/TeacherAttendance'))
+
+const StaffAttendance = loadable(() => import('../Attendance/StaffAttendance'))
 
 class Multiple extends React.Component {
 
@@ -33,6 +39,18 @@ class Multiple extends React.Component {
           <Router>
             <div>
                 <Switch>
+                    <Route path="/attendance/daily-attendance/teachers">
+
+                        <TeacherAttendance />
+                    </Route>
+                    <Route path="/attendance/daily-attendance/staff">
+
+                        <StaffAttendance />
+                    </Route>
+                    <Route path="/lists/students">
+
+                        <StudentList role={this.props.role} />
+                    </Route>
                     <Route path="/school/classes">
 
                         <Class />
@@ -55,6 +73,6 @@ class Multiple extends React.Component {
 export default Multiple;
 
 if (document.getElementById('multiple')) {
-    //var classes =  document.getElementById('class').getAttribute('classes');
-    ReactDOM.render(<Multiple />, document.getElementById('multiple'));
+    var role =  document.getElementById('multiple').getAttribute('role');
+    ReactDOM.render(<Multiple role={role} />, document.getElementById('multiple'));
 }

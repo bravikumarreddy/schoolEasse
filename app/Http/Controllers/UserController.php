@@ -58,6 +58,12 @@ class UserController extends Controller
             return view('home');
     }
 
+    public function  studentList(){
+         $role = Auth::user()->role;
+        return view('list.students',compact('role'));
+    }
+
+
     /**
      * @param $school_code
      * @param $role
@@ -298,6 +304,17 @@ class UserController extends Controller
         $user = $this->userService->getUserByUserCode($user_code);
 
         return view('profile.user', compact('user'));
+    }
+
+    public function getClassStudents(Request $request,$section_id){
+
+        $students_with_section = DB::table('users')->where("school_id","=",Auth::user()->school_id)
+            ->join("student_infos","users.id","=","student_infos.student_id")
+            ->join("sections","section_id","=","sections.id")
+            ->where("section_id","=",$section_id)
+            ->get()->all();
+
+        return json_encode($students_with_section);
     }
 
     /**

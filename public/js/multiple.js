@@ -50563,8 +50563,17 @@ var Class = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(
 var Exam = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
 });
+var StudentList = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
+});
 var TeacherSubjects = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
+});
+var TeacherAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../Attendance/TeacherAttendance */ "./resources/assets/js/components/Attendance/TeacherAttendance.js"));
+});
+var StaffAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
 });
 
 var Multiple = /*#__PURE__*/function (_React$Component) {
@@ -50582,6 +50591,14 @@ var Multiple = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/attendance/daily-attendance/teachers"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TeacherAttendance, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/attendance/daily-attendance/staff"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StaffAttendance, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/lists/students"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StudentList, {
+        role: this.props.role
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/school/classes"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Class, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/exams"
@@ -50597,8 +50614,10 @@ var Multiple = /*#__PURE__*/function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (Multiple);
 
 if (document.getElementById('multiple')) {
-  //var classes =  document.getElementById('class').getAttribute('classes');
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Multiple, null), document.getElementById('multiple'));
+  var role = document.getElementById('multiple').getAttribute('role');
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Multiple, {
+    role: role
+  }), document.getElementById('multiple'));
 }
 
 /***/ }),

@@ -17,7 +17,7 @@
                 <h4>Attendance</h4>
 
 
-                <div id="daily-attendance" classes="{{$classes}}">
+                <div id="daily-attendance" classes="{{$classes}}" class="{{$class ?? null}}" section="{{$section ?? null}}"  >
 
                 </div>
 
@@ -27,9 +27,9 @@
         </div>
     </div>
     <script src="{{asset('js/daily-attendance.js')}}"></script>
-    <script>
-        var myTable = $('.table-data-div').DataTable({ paging: false });
-    </script>
+        <script>
+            var myTable = $('.table-data-div').DataTable({ paging: false });
+        </script>
     </div>
 
 

@@ -110,7 +110,6 @@ class FeeStructureController extends Controller
             ->where("section_id","=",$section_id)
             ->get()->all();
 
-       // dd(count($students_with_section),count($students_with_section_count));
         return json_encode($students_with_section);
     }
 

@@ -18,10 +18,19 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('/exam_marks/get_students', 'ExamMarksController@apiGetStudents');
     Route::get('/exam_marks/submit_marks', 'ExamMarksController@apiSubmitMarks');
     Route::get('/exam_marks/remove_marks', 'ExamMarksController@apiRemoveMarks');
+    Route::get('/students/{section_id}', 'UserController@getClassStudents');
     Route::get('/class_exams', 'ClassExamController@apiGetClassExams');
+    Route::get('/attendance/daily-attendance/teachers/departments', 'StaffAttendanceController@apiGetDepartments');
+    Route::get('/attendance/daily-attendance/teachers/getTeachers', 'StaffAttendanceController@apiGetTeachers');
 
 });
 
+
+Route::middleware(['auth', 'staff'])->group(function () {
+
+    Route::get('/attendance/daily-attendance/staff/getStaff', 'StaffAttendanceController@apiGetStaff');
+
+});
 
 
 /*
