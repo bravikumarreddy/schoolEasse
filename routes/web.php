@@ -251,6 +251,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('edit/course/{id}', 'CourseController@edit');
     Route::post('edit/course/{id}', 'CourseController@updateNameAndTime');
     Route::post("/attendance/daily-attendance/teachers/submit",'StaffAttendanceController@takeTeacherAttendance');
+    Route::get('time_table','TimeTableController@create');
 });
 
 //use PDF;

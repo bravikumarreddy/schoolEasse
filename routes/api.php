@@ -32,7 +32,12 @@ Route::middleware(['auth', 'staff'])->group(function () {
 
 });
 
-
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/time_table/teacher', 'TimeTableController@apiGetTeacherTimeTable');
+    Route::get('/time_table/class', 'TimeTableController@apiGetClassTimeTable');
+    Route::get('/time_table/create', 'TimeTableController@apiCreateTimeTable');
+    Route::get('/time_table/delete', 'TimeTableController@apiDeleteTimeTable');
+});
 /*
 |--------------------------------------------------------------------------
 | API Routes

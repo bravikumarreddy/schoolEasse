@@ -21,6 +21,9 @@ const TeacherAttendance = loadable(() => import('../Attendance/TeacherAttendance
 
 const StaffAttendance = loadable(() => import('../Attendance/StaffAttendance'))
 
+const TimeTable = loadable(() => import('./TimeTable'))
+
+
 class Multiple extends React.Component {
 
     constructor(props) {
@@ -39,6 +42,10 @@ class Multiple extends React.Component {
           <Router>
             <div>
                 <Switch>
+                    <Route path="/time_table">
+
+                        <TimeTable />
+                    </Route>
                     <Route path="/attendance/daily-attendance/teachers">
 
                         <TeacherAttendance />

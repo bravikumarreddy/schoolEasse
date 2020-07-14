@@ -1,12 +1,4 @@
 {
-    "/js/bootstrap4.js": "/js/bootstrap4.js",
-    "/js/chart.js": "/js/chart.js",
-    "/js/daily-attendance.js": "/js/daily-attendance.js",
-    "/js/fee_groups.js": "/js/fee_groups.js",
-    "/js/multiple.js": "/js/multiple.js",
-    "/js/application.js": "/js/application.js",
-    "/css/application.css": "/css/application.css",
-    "/css/loader.css": "/css/loader.css",
-    "/js/vendors.js": "/js/vendors.js",
-    "/css/vendors.css": "/css/vendors.css"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css"
 }

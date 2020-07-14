@@ -181,7 +181,7 @@ class Class extends React.Component {
                 {
                     this.state.class && this.state.classLoading==false ?
                         <div className="card border-dark mt-4">
-                            <div className="card-header text-white bg-dark">Class {this.state.className} - Subjects</div>
+                            <div className="card-header text-white bg-dark ">Class {this.state.className} - Subjects</div>
                             <div className="card-body">
 
                                     <ul className="list-group col-6">

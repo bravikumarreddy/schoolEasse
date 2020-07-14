@@ -50558,22 +50558,25 @@ function _getPrototypeOf(o) {
 
 
 var Class = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
 });
 var Exam = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
 });
 var StudentList = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
 });
 var TeacherSubjects = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
 });
 var TeacherAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../Attendance/TeacherAttendance */ "./resources/assets/js/components/Attendance/TeacherAttendance.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../Attendance/TeacherAttendance */ "./resources/assets/js/components/Attendance/TeacherAttendance.js"));
 });
 var StaffAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
+});
+var TimeTable = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./TimeTable */ "./resources/assets/js/components/Multiple/TimeTable.js"));
 });
 
 var Multiple = /*#__PURE__*/function (_React$Component) {
@@ -50591,6 +50594,8 @@ var Multiple = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/time_table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TimeTable, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/attendance/daily-attendance/teachers"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TeacherAttendance, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/attendance/daily-attendance/staff"

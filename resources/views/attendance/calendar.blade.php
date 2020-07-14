@@ -16,7 +16,9 @@
 
                 <h4 class="mt-3">My Calendar</h4>
                 <div class="row">
+                    <div class="col-md-5 m-3" id="calendar"> </div>
                     <div class="col-md-4 m-5">
+
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -33,11 +35,14 @@
                             </tr>
                             </tbody>
                         </table>
-                    </div>
 
-                    <div class="col-md-5 m-3" id="calendar">
+
+
 
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 m-3" id="timeTable"> </div>
                 </div>
 
 
@@ -53,7 +58,9 @@
 
             var calendar = new Calendar(calendarEl, {
                 plugins: [ dayGridPlugin ,bootstrapPlugin ],
-                headerToolbar: { center: 'dayGridMonth,timeGridWeek' },
+                headerToolbar: { left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth' },
                 dayMaxEvents: 1, // for all non-TimeGrid views
 
                 events: [
@@ -77,7 +84,42 @@
             });
 
             calendar.render();
-        });
+
+
+
+            var timeTableEl = document.getElementById('timeTable');
+
+            var timeTable = new Calendar(timeTableEl, {
+                plugins: [  dayGridPlugin,bootstrapPlugin,timeGridPlugin ],
+                initialView: 'timeGridWeek',
+                headerToolbar: { left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay' },
+                dayMaxEvents: 1, // for all non-TimeGrid views
+
+                events: [
+                    {
+                        groupId: 'blueEvents', // recurrent events in this group move together
+                        daysOfWeek: [ '0' ],
+                        startTime: '10:45:00',
+                        endTime: '12:45:00'
+                    },
+                    {
+                        // recurrent events in this group move together
+                        // recurrent events in this group move together
+                        daysOfWeek: [ '4' ],
+                        startTime: '12:45:00',
+                        endTime: '13:45:00'
+                    }
+
+                ],
+
+
+            });
+
+            timeTable.render();
+
+     });
     </script>
 
 
