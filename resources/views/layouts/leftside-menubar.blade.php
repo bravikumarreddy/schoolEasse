@@ -94,10 +94,14 @@
     <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text p-2">@lang('Syllabus')</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">announcement</i> <span class="nav-link-text p-2">@lang('Notice')</span></a>
+{{--    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">announcement</i> <span class="nav-link-text p-2">@lang('Notice')</span></a>--}}
+      <a class="nav-link" href="{{ url('communicate') }}"><i class="material-icons">send</i> <span class="nav-link-text p-2">@lang('Communicate')</span></a>
+
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('academic/event') }}"><i class="material-icons">event</i> <span class="nav-link-text p-2">@lang('Event')</span></a>
+{{--    <a class="nav-link" href="{{ url('academic/event') }}"><i class="material-icons">event</i> <span class="nav-link-text p-2">@lang('Event')</span></a>--}}
+          <a class="nav-link" href="{{ url('/school_event') }}"><i class="material-icons">event</i> <span class="nav-link-text p-2">@lang('Event')</span></a>
+
   </li>
   <li class="nav-item" style="border-bottom: 1px solid #dbd8d8;"></li>
   <li class="nav-item">

@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\SchoolEvent;
+use Illuminate\Http\Request;
+
+class SchoolEventController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+
+    }
+    public function apiGetEvents(Request $request){
+        $school_id = \Auth::user()->school_id;
+        $events = SchoolEvent::where('school_id','=',$school_id)->get();
+
+        return json_encode($events);
+    }
+
+    public function apiDeleteEvent(Request $request){
+
+        $events = SchoolEvent::where('id','=',$request->input('id'))->delete();
+
+        return [
+            'status' => 'success',
+        ];
+
+    }
+
+    public function apicreateEvent(Request $request){
+
+
+        $event = new SchoolEvent();
+        $event->category= $request->input('category');
+        $event->school_id = \Auth::user()->school_id;
+        $event->title = $request->input('title');
+        $event->group_name = $request->input('group');
+        $event->from = $request->input('from');
+        $event->to = $request->input('to');
+        $event->color = $request->input('color');
+
+        $event->save();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('school-events.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\SchoolEvent  $schoolEvent
+     * @return \Illuminate\Http\Response
+     */
+    public function show(SchoolEvent $schoolEvent)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\SchoolEvent  $schoolEvent
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(SchoolEvent $schoolEvent)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\SchoolEvent  $schoolEvent
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, SchoolEvent $schoolEvent)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\SchoolEvent  $schoolEvent
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(SchoolEvent $schoolEvent)
+    {
+        //
+    }
+}

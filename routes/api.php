@@ -37,6 +37,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/time_table/class', 'TimeTableController@apiGetClassTimeTable');
     Route::get('/time_table/create', 'TimeTableController@apiCreateTimeTable');
     Route::get('/time_table/delete', 'TimeTableController@apiDeleteTimeTable');
+
+
+    Route::get('/school_event/create', 'SchoolEventController@apiCreateEvent');
+    Route::get('/school_event/get', 'SchoolEventController@apiGetEvents');
+    Route::get('/school_event/delete', 'SchoolEventController@apiDeleteEvent');
 });
 /*
 |--------------------------------------------------------------------------

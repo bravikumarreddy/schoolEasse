@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\AttendanceCheck;
 use App\DailyAttendance;
 use App\Myclass;
+use App\SchoolEvent;
 use App\StaffAttendance;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 class DailyAttendanceController extends Controller
 {
     /**
@@ -106,23 +108,62 @@ class DailyAttendanceController extends Controller
         }
         return json_encode($user);
     }
-    public function  student(){
+    public function student(){
 
         $role = Auth::user()->role;
+        $school_id = Auth::user()->school_id;
+        $all_events = SchoolEvent::where('school_id','=',$school_id)
+                        ->where('group_name',"=","all")->get();
+
+
 
         if($role=='student'){
 
+            $section_id = Auth::user()->section_id;
+            $classTimeTable = app(TimeTableController::class)->classTimeTable($section_id);
             $absent_details = DailyAttendance::
             where("student_id","=",Auth::user()->id)
                 ->get()->all();
+            $student_events = SchoolEvent::where('school_id','=',$school_id)
+                ->where('group_name',"=","students")->get();
 
-            return view("attendance.calendar",compact('absent_details'));
+
+            return view("attendance.calendar",compact('absent_details',
+                'classTimeTable'
+                ,'all_events'
+                , 'student_events'
+
+            ));
         }
         else {
+            $user_id = Auth::user()->id;
             $absent_details = StaffAttendance::
-            where("user_id","=",Auth::user()->id)
+            where("user_id","=", $user_id)
                 ->get()->all();
-            return view("attendance.calendar",compact('absent_details'));
+
+            if($role == 'teacher'){
+
+                $teacher_events = SchoolEvent::where('school_id','=',$school_id)
+                    ->where('group_name',"=","teacher")->get();
+                $teacherTimeTable = app(TimeTableController::class)->teacherTimeTable( $user_id);
+
+
+                return view("attendance.calendar",compact(
+                    'absent_details',
+                    'teacherTimeTable',
+                    'all_events',
+                    'teacher_events'
+
+                ));
+
+            }
+
+            $staff_events = SchoolEvent::where('school_id','=',$school_id)
+                ->where('group_name',"=","staff")->get();
+
+            return view("attendance.calendar",compact('absent_details',
+            'all_events'
+            ,'staff_events'));
         }
 
 

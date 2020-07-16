@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Time Table'))
+@section('title', __('Communicate'))
 
 @section('content')
     <script>
@@ -23,7 +23,8 @@
         </div>
     </div>
 
-</div>
+
+    </div>
 
 
 

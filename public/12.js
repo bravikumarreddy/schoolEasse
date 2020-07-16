@@ -1,9 +1,41 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
 
-/***/ "./resources/assets/js/components/Attendance/TeacherAttendance.js":
-/*!************************************************************************!*\
-  !*** ./resources/assets/js/components/Attendance/TeacherAttendance.js ***!
-  \************************************************************************/
+/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
+/*!**********************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Loader() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border   m-5",
+    role: "status",
+    style: {
+      width: "3rem",
+      height: "3rem"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Loading...")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Multiple/Exam.js":
+/*!*********************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Exam.js ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,16 +45,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 
 
 function _typeof(obj) {
@@ -182,56 +207,54 @@ function _getPrototypeOf(o) {
 
 
 
+var Exam = /*#__PURE__*/function (_React$Component) {
+  _inherits(Exam, _React$Component);
 
+  var _super = _createSuper(Exam);
 
-
-var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
-  _inherits(TeacherAttendance, _React$Component);
-
-  var _super = _createSuper(TeacherAttendance);
-
-  function TeacherAttendance(props) {
+  function Exam(props) {
     var _this;
 
-    _classCallCheck(this, TeacherAttendance);
+    _classCallCheck(this, Exam);
 
     _this = _super.call(this, props);
     _this.state = {
-      departmentOptions: [],
-      department: "",
-      session: "",
-      teacherList: [],
-      selectAll: true,
-      selectTeachersList: [],
-      date: Date.now(),
-      checkAttendance: null
+      classes: "",
+      "class": "",
+      classLoading: false,
+      className: "",
+      classExams: [],
+      createExamName: ""
     };
-    _this.getSectionsClasses = _this.getSectionsClasses.bind(_assertThisInitialized(_this));
-    _this.getTeachers = _this.getTeachers.bind(_assertThisInitialized(_this));
-    _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
-    _this.setDepartment = _this.setDepartment.bind(_assertThisInitialized(_this));
-    _this.changeSelection = _this.changeSelection.bind(_assertThisInitialized(_this));
-    _this.getDateString = _this.getDateString.bind(_assertThisInitialized(_this));
+    _this.getClasses = _this.getClasses.bind(_assertThisInitialized(_this));
+    _this.getExams = _this.getExams.bind(_assertThisInitialized(_this));
+    _this.deleteExam = _this.deleteExam.bind(_assertThisInitialized(_this));
+    _this.createExam = _this.createExam.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(TeacherAttendance, [{
+  _createClass(Exam, [{
     key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getClasses();
+    }
+  }, {
+    key: "getClasses",
     value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var v;
+      var _getClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/departments");
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/classes");
 
               case 2:
-                v = _context.sent;
-                console.log(v.data);
+                res = _context.sent;
+                console.log(res.data);
                 this.setState({
-                  departmentOptions: v.data
+                  classes: res.data
                 });
 
               case 5:
@@ -242,66 +265,42 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, _callee, this);
       }));
 
-      function componentDidMount() {
-        return _componentDidMount.apply(this, arguments);
+      function getClasses() {
+        return _getClasses.apply(this, arguments);
       }
 
-      return componentDidMount;
+      return getClasses;
     }()
   }, {
-    key: "selectAll",
-    value: function selectAll(event) {
-      var selectTeachersList = [];
-
-      for (var i = 0; i < this.state.selectTeachersList.length; i++) {
-        selectTeachersList.push(!this.state.selectAll);
-      }
-
-      console.log(event.target.value);
-      this.setState({
-        "selectAll": !this.state.selectAll,
-        selectTeachersList: selectTeachersList
-      });
-    }
-  }, {
-    key: "getSectionsClasses",
+    key: "getExams",
     value: function () {
-      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(value) {
-        var v;
+      var _getExams = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(class_id, className) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(value == "")) {
-                  _context2.next = 3;
-                  break;
-                }
-
                 this.setState({
-                  "class": value,
-                  "teacherList": []
+                  className: className,
+                  classLoading: true
                 });
-                return _context2.abrupt("return");
-
-              case 3:
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams", {
                   params: {
-                    class_id: value
+                    class_id: class_id
                   }
                 });
 
-              case 5:
-                v = _context2.sent;
-                console.log(v.data);
+              case 3:
+                res = _context2.sent;
+                console.log(res.data);
                 this.setState({
-                  "class": value,
-                  "sectionOptions": v.data,
-                  "section": "",
-                  "teacherList": []
+                  "class": class_id,
+                  classExams: res.data,
+                  classLoading: false
                 });
 
-              case 8:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -309,28 +308,41 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function getSectionsClasses(_x) {
-        return _getSectionsClasses.apply(this, arguments);
+      function getExams(_x, _x2) {
+        return _getExams.apply(this, arguments);
       }
 
-      return getSectionsClasses;
+      return getExams;
     }()
   }, {
-    key: "setDepartment",
+    key: "deleteExam",
     value: function () {
-      var _setDepartment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
+      var _deleteExam = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(exam_id) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 this.setState({
-                  "department": value,
-                  "teacherList": [],
-                  date: Date.now(),
-                  'session': ""
+                  classLoading: true
+                });
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams/delete", {
+                  params: {
+                    class_id: this.state["class"],
+                    exam_id: exam_id
+                  }
                 });
 
-              case 1:
+              case 3:
+                res = _context3.sent;
+                console.log(res.data);
+                this.setState({
+                  classExams: res.data,
+                  classLoading: false
+                });
+
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -338,68 +350,41 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function setDepartment(_x2) {
-        return _setDepartment.apply(this, arguments);
+      function deleteExam(_x3) {
+        return _deleteExam.apply(this, arguments);
       }
 
-      return setDepartment;
+      return deleteExam;
     }()
   }, {
-    key: "changeSelection",
-    value: function changeSelection(index) {
-      var selectTeachersList = this.state.selectTeachersList;
-      selectTeachersList[index] = !this.state.selectTeachersList[index];
-      this.setState({
-        selectTeachersList: selectTeachersList
-      });
-    }
-  }, {
-    key: "getTeachers",
+    key: "createExam",
     value: function () {
-      var _getTeachers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(value) {
-        var departmentId, session, date, v, selectTeachersList, i;
+      var _createExam = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (!(value == "")) {
-                  _context4.next = 3;
-                  break;
-                }
-
                 this.setState({
-                  "session": value,
-                  "teacherList": []
+                  classLoading: true
                 });
-                return _context4.abrupt("return");
-
-              case 3:
-                departmentId = this.state.department;
-                session = value;
-                date = this.getDateString(this.state.date);
-                _context4.next = 8;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/getTeachers", {
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams/create", {
                   params: {
-                    department_id: departmentId
+                    class_id: this.state["class"],
+                    exam_name: this.state.createExamName
                   }
                 });
 
-              case 8:
-                v = _context4.sent;
-                console.log(v);
-                selectTeachersList = [];
-
-                for (i = 0; i < v.data.length; i++) {
-                  selectTeachersList.push(true);
-                }
-
+              case 3:
+                res = _context4.sent;
+                console.log(res.data);
                 this.setState({
-                  "session": value,
-                  teacherList: v.data,
-                  selectTeachersList: selectTeachersList
+                  classExams: res.data,
+                  classLoading: false
                 });
 
-              case 13:
+              case 6:
               case "end":
                 return _context4.stop();
             }
@@ -407,174 +392,97 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, _callee4, this);
       }));
 
-      function getTeachers(_x3) {
-        return _getTeachers.apply(this, arguments);
+      function createExam() {
+        return _createExam.apply(this, arguments);
       }
 
-      return getTeachers;
+      return createExam;
     }()
-  }, {
-    key: "getDateString",
-    value: function getDateString(str) {
-      var d = new Date(this.state.date);
-      var month = '' + (d.getMonth() + 1);
-      var day = '' + d.getDate();
-      var year = d.getFullYear();
-      if (month.length < 2) month = '0' + month;
-      if (day.length < 2) day = '0' + day;
-      return [day, month, year].join('-');
-    }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      if (this.state.date) {
-        var formattedDate = this.getDateString(this.state.date);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-info mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-info"
-      }, "Select Department "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-3 mb-3"
+        className: "col-md-4 "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         htmlFor: "fee_structure",
         className: "col-form-label"
-      }, "Select Department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.department,
+      }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state["class"],
         id: "fee_structure",
-        className: "custom-select form-control",
+        className: "form-control custom-select",
         name: "fee_structure",
         onChange: function onChange(event) {
-          return _this2.setDepartment(event.target.value);
+          _this2.getExams(event.target.value, event.target.options[event.target.options.selectedIndex].text);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: ""
-      }, "Class"), this.state.departmentOptions.map(function (val) {
+      }, "Class"), this.state.classes.map(function (val) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
           key: val.id,
           value: val.id
-        }, val.department_name);
-      }))), this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-2 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-md-12 col-form-label pl-0"
-      }, "Select Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        className: "form-control",
-        name: "Instalment[]",
-        selected: this.state.date,
-        onChange: function onChange(date) {
-          _this2.setState({
-            date: date,
-            teacherList: [],
-            session: ""
-          });
-        }
-      })) : " ", this.state.date && this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "fee_structure",
-        className: "col-form-label"
-      }, "Select Session"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.session,
-        id: "fee_structure",
-        className: " custom-select form-control",
-        name: "fee_structure",
-        onChange: function onChange(event) {
-          return _this2.getTeachers(event.target.value);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Session"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Morning"
-      }, "Morning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "After-Noon"
-      }, "After-Noon"))) : " "))), this.state.teacherList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        action: "/attendance/daily-attendance/teachers/submit",
-        method: "post"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-orange mt-4 mb-4"
+        }, val.class_number);
+      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null), this.state.classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state["class"] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-orange mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-orange"
-      }, "Student List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Class ", this.state.className, " - Exams"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "_token",
-        value: csrf_token
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "department",
-        value: this.state.department
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "date",
-        value: formattedDate
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "session",
-        value: this.state.session
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
-        ref: function ref(el) {
-          return _this2.el = el;
-        },
-        className: "table table-bordered  table-hover"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "role"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "custom-control  custom-checkbox"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "checkbox",
-        className: " bg-success custom-control-input",
-        id: "selectAll",
-        checked: this.state.selectAll,
-        onChange: function onChange(event) {
-          return _this2.selectAll(event);
-        },
-        value: "val"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "custom-control-label",
-        htmlFor: "selectAll"
-      }, "Select All"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.teacherList.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
-          key: val.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.role), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, _this2.state.selectTeachersList[index] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "badge badge-pill badge-secondary badge-success"
-        }, "Present ")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "badge badge-pill badge-secondary badge-danger"
-        }, "Absent "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "custom-control custom-checkbox"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "checkbox",
-          className: "custom-control-input",
-          id: "selectTeachersList" + index,
-          name: "selectTeachersList[]",
-          value: val.id,
-          checked: _this2.state.selectTeachersList[index],
-          onChange: function onChange() {
-            return _this2.changeSelection(index);
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "list-group col-6"
+      }, this.state.classExams.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+          key: val.id,
+          className: "list-group-item d-flex justify-content-between align-items-center "
+        }, val.exam_name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn btn-sm btn-danger ml-2",
+          onClick: function onClick() {
+            _this2.deleteExam(val.id);
           }
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          className: "custom-control-label",
-          htmlFor: "selectTeachersList" + index
-        }, " Present"))));
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-footer bg-orange"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        }, "Delete"));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-5 p-0 mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        className: "form-inline ",
+        onSubmit: function onSubmit(event) {
+          event.preventDefault();
+
+          _this2.createExam();
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "createSubjectName",
+        placeholder: "Exam name",
+        value: this.state.createExamName,
+        required: true,
+        onChange: function onChange(event) {
+          return _this2.setState({
+            createExamName: event.target.value
+          });
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
-        className: "btn float-right btn-primary"
-      }, "Save Changes")))) : "");
+        className: "btn btn-success ml-2 "
+      }, "Create Exam"))))) : ""));
     }
   }]);
 
-  return TeacherAttendance;
+  return Exam;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TeacherAttendance);
+/* harmony default export */ __webpack_exports__["default"] = (Exam);
 
 /***/ })
 

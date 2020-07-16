@@ -51,14 +51,15 @@ class TimeTable extends React.Component {
         console.log(res.data);
         this.setState({classes:res.data});
 
-
     }
+
     addZero(i) {
         if (i < 10) {
             i = "0" + i;
         }
         return i;
     }
+
     async getTeacherSubjects(section_id,section_name){
         console.log(section_id,section_name);
         this.setState({teachersLoading:true});
@@ -279,7 +280,7 @@ class TimeTable extends React.Component {
                         }
                         {this.state.teacherLoading == false && this.state.teacher ?
                             <React.Fragment>
-                                <div className='row'>
+                                <div className='row justify-content-center'>
 
                                     <div className='card col-5 border-0 m-3'>
                                         <h4 className="card-header"> Teacher Time Table</h4>
@@ -290,6 +291,8 @@ class TimeTable extends React.Component {
                                                 initialView="timeGridWeek"
                                                 themeSystem='bootstrap'
                                                 expandRows={true}
+                                                slotEventOverlap={true}
+
                                                 scrollTime='09:00:00'
                                                 titleFormat={{
                                                     month: 'short',
@@ -327,6 +330,8 @@ class TimeTable extends React.Component {
                                                 plugins={[timeGridPlugin, listPlugin]}
                                                 initialView="timeGridWeek"
                                                 themeSystem='bootstrap'
+                                                expandRows={true}
+                                                slotEventOverlap={true}
                                                 scrollTime='09:00:00'
                                                 headerToolbar={
                                                     {
@@ -439,7 +444,7 @@ class TimeTable extends React.Component {
                                                         </select>
                                                     </div>
                                                     <div className="col-4 mb-3">
-                                                        <label className="col-form-label" htmlFor="from">From</label>
+                                                        <label className="col-12 pl-0 col-form-label" htmlFor="from">From</label>
                                                         <DatePicker
                                                             selected={this.state.from}
                                                             onChange={(value) => this.setState({from: value})}
@@ -454,7 +459,7 @@ class TimeTable extends React.Component {
 
                                                     </div>
                                                     <div className="col-4 mb-3">
-                                                        <label className="col-form-label" htmlFor="to">To</label>
+                                                        <label className="col-12 pl-0 col-form-label" htmlFor="to">To</label>
                                                         <DatePicker
                                                             selected={this.state.to}
                                                             onChange={(value) => this.setState({to: value})}

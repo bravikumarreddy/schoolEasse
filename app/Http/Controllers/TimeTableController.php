@@ -17,32 +17,21 @@ class TimeTableController extends Controller
         //
     }
 
-
-    public function apiGetTeacherTimeTable(Request $request)
-    {
-        //
-        $teacher_id = $request->input('teacher_id');
-        $teacherTimeTable = TimeTable::where('time_tables.teacher_id',"=",$teacher_id)
-        ->select('subjects.*',"teacher_subjects.*","time_tables.id as time_table_id",
-            'from as from','to as to','day_of_the_week as day_of_the_week',
-            'section_number as section_number',
-            'class_number as class_number'
+    public function teacherTimeTable($teacher_id){
+        return TimeTable::where('time_tables.teacher_id',"=",$teacher_id)
+            ->select('subjects.*',"teacher_subjects.*","time_tables.id as time_table_id",
+                'from as from','to as to','day_of_the_week as day_of_the_week',
+                'section_number as section_number',
+                'class_number as class_number'
             )
             ->join("sections","time_tables.section_id","sections.id")
             ->join("classes","sections.class_id","classes.id")
-        ->join("teacher_subjects","time_tables.teacher_subjects_id","=","teacher_subjects.id")
-        ->join("subjects","subject_id","=","subjects.id")
+            ->join("teacher_subjects","time_tables.teacher_subjects_id","=","teacher_subjects.id")
+            ->join("subjects","subject_id","=","subjects.id")
             ->get();
-
-        return json_encode($teacherTimeTable);
-
     }
-
-    public function apiGetClassTimeTable(Request $request)
-    {
-        //
-        $section_id = $request->input('section_id');
-        $classTimeTable = TimeTable::where('time_tables.section_id',"=",$section_id)
+    public function classTimeTable($section_id){
+        return TimeTable::where('time_tables.section_id',"=",$section_id)
             ->select('subjects.*',"teacher_subjects.*","time_tables.id as time_table_id",
                 'from as from','to as to','day_of_the_week as day_of_the_week',
                 'section_number as section_number',
@@ -53,6 +42,22 @@ class TimeTableController extends Controller
             ->join("subjects","subject_id","=","subjects.id")
 
             ->get();
+    }
+    public function apiGetTeacherTimeTable(Request $request)
+    {
+        //
+        $teacher_id = $request->input('teacher_id');
+        $teacherTimeTable = $this->teacherTimeTable($teacher_id);
+
+        return json_encode($teacherTimeTable);
+
+    }
+
+    public function apiGetClassTimeTable(Request $request)
+    {
+        //
+        $section_id = $request->input('section_id');
+        $classTimeTable = $this->classTimeTable($section_id);
         return json_encode($classTimeTable);
     }
 
