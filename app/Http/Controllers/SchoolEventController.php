@@ -19,7 +19,15 @@ class SchoolEventController extends Controller
     }
     public function apiGetEvents(Request $request){
         $school_id = \Auth::user()->school_id;
-        $events = SchoolEvent::where('school_id','=',$school_id)->get();
+        $events = SchoolEvent::where('school_events.school_id','=',$school_id)
+            ->select('school_events.*','section_number as section_name',
+                'class_number as class_name',
+                'users.name as user_name'
+            )
+            ->leftJoin('sections',"section_id","=",'sections.id')
+            ->leftJoin('classes',"class_id","=",'classes.id')
+            ->leftJoin('users',"individual_id","=","users.id")
+            ->get();
 
         return json_encode($events);
     }
@@ -36,12 +44,13 @@ class SchoolEventController extends Controller
 
     public function apicreateEvent(Request $request){
 
-
         $event = new SchoolEvent();
         $event->category= $request->input('category');
         $event->school_id = \Auth::user()->school_id;
         $event->title = $request->input('title');
         $event->group_name = $request->input('group');
+        $event->section_id = $request->input('section_id');
+        $event->individual_id = $request->input('individual_id');
         $event->from = $request->input('from');
         $event->to = $request->input('to');
         $event->color = $request->input('color');

@@ -40,8 +40,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
     Route::get('/school_event/create', 'SchoolEventController@apiCreateEvent');
+
     Route::get('/school_event/get', 'SchoolEventController@apiGetEvents');
     Route::get('/school_event/delete', 'SchoolEventController@apiDeleteEvent');
+    Route::get('/users/search/{string}', 'UserController@search');
 });
 /*
 |--------------------------------------------------------------------------

@@ -116,6 +116,31 @@
                         @endforeach
                         @endisset
 
+
+                        @isset($individual_events)
+                        @foreach($individual_events as $event)
+                    {
+                        title: "{{$event->title}}" ,
+                        start:"{{$event->from}}",
+                        end:"{{$event->to}}",
+                        color: '{{$event->color}}'
+                    },
+
+                        @endforeach
+                        @endisset
+
+                        @isset($section_events)
+                        @foreach($section_events as $event)
+                    {
+                        title: "{{$event->title}}" ,
+                        start:"{{$event->from}}",
+                        end:"{{$event->to}}",
+                        color: '{{$event->color}}'
+                    },
+
+                        @endforeach
+                        @endisset
+
                         @isset($staff_events)
                         @foreach($staff_events as $event)
                     {

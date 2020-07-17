@@ -16,7 +16,14 @@ mix.babelConfig({
 
 
 });
-
+mix.webpackConfig(webpack => {
+    return {
+        output: {
+            publicPath: '/',
+            chunkFilename: 'js/[name].js',
+        },
+    };
+});
 const fs = require('fs');
 
 

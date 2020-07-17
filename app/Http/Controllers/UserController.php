@@ -103,6 +103,13 @@ class UserController extends Controller
         return redirect()->route('register');
     }
 
+
+    public function search(Request $request,$str){
+        $search_result = User::where('school_id',"=",Auth::user()->school_id)
+        ->where('name','LIKE', "%".$str.'%')->take(10)->get();
+        return $search_result;
+    }
+
     /**
      * @param $section_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

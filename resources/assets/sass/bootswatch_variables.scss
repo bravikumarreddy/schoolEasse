@@ -117,3 +117,11 @@ $theme-colors: (
 .border-3 {
   border-width:5px !important;
 }
+
+.cursor:hover {
+  cursor:pointer;
+}
+
+.cursor > * :hover{
+  cursor:pointer;
+}
