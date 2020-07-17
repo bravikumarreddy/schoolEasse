@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Time Table'))
+@section('title', __('Event'))
 
 @section('content')
     <script>

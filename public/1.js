@@ -250,15 +250,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-function Loader() {
+function Loader(props) {
+  var size = "3rem";
+  var margin = "5";
+
+  if (props.size) {
+    size = props.size;
+  }
+
+  if (props.margin) {
+    margin = props.margin;
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "spinner-border   m-5",
+    className: "spinner-border   m-".concat(margin, " "),
     role: "status",
     style: {
-      width: "3rem",
-      height: "3rem"
+      width: size,
+      height: size
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "sr-only"
@@ -266,6 +277,339 @@ function Loader() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Multiple/Components/Selectors/ClassSection.js":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Selectors/ClassSection.js ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
+
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+
+
+
+
+function ClassSection(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      classes = _useState2[0],
+      setClasses = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      sections = _useState4[0],
+      setSections = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      class_id = _useState6[0],
+      setClass = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      classLoading = _useState8[0],
+      setClassLoading = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      selectSections = _useState10[0],
+      setSelectSections = _useState10[1];
+
+  var getClasses = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setClassLoading(true);
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/classes");
+
+            case 3:
+              res = _context.sent;
+              setClasses(res.data);
+              setClassLoading(false);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getClasses() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var getSections = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(class_id) {
+      var res, selectSections;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!(class_id == "")) {
+                _context2.next = 2;
+                break;
+              }
+
+              return _context2.abrupt("return");
+
+            case 2:
+              _context2.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/sections", {
+                params: {
+                  class_id: class_id
+                }
+              });
+
+            case 4:
+              res = _context2.sent;
+              setSections(res.data);
+              selectSections = {};
+              res.data.map(function (val) {
+                selectSections[val.id] = false;
+              });
+              setSelectSections(selectSections);
+              props.setSections(selectSections);
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getSections(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var handleChange = function handleChange(section_id) {
+    var newObj = _objectSpread(_objectSpread({}, selectSections), {}, _defineProperty({}, section_id, !selectSections[section_id]));
+
+    setSelectSections(newObj);
+    props.setSections(newObj);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    getClasses();
+    return function () {
+      props.setSections({});
+    };
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    getSections(class_id);
+  }, [class_id]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: "2rem",
+    margin: "3"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-4 mb-3 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fee_structure",
+    className: "col-form-label"
+  }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    value: class_id,
+    id: "fee_structure",
+    className: "form-control custom-select",
+    name: "fee_structure",
+    onChange: function onChange(event) {
+      return setClass(event.target.value);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "Class"), classes.map(function (val) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: val.id,
+      value: val.id
+    }, val.class_number);
+  }))), class_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-4 mb-3 "
+  }, sections.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Sections")), sections.map(function (val) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      key: val.id,
+      className: "custom-control mb-2 custom-checkbox"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "{customCheck".concat(val.id),
+      checked: selectSections[val.id] ? true : false,
+      onChange: function onChange() {
+        return handleChange(val.id);
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "{customCheck".concat(val.id)
+    }, " ", val.section_number));
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-danger"
+  }, "No sections under this class")) : "");
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ClassSection);
 
 /***/ }),
 
@@ -417,6 +761,295 @@ function Group(props) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Multiple/Components/Selectors/Individual.js":
+/*!************************************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Selectors/Individual.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_4__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+
+
+
+
+
+function Individual(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      search = _useState2[0],
+      setSearch = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loading = _useState4[0],
+      setLoading = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      users = _useState6[0],
+      setUsers = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(props.individuals),
+      _useState8 = _slicedToArray(_useState7, 2),
+      selectedUsers = _useState8[0],
+      updateSelectedUsers = _useState8[1];
+
+  var handleSearch = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(value) {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (!(value == "")) {
+                _context.next = 4;
+                break;
+              }
+
+              setSearch(value);
+              setUsers([]);
+              return _context.abrupt("return");
+
+            case 4:
+              setLoading(true);
+              setSearch(value);
+              _context.next = 8;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/search/".concat(value));
+
+            case 8:
+              res = _context.sent;
+              setUsers(res.data);
+              setLoading(false);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleSearch(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var addUser = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(item) {
+      var newList;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              newList = selectedUsers.concat(item);
+              updateSelectedUsers(newList);
+              props.setIndividuals(newList);
+              setUsers([]);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function addUser(_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var deleteUser = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(index) {
+      var newList;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              newList = Array.from(selectedUsers);
+              newList = newList.splice(index, 1);
+              updateSelectedUsers(newList);
+              props.setIndividuals(newList);
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function deleteUser(_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-8 mb-3 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "search",
+    className: "col-form-label"
+  }, "Search name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    id: "search",
+    autoComplete: "off",
+    className: "form-control mr-sm-2",
+    type: "search",
+    placeholder: "Search",
+    "aria-label": "Search",
+    value: search,
+    onChange: function onChange(event) {
+      handleSearch(event.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "list-group col-5  dropdown-menu border-0 "
+  }, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: "2rem",
+    margin: "2"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, users.map(function (val, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      key: val.id,
+      onClick: function onClick() {
+        return addUser(val);
+      },
+      className: " list-group-item d-flex justify-content-between align-items-center cursor"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.name, " \xA0\xA0 \xA0\xA0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "badge badge-messenger"
+    }, "  ", val.role)));
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-8  mb-3 mt-3 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "list-group pt-1 "
+  }, selectedUsers.map(function (val, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      key: val.id,
+      className: "list-group-item  d-flex justify-content-between align-items-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "col-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.name, " \xA0\xA0 \xA0\xA0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "badge badge-messenger"
+    }, "  ", val.role)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "col-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-sm btn-danger ml-2 mr-2 ",
+      onClick: function onClick() {
+        deleteUser(val.id);
+      }
+    }, "delete")));
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Individual);
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Multiple/SchoolEvent.js":
 /*!****************************************************************!*\
   !*** ./resources/assets/js/components/Multiple/SchoolEvent.js ***!
@@ -432,14 +1065,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 /* harmony import */ var _Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Selectors/Group */ "./resources/assets/js/components/Multiple/Components/Selectors/Group.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Selectors/Individual */ "./resources/assets/js/components/Multiple/Components/Selectors/Individual.js");
+/* harmony import */ var _Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Selectors/ClassSection */ "./resources/assets/js/components/Multiple/Components/Selectors/ClassSection.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9__);
 
 
 function _typeof(obj) {
@@ -603,6 +1238,8 @@ function _getPrototypeOf(o) {
 
 
 
+
+
 var SchoolEvent = /*#__PURE__*/function (_React$Component) {
   _inherits(SchoolEvent, _React$Component);
 
@@ -615,8 +1252,10 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      category: "groups",
+      category: "individual",
       group: "",
+      section_ids: {},
+      individual_ids: [],
       to: "",
       from: "",
       title: "",
@@ -658,13 +1297,78 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
     key: "createEvent",
     value: function () {
       var _createEvent = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var res;
+        var section_ids, awaitArray, key, individual_ids, _awaitArray, i, individual, res;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/api/school_event/create", {
+                if (!(this.state.category == 'class')) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                section_ids = this.state.section_ids;
+                awaitArray = [];
+
+                for (key in section_ids) {
+                  if (section_ids[key]) {
+                    awaitArray.push(axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/create", {
+                      params: {
+                        category: this.state.category,
+                        group: this.state.group,
+                        title: this.state.title,
+                        from: this.state.from,
+                        to: this.state.to,
+                        color: this.state.color,
+                        section_id: key
+                      }
+                    }));
+                  }
+                }
+
+                _context2.next = 6;
+                return Promise.all(awaitArray);
+
+              case 6:
+                _context2.next = 19;
+                break;
+
+              case 8:
+                if (!(this.state.category == 'individual')) {
+                  _context2.next = 16;
+                  break;
+                }
+
+                individual_ids = this.state.individual_ids;
+                _awaitArray = [];
+
+                for (i = 0; i < individual_ids.length; i++) {
+                  individual = individual_ids[i];
+
+                  _awaitArray.push(axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/create", {
+                    params: {
+                      category: this.state.category,
+                      group: this.state.group,
+                      title: this.state.title,
+                      from: this.state.from,
+                      to: this.state.to,
+                      color: this.state.color,
+                      individual_id: individual.id
+                    }
+                  }));
+                }
+
+                _context2.next = 14;
+                return Promise.all(_awaitArray);
+
+              case 14:
+                _context2.next = 19;
+                break;
+
+              case 16:
+                _context2.next = 18;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/create", {
                   params: {
                     category: this.state.category,
                     group: this.state.group,
@@ -675,12 +1379,14 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
                   }
                 });
 
-              case 2:
+              case 18:
                 res = _context2.sent;
-                _context2.next = 5;
+
+              case 19:
+                _context2.next = 21;
                 return this.getEventList();
 
-              case 5:
+              case 21:
               case "end":
                 return _context2.stop();
             }
@@ -704,7 +1410,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/api/school_event/delete", {
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/delete", {
                   params: {
                     id: id
                   }
@@ -739,7 +1445,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/api/school_event/get");
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/get");
 
               case 2:
                 res = _context4.sent;
@@ -766,6 +1472,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      console.log(Object.keys(this.state.section_ids).length);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-orange"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -808,6 +1515,19 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
             group: group
           });
         }
+      }) : "", this.state.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        setSections: function setSections(section_ids) {
+          _this2.setState({
+            section_ids: section_ids
+          });
+        }
+      }) : "", this.state.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        individuals: this.state.individual_ids,
+        setIndividuals: function setIndividuals(individual_ids) {
+          _this2.setState({
+            individual_ids: individual_ids
+          });
+        }
       }) : "")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-indigo mt-3 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -819,14 +1539,14 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
       }, this.state.eventList.map(function (val, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
           key: val.id,
-          className: "list-group-item  d-flex justify-content-between align-items-center"
+          className: "list-group-item  d-flex justify-content-between align-items-center "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "col-3"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-5"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, dateformat__WEBPACK_IMPORTED_MODULE_6___default()(val.from, 'mmm d, yyyy h:mm '), " - ", dateformat__WEBPACK_IMPORTED_MODULE_6___default()(val.to, 'mmm d, yyyy h:mm '), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, val.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.group_name, " ") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-4"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, dateformat__WEBPACK_IMPORTED_MODULE_8___default()(val.from, 'mmm d, yyyy h:mm '), " - ", dateformat__WEBPACK_IMPORTED_MODULE_8___default()(val.to, 'mmm d, yyyy h:mm '), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-3"
+        }, val.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.group_name, " ") : "", val.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Class-", val.class_name, " Sec-", val.section_name, "  ") : "", val.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.user_name, "  ") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "col-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "button",
@@ -835,7 +1555,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
             _this2.deleteEvent(val.id);
           }
         }, "delete")));
-      })))), this.state.category == 'groups' && this.state.group ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      })))), this.state.category == 'groups' && this.state.group || this.state.category == 'individual' && this.state.individual_ids.length !== 0 || this.state.category == 'class' && Object.keys(this.state.section_ids).length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-messenger mt-3 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-messenger border-0"
@@ -873,7 +1593,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         htmlFor: "from"
       }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_7___default.a, {
         className: "form-control",
         selected: this.state.from,
         onChange: function onChange(value) {
@@ -890,7 +1610,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         htmlFor: "to"
       }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_7___default.a, {
         className: "form-control",
         selected: this.state.to,
         onChange: function onChange(value) {

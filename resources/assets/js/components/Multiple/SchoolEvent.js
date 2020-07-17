@@ -1,6 +1,8 @@
 import React from 'react';
 import Loader from './Components/Loader'
 import Group from "./Components/Selectors/Group";
+import Individual from "./Components/Selectors/Individual";
+import ClassSection from "./Components/Selectors/ClassSection";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import dateformat from 'dateformat';
@@ -12,14 +14,15 @@ class SchoolEvent extends React.Component {
         super(props);
 
         this.state={
-            category:"groups",
+            category:"individual",
             group:"",
+            section_ids:{},
+            individual_ids:[],
             to:"",
             from:"",
             title:"",
             color:"#ff6245",
             eventList:[]
-
         }
         this.getEventList = this.getEventList.bind(this);
         this.deleteEvent = this.deleteEvent.bind(this);
@@ -32,17 +35,63 @@ class SchoolEvent extends React.Component {
     }
 
     async createEvent(){
-        let res = await axios.get(`/api/school_event/create`,{
-            params:{
-                category : this.state.category,
-                group:this.state.group,
-                title:this.state.title,
-                from:this.state.from,
-                to:this.state.to,
-                color:this.state.color
+        if(this.state.category == 'class'){
+            let section_ids = this.state.section_ids;
+            let awaitArray = [];
+            for (let key in section_ids) {
+                if(section_ids[key]) {
+                    awaitArray.push(axios.get(`/api/school_event/create`,{
+                        params:{
+                            category : this.state.category,
+                            group:this.state.group,
+                            title:this.state.title,
+                            from:this.state.from,
+                            to:this.state.to,
+                            color:this.state.color,
+                            section_id:key
+
+                        }
+                    }));
+                }
+            }
+            await Promise.all(awaitArray);
+        }
+        else if(this.state.category == 'individual'){
+            let individual_ids = this.state.individual_ids;
+            let awaitArray = [];
+            for (let i=0;i<individual_ids.length;i++) {
+                let individual = individual_ids[i];
+
+                    awaitArray.push(axios.get(`/api/school_event/create`,{
+                        params:{
+                            category : this.state.category,
+                            group:this.state.group,
+                            title:this.state.title,
+                            from:this.state.from,
+                            to:this.state.to,
+                            color:this.state.color,
+                            individual_id:individual.id
+
+                        }
+                    }));
 
             }
-        });
+            await Promise.all(awaitArray);
+        }
+        else{
+            let res = await axios.get(`/api/school_event/create`,{
+                params:{
+                    category : this.state.category,
+                    group:this.state.group,
+                    title:this.state.title,
+                    from:this.state.from,
+                    to:this.state.to,
+                    color:this.state.color
+
+                }
+            });
+        }
+
         await  this.getEventList();
     }
 
@@ -64,7 +113,7 @@ class SchoolEvent extends React.Component {
 
 
     render() {
-
+        console.log(Object.keys(this.state.section_ids).length);
         return (
             <React.Fragment>
                 <div className="card border-orange">
@@ -96,6 +145,19 @@ class SchoolEvent extends React.Component {
                         ""
 
                     }
+                    {this.state.category =='class'?
+                        <ClassSection
+                            setSections={(section_ids)=>{this.setState({section_ids: section_ids})}}
+                        />:
+                        ""
+                    }
+                    {this.state.category =='individual'?
+                        <Individual
+                            individuals={this.state.individual_ids} setIndividuals={(individual_ids)=>{this.setState({individual_ids: individual_ids})}}
+                        />:
+                        ""
+                    }
+
                 </div>
 
 
@@ -113,7 +175,7 @@ class SchoolEvent extends React.Component {
                             this.state.eventList.map((val,index )=>(
 
 
-                                <li key={val.id} className="list-group-item  d-flex justify-content-between align-items-center">
+                                <li key={val.id} className="list-group-item  d-flex justify-content-between align-items-center ">
 
 
 
@@ -123,21 +185,28 @@ class SchoolEvent extends React.Component {
 
 
                                         </div>
-                                    <div className="col-5">
+                                    <div className="col-4">
 
                                         <span>{dateformat(val.from,'mmm d, yyyy h:mm ')} - { dateformat(val.to ,'mmm d, yyyy h:mm ')} </span>
 
 
                                     </div>
-                                        <div className="col-2">
+                                        <div className="col-3">
                                             {val.category =='groups'?
                                                 <span>{val.group_name} </span>
                                                 :
                                                 ""
                                             }
-
-
-
+                                            {val.category =='class'?
+                                                <span> Class-{val.class_name} Sec-{val.section_name}  </span>
+                                                :
+                                                ""
+                                            }
+                                            {val.category =='individual'?
+                                                <span> {val.user_name}  </span>
+                                                :
+                                                ""
+                                            }
                                         </div>
                                         <div className="col-2">
 
@@ -158,7 +227,9 @@ class SchoolEvent extends React.Component {
                         </ul>
                     </div>
                 </div>
-                { this.state.category=='groups' && this.state.group  ?
+                { this.state.category=='groups' && this.state.group ||
+                this.state.category=='individual' && this.state.individual_ids.length !== 0  ||
+                this.state.category=='class' && Object.keys(this.state.section_ids).length !== 0 ?
                     <div className="card border-messenger mt-3 mb-3">
 
                         <div className="card-header text-white bg-messenger border-0">

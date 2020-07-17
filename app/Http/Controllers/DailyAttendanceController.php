@@ -111,9 +111,13 @@ class DailyAttendanceController extends Controller
     public function student(){
 
         $role = Auth::user()->role;
+        $user_id = Auth::user()->id;
         $school_id = Auth::user()->school_id;
         $all_events = SchoolEvent::where('school_id','=',$school_id)
                         ->where('group_name',"=","all")->get();
+
+        $individual_events = SchoolEvent::where('school_id','=',$school_id)
+            ->where('individual_id',"=",$user_id)->get();
 
 
 
@@ -121,17 +125,22 @@ class DailyAttendanceController extends Controller
 
             $section_id = Auth::user()->section_id;
             $classTimeTable = app(TimeTableController::class)->classTimeTable($section_id);
+
             $absent_details = DailyAttendance::
             where("student_id","=",Auth::user()->id)
                 ->get()->all();
             $student_events = SchoolEvent::where('school_id','=',$school_id)
                 ->where('group_name',"=","students")->get();
 
+            $section_events = SchoolEvent::where('school_id','=',$school_id)
+                ->where('section_id',"=","$section_id")->get();
 
             return view("attendance.calendar",compact('absent_details',
                 'classTimeTable'
                 ,'all_events'
                 , 'student_events'
+                ,'section_events'
+                ,'individual_events'
 
             ));
         }
@@ -152,7 +161,9 @@ class DailyAttendanceController extends Controller
                     'absent_details',
                     'teacherTimeTable',
                     'all_events',
-                    'teacher_events'
+                    'teacher_events',
+                    'individual_events'
+
 
                 ));
 
@@ -163,7 +174,9 @@ class DailyAttendanceController extends Controller
 
             return view("attendance.calendar",compact('absent_details',
             'all_events'
-            ,'staff_events'));
+            ,'staff_events'
+                ,'individual_events'
+            ));
         }
 
 
