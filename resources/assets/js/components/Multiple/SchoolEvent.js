@@ -14,7 +14,7 @@ class SchoolEvent extends React.Component {
         super(props);
 
         this.state={
-            category:"individual",
+            category:"groups",
             group:"",
             section_ids:{},
             individual_ids:[],
@@ -103,6 +103,8 @@ class SchoolEvent extends React.Component {
         });
         await  this.getEventList();
     }
+
+
     async getEventList(){
 
         let res = await axios.get(`/api/school_event/get`);

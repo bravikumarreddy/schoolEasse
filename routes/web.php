@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    Route::get('messages', 'MessageController@index');
     // Route::get('/view-attendance/section/{section_id}',function($section_id){
     //   if($section_id > 0){
     //     $attendances = App\Attendance::with(['student'])->where('section_id', $section_id)->get();
@@ -217,19 +218,20 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('promote-students', 'UserController@promoteSectionStudentsPost');
         Route::post('theme', 'SchoolController@changeTheme');
         Route::post('set-ignore-sessions', 'SchoolController@setIgnoreSessions');
+
     });
 
     Route::prefix('register')->name('register.')->group(function () {
         Route::get('student', 'UserController@redirectToRegisterStudent');
-        Route::get('teacher', function () {
-            $departments = \App\Department::where('school_id', \Auth::user()->school_id)->get();
-            $classes = \App\Myclass::where('school_id', \Auth::user()->school->id)->pluck('id');
-            $sections = \App\Section::with('class')->whereIn('class_id', $classes)->get();
-            session([
-        'register_role' => 'teacher',
-        'departments' => $departments,
-        'register_sections' => $sections,
-      ]);
+                Route::get('teacher', function () {
+                    $departments = \App\Department::where('school_id', \Auth::user()->school_id)->get();
+                    $classes = \App\Myclass::where('school_id', \Auth::user()->school->id)->pluck('id');
+                    $sections = \App\Section::with('class')->whereIn('class_id', $classes)->get();
+                    session([
+                'register_role' => 'teacher',
+                'departments' => $departments,
+                'register_sections' => $sections,
+              ]);
 
             return redirect()->route('register');
         });
@@ -253,6 +255,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post("/attendance/daily-attendance/teachers/submit",'StaffAttendanceController@takeTeacherAttendance');
     Route::get('time_table','TimeTableController@create');
     Route::get('school_event','SchoolEventController@create');
+    Route::get('communicate', 'CommunicationController@index');
 });
 
 //use PDF;
@@ -288,7 +291,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
 Route::middleware(['auth', 'teacher'])->group(function () {
 
     Route::post('calculate-marks', 'GradeController@calculateMarks');
-    Route::post('message/students', 'NotificationController@store');
+   // Route::post('message/students', 'NotificationController@store');
 
 });
 // Route::middleware(['auth'])->group(function (){

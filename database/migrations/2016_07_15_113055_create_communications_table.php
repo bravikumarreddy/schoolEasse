@@ -16,13 +16,19 @@ class CreateCommunicationsTable extends Migration
         Schema::create('communications', function (Blueprint $table) {
             $table->increments( 'id' );
             $table->string('message',1500);
+            $table->integer('school_id')->unsigned();
+            $table->integer('sender_id')->unsigned();
+            $table->string('category');
+            $table->string('title');
             $table->timestamps();
         });
 
-        Schema::create('communications_log', function (Blueprint $table) {
-            $table->id();
-            $table->string('sent_to',1500);
-            $table->timestamps();
+
+
+        Schema::table('communications', function (Blueprint $table) {
+
+            $table->foreign('school_id')->references("id")->on("schools")->onDelete('cascade');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

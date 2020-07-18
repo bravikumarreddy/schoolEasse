@@ -25,6 +25,9 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                        @if(Auth::user()->role == 'admin')
+                                
+                        @endif
                     <div class="row ">
 
                         <div class="col-sm-2">
