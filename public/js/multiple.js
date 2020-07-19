@@ -50558,25 +50558,25 @@ function _getPrototypeOf(o) {
 
 
 var Class = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
 });
 var Exam = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
 });
 var StudentList = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
 });
 var TeacherSubjects = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
 });
 var TeacherAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ../Attendance/TeacherAttendance */ "./resources/assets/js/components/Attendance/TeacherAttendance.js"));
 });
 var StaffAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
 });
 var TimeTable = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./TimeTable */ "./resources/assets/js/components/Multiple/TimeTable.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./TimeTable */ "./resources/assets/js/components/Multiple/TimeTable.js"));
 });
 var Communicate = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./Communicate */ "./resources/assets/js/components/Multiple/Communicate.js"));

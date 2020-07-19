@@ -31,6 +31,8 @@ class CommunicationController extends Controller
         $communication->save();
         $communication_id = $communication->id;
         $users = [];
+
+
         if($category == 'groups'){
 
                 if($group_name == 'all'){
@@ -84,8 +86,10 @@ class CommunicationController extends Controller
 
     }
     public function apiGetCommunications(){
-        $school_id = \Auth::user()->school_id;
-        return json_encode(Communication::where('school_id','=',$school_id)->get());
+
+       $school_id = \Auth::user()->school_id;
+       $communication_log = Communication::where('school_id','=',$school_id)->paginate(3);
+       return json_encode($communication_log);
     }
 
 

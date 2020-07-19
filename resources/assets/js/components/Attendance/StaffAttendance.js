@@ -4,7 +4,7 @@ import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import $ from 'jquery';
-
+import dateformatter from 'dateformat';
 class StaffAttendance extends React.Component {
 
     constructor(props) {
@@ -71,17 +71,7 @@ class StaffAttendance extends React.Component {
         this.setState({"session":value,staffList:v.data,selectStaffList:selectStaffList});
     }
     getDateString(str){
-        var d = new Date(this.state.date);
-        var month = '' + (d.getMonth() + 1);
-        var day = '' + d.getDate();
-        var year = d.getFullYear();
-
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-
-        return [ day, month,year].join('-');
+        return dateformatter( str,'dd-mm-yyyy')
     }
     render() {
 

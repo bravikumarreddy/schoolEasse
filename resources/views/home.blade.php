@@ -26,7 +26,19 @@
                     </div>
                     @endif
                         @if(Auth::user()->role == 'admin')
-                                
+                            <div class="row ">
+                                <div class="col-3 mb-3 pb-3">
+                                    <div style="width: 150px; height: 150px; float: left; position: relative;">
+                                        <canvas id="doughnut" width="100px" height="100px"></canvas>
+                                        <div
+                                            style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -20px; line-height:19px; text-align: center; z-index: 999999999999999">
+                                            <h4 class="m-0"><b>{{$totalStudents - $studentsFullDay}}</b></h4>
+                                            <small>Students present  </small><br/>
+                                            <small>out of {{$totalStudents}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     <div class="row ">
 
@@ -212,5 +224,44 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('js/chart.js')}}"></script>
+    <script>
+        var ctxDoughnut = document.getElementById('doughnut').getContext('2d');
+        var doughnut = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+
+                datasets: [{
+                    label: '# of Votes',
+                    data: [{{$totalStudents - $studentsFullDay}}, {{$studentsFullDay }}, {{$studentsHalfDay}}],
+                    backgroundColor: [
+
+                        'rgb(79,227,192)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+
+
+                    ],
+                    borderColor: [
+
+                        'rgb(79,227,192)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+
+                    ],
+                    borderWidth: 2,
+
+                }]
+            },
+            options:{
+                tooltips:{
+                    enabled:false
+                },
+                cutoutPercentage:90
+
+            }
+        });
+
+    </script>
 </div>
 @endsection

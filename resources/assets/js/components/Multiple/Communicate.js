@@ -20,7 +20,9 @@ class Communicate extends React.Component {
             individual_ids:[],
             message:"",
             title:"",
-            communicationList:[]
+            communicationList:[],
+            pagination: {},
+            success:false
         }
         this.getCommunications = this.getCommunications.bind(this);
 
@@ -55,31 +57,57 @@ class Communicate extends React.Component {
                     message:this.state.message,
                     section_ids:section_ids,
                     individual_ids:individual_ids,
-
-
                 }
             });
 
 
 
         await this.getCommunications();
+        this.setState({success:true});
     }
 
 
 
-    async getCommunications(){
+    async getCommunications(url=null){
 
-        let res = await axios.get(`/api/communicate/get`);
-        this.setState({communicationList:res.data});
+
+        console.log(url);
+        if(url == null){
+
+            url = `/api/communicate/get`;
+        }
+        else{
+            let urlObj = new URL(url);
+                url = urlObj.pathname +"?"+ urlObj.searchParams;
+        }
+
+        console.log(url);
+        let res = await axios.get(url);
+        this.setState({communicationList:res.data.data ,pagination:res.data});
+
 
     }
+
 
 
 
     render() {
-        console.log(Object.keys(this.state.section_ids).length);
+        console.log(this.state.pagination);
         return (
             <React.Fragment>
+
+                {this.state.success ?
+
+                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>    Message sent  sucessfully </strong>
+                    <button type="button" className="close" onClick={()=>{this.setState({success: false})}}>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>:
+                    ""
+
+                }
+
                 <div className="card border-orange">
 
                     <div className="card-header  bg-orange border-0 text-white">
@@ -194,12 +222,19 @@ class Communicate extends React.Component {
                         <ul className="list-group col-10">
                             <li className="list-group-item  d-flex justify-content-between align-items-center ">
 
-                                <div className="col-10">
+                                <div className="col-2">
+
+                                    <b><span> Index </span></b>
+
+
+                                </div>
+                                <div className="col-8">
 
                                     <b><span> Title </span></b>
 
 
                                 </div>
+
 
                                 <div className="col-2">
                                     <b><span> Category </span></b>
@@ -214,6 +249,10 @@ class Communicate extends React.Component {
 
                                         <li key={val.id} className="list-group-item  d-flex justify-content-between align-items-center ">
 
+
+                                            <div className="col-2">
+                                                <span> {(this.state.pagination.current_page-1) * (this.state.pagination.per_page) + index + 1 }</span>
+                                            </div>
                                             <div className="col-8">
 
                                                 <span>{val.title} </span>
@@ -233,6 +272,42 @@ class Communicate extends React.Component {
 
                             }
                         </ul>
+                        <nav aria-label="Page navigation example" className="mt-3">
+                            <ul className="pagination d-inline-flex" >
+                                { this.state.pagination.prev_page_url ?
+                                    <li className="page-item"  onClick={()=>this.getCommunications(this.state.pagination.prev_page_url)}><a href="#" className="page-link ">Previous</a></li>
+                                    :
+                                    ""}
+
+                                { this.state.pagination.next_page_url ?
+                                    <li className="page-item" onClick={()=>this.getCommunications(this.state.pagination.next_page_url)}><a className="page-link text-white ">Next</a></li>
+                                    :
+                                    ""}
+
+
+
+
+                            </ul>
+
+                            <ul className="pagination float-right">
+                                {
+                                    this.state.pagination.first_page_url ?
+                                    <li className="page-item float-right" onClick={()=>this.getCommunications(this.state.pagination.first_page_url)}><a className="page-link text-white ">First</a></li>
+                                    :
+                                    ""
+                                }
+
+                                {
+                                    this.state.pagination.last_page_url ?
+                                    <li className="page-item float-right"  onClick={()=>this.getCommunications(this.state.pagination.last_page_url)}><a href="#" className="page-link ">Last</a></li>
+                                    :
+                                    ""
+                                }
+
+
+                            </ul>
+
+                        </nav>
                     </div>
                 </div>
             </React.Fragment>

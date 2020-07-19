@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DailyAttendance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -82,6 +84,25 @@ class HomeController extends Controller
             //   $messageCount = \App\Notification::where('student_id',\Auth::user()->id)->count();
             // else
             //   $messageCount = 0;
+            $today = Carbon::today()->format('d-m-Y');
+            $studentsMorning = DailyAttendance::join('users','student_id',"=","users.id")
+                                ->whereDate('date','=',$today)->where('session','=','Morning')
+                                ->pluck('student_id');
+
+            $studentsEveningAndMorning = DailyAttendance::join('users','student_id',"=","users.id")
+                ->whereDate('date','=',$today)->where('session','=','After-Noon')
+                ->whereIn('student_id', $studentsMorning)
+                ->pluck('student_id');
+
+            $studentsHalfDay = DailyAttendance::join('users','student_id',"=","users.id")
+                ->whereDate('date','=',$today)
+                ->whereNotIn('student_id', $studentsEveningAndMorning)
+                ->count();
+
+            $studentsFullDay = count($studentsEveningAndMorning);
+
+
+
             return view('home',[
               'totalStudents'=>$totalStudents,
               'totalTeachers'=>$totalTeachers,
@@ -93,6 +114,8 @@ class HomeController extends Controller
               'routines'=>$routines,
               'syllabuses'=>$syllabuses,
               'exams'=>$exams,
+              'studentsFullDay'=>$studentsFullDay,
+                'studentsHalfDay'=>$studentsHalfDay
               //'messageCount'=>$messageCount,
             ]);
         } else {

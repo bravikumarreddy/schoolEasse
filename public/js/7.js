@@ -43,10 +43,10 @@ function Loader(props) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Multiple/StudentList.js":
-/*!****************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/StudentList.js ***!
-  \****************************************************************/
+/***/ "./resources/assets/js/components/Multiple/Exam.js":
+/*!*********************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Exam.js ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -56,9 +56,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 
 
 function _typeof(obj) {
@@ -218,35 +218,35 @@ function _getPrototypeOf(o) {
 
 
 
-var StudentList = /*#__PURE__*/function (_React$Component) {
-  _inherits(StudentList, _React$Component);
+var Exam = /*#__PURE__*/function (_React$Component) {
+  _inherits(Exam, _React$Component);
 
-  var _super = _createSuper(StudentList);
+  var _super = _createSuper(Exam);
 
-  function StudentList(props) {
+  function Exam(props) {
     var _this;
 
-    _classCallCheck(this, StudentList);
+    _classCallCheck(this, Exam);
 
     _this = _super.call(this, props);
     _this.state = {
-      classes: [],
+      classes: "",
       "class": "",
-      sectionOptions: [],
-      section: "",
-      studentList: [],
-      filterText: ""
+      classLoading: false,
+      className: "",
+      classExams: [],
+      createExamName: ""
     };
-    _this.getSectionsClasses = _this.getSectionsClasses.bind(_assertThisInitialized(_this));
-    _this.getStudents = _this.getStudents.bind(_assertThisInitialized(_this));
     _this.getClasses = _this.getClasses.bind(_assertThisInitialized(_this));
+    _this.getExams = _this.getExams.bind(_assertThisInitialized(_this));
+    _this.deleteExam = _this.deleteExam.bind(_assertThisInitialized(_this));
+    _this.createExam = _this.createExam.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(StudentList, [{
+  _createClass(Exam, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log(this.props);
       this.getClasses();
     }
   }, {
@@ -259,7 +259,7 @@ var StudentList = /*#__PURE__*/function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/classes");
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/classes");
 
               case 2:
                 res = _context.sent;
@@ -283,41 +283,35 @@ var StudentList = /*#__PURE__*/function (_React$Component) {
       return getClasses;
     }()
   }, {
-    key: "getSectionsClasses",
+    key: "getExams",
     value: function () {
-      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(value) {
-        var v;
+      var _getExams = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(class_id, className) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(value == "")) {
-                  _context2.next = 3;
-                  break;
-                }
-
                 this.setState({
-                  "class": value
+                  className: className,
+                  classLoading: true
                 });
-                return _context2.abrupt("return");
-
-              case 3:
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams", {
                   params: {
-                    class_id: value
+                    class_id: class_id
                   }
                 });
 
-              case 5:
-                v = _context2.sent;
-                console.log(v.data);
+              case 3:
+                res = _context2.sent;
+                console.log(res.data);
                 this.setState({
-                  "class": value,
-                  "sectionOptions": v.data
+                  "class": class_id,
+                  classExams: res.data,
+                  classLoading: false
                 });
 
-              case 8:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -325,46 +319,41 @@ var StudentList = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function getSectionsClasses(_x) {
-        return _getSectionsClasses.apply(this, arguments);
+      function getExams(_x, _x2) {
+        return _getExams.apply(this, arguments);
       }
 
-      return getSectionsClasses;
+      return getExams;
     }()
   }, {
-    key: "getStudents",
+    key: "deleteExam",
     value: function () {
-      var _getStudents = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
-        var classId, v;
+      var _deleteExam = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(exam_id) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!(value == "")) {
-                  _context3.next = 3;
-                  break;
-                }
-
                 this.setState({
-                  "section": value,
-                  studentList: []
+                  classLoading: true
                 });
-                return _context3.abrupt("return");
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams/delete", {
+                  params: {
+                    class_id: this.state["class"],
+                    exam_id: exam_id
+                  }
+                });
 
               case 3:
-                classId = this.state["class"];
-                _context3.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/students/".concat(value));
-
-              case 6:
-                v = _context3.sent;
-                console.log(v);
+                res = _context3.sent;
+                console.log(res.data);
                 this.setState({
-                  "section": value,
-                  studentList: v.data
+                  classExams: res.data,
+                  classLoading: false
                 });
 
-              case 9:
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -372,37 +361,69 @@ var StudentList = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function getStudents(_x2) {
-        return _getStudents.apply(this, arguments);
+      function deleteExam(_x3) {
+        return _deleteExam.apply(this, arguments);
       }
 
-      return getStudents;
+      return deleteExam;
+    }()
+  }, {
+    key: "createExam",
+    value: function () {
+      var _createExam = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                this.setState({
+                  classLoading: true
+                });
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams/create", {
+                  params: {
+                    class_id: this.state["class"],
+                    exam_name: this.state.createExamName
+                  }
+                });
+
+              case 3:
+                res = _context4.sent;
+                console.log(res.data);
+                this.setState({
+                  classExams: res.data,
+                  classLoading: false
+                });
+
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function createExam() {
+        return _createExam.apply(this, arguments);
+      }
+
+      return createExam;
     }()
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var classes = this.state.classes;
-      var filteredStudents = this.state.studentList;
-      console.log(this.state.studentList);
-
-      if (this.state.filterText) {
-        filteredStudents = this.state.studentList.filter(function (item) {
-          return item.name && item.name.toLowerCase().includes(_this2.state.filterText.toLowerCase());
-        });
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Students List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-info mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-info"
-      }, "Select Class And Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3"
+        className: "col-md-4 "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         htmlFor: "fee_structure",
         className: "col-form-label"
@@ -412,101 +433,67 @@ var StudentList = /*#__PURE__*/function (_React$Component) {
         className: "form-control custom-select",
         name: "fee_structure",
         onChange: function onChange(event) {
-          return _this2.getSectionsClasses(event.target.value);
+          _this2.getExams(event.target.value, event.target.options[event.target.options.selectedIndex].text);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: ""
-      }, "Class"), classes.map(function (val) {
+      }, "Class"), this.state.classes.map(function (val) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
           key: val.id,
           value: val.id
         }, val.class_number);
-      }))), this.state["class"] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "fee_structure",
-        className: "col-form-label"
-      }, "Select Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.section,
-        id: "fee_structure",
-        className: "form-control custom-select",
-        name: "fee_structure",
-        onChange: function onChange(event) {
-          return _this2.getStudents(event.target.value);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Section"), this.state.sectionOptions.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null), this.state.classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state["class"] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-orange mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-orange"
+      }, "Class ", this.state.className, " - Exams"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "list-group col-6"
+      }, this.state.classExams.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
           key: val.id,
-          value: val.id
-        }, val.section_number);
-      }))) : ""))), this.state.studentList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-0 p-0 mt-4 mb-4"
+          className: "list-group-item d-flex justify-content-between align-items-center "
+        }, val.exam_name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn btn-sm btn-danger ml-2",
+          onClick: function onClick() {
+            _this2.deleteExam(val.id);
+          }
+        }, "Delete"));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-5 p-0 mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        className: "form-inline ",
+        onSubmit: function onSubmit(event) {
+          event.preventDefault();
+
+          _this2.createExam();
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body p-0 border-0"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-3 mb-3  float-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "filterText",
-        className: "col-form-label"
-      }, "Filter by name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "text",
-        id: "filterText",
         className: "form-control",
-        placeholder: "name",
-        value: this.state.filterText,
+        id: "createSubjectName",
+        placeholder: "Exam name",
+        value: this.state.createExamName,
+        required: true,
         onChange: function onChange(event) {
-          _this2.setState({
-            filterText: event.target.value
+          return _this2.setState({
+            createExamName: event.target.value
           });
         }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
-        className: "table table-bordered table-hover"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Name"), this.props.role == 'admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Action") : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Student Code"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Father's Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Gender"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Blood"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-        scope: "col"
-      }, "Address"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, filteredStudents.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
-          key: val.student_id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          href: "/user/" + val.student_code
-        }, val.name))), _this2.props.role == 'admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          className: "btn pl-1 pr-1 pt-0 pb-0 m-0 btn-sm btn-danger",
-          href: "/edit/user/" + val.student_id
-        }, "Edit")) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          className: "btn pl-1 pr-1 pt-0 pb-0 m-0 btn-sm btn-info",
-          href: "/user/" + val.student_code
-        }, "Profile")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.class_id)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.section_number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.student_code)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.father_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.gender)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.blood_group)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.phone_number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.address)));
-      }))))) : "") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success ml-2 "
+      }, "Create Exam"))))) : ""));
     }
   }]);
 
-  return StudentList;
+  return Exam;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (StudentList);
+/* harmony default export */ __webpack_exports__["default"] = (Exam);
 
 /***/ })
 

@@ -208,7 +208,9 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
       individual_ids: [],
       message: "",
       title: "",
-      communicationList: []
+      communicationList: [],
+      pagination: {},
+      success: false
     };
     _this.getCommunications = _this.getCommunications.bind(_assertThisInitialized(_this));
     _this.createMessage = _this.createMessage.bind(_assertThisInitialized(_this));
@@ -282,6 +284,11 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
                 return this.getCommunications();
 
               case 9:
+                this.setState({
+                  success: true
+                });
+
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -299,21 +306,36 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
     key: "getCommunications",
     value: function () {
       var _getCommunications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var res;
+        var url,
+            urlObj,
+            res,
+            _args3 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/communicate/get");
+                url = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
+                console.log(url);
 
-              case 2:
+                if (url == null) {
+                  url = "/api/communicate/get";
+                } else {
+                  urlObj = new URL(url);
+                  url = urlObj.pathname + "?" + urlObj.searchParams;
+                }
+
+                console.log(url);
+                _context3.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(url);
+
+              case 6:
                 res = _context3.sent;
                 this.setState({
-                  communicationList: res.data
+                  communicationList: res.data.data,
+                  pagination: res.data
                 });
 
-              case 4:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -332,8 +354,21 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log(Object.keys(this.state.section_ids).length);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      console.log(this.state.pagination);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.success ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "alert alert-success alert-dismissible fade show",
+        role: "alert"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "    Message sent  sucessfully "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        onClick: function onClick() {
+          _this2.setState({
+            success: false
+          });
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-orange"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header  bg-orange border-0 text-white"
@@ -452,7 +487,9 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "list-group-item  d-flex justify-content-between align-items-center "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-10"
+        className: "col-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Index "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-8"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Title "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Category ")))), this.state.communicationList.map(function (val, index) {
@@ -460,11 +497,50 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
           key: val.id,
           className: "list-group-item  d-flex justify-content-between align-items-center "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", (_this2.state.pagination.current_page - 1) * _this2.state.pagination.per_page + index + 1)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "col-8"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "col-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.category, " ")));
-      })))));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+        "aria-label": "Page navigation example",
+        className: "mt-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "pagination d-inline-flex"
+      }, this.state.pagination.prev_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.prev_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "#",
+        className: "page-link "
+      }, "Previous")) : "", this.state.pagination.next_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.next_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "page-link text-white "
+      }, "Next")) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "pagination float-right"
+      }, this.state.pagination.first_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item float-right",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.first_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "page-link text-white "
+      }, "First")) : "", this.state.pagination.last_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item float-right",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.last_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "#",
+        className: "page-link "
+      }, "Last")) : "")))));
     }
   }]);
 

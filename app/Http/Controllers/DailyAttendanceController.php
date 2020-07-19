@@ -97,7 +97,7 @@ class DailyAttendanceController extends Controller
         $date = $request->input('date');
 
         $user = AttendanceCheck::
-            where("date","=",$date)
+            whereDate("date","=",$date)
             ->where("session","=",$session)
             ->where("section_id","=",$section_id)
         ->first();

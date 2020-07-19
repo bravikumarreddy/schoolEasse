@@ -4,6 +4,7 @@ import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import $ from 'jquery';
+import dateformatter from 'dateformat';
 
 class DailyAttendance extends React.Component {
 
@@ -17,7 +18,7 @@ class DailyAttendance extends React.Component {
             studentList:[],
             selectAll:true,
             selectStudentsList:[],
-            date:Date.now(),
+            date:"",
             checkAttendance:null
 
         }
@@ -69,7 +70,7 @@ class DailyAttendance extends React.Component {
     }
     async setSection(value){
         console.log(value)
-        this.setState({"section":value,"studentList":[],date:Date.now()});
+        this.setState({"section":value,"studentList":[],date:""});
     }
     changeSelection(index){
         var selectStudentsList = this.state.selectStudentsList;
@@ -84,13 +85,13 @@ class DailyAttendance extends React.Component {
         const classId= this.state.class;
         const sectionId =  this.state.section;
         const session =  value
-        const date =  this.getDateString(this.state.date);
+        const date =  this.state.date
 
         var checkAttendance = await axios.get(`/api/attendance/daily-attendance/checkAttendance`,{
             params:{
                 section_id : sectionId,
                 session:session,
-                date:date
+                date:dateformatter( date,'dd-mm-yyyy')
             }
         });
         this.setState({checkAttendance:checkAttendance.data});
@@ -172,6 +173,7 @@ class DailyAttendance extends React.Component {
                                         name="Instalment[]"
                                         selected={this.state.date}
                                         onChange={(date => {this.setState({date:date,studentList:[],session:""})})}
+                                        dateFormat="MMMM d, yyyy "
                                     />
                                 </div>
                                 : " "
@@ -216,7 +218,7 @@ class DailyAttendance extends React.Component {
 
                             <input type="hidden" name="_token" value={csrf_token} />
                             <input type="hidden" name="section" value={this.state.section}/>
-                            <input type="hidden" name="date" value={formattedDate}/>
+                            <input type="hidden" name="date" value={dateformatter( this.state.date,'dd-mm-yyyy')}/>
                             <input type="hidden" name="session" value={this.state.session}/>
 
 
