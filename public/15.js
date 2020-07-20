@@ -1,41 +1,246 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
-/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
-/*!**********************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/dateformat/lib/dateformat.js":
+/*!***************************************************!*\
+  !*** ./node_modules/dateformat/lib/dateformat.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * Date Format 1.2.3
+ * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+ * MIT license
+ *
+ * Includes enhancements by Scott Trenda <scott.trenda.net>
+ * and Kris Kowal <cixar.com/~kris.kowal/>
+ *
+ * Accepts a date, a mask, or a date and a mask.
+ * Returns a formatted version of the given date.
+ * The date defaults to the current date/time.
+ * The mask defaults to dateFormat.masks.default.
+ */
 
+(function(global) {
+  'use strict';
 
-function Loader() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "spinner-border   m-5",
-    role: "status",
-    style: {
-      width: "3rem",
-      height: "3rem"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Loading...")));
+  var dateFormat = (function() {
+      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|"[^"]*"|'[^']*'/g;
+      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
+      var timezoneClip = /[^-+\dA-Z]/g;
+  
+      // Regexes and supporting functions are cached through closure
+      return function (date, mask, utc, gmt) {
+  
+        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
+        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
+          mask = date;
+          date = undefined;
+        }
+  
+        date = date || new Date;
+  
+        if(!(date instanceof Date)) {
+          date = new Date(date);
+        }
+  
+        if (isNaN(date)) {
+          throw TypeError('Invalid date');
+        }
+  
+        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
+  
+        // Allow setting the utc/gmt argument via the mask
+        var maskSlice = mask.slice(0, 4);
+        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
+          mask = mask.slice(4);
+          utc = true;
+          if (maskSlice === 'GMT:') {
+            gmt = true;
+          }
+        }
+  
+        var _ = utc ? 'getUTC' : 'get';
+        var d = date[_ + 'Date']();
+        var D = date[_ + 'Day']();
+        var m = date[_ + 'Month']();
+        var y = date[_ + 'FullYear']();
+        var H = date[_ + 'Hours']();
+        var M = date[_ + 'Minutes']();
+        var s = date[_ + 'Seconds']();
+        var L = date[_ + 'Milliseconds']();
+        var o = utc ? 0 : date.getTimezoneOffset();
+        var W = getWeek(date);
+        var N = getDayOfWeek(date);
+        var flags = {
+          d:    d,
+          dd:   pad(d),
+          ddd:  dateFormat.i18n.dayNames[D],
+          dddd: dateFormat.i18n.dayNames[D + 7],
+          m:    m + 1,
+          mm:   pad(m + 1),
+          mmm:  dateFormat.i18n.monthNames[m],
+          mmmm: dateFormat.i18n.monthNames[m + 12],
+          yy:   String(y).slice(2),
+          yyyy: y,
+          h:    H % 12 || 12,
+          hh:   pad(H % 12 || 12),
+          H:    H,
+          HH:   pad(H),
+          M:    M,
+          MM:   pad(M),
+          s:    s,
+          ss:   pad(s),
+          l:    pad(L, 3),
+          L:    pad(Math.round(L / 10)),
+          t:    H < 12 ? dateFormat.i18n.timeNames[0] : dateFormat.i18n.timeNames[1],
+          tt:   H < 12 ? dateFormat.i18n.timeNames[2] : dateFormat.i18n.timeNames[3],
+          T:    H < 12 ? dateFormat.i18n.timeNames[4] : dateFormat.i18n.timeNames[5],
+          TT:   H < 12 ? dateFormat.i18n.timeNames[6] : dateFormat.i18n.timeNames[7],
+          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
+          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
+          W:    W,
+          N:    N
+        };
+  
+        return mask.replace(token, function (match) {
+          if (match in flags) {
+            return flags[match];
+          }
+          return match.slice(1, match.length - 1);
+        });
+      };
+    })();
+
+  dateFormat.masks = {
+    'default':               'ddd mmm dd yyyy HH:MM:ss',
+    'shortDate':             'm/d/yy',
+    'mediumDate':            'mmm d, yyyy',
+    'longDate':              'mmmm d, yyyy',
+    'fullDate':              'dddd, mmmm d, yyyy',
+    'shortTime':             'h:MM TT',
+    'mediumTime':            'h:MM:ss TT',
+    'longTime':              'h:MM:ss TT Z',
+    'isoDate':               'yyyy-mm-dd',
+    'isoTime':               'HH:MM:ss',
+    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
+    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
+    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
+  };
+
+  // Internationalization strings
+  dateFormat.i18n = {
+    dayNames: [
+      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+    ],
+    monthNames: [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    timeNames: [
+      'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
+    ]
+  };
+
+function pad(val, len) {
+  val = String(val);
+  len = len || 2;
+  while (val.length < len) {
+    val = '0' + val;
+  }
+  return val;
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Loader);
+/**
+ * Get the ISO 8601 week number
+ * Based on comments from
+ * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
+ *
+ * @param  {Object} `date`
+ * @return {Number}
+ */
+function getWeek(date) {
+  // Remove time components of date
+  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  // Change date to Thursday same week
+  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
+
+  // Take January 4th as it is always in week 1 (see ISO 8601)
+  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
+
+  // Change date to Thursday same week
+  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
+
+  // Check if daylight-saving-time-switch occurred and correct for it
+  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
+  targetThursday.setHours(targetThursday.getHours() - ds);
+
+  // Number of weeks between target Thursday and first Thursday
+  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
+  return 1 + Math.floor(weekDiff);
+}
+
+/**
+ * Get ISO-8601 numeric representation of the day of the week
+ * 1 (for Monday) through 7 (for Sunday)
+ * 
+ * @param  {Object} `date`
+ * @return {Number}
+ */
+function getDayOfWeek(date) {
+  var dow = date.getDay();
+  if(dow === 0) {
+    dow = 7;
+  }
+  return dow;
+}
+
+/**
+ * kind-of shortcut
+ * @param  {*} val
+ * @return {String}
+ */
+function kindOf(val) {
+  if (val === null) {
+    return 'null';
+  }
+
+  if (val === undefined) {
+    return 'undefined';
+  }
+
+  if (typeof val !== 'object') {
+    return typeof val;
+  }
+
+  if (Array.isArray(val)) {
+    return 'array';
+  }
+
+  return {}.toString.call(val)
+    .slice(8, -1).toLowerCase();
+};
+
+
+
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+      return dateFormat;
+    }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+})(this);
+
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Multiple/TeacherSubjects.js":
-/*!********************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/TeacherSubjects.js ***!
-  \********************************************************************/
+/***/ "./resources/assets/js/components/Attendance/TeacherAttendance.js":
+/*!************************************************************************!*\
+  !*** ./resources/assets/js/components/Attendance/TeacherAttendance.js ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -45,9 +250,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_7__);
 
 
 function _typeof(obj) {
@@ -207,58 +421,57 @@ function _getPrototypeOf(o) {
 
 
 
-var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
-  _inherits(TeacherSubjects, _React$Component);
 
-  var _super = _createSuper(TeacherSubjects);
 
-  function TeacherSubjects(props) {
+
+
+var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
+  _inherits(TeacherAttendance, _React$Component);
+
+  var _super = _createSuper(TeacherAttendance);
+
+  function TeacherAttendance(props) {
     var _this;
 
-    _classCallCheck(this, TeacherSubjects);
+    _classCallCheck(this, TeacherAttendance);
 
     _this = _super.call(this, props);
     _this.state = {
-      mySubjects: [],
-      mySubjectsLoading: false,
-      subjectId: "",
-      classId: "",
-      className: "",
-      sectionId: "",
-      classExams: [],
-      exam: "",
-      studentList: [],
-      maxMarks: 0,
-      studentMarksList: []
+      departmentOptions: [],
+      department: "",
+      session: "",
+      teacherList: [],
+      selectAll: true,
+      selectTeachersList: [],
+      date: Date.now(),
+      checkAttendance: null
     };
-    _this.getExams = _this.getExams.bind(_assertThisInitialized(_this));
-    _this.changeMarks = _this.changeMarks.bind(_assertThisInitialized(_this));
-    _this.getStudents = _this.getStudents.bind(_assertThisInitialized(_this));
-    _this.submitMarks = _this.submitMarks.bind(_assertThisInitialized(_this));
-    _this.removeMarks = _this.removeMarks.bind(_assertThisInitialized(_this));
+    _this.getSectionsClasses = _this.getSectionsClasses.bind(_assertThisInitialized(_this));
+    _this.getTeachers = _this.getTeachers.bind(_assertThisInitialized(_this));
+    _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
+    _this.setDepartment = _this.setDepartment.bind(_assertThisInitialized(_this));
+    _this.changeSelection = _this.changeSelection.bind(_assertThisInitialized(_this));
+    _this.getDateString = _this.getDateString.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(TeacherSubjects, [{
+  _createClass(TeacherAttendance, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
+        var v;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.setState({
-                  mySubjectsLoading: true
-                });
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/my_subjects");
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/departments");
 
-              case 3:
-                res = _context.sent;
+              case 2:
+                v = _context.sent;
+                console.log(v.data);
                 this.setState({
-                  mySubjects: res.data,
-                  mySubjectsLoading: false
+                  departmentOptions: v.data
                 });
 
               case 5:
@@ -276,42 +489,59 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "getExams",
+    key: "selectAll",
+    value: function selectAll(event) {
+      var selectTeachersList = [];
+
+      for (var i = 0; i < this.state.selectTeachersList.length; i++) {
+        selectTeachersList.push(!this.state.selectAll);
+      }
+
+      console.log(event.target.value);
+      this.setState({
+        "selectAll": !this.state.selectAll,
+        selectTeachersList: selectTeachersList
+      });
+    }
+  }, {
+    key: "getSectionsClasses",
     value: function () {
-      var _getExams = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(subject_id, class_id, section_id, className) {
-        var res;
+      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(value) {
+        var v;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                if (!(value == "")) {
+                  _context2.next = 3;
+                  break;
+                }
+
                 this.setState({
-                  exam: "",
-                  maxMarks: 0
+                  "class": value,
+                  "teacherList": []
                 });
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/class_exams", {
+                return _context2.abrupt("return");
+
+              case 3:
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
                   params: {
-                    class_id: class_id
+                    class_id: value
                   }
                 });
 
-              case 3:
-                res = _context2.sent;
-                console.log(res.data);
+              case 5:
+                v = _context2.sent;
+                console.log(v.data);
                 this.setState({
-                  classId: class_id,
-                  className: className,
-                  subjectId: subject_id,
-                  sectionId: section_id,
-                  classExams: res.data
-                });
-                window.scrollTo({
-                  top: document.body.scrollHeight,
-                  left: 0,
-                  behavior: 'smooth'
+                  "class": value,
+                  "sectionOptions": v.data,
+                  "section": "",
+                  "teacherList": []
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -319,45 +549,28 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function getExams(_x, _x2, _x3, _x4) {
-        return _getExams.apply(this, arguments);
+      function getSectionsClasses(_x) {
+        return _getSectionsClasses.apply(this, arguments);
       }
 
-      return getExams;
+      return getSectionsClasses;
     }()
   }, {
-    key: "getStudents",
+    key: "setDepartment",
     value: function () {
-      var _getStudents = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(exam_id) {
-        var res, arr, i;
+      var _setDepartment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/get_students", {
-                  params: {
-                    exam_id: exam_id,
-                    section_id: this.state.sectionId,
-                    subject_id: this.state.subjectId
-                  }
-                });
-
-              case 2:
-                res = _context3.sent;
-                arr = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  arr.push(0);
-                }
-
                 this.setState({
-                  exam: exam_id,
-                  studentList: res.data,
-                  studentMarksList: arr
+                  "department": value,
+                  "teacherList": [],
+                  date: Date.now(),
+                  'session': ""
                 });
 
-              case 6:
+              case 1:
               case "end":
                 return _context3.stop();
             }
@@ -365,49 +578,68 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function getStudents(_x5) {
-        return _getStudents.apply(this, arguments);
+      function setDepartment(_x2) {
+        return _setDepartment.apply(this, arguments);
       }
 
-      return getStudents;
+      return setDepartment;
     }()
   }, {
-    key: "submitMarks",
+    key: "changeSelection",
+    value: function changeSelection(index) {
+      var selectTeachersList = this.state.selectTeachersList;
+      selectTeachersList[index] = !this.state.selectTeachersList[index];
+      this.setState({
+        selectTeachersList: selectTeachersList
+      });
+    }
+  }, {
+    key: "getTeachers",
     value: function () {
-      var _submitMarks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(marks, student_id) {
-        var res, arr, i;
+      var _getTeachers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(value) {
+        var departmentId, session, date, v, selectTeachersList, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                console.log(marks);
-                console.log(this.state.studentMarksList);
-                _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/submit_marks", {
-                  params: {
-                    exam_id: this.state.exam,
-                    section_id: this.state.sectionId,
-                    subject_id: this.state.subjectId,
-                    student_id: student_id,
-                    marks: marks,
-                    max_marks: this.state.maxMarks
-                  }
-                });
-
-              case 4:
-                res = _context4.sent;
-                arr = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  arr.push(0);
+                if (!(value == "")) {
+                  _context4.next = 3;
+                  break;
                 }
 
                 this.setState({
-                  studentList: res.data,
-                  studentMarksList: arr
+                  "session": value,
+                  "teacherList": []
+                });
+                return _context4.abrupt("return");
+
+              case 3:
+                departmentId = this.state.department;
+                session = value;
+                date = this.getDateString(this.state.date);
+                _context4.next = 8;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/getTeachers", {
+                  params: {
+                    department_id: departmentId
+                  }
                 });
 
               case 8:
+                v = _context4.sent;
+                console.log(v);
+                selectTeachersList = [];
+
+                for (i = 0; i < v.data.length; i++) {
+                  selectTeachersList.push(true);
+                }
+
+                this.setState({
+                  "session": value,
+                  teacherList: v.data,
+                  selectTeachersList: selectTeachersList
+                });
+
+              case 13:
               case "end":
                 return _context4.stop();
             }
@@ -415,207 +647,169 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
         }, _callee4, this);
       }));
 
-      function submitMarks(_x6, _x7) {
-        return _submitMarks.apply(this, arguments);
+      function getTeachers(_x3) {
+        return _getTeachers.apply(this, arguments);
       }
 
-      return submitMarks;
+      return getTeachers;
     }()
   }, {
-    key: "removeMarks",
-    value: function () {
-      var _removeMarks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id) {
-        var res, arr, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/remove_marks", {
-                  params: {
-                    exam_id: this.state.exam,
-                    section_id: this.state.sectionId,
-                    subject_id: this.state.subjectId,
-                    record_id: id
-                  }
-                });
-
-              case 2:
-                res = _context5.sent;
-                arr = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  arr.push(0);
-                }
-
-                this.setState({
-                  studentList: res.data,
-                  studentMarksList: arr
-                });
-
-              case 6:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function removeMarks(_x8) {
-        return _removeMarks.apply(this, arguments);
-      }
-
-      return removeMarks;
-    }()
-  }, {
-    key: "changeMarks",
-    value: function changeMarks(index, value) {
-      var studentMarksList = this.state.studentMarksList;
-      studentMarksList[index] = value;
-      this.setState({
-        studentMarksList: studentMarksList
-      });
+    key: "getDateString",
+    value: function getDateString(str) {
+      return dateformat__WEBPACK_IMPORTED_MODULE_7___default()(str, 'dd-mm-yyyy');
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjectsLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjects ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-dark mb-5 mt-4"
+      if (this.state.date) {
+        var formattedDate = this.getDateString(this.state.date);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-info mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-dark "
-      }, " My Subjects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-12"
-      }, this.state.mySubjects.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: index,
-          className: "list-group-item "
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, "Class - ", val.class_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, "Section - ", val.section_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-info",
-          onClick: function onClick() {
-            _this2.getExams(val.subject_id, val.class_id, val.section_id, val.class_number);
-          }
-        }, "Assign Marks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          className: "btn btn-sm btn-warning",
-          href: "attendance/daily-attendance/".concat(val.class_id, "/").concat(val.section_id)
-        }, "Take Attendance"))));
-      })))) : " No subjects are assigned "), this.state.classId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-indigo mt-4 mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-indigo"
-      }, "Class ", this.state.className, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-info"
+      }, "Select Department "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row m-1"
+        className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 "
+        className: "col-md-3 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "classExams",
+        htmlFor: "fee_structure",
         className: "col-form-label"
-      }, "Select exam to assign Marks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.exam,
-        id: "classExams",
-        className: "form-control custom-select",
-        name: "teachers",
+      }, "Select Department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.department,
+        id: "fee_structure",
+        className: "custom-select form-control",
+        name: "fee_structure",
         onChange: function onChange(event) {
-          _this2.getStudents(event.target.value);
-        },
-        required: true
+          return _this2.setDepartment(event.target.value);
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: ""
-      }, "Teacher"), this.state.classExams.map(function (val) {
+      }, "Class"), this.state.departmentOptions.map(function (val) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
           key: val.id,
           value: val.id
-        }, val.exam_name);
-      }))), this.state.exam ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 "
+        }, val.department_name);
+      }))), this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-2 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "maxValue",
-        className: "col-form-label text-danger"
-      }, "Maximum Marks for this test"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "number",
-        value: this.state.maxMarks,
-        id: "maxValue",
+        className: "col-md-12 col-form-label pl-0"
+      }, "Select Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_4___default.a, {
         className: "form-control",
-        min: 0,
-        onChange: function onChange(event) {
-          return _this2.setState({
-            maxMarks: event.target.value
+        name: "Instalment[]",
+        selected: this.state.date,
+        dateFormat: "dd-M-yyyy",
+        onChange: function onChange(date) {
+          _this2.setState({
+            date: date,
+            teacherList: [],
+            session: ""
           });
         }
-      })) : ""), this.state.exam ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-12 m-3"
-      }, this.state.studentList.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: index,
-          className: "list-group-item "
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, val.student_code), val.id == null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-          className: "form-row col-5",
-          onSubmit: function onSubmit(event) {
-            event.preventDefault();
-
-            _this2.submitMarks(_this2.state.studentMarksList[index], val.student_user_id);
-          }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-5 d-flex justify-content-between align-items-center"
+      })) : " ", this.state.date && this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-3 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "fee_structure",
+        className: "col-form-label"
+      }, "Select Session"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.session,
+        id: "fee_structure",
+        className: " custom-select form-control",
+        name: "fee_structure",
+        onChange: function onChange(event) {
+          return _this2.getTeachers(event.target.value);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: ""
+      }, "Session"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Morning"
+      }, "Morning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "After-Noon"
+      }, "After-Noon"))) : " "))), this.state.teacherList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        action: "/attendance/daily-attendance/teachers/submit",
+        method: "post"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-orange mt-4 mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-orange"
+      }, "Student List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "hidden",
+        name: "_token",
+        value: csrf_token
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "hidden",
+        name: "department",
+        value: this.state.department
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "hidden",
+        name: "date",
+        value: formattedDate
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "hidden",
+        name: "session",
+        value: this.state.session
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+        ref: function ref(el) {
+          return _this2.el = el;
+        },
+        className: "table table-bordered  table-hover"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "role"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "custom-control  custom-checkbox"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "checkbox",
+        className: " bg-success custom-control-input",
+        id: "selectAll",
+        checked: this.state.selectAll,
+        onChange: function onChange(event) {
+          return _this2.selectAll(event);
+        },
+        value: "val"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "custom-control-label",
+        htmlFor: "selectAll"
+      }, "Select All"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.teacherList.map(function (val, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          key: val.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.role), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, _this2.state.selectTeachersList[index] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "badge badge-pill badge-secondary badge-success"
+        }, "Present ")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "badge badge-pill badge-secondary badge-danger"
+        }, "Absent "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "custom-control custom-checkbox"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "number",
-          className: "form-control col-9",
-          "aria-label": "Small",
-          min: 0,
-          max: _this2.state.maxMarks,
-          "aria-describedby": "inputGroup-sizing-sm",
-          value: _this2.state.studentMarksList[index] || 0,
-          onChange: function onChange(event) {
-            return _this2.changeMarks(index, event.target.value);
-          },
-          required: true,
-          name: "marks"
-        }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "/"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, _this2.state.maxMarks)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-4 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-success",
-          onClick: function onClick() {}
-        }, "Submit")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, " ", val.marks, " / ", val.max_marks, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-danger",
-          onClick: function onClick() {
-            _this2.removeMarks(val.id);
+          type: "checkbox",
+          className: "custom-control-input",
+          id: "selectTeachersList" + index,
+          name: "selectTeachersList[]",
+          value: val.id,
+          checked: _this2.state.selectTeachersList[index],
+          onChange: function onChange() {
+            return _this2.changeSelection(index);
           }
-        }, "Remove")))));
-      })) : "")) : "");
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          className: "custom-control-label",
+          htmlFor: "selectTeachersList" + index
+        }, " Present"))));
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-footer bg-orange"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "submit",
+        className: "btn float-right btn-primary"
+      }, "Save Changes")))) : "");
     }
   }]);
 
-  return TeacherSubjects;
+  return TeacherAttendance;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TeacherSubjects);
+/* harmony default export */ __webpack_exports__["default"] = (TeacherAttendance);
 
 /***/ })
 

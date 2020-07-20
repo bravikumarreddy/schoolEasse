@@ -121,7 +121,7 @@ class Exam extends React.Component {
                                         <div className="card-header text-white bg-orange">Class {this.state.className} - Exams</div>
                                         <div className="card-body">
 
-                                            <ul className="list-group col-6">
+                                            <ul className="list-group col-6 ">
                                                 {this.state.classExams.map( val => (
 
                                                     <li key={val.id} className="list-group-item d-flex justify-content-between align-items-center ">{val.exam_name}

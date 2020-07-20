@@ -16,6 +16,7 @@ class CreateExamMarksTable extends Migration
         Schema::create('exam_marks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('marks');
+            $table->string('grade');
             $table->integer('max_marks');
             $table->integer('subject_id')->unsigned();
             $table->integer('exam_id')->unsigned();

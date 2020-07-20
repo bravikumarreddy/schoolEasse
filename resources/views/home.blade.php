@@ -18,7 +18,7 @@
 
         <div class="col-md-10" id="main-container">
             <div class="pt-3 card border-0 " >
-                <h3 class="card-title">@lang('Dashboard')</h3>
+
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success">
@@ -26,206 +26,273 @@
                     </div>
                     @endif
                         @if(Auth::user()->role == 'admin')
-                            <div class="row ">
-                                <div class="col-3 mb-3 pb-3">
-                                    <div style="width: 150px; height: 150px; float: left; position: relative;">
-                                        <canvas id="doughnut" width="100px" height="100px"></canvas>
-                                        <div
-                                            style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -20px; line-height:19px; text-align: center; z-index: 999999999999999">
-                                            <h4 class="m-0"><b>{{$totalStudents - $studentsFullDay}}</b></h4>
-                                            <small>Students present  </small><br/>
-                                            <small>out of {{$totalStudents}}</small>
+                            <div class="card border-0 p-0 mb-3 shadow">
+
+                                <div class="card-body p-0 m-0 mb-4">
+                                    <div class="card-header bg-messenger text-white mb-3 border-0">
+                                        <h4 class="d-inline">
+                                            Attendance Overview
+                                        </h4>
+                                        <div class="d-flex flex-row float-right">
+                                            <div class="mr-4">
+                                                <h5 class="d-inline mr-1"><span class="badge" style="background-color:#4FE3BF">&nbsp;&nbsp;</span>
+
+                                                </h5>
+                                                <span> Preset </span>
+
+                                            </div>
+                                            <div class="mr-4">
+                                                <h5 class="d-inline mr-1"><span class="badge" style="background-color:#FFCE56">&nbsp;&nbsp;</span>
+
+                                                </h5>
+                                                <span> Half Day </span>
+
+                                            </div>
+                                            <div class="mr-4">
+                                                <h5 class="d-inline mr-1"><span class="badge" style="background-color:#FF6383">&nbsp;&nbsp;</span>
+
+                                                </h5>
+                                                <span> Absent </span>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-flex flex-row justify-content-around">
+                                        <div class="">
+                                            <div  style="width: 150px; height: 150px; position: relative;">
+                                                <canvas class="m-auto" id="doughnut" width="100px" height="100px"></canvas>
+                                                <div
+                                                    style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -20px; line-height:19px; text-align: center; z-index: 999999999999999">
+                                                    <h4 class="m-0"><b>{{$totalStudents - $studentsFullDay -$studentsHalfDay}}</b></h4>
+                                                    <small>Students present </small><br/>
+                                                    <small>out of {{$totalStudents}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div  style="width: 150px; height: 150px; float: left; position: relative;">
+                                                <canvas id="doughnut_teachers" width="100px" height="100px"></canvas>
+                                                <div
+                                                    style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -20px; line-height:19px; text-align: center; z-index: 999999999999999">
+                                                    <h4 class="m-0"><b>{{$totalTeachers - $teachersFullDay -$teachersHalfDay}}</b></h4>
+                                                    <small>Teachers present</small><br/>
+                                                    <small>out of {{$totalTeachers}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="" >
+                                            <div  style="width: 150px; height: 150px; float: left; position: relative;">
+                                                <canvas id="doughnut_staff" width="100px" height="100px"></canvas>
+                                                <div
+                                                    style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -20px; line-height:19px; text-align: center; z-index: 999999999999999">
+                                                    <h4 class="m-0"><b>{{$totalStaff - $staffFullDay -$staffHalfDay}}</b></h4>
+                                                    <small>Staff present</small><br/>
+                                                    <small>out of {{$totalStaff}}</small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+                                
                             </div>
+
+
                         @endif
-                    <div class="row ">
+{{--                    <div class="row ">--}}
 
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-lg btn-primary" >
-                                @lang('Students') - <b>{{$totalStudents}}</b>
-                            </button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-lg btn-success" >
-                                @lang('Teachers') - <b>{{$totalTeachers}}</b>
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="button" class="btn btn-lg btn-info">
-                                @lang('Types of Books In Library') - <b>{{$totalBooks}}</b>
-                            </button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-lg btn-danger">
-                                @lang('Classes') - <b>{{$totalClasses}}</b>
-                            </button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-lg btn-warning">
-                                @lang('Sections') - <b>{{$totalSections}}</b>
-                            </button>
-                        </div>
+{{--                        <div class="col-sm-2">--}}
+{{--                            <button type="button" class="btn btn-lg btn-primary" >--}}
+{{--                                @lang('Students') - <b>{{$totalStudents}}</b>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-2">--}}
+{{--                            <button type="button" class="btn btn-lg btn-success" >--}}
+{{--                                @lang('Teachers') - <b>{{$totalTeachers}}</b>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-3">--}}
+{{--                            <button type="button" class="btn btn-lg btn-info">--}}
+{{--                                @lang('Types of Books In Library') - <b>{{$totalBooks}}</b>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-2">--}}
+{{--                            <button type="button" class="btn btn-lg btn-danger">--}}
+{{--                                @lang('Classes') - <b>{{$totalClasses}}</b>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-2">--}}
+{{--                            <button type="button" class="btn btn-lg btn-warning">--}}
+{{--                                @lang('Sections') - <b>{{$totalSections}}</b>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
 
-                    </div>
-                    <br>
+{{--                    </div>--}}
 
 
                     <div class="row" >
                         <div class="col-sm-8">
-                            <div class="card  pt-2" style="background-color: rgba(242,245,245,0.8);">
-                                <div class="card-body">
-                                    <h3>@lang('Welcome to') {{Auth::user()->school->name}}</h3>
-                                    @lang ('Your presence and cooperation will help us to improve the education system of our organization.')
+                            <div class="card shadow" style="background-color: rgb(255,255,255);">
+                                <div class="card-header text-white bg-yellow"><h4 class="mb-0" > Welcome to {{Auth::user()->school->name}}</h4> </div>
+                                <div class="card-body text-dark">
+
+                                    <li class="media">
+                                        <img class="mr-3 align-self-center"
+                                             style="vertical-align: middle;border-style: none;border-radius: 50%;width: 60px;height: 60px;"
+
+                                             src="https://toppersunited.com/wp-content/uploads/2018/12/delhi-international-school-logo.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+
+                                            <h5>{{Auth::user()->school()->first()->about}}</h5>
+                                        </div>
+                                    </li>
                                 </div>
                             </div>
 
-                            <div class="card mt-4 border-dark">
-                                <h5 class="card-header text-white bg-dark ">@lang('Active Exams')</h5>
-                                <div class="card-body">
-                                    @if(count($exams) > 0)
-                                    <table class="table table-borderless ">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" >@lang('Exam Name')</th>
-                                                <th scope="col" >@lang('Notice Published')</th>
-                                                <th scope="col" >@lang('Result Published')</th>
-                                            </tr>
-                                        </thead>
-                                        <thead>
-                                        @foreach($exams as $exam)
-                                        <tr>
-                                            <td>{{$exam->exam_name}}</td>
-                                            <td>{{($exam->notice_published === 1)?__('Yes'):__('No')}}</td>
-                                            <td>{{($exam->result_published === 1)?__('Yes'):__('No')}}</td>
-                                        </tr>
-                                        @endforeach
-                                        </thead>
-                                    </table>
-                                    @else
-                                    @lang('No Active Examination')
-                                    @endif
+
+                            <div class="card shadow-lg mt-4 overflow-hidden ">
+                                <div class="card-body p-0 m-0 ">
+                                    <div id="carouselExampleControls" class="carousel slide overflow-hidden"  style="" data-ride="carousel">
+                                        <div class="carousel-inner" >
+                                            <div class="carousel-item active">
+                                                <img class="d-block w-100" src="https://www.dell.org/wp-content/uploads/2020/04/indian-school-children-social-impact.jpeg" alt="First slide">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h2 ><b>Board Examinations </b></h2>
+                                                    <h3> All the best for 10th Class Students </h3>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img class="d-block w-100 h-100" src="https://www.skoltech.ru/app/data/uploads/2019/12/DSC04232.jpg" alt="Second slide">
+                                                <div class="carousel-caption d-none d-md-block">
+
+                                                    <h3> Sirius Hosts a Russian-Indian Project School </h3>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img class="d-block w-100" src="https://www.desktopbackground.org/download/1600x900/2010/04/30/10145_happy-school-holiday-wallpapers_1920x1200_h.jpg" alt="Third slide">
+                                                <div class="carousel-caption d-none d-md-block">
+
+                                                    <h3> School reopen on Aug-2 </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="card mb-3 border-info">
-                                <div class="card-header text-white bg-primary">@lang('Notices')</div>
-                                <div class="card-body pre-scrollable ">
-                                    @if(count($notices) > 0)
-                                    <div class="list-group list-group-flush">
-                                        @foreach($notices as $notice)
-                                        <a href="{{url($notice->file_path)}}" class="list-group-item  list-group-item-action flex-column align-items-start" download>
-
-                                            <div class="d-flex w-100 justify-content-between border-0">
-                                                <h5 class="list-group-item-heading">{{$notice->title}}</h5>
-                                                <i class="badge badge-download material-icons">
-                                                    get_app
-                                                </i>
-                                            </div>
-                                            <small class="mb-1">@lang('Published at'):
-                                                {{$notice->created_at->format('M d Y h:i:sa')}}</small>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    @else
-                                    @lang('No New Notice')
-                                    @endif
+                            <div class="h-100 card mb-3 shadow">
+                                <div class="card-header mb-2 text-white bg-orange"><h4 class="m-0"> @lang('School Events')</h4></div>
+                                <div class="  card-body mt-2 pt-0 ">
+                                        <div id="calendar"  ></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card mt-4 border-warning">
-                                <div class="card-header text-white bg-warning ">@lang('Events')</div>
-                                <div class="card-body pre-scrollable ">
-                                @if(count($events) > 0)
-                                    <div class="list-group list-group-flush">
-                                        @foreach($events as $event)
-                                        <a href="{{url($event->file_path)}}" class="list-group-item  list-group-item-action flex-column align-items-start" download>
+{{--                        <div class="row">--}}
+{{--                        <div class="col-sm-4">--}}
+{{--                            <div class="card mt-4 border-warning shadow">--}}
+{{--                                <div class="card-header text-white bg-warning ">@lang('Events')</div>--}}
+{{--                                <div class="card-body pre-scrollable ">--}}
+{{--                                @if(count($events) > 0)--}}
+{{--                                    <div class="list-group list-group-flush">--}}
+{{--                                        @foreach($events as $event)--}}
+{{--                                        <a href="{{url($event->file_path)}}" class="list-group-item  list-group-item-action flex-column align-items-start" download>--}}
 
-                                            <div class="d-flex w-100 justify-content-between border-0">
+{{--                                            <div class="d-flex w-100 justify-content-between border-0">--}}
 
-                                                <h5 class="list-group-item-heading">{{$event->title}}</h5>
-                                                <i class="badge badge-download material-icons">
-                                                    get_app
-                                                </i>
-                                            </div>
-                                            <p class="list-group-item-text">@lang('Published at'):
-                                                {{$event->created_at->format('M d Y')}}</p>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    @else
-                                    @lang('No New Event')
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+{{--                                                <h5 class="list-group-item-heading">{{$event->title}}</h5>--}}
+{{--                                                <i class="badge badge-download material-icons">--}}
+{{--                                                    get_app--}}
+{{--                                                </i>--}}
+{{--                                            </div>--}}
+{{--                                            <p class="list-group-item-text">@lang('Published at'):--}}
+{{--                                                {{$event->created_at->format('M d Y')}}</p>--}}
+{{--                                        </a>--}}
+{{--                                        @endforeach--}}
+{{--                                    </div>--}}
+{{--                                    @else--}}
+{{--                                    @lang('No New Event')--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="col-sm-4">
-                            <div class="card mt-4 border-danger">
-                                <div class="card-header text-white bg-danger ">@lang('Routines')</div>
-                                <div class="card-body pre-scrollable">
-                                    @if(count($routines) > 0)
-                                    <div class="list-group list-group-flush">
-                                        @foreach($routines as $routine)
-                                        <a href="{{url($routine->file_path)}}" class="list-group-item list-group-item-action flex-column align-items-start" download>
-                                            <div class="d-flex w-100 justify-content-between border-0">
+{{--                        <div class="col-sm-4">--}}
+{{--                            <div class="card mt-4 border-danger shadow">--}}
+{{--                                <div class="card-header text-white bg-danger ">@lang('Routines')</div>--}}
+{{--                                <div class="card-body pre-scrollable">--}}
+{{--                                    @if(count($routines) > 0)--}}
+{{--                                    <div class="list-group list-group-flush">--}}
+{{--                                        @foreach($routines as $routine)--}}
+{{--                                        <a href="{{url($routine->file_path)}}" class="list-group-item list-group-item-action flex-column align-items-start" download>--}}
+{{--                                            <div class="d-flex w-100 justify-content-between border-0">--}}
 
-                                                <h5 class="list-group-item-heading">{{$routine->title}}</h5>
-                                                <i class="badge badge-download material-icons">
-                                                    get_app
-                                                </i>
-                                            </div>
-                                            <p class="list-group-item-text">@lang('Published at'):
-                                                {{$routine->created_at->format('M d Y')}}</p>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    @else
-                                    @lang('No New Routine')
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card mt-4 border-info">
-                                <div class="card-header text-white bg-info ">@lang('Syllabus')</div>
+{{--                                                <h5 class="list-group-item-heading">{{$routine->title}}</h5>--}}
+{{--                                                <i class="badge badge-download material-icons">--}}
+{{--                                                    get_app--}}
+{{--                                                </i>--}}
+{{--                                            </div>--}}
+{{--                                            <p class="list-group-item-text">@lang('Published at'):--}}
+{{--                                                {{$routine->created_at->format('M d Y')}}</p>--}}
+{{--                                        </a>--}}
+{{--                                        @endforeach--}}
+{{--                                    </div>--}}
+{{--                                    @else--}}
+{{--                                    @lang('No New Routine')--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-4">--}}
+{{--                            <div class="card mt-4 border-info shadow">--}}
+{{--                                <div class="card-header text-white bg-info ">@lang('Syllabus')</div>--}}
 
-                                <div class="card-body pre-scrollable">
-                                    @if(count($syllabuses) > 0)
-                                    <div class="list-group list-group-flush">
-                                        @foreach($syllabuses as $syllabus)
-                                        <a href="{{url($syllabus->file_path)}}" class="list-group-item" download>
-                                            <div class="d-flex w-100 justify-content-between border-0">
-                                                <h5 class="list-group-item-heading">{{$syllabus->title}}</h5>
-                                                <i class="badge badge-download material-icons">
-                                                    get_app
-                                                </i>
-                                            </div>
-                                            <p class="list-group-item-text">@lang('Published at'):
-                                                {{$syllabus->created_at->format('M d Y')}}</p>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    @else
-                                    @lang('No New Syllabus')
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                                <div class="card-body pre-scrollable">--}}
+{{--                                    @if(count($syllabuses) > 0)--}}
+{{--                                    <div class="list-group list-group-flush">--}}
+{{--                                        @foreach($syllabuses as $syllabus)--}}
+{{--                                        <a href="{{url($syllabus->file_path)}}" class="list-group-item" download>--}}
+{{--                                            <div class="d-flex w-100 justify-content-between border-0">--}}
+{{--                                                <h5 class="list-group-item-heading">{{$syllabus->title}}</h5>--}}
+{{--                                                <i class="badge badge-download material-icons">--}}
+{{--                                                    get_app--}}
+{{--                                                </i>--}}
+{{--                                            </div>--}}
+{{--                                            <p class="list-group-item-text">@lang('Published at'):--}}
+{{--                                                {{$syllabus->created_at->format('M d Y')}}</p>--}}
+{{--                                        </a>--}}
+{{--                                        @endforeach--}}
+{{--                                    </div>--}}
+{{--                                    @else--}}
+{{--                                    @lang('No New Syllabus')--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
     </div>
     <script src="{{asset('js/chart.js')}}"></script>
     <script>
+            @if(Auth::user()->role == 'admin')
         var ctxDoughnut = document.getElementById('doughnut').getContext('2d');
         var doughnut = new Chart(ctxDoughnut, {
             type: 'doughnut',
@@ -233,7 +300,7 @@
 
                 datasets: [{
                     label: '# of Votes',
-                    data: [{{$totalStudents - $studentsFullDay}}, {{$studentsFullDay }}, {{$studentsHalfDay}}],
+                    data: [{{$totalStudents - $studentsFullDay-$studentsHalfDay}}, {{$studentsFullDay }}, {{$studentsHalfDay}}],
                     backgroundColor: [
 
                         'rgb(79,227,192)',
@@ -261,6 +328,199 @@
 
             }
         });
+
+        let ctxDoughnutTeachers = document.getElementById('doughnut_teachers').getContext('2d');
+        let doughnut_teachers = new Chart(ctxDoughnutTeachers, {
+            type: 'doughnut',
+            data: {
+
+                datasets: [{
+                    label: '# of Votes',
+                    data: [{{$totalTeachers - $teachersFullDay-$teachersHalfDay}}, {{$teachersFullDay }}, {{$teachersHalfDay}}],
+                    backgroundColor: [
+
+                        'rgb(79,227,192)',
+                        'rgb(255,99,132)',
+                        'rgba(255, 206, 86, 1)',
+
+
+                    ],
+                    borderColor: [
+
+                        'rgb(79,227,192)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+
+                    ],
+                    borderWidth: 2,
+
+                }]
+            },
+            options:{
+                tooltips:{
+                    enabled:false
+                },
+                cutoutPercentage:90
+
+            }
+        });
+
+
+
+        let ctxDoughnutStaff = document.getElementById('doughnut_staff').getContext('2d');
+        let doughnut_staff = new Chart(ctxDoughnutStaff, {
+            type: 'doughnut',
+            data: {
+
+                datasets: [{
+                    label: '# of Votes',
+                    data: [{{$totalStaff - $staffFullDay-$staffHalfDay}}, {{$staffFullDay }}, {{$staffHalfDay}}],
+                    backgroundColor: [
+
+                        'rgb(79,227,192)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+
+
+                    ],
+                    borderColor: [
+
+                        'rgb(79,227,192)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+
+                    ],
+                    borderWidth: 2,
+
+                }]
+            },
+            options:{
+                tooltips:{
+                    enabled:false
+                },
+                cutoutPercentage:90
+
+            }
+        });
+        @endif
+
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new Calendar(calendarEl, {
+            plugins: [ dayGridPlugin ,listPlugin,bootstrapPlugin ],
+            handleWindowResize: true,
+            height:"100%",
+
+            initialView:'listMonth',
+            headerToolbar: { left: 'prev,next today',
+                center: 'title',
+                right: ''
+            },
+            dayMaxEvents: 1, // for all non-TimeGrid views
+            titleFormat:{
+                month: 'long',
+
+            },
+            events: [
+
+                    @isset($absent_details)
+                    @foreach($absent_details as $absent)
+                        {
+                            title: "Absent {{$absent->session}}" ,
+                            start:"{{Carbon\Carbon::parse($absent->date)->format("Y-m-d")}}",
+                            color: '#E74B3C'
+                        },
+
+                    @endforeach
+                    @endisset
+
+
+                    @isset($teacher_events)
+                    @foreach($teacher_events as $event)
+                {
+                    title: "{{$event->title}}" ,
+                    start:"{{$event->from}}",
+                    end:"{{$event->to}}",
+                    color: '{{$event->color}}'
+                },
+
+                    @endforeach
+                    @endisset
+
+                    @isset($student_events)
+                    @foreach($student_events as $event)
+                {
+                    title: "{{$event->title}}" ,
+                    start:"{{$event->from}}",
+                    end:"{{$event->to}}",
+                    color: '{{$event->color}}'
+                },
+
+                    @endforeach
+                    @endisset
+
+
+                    @isset($individual_events)
+                    @foreach($individual_events as $event)
+                {
+                    title: "{{$event->title}}" ,
+                    start:"{{$event->from}}",
+                    end:"{{$event->to}}",
+                    color: '{{$event->color}}'
+                },
+
+                    @endforeach
+                    @endisset
+
+                    @isset($section_events)
+                    @foreach($section_events as $event)
+                {
+                    title: "{{$event->title}}" ,
+                    start:"{{$event->from}}",
+                    end:"{{$event->to}}",
+                    color: '{{$event->color}}'
+                },
+
+                    @endforeach
+                    @endisset
+
+                    @isset($staff_events)
+                    @foreach($staff_events as $event)
+                {
+                    title: "{{$event->title}}" ,
+                    start:"{{$event->from}}",
+                    end:"{{$event->to}}",
+                    color: '{{$event->color}}'
+                },
+
+                    @endforeach
+                    @endisset
+
+                    @isset($all_events)
+                    @foreach($all_events as $event)
+                {
+                    title: "{{$event->title}}" ,
+                    start:"{{$event->from}}",
+                    end:"{{$event->to}}",
+                    color: '{{$event->color}}'
+                },
+
+                    @endforeach
+                    @endisset
+
+
+                { // this object will be "parsed" into an Event Object
+                    title: 'The Title', // a property!
+                    start: '2020-06-06', // a property!
+                    end: '2020-06-06' // a property! ** see important note below about 'end' **
+                }
+
+            ],
+
+
+        });
+
+        calendar.render();
 
     </script>
 </div>

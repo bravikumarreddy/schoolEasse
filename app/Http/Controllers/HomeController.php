@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DailyAttendance;
+use App\SchoolEvent;
+use App\StaffAttendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -46,6 +48,14 @@ class HomeController extends Controller
                               ->where('active', 1)
                               ->count();
             });
+
+            $totalStaff = \Cache::remember('totalStaff-'.$school_id, $minutes, function () use($school_id) {
+                return \App\User::bySchool($school_id)
+                    ->whereNotIn('role',['teacher','master','student'])
+                    ->where('active', 1)
+                    ->count();
+            });
+
             $totalBooks = \Cache::remember('totalBooks-'.$school_id, $minutes, function () use($school_id) {
               return \App\Book::bySchool($school_id)->count();
             });
@@ -103,6 +113,54 @@ class HomeController extends Controller
 
 
 
+            $teachersMorning = StaffAttendance::join('users','user_id',"=","users.id")
+                ->whereDate('date','=',$today)->where('session','=','Morning')
+                ->where('staff_attendances.role','teacher')
+                ->pluck('user_id');
+
+            $teachersEveningAndMorning = StaffAttendance::join('users','user_id',"=","users.id")
+                ->whereDate('date','=',$today)->where('session','=','After-Noon')
+                ->where('staff_attendances.role','teacher')
+                ->whereIn('user_id', $teachersMorning)
+                ->pluck('user_id');
+
+            $teachersHalfDay = StaffAttendance::join('users','user_id',"=","users.id")
+                ->whereDate('date','=',$today)
+                ->where('staff_attendances.role','teacher')
+                ->whereNotIn('user_id', $teachersEveningAndMorning)
+                ->pluck('user_id')
+                ->count();
+
+            $teachersFullDay = count($teachersEveningAndMorning);
+
+
+
+
+            $staffMorning = StaffAttendance::join('users','user_id',"=","users.id")
+                ->whereDate('date','=',$today)->where('session','=','Morning')
+                ->where('staff_attendances.role','!=','teacher')
+                ->pluck('user_id');
+
+            $staffEveningAndMorning = StaffAttendance::join('users','user_id',"=","users.id")
+                ->whereDate('date','=',$today)->where('session','=','After-Noon')
+                ->where('staff_attendances.role','!=','teacher')
+                ->whereIn('user_id', $staffMorning)
+                ->pluck('user_id');
+
+            $staffHalfDay = StaffAttendance::join('users','user_id',"=","users.id")
+                ->whereDate('date','=',$today)
+                ->where('staff_attendances.role','!=','teacher')
+                ->whereNotIn('user_id', $staffEveningAndMorning)
+                ->pluck('user_id')
+                ->count();
+
+            $staffFullDay = count($staffEveningAndMorning);
+
+            $all_events = SchoolEvent::where('school_id','=',$school_id)
+                ->where('group_name',"=","all")->get();
+
+
+
             return view('home',[
               'totalStudents'=>$totalStudents,
               'totalTeachers'=>$totalTeachers,
@@ -115,7 +173,14 @@ class HomeController extends Controller
               'syllabuses'=>$syllabuses,
               'exams'=>$exams,
               'studentsFullDay'=>$studentsFullDay,
-                'studentsHalfDay'=>$studentsHalfDay
+              'studentsHalfDay'=>$studentsHalfDay,
+              'totalStaff' => $totalStaff,
+              'teachersFullDay' => $teachersFullDay,
+              'teachersHalfDay' => $teachersHalfDay,
+              'staffHalfDay' => $staffHalfDay,
+              'staffFullDay' => $staffFullDay,
+                'all_events' => $all_events
+
               //'messageCount'=>$messageCount,
             ]);
         } else {

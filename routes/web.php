@@ -145,6 +145,8 @@ Route::middleware(['auth', 'admin'])->prefix('academic')->name('academic.')->gro
 Route::middleware(['auth', 'admin'])->prefix('exams')->name('exams.')->group(function () {
    // Route::get('/', 'ExamController@index');
     Route::get('/', 'ExamController@manage');
+    Route::get('/grade-system', 'GradesystemController@index');
+    Route::post('/grade-system/submit', 'GradesystemController@submit');
     Route::get('create', 'ExamController@create');
     Route::post('create', 'ExamController@store');
     Route::post('activate-exam', 'ExamController@update');

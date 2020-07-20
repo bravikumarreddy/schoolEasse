@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./resources/assets/js/components/Multiple/SchoolEvent.js":
+/***/ "./resources/assets/js/components/Multiple/Communicate.js":
 /*!****************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/SchoolEvent.js ***!
+  !*** ./resources/assets/js/components/Multiple/Communicate.js ***!
   \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -190,35 +190,34 @@ function _getPrototypeOf(o) {
 
 
 
-var SchoolEvent = /*#__PURE__*/function (_React$Component) {
-  _inherits(SchoolEvent, _React$Component);
+var Communicate = /*#__PURE__*/function (_React$Component) {
+  _inherits(Communicate, _React$Component);
 
-  var _super = _createSuper(SchoolEvent);
+  var _super = _createSuper(Communicate);
 
-  function SchoolEvent(props) {
+  function Communicate(props) {
     var _this;
 
-    _classCallCheck(this, SchoolEvent);
+    _classCallCheck(this, Communicate);
 
     _this = _super.call(this, props);
     _this.state = {
-      category: "groups",
+      category: "individual",
       group: "",
       section_ids: {},
       individual_ids: [],
-      to: "",
-      from: "",
+      message: "",
       title: "",
-      color: "#ff6245",
-      eventList: []
+      communicationList: [],
+      pagination: {},
+      success: false
     };
-    _this.getEventList = _this.getEventList.bind(_assertThisInitialized(_this));
-    _this.deleteEvent = _this.deleteEvent.bind(_assertThisInitialized(_this));
-    _this.createEvent = _this.createEvent.bind(_assertThisInitialized(_this));
+    _this.getCommunications = _this.getCommunications.bind(_assertThisInitialized(_this));
+    _this.createMessage = _this.createMessage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(SchoolEvent, [{
+  _createClass(Communicate, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -227,7 +226,7 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getEventList();
+                return this.getCommunications();
 
               case 2:
               case "end":
@@ -244,99 +243,52 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "createEvent",
+    key: "createMessage",
     value: function () {
-      var _createEvent = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var section_ids, awaitArray, key, individual_ids, _awaitArray, i, individual, res;
-
+      var _createMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var section_ids, individual_ids, i, key, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(this.state.category == 'class')) {
-                  _context2.next = 8;
-                  break;
+                section_ids = [];
+                individual_ids = [];
+
+                if (this.state.category == 'individual') {
+                  for (i = 0; i < this.state.individual_ids.length; i++) {
+                    individual_ids.push(this.state.individual_ids[i].id);
+                  }
                 }
 
-                section_ids = this.state.section_ids;
-                awaitArray = [];
-
-                for (key in section_ids) {
-                  if (section_ids[key]) {
-                    awaitArray.push(axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/create", {
-                      params: {
-                        category: this.state.category,
-                        group: this.state.group,
-                        title: this.state.title,
-                        from: this.state.from,
-                        to: this.state.to,
-                        color: this.state.color,
-                        section_id: key
-                      }
-                    }));
+                for (key in this.state.section_ids) {
+                  if (this.state.section_ids[key]) {
+                    section_ids.push(key);
                   }
                 }
 
                 _context2.next = 6;
-                return Promise.all(awaitArray);
-
-              case 6:
-                _context2.next = 19;
-                break;
-
-              case 8:
-                if (!(this.state.category == 'individual')) {
-                  _context2.next = 16;
-                  break;
-                }
-
-                individual_ids = this.state.individual_ids;
-                _awaitArray = [];
-
-                for (i = 0; i < individual_ids.length; i++) {
-                  individual = individual_ids[i];
-
-                  _awaitArray.push(axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/create", {
-                    params: {
-                      category: this.state.category,
-                      group: this.state.group,
-                      title: this.state.title,
-                      from: this.state.from,
-                      to: this.state.to,
-                      color: this.state.color,
-                      individual_id: individual.id
-                    }
-                  }));
-                }
-
-                _context2.next = 14;
-                return Promise.all(_awaitArray);
-
-              case 14:
-                _context2.next = 19;
-                break;
-
-              case 16:
-                _context2.next = 18;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/create", {
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/communicate/create", {
                   params: {
                     category: this.state.category,
                     group: this.state.group,
                     title: this.state.title,
-                    from: this.state.from,
-                    to: this.state.to,
-                    color: this.state.color
+                    message: this.state.message,
+                    section_ids: section_ids,
+                    individual_ids: individual_ids
                   }
                 });
 
-              case 18:
+              case 6:
                 res = _context2.sent;
+                _context2.next = 9;
+                return this.getCommunications();
 
-              case 19:
-                _context2.next = 21;
-                return this.getEventList();
+              case 9:
+                this.setState({
+                  success: true
+                });
 
-              case 21:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -344,34 +296,46 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function createEvent() {
-        return _createEvent.apply(this, arguments);
+      function createMessage() {
+        return _createMessage.apply(this, arguments);
       }
 
-      return createEvent;
+      return createMessage;
     }()
   }, {
-    key: "deleteEvent",
+    key: "getCommunications",
     value: function () {
-      var _deleteEvent = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(id) {
-        var res;
+      var _getCommunications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var url,
+            urlObj,
+            res,
+            _args3 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/delete", {
-                  params: {
-                    id: id
-                  }
+                url = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
+                console.log(url);
+
+                if (url == null) {
+                  url = "/api/communicate/get";
+                } else {
+                  urlObj = new URL(url);
+                  url = urlObj.pathname + "?" + urlObj.searchParams;
+                }
+
+                console.log(url);
+                _context3.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(url);
+
+              case 6:
+                res = _context3.sent;
+                this.setState({
+                  communicationList: res.data.data,
+                  pagination: res.data
                 });
 
-              case 2:
-                res = _context3.sent;
-                _context3.next = 5;
-                return this.getEventList();
-
-              case 5:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -379,51 +343,32 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function deleteEvent(_x) {
-        return _deleteEvent.apply(this, arguments);
+      function getCommunications() {
+        return _getCommunications.apply(this, arguments);
       }
 
-      return deleteEvent;
-    }()
-  }, {
-    key: "getEventList",
-    value: function () {
-      var _getEventList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/school_event/get");
-
-              case 2:
-                res = _context4.sent;
-                this.setState({
-                  eventList: res.data
-                });
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function getEventList() {
-        return _getEventList.apply(this, arguments);
-      }
-
-      return getEventList;
+      return getCommunications;
     }()
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log(Object.keys(this.state.section_ids).length);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      console.log(this.state.pagination);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.success ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "alert alert-success alert-dismissible fade show",
+        role: "alert"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "    Message sent  sucessfully "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        onClick: function onClick() {
+          _this2.setState({
+            success: false
+          });
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-orange"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header  bg-orange border-0 text-white"
@@ -478,51 +423,24 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
             individual_ids: individual_ids
           });
         }
-      }) : "")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-indigo mt-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-indigo border-0"
-      }, "Event List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-10"
-      }, this.state.eventList.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: val.id,
-          className: "list-group-item  d-flex justify-content-between align-items-center "
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-4"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, dateformat__WEBPACK_IMPORTED_MODULE_8___default()(val.from, 'mmm d, yyyy h:mm '), " - ", dateformat__WEBPACK_IMPORTED_MODULE_8___default()(val.to, 'mmm d, yyyy h:mm '), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
-        }, val.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.group_name, " ") : "", val.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Class-", val.class_name, " Sec-", val.section_name, "  ") : "", val.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.user_name, "  ") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-sm btn-danger ml-2 mr-2 ",
-          onClick: function onClick() {
-            _this2.deleteEvent(val.id);
-          }
-        }, "delete")));
-      })))), this.state.category == 'groups' && this.state.group || this.state.category == 'individual' && this.state.individual_ids.length !== 0 || this.state.category == 'class' && Object.keys(this.state.section_ids).length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }) : "")), this.state.category == 'groups' && this.state.group || this.state.category == 'individual' && this.state.individual_ids.length !== 0 || this.state.category == 'class' && Object.keys(this.state.section_ids).length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-messenger mt-3 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-messenger border-0"
-      }, "Event Input"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Message Input"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
 
-          _this2.createEvent();
+          _this2.createMessage();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-6 mb-3 form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         className: " col-4 col-form-label",
         htmlFor: "title"
-      }, "Event Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Message Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         className: "form-control",
@@ -541,64 +459,95 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         className: "col-4  col-form-label",
         htmlFor: "from"
-      }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_7___default.a, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         className: "form-control",
-        selected: this.state.from,
-        onChange: function onChange(value) {
-          return _this2.setState({
-            from: value
-          });
-        },
-        showTimeSelect: true,
-        dateFormat: "MMMM d, yyyy h:mm aa"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
-        htmlFor: "to"
-      }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_7___default.a, {
-        className: "form-control",
-        selected: this.state.to,
-        onChange: function onChange(value) {
-          return _this2.setState({
-            to: value
-          });
-        },
-        showTimeSelect: true,
-        dateFormat: "MMMM d, yyyy h:mm aa"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
-        htmlFor: "to"
-      }, "Color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        className: "form-control",
-        id: "color",
-        type: "Color",
-        value: this.state.color,
+        id: "message",
+        placeholder: "message",
+        "aria-label": "With textarea",
+        maxLength: 1499,
+        value: this.state.message,
         onChange: function onChange(event) {
           _this2.setState({
-            color: event.target.value
+            message: event.target.value
           });
-        },
-        placeholder: "Default input"
+        }
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-success ml-2"
-      }, "Create Event")))) : "");
+      }, "Send Message")))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-indigo mt-3 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-indigo border-0"
+      }, "Communication Log"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "list-group col-10"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "list-group-item  d-flex justify-content-between align-items-center "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Index "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-8"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Title "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Category ")))), this.state.communicationList.map(function (val, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+          key: val.id,
+          className: "list-group-item  d-flex justify-content-between align-items-center "
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", (_this2.state.pagination.current_page - 1) * _this2.state.pagination.per_page + index + 1)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-8"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.category, " ")));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+        "aria-label": "Page navigation example",
+        className: "mt-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "pagination d-inline-flex"
+      }, this.state.pagination.prev_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.prev_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "#",
+        className: "page-link "
+      }, "Previous")) : "", this.state.pagination.next_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.next_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "page-link text-white "
+      }, "Next")) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "pagination float-right"
+      }, this.state.pagination.first_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item float-right",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.first_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "page-link text-white "
+      }, "First")) : "", this.state.pagination.last_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "page-item float-right",
+        onClick: function onClick() {
+          return _this2.getCommunications(_this2.state.pagination.last_page_url);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "#",
+        className: "page-link "
+      }, "Last")) : "")))));
     }
   }]);
 
-  return SchoolEvent;
+  return Communicate;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (SchoolEvent);
+/* harmony default export */ __webpack_exports__["default"] = (Communicate);
 
 /***/ })
 

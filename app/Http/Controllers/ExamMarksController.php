@@ -63,9 +63,11 @@ class ExamMarksController extends Controller
         $marks= $request->input('marks');
         $student_id = $request->input('student_id');
         $max_marks = $request->input('max_marks');
+        $grade = $request->input('grade');
 
         $exam_marks = new ExamMarks();
         $exam_marks->marks = $marks;
+        $exam_marks->grade = $grade;
         $exam_marks->max_marks = $max_marks;
         $exam_marks->subject_id = $subject_id;
         $exam_marks->exam_id = $exam_id;

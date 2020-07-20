@@ -43,10 +43,10 @@ function Loader(props) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Multiple/TimeTable.js":
-/*!**************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/TimeTable.js ***!
-  \**************************************************************/
+/***/ "./resources/assets/js/components/Multiple/StudentList.js":
+/*!****************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/StudentList.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -59,14 +59,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fullcalendar/react */ "./node_modules/@fullcalendar/react/dist/main.js");
-/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/main.js");
-/* harmony import */ var _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fullcalendar/timegrid */ "./node_modules/@fullcalendar/timegrid/main.js");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fullcalendar/list */ "./node_modules/@fullcalendar/list/main.js");
 
 
 function _typeof(obj) {
@@ -226,21 +218,15 @@ function _getPrototypeOf(o) {
 
 
 
+var StudentList = /*#__PURE__*/function (_React$Component) {
+  _inherits(StudentList, _React$Component);
 
+  var _super = _createSuper(StudentList);
 
-
-
-
-
-var TimeTable = /*#__PURE__*/function (_React$Component) {
-  _inherits(TimeTable, _React$Component);
-
-  var _super = _createSuper(TimeTable);
-
-  function TimeTable(props) {
+  function StudentList(props) {
     var _this;
 
-    _classCallCheck(this, TimeTable);
+    _classCallCheck(this, StudentList);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -248,29 +234,16 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
       "class": "",
       sectionOptions: [],
       section: "",
-      sectionName: "",
-      filterText: "",
-      teachersLoading: "",
-      teacherSubjects: [],
-      teacher_subject: "",
-      teacherEvents: [],
-      classEvents: [],
-      dayOfTheWeek: "",
-      from: "",
-      teacher: "",
-      to: "",
-      teacherLoading: false
+      studentList: [],
+      filterText: ""
     };
     _this.getSectionsClasses = _this.getSectionsClasses.bind(_assertThisInitialized(_this));
-    _this.getTimeTable = _this.getTimeTable.bind(_assertThisInitialized(_this));
+    _this.getStudents = _this.getStudents.bind(_assertThisInitialized(_this));
     _this.getClasses = _this.getClasses.bind(_assertThisInitialized(_this));
-    _this.getTeacherSubjects = _this.getTeacherSubjects.bind(_assertThisInitialized(_this));
-    _this.createTimeTable = _this.createTimeTable.bind(_assertThisInitialized(_this));
-    _this.deleteTimeTable = _this.deleteTimeTable.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(TimeTable, [{
+  _createClass(StudentList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       console.log(this.props);
@@ -310,45 +283,41 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
       return getClasses;
     }()
   }, {
-    key: "addZero",
-    value: function addZero(i) {
-      if (i < 10) {
-        i = "0" + i;
-      }
-
-      return i;
-    }
-  }, {
-    key: "getTeacherSubjects",
+    key: "getSectionsClasses",
     value: function () {
-      var _getTeacherSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(section_id, section_name) {
-        var res;
+      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(value) {
+        var v;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log(section_id, section_name);
+                if (!(value == "")) {
+                  _context2.next = 3;
+                  break;
+                }
+
                 this.setState({
-                  teachersLoading: true
+                  "class": value
                 });
-                _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects", {
+                return _context2.abrupt("return");
+
+              case 3:
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
                   params: {
-                    section_id: section_id
+                    class_id: value
                   }
                 });
 
-              case 4:
-                res = _context2.sent;
+              case 5:
+                v = _context2.sent;
+                console.log(v.data);
                 this.setState({
-                  teachersLoading: false,
-                  section: section_id,
-                  sectionName: section_name,
-                  teacherSubjects: res.data
+                  "class": value,
+                  "sectionOptions": v.data
                 });
-                console.log(res);
 
-              case 7:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -356,49 +325,43 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function getTeacherSubjects(_x, _x2) {
-        return _getTeacherSubjects.apply(this, arguments);
+      function getSectionsClasses(_x) {
+        return _getSectionsClasses.apply(this, arguments);
       }
 
-      return getTeacherSubjects;
+      return getSectionsClasses;
     }()
   }, {
-    key: "getSectionsClasses",
+    key: "getStudents",
     value: function () {
-      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
-        var v;
+      var _getStudents = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
+        var classId, v;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                this.setState({
-                  section: ""
-                });
-
                 if (!(value == "")) {
-                  _context3.next = 4;
+                  _context3.next = 3;
                   break;
                 }
 
                 this.setState({
-                  "class": value
+                  "section": value,
+                  studentList: []
                 });
                 return _context3.abrupt("return");
 
-              case 4:
+              case 3:
+                classId = this.state["class"];
                 _context3.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
-                  params: {
-                    class_id: value
-                  }
-                });
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/students/".concat(value));
 
               case 6:
                 v = _context3.sent;
-                console.log(v.data);
+                console.log(v);
                 this.setState({
-                  "class": value,
-                  "sectionOptions": v.data
+                  "section": value,
+                  studentList: v.data
                 });
 
               case 9:
@@ -409,145 +372,11 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function getSectionsClasses(_x3) {
-        return _getSectionsClasses.apply(this, arguments);
+      function getStudents(_x2) {
+        return _getStudents.apply(this, arguments);
       }
 
-      return getSectionsClasses;
-    }()
-  }, {
-    key: "getTimeTable",
-    value: function () {
-      var _getTimeTable = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(value, teacher_id) {
-        var teacherEvents, classEvents;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                this.setState({
-                  "teacher_subject": value,
-                  "teacher": teacher_id,
-                  "teacherLoading": true
-                });
-                _context4.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/time_table/teacher", {
-                  params: {
-                    teacher_id: teacher_id
-                  }
-                });
-
-              case 3:
-                teacherEvents = _context4.sent;
-                console.log(teacherEvents);
-                _context4.next = 7;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/time_table/class", {
-                  params: {
-                    section_id: this.state.section
-                  }
-                });
-
-              case 7:
-                classEvents = _context4.sent;
-                console.log(classEvents);
-                this.setState({
-                  "classEvents": classEvents.data,
-                  teacherEvents: teacherEvents.data,
-                  "teacherLoading": false
-                });
-
-              case 10:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function getTimeTable(_x4, _x5) {
-        return _getTimeTable.apply(this, arguments);
-      }
-
-      return getTimeTable;
-    }()
-  }, {
-    key: "deleteTimeTable",
-    value: function () {
-      var _deleteTimeTable = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id) {
-        var teacherEvents;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                console.log("delete Time Table");
-                _context5.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/time_table/delete", {
-                  params: {
-                    time_table_id: id
-                  }
-                });
-
-              case 3:
-                teacherEvents = _context5.sent;
-                _context5.next = 6;
-                return this.getTimeTable(this.state.teacher_subject, this.state.teacher);
-
-              case 6:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function deleteTimeTable(_x6) {
-        return _deleteTimeTable.apply(this, arguments);
-      }
-
-      return deleteTimeTable;
-    }()
-  }, {
-    key: "createTimeTable",
-    value: function () {
-      var _createTimeTable = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-        var fromDate, toDate, from, to, v;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                fromDate = new Date(this.state.from);
-                toDate = new Date(this.state.to);
-                from = "".concat(this.addZero(fromDate.getHours()), ":").concat(this.addZero(fromDate.getMinutes()));
-                to = "".concat(this.addZero(toDate.getHours()), ":").concat(this.addZero(toDate.getMinutes()));
-                _context6.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/time_table/create", {
-                  params: {
-                    teacher_id: this.state.teacher,
-                    section_id: this.state.section,
-                    teacher_subjects_id: this.state.teacher_subject,
-                    from: from,
-                    to: to,
-                    day_of_the_week: this.state.dayOfTheWeek
-                  }
-                });
-
-              case 6:
-                v = _context6.sent;
-                _context6.next = 9;
-                return this.getTimeTable(this.state.teacher_subject, this.state.teacher);
-
-              case 9:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
-
-      function createTimeTable() {
-        return _createTimeTable.apply(this, arguments);
-      }
-
-      return createTimeTable;
+      return getStudents;
     }()
   }, {
     key: "render",
@@ -555,37 +384,16 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var classes = this.state.classes;
-      var teacherEvents = [];
+      var filteredStudents = this.state.studentList;
+      console.log(this.state.studentList);
 
-      for (var i = 0; i < this.state.teacherEvents.length; i++) {
-        teacherEvents.push({
-          title: "c - ".concat(this.state.teacherEvents[i].class_number, " s - ").concat(this.state.teacherEvents[i].section_number, " ").concat(this.state.teacherEvents[i].name, " "),
-          daysOfWeek: [this.state.teacherEvents[i].day_of_the_week],
-          startTime: this.state.teacherEvents[i].from,
-          endTime: this.state.teacherEvents[i].to
+      if (this.state.filterText) {
+        filteredStudents = this.state.studentList.filter(function (item) {
+          return item.name && item.name.toLowerCase().includes(_this2.state.filterText.toLowerCase());
         });
       }
 
-      var classEvents = [];
-
-      for (var _i = 0; _i < this.state.classEvents.length; _i++) {
-        classEvents.push({
-          title: " ".concat(this.state.classEvents[_i].name, " (").concat(this.state.classEvents[_i].teacher_name, ")"),
-          daysOfWeek: [this.state.classEvents[_i].day_of_the_week],
-          startTime: this.state.classEvents[_i].from,
-          endTime: this.state.classEvents[_i].to
-        });
-      }
-
-      var weekday = new Array(7);
-      weekday[0] = "Sunday";
-      weekday[1] = "Monday";
-      weekday[2] = "Tuesday";
-      weekday[3] = "Wednesday";
-      weekday[4] = "Thursday";
-      weekday[5] = "Friday";
-      weekday[6] = "Saturday";
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Class Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Students List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-info mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-info"
@@ -624,7 +432,7 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
         className: "form-control custom-select",
         name: "fee_structure",
         onChange: function onChange(event) {
-          return _this2.getTeacherSubjects(event.target.value, event.target.options[event.target.options.selectedIndex].text);
+          return _this2.getStudents(event.target.value);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: ""
@@ -633,211 +441,72 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
           key: val.id,
           value: val.id
         }, val.section_number);
-      }))) : ""))), this.state.teacherSubjects.length && this.state.section ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "mt-4 mb-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-8"
-      }, this.state.teacherSubjects.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: val.teacher_subject_id,
-          className: "list-group-item"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
-        }, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-4"
-        }, val.teacher_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.teacher_name, " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "text-danger"
-        }, "Teacher not assigned")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
-        }, val.teacher_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-sm btn-orange ml-2 mr-2 ",
-          onClick: function onClick() {
-            _this2.getTimeTable(val.teacher_subject_id, val.teacher_id);
-          }
-        }, "Select Teacher") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, val.teacher_subject_id == _this2.state.teacher_subject ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "badge badge-pill badge-success"
-        }, "Selected")) : "")));
-      }))) : "", this.state.teacherLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : "", this.state.teacherLoading == false && this.state.teacher ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row justify-content-center"
+      }))) : ""))), this.state.studentList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-0 p-0 mt-4 mb-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card col-5 border-0 m-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-        className: "card-header"
-      }, " Teacher Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        plugins: [_fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__["default"]],
-        initialView: "timeGridWeek",
-        themeSystem: "bootstrap",
-        expandRows: true,
-        slotEventOverlap: true,
-        scrollTime: "09:00:00",
-        titleFormat: {
-          month: 'short',
-          year: '2-digit'
-        },
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: ""
-        },
-        footerToolbar: {
-          center: 'timeGridWeek,timeGridDay,listWeek',
-          right: ""
-        },
-        events: teacherEvents
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card col-5 border-0 m-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-        className: "card-header"
-      }, " Class Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        plugins: [_fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__["default"]],
-        initialView: "timeGridWeek",
-        themeSystem: "bootstrap",
-        expandRows: true,
-        slotEventOverlap: true,
-        scrollTime: "09:00:00",
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: ""
-        },
-        titleFormat: {
-          month: 'short',
-          year: '2-digit'
-        },
-        footerToolbar: {
-          center: 'timeGridWeek,timeGridDay,listWeek'
-        },
-        events: classEvents
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-indigo mt-4 mb-4"
+        className: "card-body p-0 border-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-indigo"
-      }, "Create Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "mt-4 mb-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-10  "
-      }, this.state.classEvents.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: val.time_table_id,
-          className: "list-group-item d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.teacher_name, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.from + " - " + val.to, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", weekday[val.day_of_the_week], " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-sm btn-danger ml-2 mr-2 ",
-          onClick: function onClick() {
-            _this2.deleteTimeTable(val.time_table_id);
-          }
-        }, "Delete")));
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-5 p-0 mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        onSubmit: function onSubmit(event) {
-          event.preventDefault();
-
-          _this2.createTimeTable();
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-4 mb-3"
+        className: "col-md-3 mb-3  float-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-form-label",
-        htmlFor: "week"
-      }, "Day of the week"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.dayOfTheWeek,
-        id: "week",
+        htmlFor: "filterText",
+        className: "col-form-label"
+      }, "Filter by name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "text",
+        id: "filterText",
         className: "form-control",
+        placeholder: "name",
+        value: this.state.filterText,
         onChange: function onChange(event) {
-          return _this2.setState({
-            dayOfTheWeek: event.target.value
+          _this2.setState({
+            filterText: event.target.value
           });
-        },
-        required: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Select"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "0"
-      }, "Sunday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "1"
-      }, "Monday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "2"
-      }, "Tuesday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "3"
-      }, "Wednesday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "4"
-      }, "Thursday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "5"
-      }, "Friday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "6"
-      }, "Saturday"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-4 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-12 pl-0 col-form-label",
-        htmlFor: "from"
-      }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
-        selected: this.state.from,
-        onChange: function onChange(value) {
-          return _this2.setState({
-            from: value
-          });
-        },
-        showTimeSelect: true,
-        showTimeSelectOnly: true,
-        timeIntervals: 15,
-        timeCaption: "Time",
-        dateFormat: "h:mm aa",
-        className: "form-control",
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-4 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-12 pl-0 col-form-label",
-        htmlFor: "to"
-      }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
-        selected: this.state.to,
-        onChange: function onChange(value) {
-          return _this2.setState({
-            to: value
-          });
-        },
-        showTimeSelect: true,
-        showTimeSelectOnly: true,
-        timeIntervals: 15,
-        timeCaption: "Time",
-        dateFormat: "h:mm aa",
-        className: "form-control",
-        required: true
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-success"
-      }, "Create time table")))))) : "") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+        className: "table table-bordered table-hover"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Name"), this.props.role == 'admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Action") : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Student Code"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Father's Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Gender"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Blood"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+        scope: "col"
+      }, "Address"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, filteredStudents.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+          key: val.student_id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          href: "/user/" + val.student_code
+        }, val.name))), _this2.props.role == 'admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          className: "btn pl-1 pr-1 pt-0 pb-0 m-0 btn-sm btn-danger",
+          href: "/edit/user/" + val.student_id
+        }, "Edit")) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          className: "btn pl-1 pr-1 pt-0 pb-0 m-0 btn-sm btn-info",
+          href: "/user/" + val.student_code
+        }, "Profile")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.class_id)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.section_number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.student_code)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.father_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.gender)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.blood_group)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.phone_number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, val.address)));
+      }))))) : "") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
-  return TimeTable;
+  return StudentList;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TimeTable);
+/* harmony default export */ __webpack_exports__["default"] = (StudentList);
 
 /***/ })
 

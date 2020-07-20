@@ -21,7 +21,6 @@
                             <div class="col-6" id="calendar"> </div>
                             <div class="col-2 mt-auto mb-auto">
 
-
                                     <table class="table  table-bordered">
                                         <thead>
                                         <tr>
@@ -38,10 +37,6 @@
                                         </tr>
                                         </tbody>
                                     </table>
-
-
-
-
 
                                 </div>
                             </div>

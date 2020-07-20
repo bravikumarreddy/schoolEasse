@@ -79,6 +79,9 @@
       <li>
         <a class="dropdown-item" href="{{ url('exams') }}"><i class="material-icons">settings</i> <span class="nav-link-text p-2">@lang('Manage Examinations')</span></a>
       </li>
+      <li>
+            <a class="dropdown-item" href="{{ url('exams/grade-system') }}"><i class="material-icons">grade</i> <span class="nav-link-text p-2">@lang('Grade System')</span></a>
+      </li>
     </ul>
   </li>
   <li class="nav-item">

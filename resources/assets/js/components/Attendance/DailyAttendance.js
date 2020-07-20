@@ -18,7 +18,7 @@ class DailyAttendance extends React.Component {
             studentList:[],
             selectAll:true,
             selectStudentsList:[],
-            date:"",
+            date:Date.now(),
             checkAttendance:null
 
         }
@@ -70,7 +70,7 @@ class DailyAttendance extends React.Component {
     }
     async setSection(value){
         console.log(value)
-        this.setState({"section":value,"studentList":[],date:""});
+        this.setState({"section":value,"studentList":[],date:Date.now()});
     }
     changeSelection(index){
         var selectStudentsList = this.state.selectStudentsList;
@@ -107,19 +107,11 @@ class DailyAttendance extends React.Component {
 
         this.setState({"session":value,studentList:v.data,selectStudentsList:selectStudentsList});
     }
+
     getDateString(str){
-        var d = new Date(this.state.date);
-        var month = '' + (d.getMonth() + 1);
-        var day = '' + d.getDate();
-        var year = d.getFullYear();
-
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-
-        return [ day, month,year].join('-');
+        return dateformatter( str,'dd-mm-yyyy')
     }
+
     render() {
         const classes = JSON.parse(this.props.classes);
         // console.log(this.state.date);

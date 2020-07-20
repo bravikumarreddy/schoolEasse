@@ -74782,7 +74782,7 @@ var DailyAttendance = /*#__PURE__*/function (_React$Component) {
       studentList: [],
       selectAll: true,
       selectStudentsList: [],
-      date: "",
+      date: Date.now(),
       checkAttendance: null
     };
     console.log(_this.props);
@@ -74912,7 +74912,7 @@ var DailyAttendance = /*#__PURE__*/function (_React$Component) {
                 this.setState({
                   "section": value,
                   "studentList": [],
-                  date: ""
+                  date: Date.now()
                 });
 
               case 2:
@@ -75013,13 +75013,7 @@ var DailyAttendance = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getDateString",
     value: function getDateString(str) {
-      var d = new Date(this.state.date);
-      var month = '' + (d.getMonth() + 1);
-      var day = '' + d.getDate();
-      var year = d.getFullYear();
-      if (month.length < 2) month = '0' + month;
-      if (day.length < 2) day = '0' + day;
-      return [day, month, year].join('-');
+      return dateformat__WEBPACK_IMPORTED_MODULE_7___default()(str, 'dd-mm-yyyy');
     }
   }, {
     key: "render",

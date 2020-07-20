@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('All Fees'))
+@section('title', __('Manage Exams'))
 
 @section('content')
     <script>

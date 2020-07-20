@@ -22,6 +22,7 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('/class_exams', 'ClassExamController@apiGetClassExams');
     Route::get('/attendance/daily-attendance/teachers/departments', 'StaffAttendanceController@apiGetDepartments');
     Route::get('/attendance/daily-attendance/teachers/getTeachers', 'StaffAttendanceController@apiGetTeachers');
+    Route::get('/exams/grade-system/get', 'GradesystemController@apiGetGradeSystems');
 
 });
 
@@ -50,6 +51,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/communicate/create', 'CommunicationController@apiCreateMessage');
     Route::get('/communicate/get', 'CommunicationController@apiGetCommunications');
+
+
+     Route::get('/exams/grade-system/delete/{id}', 'GradesystemController@apiDeleteGradeSystems');
+
+
 
 
 

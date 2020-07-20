@@ -12,6 +12,7 @@ import loadable from '@loadable/component'
 const Class = loadable(() => import('./Class'))
 
 const Exam = loadable(() => import('./Exam'))
+const GradeSystems = loadable(() => import('./GradeSystems'))
 
 const StudentList = loadable(() => import('./StudentList'))
 
@@ -72,9 +73,16 @@ class Multiple extends React.Component {
 
                         <Class />
                     </Route>
-                    <Route path="/exams">
+
+                    <Route path="/exams/grade-system">
+                        <GradeSystems />
+                    </Route>
+
+                    <Route exact path="/exams">
                         <Exam />
                     </Route>
+
+
 
                     <Route path="/teacher_subjects">
                         <TeacherSubjects />

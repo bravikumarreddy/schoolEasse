@@ -71,6 +71,7 @@ class DailyAttendanceController extends Controller
 
 
 
+
         $attendance_check = new AttendanceCheck();
         $attendance_check->user_id =Auth::user()->id;
         $attendance_check->date = $date;
