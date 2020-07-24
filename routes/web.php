@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'teacher'])->prefix('grades')->group(function () {
 
     Route::get('all-exams-grade', 'GradeController@allExamsGrade');
+    Route::get('all-grades', 'ExamMarksController@allGrades');
     Route::get('section/{section_id}', 'GradeController@gradesOfSection');
     Route::get('t/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@tindex')->name('teacher-grade');
     Route::get('c/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@cindex');
@@ -88,10 +89,12 @@ Route::middleware(['auth', 'accountant'])->prefix('fees')->name('fees.')->group(
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('dashboard/setting', 'HomeController@sliderSetting');
     Route::get('/settings', 'SettingController@index')->name('settings.index');
     Route::get('gpa/create-gpa', 'GradesystemController@create');
     Route::post('create-gpa', 'GradesystemController@store');
     Route::post('gpa/delete', 'GradesystemController@destroy');
+    Route::post('/dashboard/setting/upload-image','HomeController@uploadImage');
 });
 
 Route::middleware(['auth', 'teacher'])->group(function () {

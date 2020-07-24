@@ -85,7 +85,10 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('grades/all-exams-grade') }}"><i class="material-icons">assignment</i> <span class="nav-link-text p-2">@lang('Grades')</span></a>
+{{--    <a class="nav-link" href="{{ url('grades/all-exams-grade') }}"><i class="material-icons">assignment</i> <span class="nav-link-text p-2">@lang('Grades')</span></a>--}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('grades/all-grades') }}"><i class="material-icons">assignment</i> <span class="nav-link-text p-2">@lang('Grades')</span></a>
+        </li>
   </li>
   <li class="nav-item" style="border-bottom: 1px solid #dbd8d8;"></li>
   <li class="nav-item">
@@ -110,20 +113,23 @@
   <li class="nav-item">
     <a class="nav-link" href="{{ route('settings.index') }}"><i class="material-icons">settings</i> <span class="nav-link-text p-2">@lang('Academic Settings')</span></a>
   </li>
-  <li class="nav-item dropdown">
-    <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">chrome_reader_mode</i> <span class="nav-link-text p-2">@lang('Manage GPA')</span> <i class="material-icons float-right">keyboard_arrow_down</i></a>
-    <ul class="dropdown-menu" style="width: 100%;">
-      <!-- Dropdown menu links -->
-      <li>
-        <a class="dropdown-item" href="{{ url('gpa/all-gpa') }}"><i class="material-icons">developer_board</i> <span
-            class="nav-link-text p-2">@lang('All GPA')</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('gpa/create-gpa') }}"><i class="material-icons">note_add</i> <span class="nav-link-text p-2">@lang('Add New GPA')</span></a>
-      </li>
-    </ul>
-  </li>
+{{--  <li class="nav-item dropdown">--}}
+{{--    <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i--}}
+{{--        class="material-icons">chrome_reader_mode</i> <span class="nav-link-text p-2">@lang('Manage GPA')</span> <i class="material-icons float-right">keyboard_arrow_down</i></a>--}}
+{{--    <ul class="dropdown-menu" style="width: 100%;">--}}
+{{--      <!-- Dropdown menu links -->--}}
+{{--      <li>--}}
+{{--        <a class="dropdown-item" href="{{ url('gpa/all-gpa') }}"><i class="material-icons">developer_board</i> <span--}}
+{{--            class="nav-link-text p-2">@lang('All GPA')</span></a>--}}
+{{--      </li>--}}
+{{--      <li>--}}
+{{--        <a class="dropdown-item" href="{{ url('gpa/create-gpa') }}"><i class="material-icons">note_add</i> <span class="nav-link-text p-2">@lang('Add New GPA')</span></a>--}}
+{{--      </li>--}}
+{{--    </ul>--}}
+{{--  </li>--}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('dashboard/setting') }}"><i class="material-icons">add_a_photo</i> <span class="nav-link-text p-2">@lang('Slider Settings')</span></a>
+        </li>
   @endif
   @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
   <li class="nav-item dropdown">

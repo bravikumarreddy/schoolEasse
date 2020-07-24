@@ -159,27 +159,63 @@
                                 <div class="card-body p-0 m-0 ">
                                     <div id="carouselExampleControls" class="carousel slide overflow-hidden"  style="" data-ride="carousel">
                                         <div class="carousel-inner" >
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="https://www.dell.org/wp-content/uploads/2020/04/indian-school-children-social-impact.jpeg" alt="First slide">
-                                                <div class="carousel-caption d-none d-md-block">
-                                                    <h2 ><b>Board Examinations </b></h2>
-                                                    <h3> All the best for 10th Class Students </h3>
+                                            @if($image1 != null)
+                                                <div class="carousel-item active">
+                                                    <img class="d-block w-100" src="{{$image1->url_path}}" alt="First slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h2 ><b>{{$image1->title}} </b></h2>
+                                                        <h3> {{$image1->description}} </h3>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100 h-100" src="https://www.skoltech.ru/app/data/uploads/2019/12/DSC04232.jpg" alt="Second slide">
-                                                <div class="carousel-caption d-none d-md-block">
+                                            @else
+                                                <div class="carousel-item active">
+                                                    <img class="d-block w-100" src="https://www.dell.org/wp-content/uploads/2020/04/indian-school-children-social-impact.jpeg" alt="First slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h2 ><b>Board Examinations </b></h2>
+                                                        <h3> All the best for 10th Class Students </h3>
+                                                    </div>
+                                                </div>
+                                            @endif
 
-                                                    <h3> Sirius Hosts a Russian-Indian Project School </h3>
-                                                </div>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="https://www.desktopbackground.org/download/1600x900/2010/04/30/10145_happy-school-holiday-wallpapers_1920x1200_h.jpg" alt="Third slide">
-                                                <div class="carousel-caption d-none d-md-block">
+                                                @if($image2 != null)
+                                                    <div class="carousel-item ">
+                                                        <img class="d-block w-100" src="{{$image2->url_path}}"  alt="Second slide">
+                                                        <div class="carousel-caption d-none d-md-block">
+                                                            <h2 ><b>{{$image2->title}} </b></h2>
+                                                            <h3> {{$image2->description}} </h3>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="carousel-item">
+                                                        <img class="d-block w-100 h-100" src="https://www.skoltech.ru/app/data/uploads/2019/12/DSC04232.jpg" alt="Third slide">
+                                                        <div class="carousel-caption d-none d-md-block">
 
-                                                    <h3> School reopen on Aug-2 </h3>
-                                                </div>
-                                            </div>
+                                                            <h3> Sirius Hosts a Russian-Indian Project School </h3>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if($image3 != null)
+                                                    <div class="carousel-item ">
+                                                        <img class="d-block w-100" src="{{$image3->url_path}}" alt="First slide">
+                                                        <div class="carousel-caption d-none d-md-block">
+                                                            <h2 ><b>{{$image3->title}} </b></h2>
+                                                            <h3> {{$image3->description}} </h3>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="carousel-item">
+                                                        <img class="d-block w-100" src="https://www.desktopbackground.org/download/1600x900/2010/04/30/10145_happy-school-holiday-wallpapers_1920x1200_h.jpg" alt="Third slide">
+                                                        <div class="carousel-caption d-none d-md-block ">
+
+                                                            <h3> School reopen on Aug-2 </h3>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+
+
+
                                         </div>
                                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

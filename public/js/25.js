@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
 
 /***/ "./node_modules/dateformat/lib/dateformat.js":
 /*!***************************************************!*\

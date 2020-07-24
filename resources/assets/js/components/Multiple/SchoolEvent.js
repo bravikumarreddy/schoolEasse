@@ -24,6 +24,7 @@ class SchoolEvent extends React.Component {
             color:"#ff6245",
             eventList:[]
         }
+
         this.getEventList = this.getEventList.bind(this);
         this.deleteEvent = this.deleteEvent.bind(this);
         this.createEvent = this.createEvent.bind(this);

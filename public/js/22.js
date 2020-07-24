@@ -43,10 +43,10 @@ function Loader(props) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Multiple/TeacherSubjects.js":
-/*!********************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/TeacherSubjects.js ***!
-  \********************************************************************/
+/***/ "./resources/assets/js/components/Multiple/GradeSystems.js":
+/*!*****************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/GradeSystems.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -56,9 +56,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 
 
 function _typeof(obj) {
@@ -75,6 +75,55 @@ function _typeof(obj) {
   }
 
   return _typeof(obj);
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -218,69 +267,86 @@ function _getPrototypeOf(o) {
 
 
 
-var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
-  _inherits(TeacherSubjects, _React$Component);
+var GradeSystems = /*#__PURE__*/function (_React$Component) {
+  _inherits(GradeSystems, _React$Component);
 
-  var _super = _createSuper(TeacherSubjects);
+  var _super = _createSuper(GradeSystems);
 
-  function TeacherSubjects(props) {
+  function GradeSystems(props) {
     var _this;
 
-    _classCallCheck(this, TeacherSubjects);
+    _classCallCheck(this, GradeSystems);
 
     _this = _super.call(this, props);
     _this.state = {
-      mySubjects: [],
-      mySubjectsLoading: false,
-      subjectId: "",
-      classId: "",
-      className: "",
-      sectionId: "",
-      classExams: [],
-      exam: "",
-      studentList: [],
-      maxMarks: 0,
-      studentMarksList: [],
-      gradeList: [],
-      gradeSystems: {},
-      gradeSystem: ""
+      grade_systems: {},
+      name: "",
+      from: {
+        1: 0
+      },
+      to: {
+        1: 100
+      },
+      grade: {
+        1: ""
+      }
     };
-    _this.getExams = _this.getExams.bind(_assertThisInitialized(_this));
-    _this.changeMarks = _this.changeMarks.bind(_assertThisInitialized(_this));
-    _this.getStudents = _this.getStudents.bind(_assertThisInitialized(_this));
-    _this.submitMarks = _this.submitMarks.bind(_assertThisInitialized(_this));
-    _this.removeMarks = _this.removeMarks.bind(_assertThisInitialized(_this));
+    _this.getGradeSystems = _this.getGradeSystems.bind(_assertThisInitialized(_this));
+    _this.deleteGradeSystem = _this.deleteGradeSystem.bind(_assertThisInitialized(_this));
+    _this.handleGradeChange = _this.handleGradeChange.bind(_assertThisInitialized(_this));
+    _this.handleToChange = _this.handleToChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(TeacherSubjects, [{
-    key: "componentDidMount",
+  _createClass(GradeSystems, [{
+    key: "getGradeSystems",
     value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var _getGradeSystems = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.setState({
-                  mySubjectsLoading: true
-                });
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/my_subjects");
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/exams/grade-system/get");
 
-              case 3:
+              case 2:
                 res = _context.sent;
                 this.setState({
-                  mySubjects: res.data,
-                  mySubjectsLoading: false
+                  grade_systems: res.data
                 });
 
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
+      }));
+
+      function getGradeSystems() {
+        return _getGradeSystems.apply(this, arguments);
+      }
+
+      return getGradeSystems;
+    }()
+  }, {
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.getGradeSystems();
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
       }));
 
       function componentDidMount() {
@@ -290,97 +356,23 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "getExams",
+    key: "deleteGradeSystem",
     value: function () {
-      var _getExams = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(subject_id, class_id, section_id, className) {
-        var res, gradeSystems;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                this.setState({
-                  exam: "",
-                  maxMarks: 0
-                });
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/class_exams", {
-                  params: {
-                    class_id: class_id
-                  }
-                });
-
-              case 3:
-                res = _context2.sent;
-                _context2.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exams/grade-system/get");
-
-              case 6:
-                gradeSystems = _context2.sent;
-                this.setState({
-                  classId: class_id,
-                  className: className,
-                  subjectId: subject_id,
-                  sectionId: section_id,
-                  gradeSystems: gradeSystems.data,
-                  classExams: res.data
-                });
-                console.log(gradeSystems.data);
-                window.scrollTo({
-                  top: document.body.scrollHeight,
-                  left: 0,
-                  behavior: 'smooth'
-                });
-
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getExams(_x, _x2, _x3, _x4) {
-        return _getExams.apply(this, arguments);
-      }
-
-      return getExams;
-    }()
-  }, {
-    key: "getStudents",
-    value: function () {
-      var _getStudents = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(exam_id) {
-        var res, arr, gradeList, i;
+      var _deleteGradeSystem = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(id) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/get_students", {
-                  params: {
-                    exam_id: exam_id,
-                    section_id: this.state.sectionId,
-                    subject_id: this.state.subjectId
-                  }
-                });
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/exams/grade-system/delete/".concat(id));
 
               case 2:
                 res = _context3.sent;
-                arr = [];
-                gradeList = [];
+                _context3.next = 5;
+                return this.getGradeSystems();
 
-                for (i = 0; i < res.data.length; i++) {
-                  arr.push(0);
-                  gradeList.push("None");
-                }
-
-                this.setState({
-                  exam: exam_id,
-                  studentList: res.data,
-                  studentMarksList: arr,
-                  gradeList: gradeList
-                });
-
-              case 7:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -388,343 +380,219 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function getStudents(_x5) {
-        return _getStudents.apply(this, arguments);
+      function deleteGradeSystem(_x) {
+        return _deleteGradeSystem.apply(this, arguments);
       }
 
-      return getStudents;
+      return deleteGradeSystem;
     }()
   }, {
-    key: "submitMarks",
-    value: function () {
-      var _submitMarks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(marks, student_id, grade) {
-        var res, arr, gradeList, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                console.log(marks);
-                console.log(this.state.studentMarksList);
-                _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/submit_marks", {
-                  params: {
-                    exam_id: this.state.exam,
-                    section_id: this.state.sectionId,
-                    subject_id: this.state.subjectId,
-                    student_id: student_id,
-                    marks: marks,
-                    grade: grade,
-                    max_marks: this.state.maxMarks
-                  }
-                });
+    key: "handleGradeChange",
+    value: function handleGradeChange(value, index) {
+      var grade = _objectSpread({}, this.state.grade);
 
-              case 4:
-                res = _context4.sent;
-                arr = [];
-                gradeList = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  arr.push(0);
-                  gradeList.push("None");
-                }
-
-                this.setState({
-                  studentList: res.data,
-                  studentMarksList: arr,
-                  gradeList: gradeList
-                });
-
-              case 9:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function submitMarks(_x6, _x7, _x8) {
-        return _submitMarks.apply(this, arguments);
-      }
-
-      return submitMarks;
-    }()
-  }, {
-    key: "removeMarks",
-    value: function () {
-      var _removeMarks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id) {
-        var res, arr, gradeList, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/remove_marks", {
-                  params: {
-                    exam_id: this.state.exam,
-                    section_id: this.state.sectionId,
-                    subject_id: this.state.subjectId,
-                    record_id: id
-                  }
-                });
-
-              case 2:
-                res = _context5.sent;
-                arr = [];
-                gradeList = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  arr.push(0);
-                  gradeList.push("None");
-                }
-
-                this.setState({
-                  studentList: res.data,
-                  studentMarksList: arr,
-                  gradeList: gradeList
-                });
-
-              case 7:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function removeMarks(_x9) {
-        return _removeMarks.apply(this, arguments);
-      }
-
-      return removeMarks;
-    }()
-  }, {
-    key: "changeMarks",
-    value: function changeMarks(index, value) {
-      var studentMarksList = this.state.studentMarksList;
-      var gradeList = this.state.gradeList;
-      var maxMarks = parseFloat(this.state.maxMarks);
-      var grade = 'None';
-      console.log(maxMarks);
-
-      if (maxMarks != 0) {
-        var percent = parseFloat(value) / maxMarks * 100;
-        console.log(percent);
-
-        if (this.state.gradeSystem) {
-          console.log(this.state.gradeSystem);
-          var gradeSystem = this.state.gradeSystems[this.state.gradeSystem];
-
-          for (var i = 0; i < gradeSystem.length; i++) {
-            if (percent >= parseFloat(gradeSystem[i].from) && percent < parseFloat(gradeSystem[i].to)) {
-              grade = gradeSystem[i].grade;
-            }
-          }
-        }
-      }
-
-      studentMarksList[index] = value;
-      gradeList[index] = grade;
-      console.log(gradeList, grade);
+      grade[index] = value;
+      console.log(grade);
       this.setState({
-        studentMarksList: studentMarksList,
-        gradeList: gradeList
+        grade: grade
       });
+    }
+  }, {
+    key: "handleToChange",
+    value: function handleToChange(value, index) {
+      index = parseInt(index);
+      var from = {};
+      var to = {};
+      var grade = {};
+      console.log(index);
+
+      if (value < 100) {
+        from = _objectSpread({}, this.state.from);
+        to = _objectSpread({}, this.state.to);
+        grade = _objectSpread({}, this.state.grade);
+        to[index] = value;
+        from[index + 1] = value;
+
+        if (!this.state.from[index + 1]) {
+          to[index + 1] = 100;
+          grade[index + 1] = this.state.grade[index + 1] ? this.state.grade[index + 1] : "";
+        }
+
+        this.setState({
+          from: from,
+          to: to,
+          grade: grade
+        });
+        return;
+      } else if (value == 100) {
+        for (var i = 1; i < index; i++) {
+          from[i] = this.state.from[i];
+          to[i] = this.state.to[i];
+          grade[i] = this.state.grade[i];
+        }
+
+        to[index] = value;
+        from[index] = this.state.from[index];
+        grade[index] = this.state.grade[index];
+        this.setState({
+          from: from,
+          to: to,
+          grade: grade
+        });
+        return;
+      }
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var gradeSystems = this.state.gradeSystems;
-      var gradeSystemsKeys = Object.keys(this.state.gradeSystems);
-      console.log(gradeSystemsKeys);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjectsLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjects ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-dark mb-5 mt-4"
+      var gradeSystems = Object.keys(this.state.grade_systems);
+      var gradeKeys = Object.keys(this.state.from);
+      var from = this.state.from;
+      var to = this.state.to;
+      var grade = this.state.grade;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-dark "
-      }, " My Subjects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-yellow"
+      }, "Create Grade System"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-12"
-      }, this.state.mySubjects.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: index,
-          className: "list-group-item "
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, "Class - ", val.class_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, "Section - ", val.section_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-info",
-          onClick: function onClick() {
-            _this2.getExams(val.subject_id, val.class_id, val.section_id, val.class_number);
-          }
-        }, "Assign Marks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          className: "btn btn-sm btn-warning",
-          href: "attendance/daily-attendance/".concat(val.class_id, "/").concat(val.section_id)
-        }, "Take Attendance"))));
-      })))) : " No subjects are assigned "), this.state.classId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-indigo mt-4 mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-indigo"
-      }, "Class ", this.state.className, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row m-1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "classExams",
-        className: "col-form-label"
-      }, "Select exam to assign Marks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.exam,
-        id: "classExams",
-        className: "form-control custom-select",
-        name: "teachers",
-        onChange: function onChange(event) {
-          _this2.getStudents(event.target.value);
-        },
-        required: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Teacher"), this.state.classExams.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-          key: val.id,
-          value: val.id
-        }, val.exam_name);
-      }))), this.state.exam ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "maxValue",
-        className: "col-form-label text-danger"
-      }, "Maximum Marks for this test"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "number",
-        value: this.state.maxMarks,
-        id: "maxValue",
-        className: "form-control",
-        min: 0,
-        onChange: function onChange(event) {
-          return _this2.setState({
-            maxMarks: event.target.value
-          });
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "fee_structure",
-        className: "col-form-label"
-      }, "Select Grade System"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.gradeSystem,
-        id: "fee_structure",
-        className: "form-control custom-select",
-        name: "fee_structure",
-        onChange: function onChange(event) {
-          return _this2.setState({
-            gradeSystem: event.target.value
-          });
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Grade System"), gradeSystemsKeys.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-          key: val,
-          value: val
-        }, gradeSystems[val][0].grade_system_name);
-      })))) : ""), this.state.exam ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-12 m-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "list-group-item "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        className: "form-row col-12 m-0 b-0 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "col-2 d-flex justify-content-between align-items-center text-center"
-      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Name"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "col-2 d-flex justify-content-between align-items-center"
-      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Code"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "col-4 d-flex justify-content-between align-items-center"
-      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "marks / maxMarks ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "col-2 d-flex justify-content-between align-items-center"
-      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Grade ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "col-2 d-flex justify-content-between align-items-center"
-      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Action"), " ")))), this.state.studentList.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: index,
-          className: "list-group-item "
+        action: "/exams/grade-system/submit",
+        method: "post"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "hidden",
+        name: "_token",
+        value: csrf_token
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 pl-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "name"
+      }, "Grade System Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "name",
+        "aria-describedby": "name",
+        placeholder: "Name",
+        name: "name",
+        required: true
+      }))), gradeKeys.map(function (value) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          key: value,
+          className: "form-group row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-md-4 "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row text-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-          className: "form-row col-12 m-0 b-0 ",
-          onSubmit: function onSubmit(event) {
-            event.preventDefault();
-
-            _this2.submitMarks(_this2.state.studentMarksList[index], val.student_user_id, _this2.state.gradeList[index]);
-          }
+          className: "input-group"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group-prepend"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, val.student_code), val.id == null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "input-group col-4  pr-3 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "hidden",
-          name: "grade",
-          value: _this2.state.gradeList[index]
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          className: "input-group-text bg-messenger text-white"
+        }, "From")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
           type: "number",
           className: "form-control",
-          "aria-label": "Small",
-          min: 0,
-          max: _this2.state.maxMarks,
-          "aria-describedby": "inputGroup-sizing-sm",
-          value: _this2.state.studentMarksList[index] || 0,
-          onChange: function onChange(event) {
-            return _this2.changeMarks(index, event.target.value);
-          },
-          required: true,
-          name: "marks"
+          value: from[value],
+          disabled: true
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "hidden",
+          name: "from[]",
+          value: from[value]
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "input-group-append"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          "class": "input-group-text"
-        }, "/"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          "class": "input-group-text"
-        }, _this2.state.maxMarks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, _this2.state.gradeList[index]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-success",
-          onClick: function onClick() {}
-        }, "Submit"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-4 d-flex justify-content-between align-items-center"
-        }, " ", val.marks, " / ", val.max_marks, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, val.grade), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-danger",
-          onClick: function onClick() {
-            _this2.removeMarks(val.id);
+          className: "input-group-text bg-secondary text-white"
+        }, "%")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-md-4 "
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group-prepend"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "input-group-text bg-orange text-white"
+        }, "To")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "number",
+          className: "form-control",
+          value: to[value],
+          min: parseFloat(from[value]) + 1,
+          name: "to[]",
+          onChange: function onChange(event) {
+            _this2.handleToChange(event.target.value, value);
           }
-        }, "Remove"))))));
-      })) : "")) : "");
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group-append"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "input-group-text bg-secondary text-white"
+        }, "%")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-md-4 "
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group-prepend"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "input-group-text bg-success text-white"
+        }, "Grade")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "text",
+          className: "form-control",
+          value: grade[value],
+          name: "grade[]",
+          onChange: function onChange(event) {
+            _this2.handleGradeChange(event.target.value, value);
+          },
+          required: true
+        })))));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "submit",
+        className: "btn align-self-center btn-primary"
+      }, "Save Changes")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header bg-orange text-white"
+      }, "Grade Systems"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body m-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row justify-content-start"
+      }, gradeSystems.map(function (value) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, {
+          key: value
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "card col-4 p-0 m-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "card-header bg-messenger text-white"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+          className: "mb-0 d-inline"
+        }, _this2.state.grade_systems[value][0].grade_system_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn btn-xs p-1 m-0 btn-danger float-right",
+          onClick: function onClick() {
+            _this2.deleteGradeSystem(value);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "Delete"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "card-body"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+          className: "table"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Index"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Marks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Grade"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, _this2.state.grade_systems[value].map(function (row, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+            key: index
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+            scope: "row"
+          }, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, row.from, " - ", row.to), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, row.grade));
+        }))))));
+      })))));
     }
   }]);
 
-  return TeacherSubjects;
+  return GradeSystems;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TeacherSubjects);
+/* harmony default export */ __webpack_exports__["default"] = (GradeSystems);
 
 /***/ })
 

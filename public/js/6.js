@@ -237,10 +237,53 @@ function kindOf(val) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Attendance/TeacherAttendance.js":
-/*!************************************************************************!*\
-  !*** ./resources/assets/js/components/Attendance/TeacherAttendance.js ***!
-  \************************************************************************/
+/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
+/*!**********************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Loader(props) {
+  var size = "3rem";
+  var margin = "5";
+
+  if (props.size) {
+    size = props.size;
+  }
+
+  if (props.margin) {
+    margin = props.margin;
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border   m-".concat(margin, " "),
+    role: "status",
+    style: {
+      width: size,
+      height: size
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Loading...")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Multiple/SliderSetting.js":
+/*!******************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/SliderSetting.js ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -250,18 +293,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_4__);
 
 
 function _typeof(obj) {
@@ -278,6 +314,21 @@ function _typeof(obj) {
   }
 
   return _typeof(obj);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -422,64 +473,97 @@ function _getPrototypeOf(o) {
 
 
 
+var SliderSetting = /*#__PURE__*/function (_React$Component) {
+  _inherits(SliderSetting, _React$Component);
 
+  var _super = _createSuper(SliderSetting);
 
-
-var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
-  _inherits(TeacherAttendance, _React$Component);
-
-  var _super = _createSuper(TeacherAttendance);
-
-  function TeacherAttendance(props) {
+  function SliderSetting(props) {
     var _this;
 
-    _classCallCheck(this, TeacherAttendance);
+    _classCallCheck(this, SliderSetting);
 
     _this = _super.call(this, props);
     _this.state = {
-      departmentOptions: [],
-      department: "",
-      session: "",
-      teacherList: [],
-      selectAll: true,
-      selectTeachersList: [],
-      date: Date.now(),
-      checkAttendance: null
+      image1: "",
+      image1Src: "https://www.dell.org/wp-content/uploads/2020/04/indian-school-children-social-impact.jpeg",
+      prevTitle: "",
+      prevDescription: "",
+      title: "",
+      description: "",
+      imageNumber: 1,
+      isInvalid: false
     };
-    _this.getSectionsClasses = _this.getSectionsClasses.bind(_assertThisInitialized(_this));
-    _this.getTeachers = _this.getTeachers.bind(_assertThisInitialized(_this));
-    _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
-    _this.setDepartment = _this.setDepartment.bind(_assertThisInitialized(_this));
-    _this.changeSelection = _this.changeSelection.bind(_assertThisInitialized(_this));
-    _this.getDateString = _this.getDateString.bind(_assertThisInitialized(_this));
+    _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
+    _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
+    _this.uploadHandler = _this.uploadHandler.bind(_assertThisInitialized(_this));
+    _this.getImage = _this.getImage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(TeacherAttendance, [{
-    key: "componentDidMount",
+  _createClass(SliderSetting, [{
+    key: "getImage",
     value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var v;
+      var _getImage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(imageNumber) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/departments");
-
-              case 2:
-                v = _context.sent;
-                console.log(v.data);
-                this.setState({
-                  departmentOptions: v.data
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/dashboard/setting/upload-image/get", {
+                  params: {
+                    image_number: imageNumber
+                  }
                 });
 
-              case 5:
+              case 2:
+                res = _context.sent;
+                console.log(res);
+
+                if (res.data != null) {
+                  this.setState({
+                    image1Src: res.data.url_path,
+                    prevTitle: res.data.title,
+                    prevDescription: res.data.description
+                  });
+                }
+
+                this.setState({
+                  imageNumber: imageNumber
+                });
+
+              case 6:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
+      }));
+
+      function getImage(_x) {
+        return _getImage.apply(this, arguments);
+      }
+
+      return getImage;
+    }()
+  }, {
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.getImage(this.state.imageNumber);
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
       }));
 
       function componentDidMount() {
@@ -489,157 +573,99 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "selectAll",
-    value: function selectAll(event) {
-      var selectTeachersList = [];
-
-      for (var i = 0; i < this.state.selectTeachersList.length; i++) {
-        selectTeachersList.push(!this.state.selectAll);
-      }
-
-      console.log(event.target.value);
+    key: "fileChangedHandler",
+    value: function fileChangedHandler(event) {
+      var file = event.target.files[0];
+      var width = file.naturalWidth || file.width;
+      var height = file.naturalHeight || file.height;
+      console.log(file);
+      console.log(height);
       this.setState({
-        "selectAll": !this.state.selectAll,
-        selectTeachersList: selectTeachersList
+        image1: event.target.files[0]
       });
     }
   }, {
-    key: "getSectionsClasses",
+    key: "uploadHandler",
     value: function () {
-      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(value) {
-        var v;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (!(value == "")) {
-                  _context2.next = 3;
-                  break;
-                }
-
-                this.setState({
-                  "class": value,
-                  "teacherList": []
-                });
-                return _context2.abrupt("return");
-
-              case 3:
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
-                  params: {
-                    class_id: value
-                  }
-                });
-
-              case 5:
-                v = _context2.sent;
-                console.log(v.data);
-                this.setState({
-                  "class": value,
-                  "sectionOptions": v.data,
-                  "section": "",
-                  "teacherList": []
-                });
-
-              case 8:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getSectionsClasses(_x) {
-        return _getSectionsClasses.apply(this, arguments);
-      }
-
-      return getSectionsClasses;
-    }()
-  }, {
-    key: "setDepartment",
-    value: function () {
-      var _setDepartment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                this.setState({
-                  "department": value,
-                  "teacherList": [],
-                  date: Date.now(),
-                  'session': ""
-                });
-
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function setDepartment(_x2) {
-        return _setDepartment.apply(this, arguments);
-      }
-
-      return setDepartment;
-    }()
-  }, {
-    key: "changeSelection",
-    value: function changeSelection(index) {
-      var selectTeachersList = this.state.selectTeachersList;
-      selectTeachersList[index] = !this.state.selectTeachersList[index];
-      this.setState({
-        selectTeachersList: selectTeachersList
-      });
-    }
-  }, {
-    key: "getTeachers",
-    value: function () {
-      var _getTeachers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(value) {
-        var departmentId, session, date, v, selectTeachersList, i;
+      var _uploadHandler = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var img, imageFile, width, height, thisRef;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (!(value == "")) {
-                  _context4.next = 3;
-                  break;
-                }
+                window.URL = window.URL || window.webkitURL;
+                img = new Image();
+                imageFile = this.state.image1;
+                img.src = window.URL.createObjectURL(this.state.image1);
+                width = "";
+                height = "";
+                thisRef = this;
+                img.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+                  var width, height, data, res;
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          width = img.naturalWidth;
+                          height = img.naturalHeight;
+                          window.URL.revokeObjectURL(img.src);
+                          data = new FormData();
+                          console.log(width, height);
 
-                this.setState({
-                  "session": value,
-                  "teacherList": []
-                });
-                return _context4.abrupt("return");
+                          if (!(width != 1600)) {
+                            _context3.next = 8;
+                            break;
+                          }
 
-              case 3:
-                departmentId = this.state.department;
-                session = value;
-                date = this.getDateString(this.state.date);
-                _context4.next = 8;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/getTeachers", {
-                  params: {
-                    department_id: departmentId
-                  }
-                });
+                          thisRef.setState({
+                            isInvalid: true
+                          });
+                          return _context3.abrupt("return");
 
-              case 8:
-                v = _context4.sent;
-                console.log(v);
-                selectTeachersList = [];
+                        case 8:
+                          if (!(height != 900)) {
+                            _context3.next = 11;
+                            break;
+                          }
 
-                for (i = 0; i < v.data.length; i++) {
-                  selectTeachersList.push(true);
-                }
+                          thisRef.setState({
+                            isInvalid: true
+                          });
+                          return _context3.abrupt("return");
 
-                this.setState({
-                  "session": value,
-                  teacherList: v.data,
-                  selectTeachersList: selectTeachersList
-                });
+                        case 11:
+                          thisRef.setState({
+                            isInvalid: false
+                          });
+                          data.append('image', imageFile);
+                          data.append('title', thisRef.state.title);
+                          data.append('description', thisRef.state.description);
+                          data.append('image_number', thisRef.state.imageNumber);
+                          _context3.next = 18;
+                          return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/dashboard/setting/upload-image", data, {
+                            method: "POST",
+                            headers: {
+                              'X-CSRF-TOKEN': csrf_token
+                            }
+                          });
 
-              case 13:
+                        case 18:
+                          res = _context3.sent;
+                          console.log(res);
+                          thisRef.setState({
+                            image1Src: res.data.imgUrlpath
+                          });
+
+                        case 21:
+                        case "end":
+                          return _context3.stop();
+                      }
+                    }
+                  }, _callee3);
+                }));
+                console.log(this.state.image);
+
+              case 9:
               case "end":
                 return _context4.stop();
             }
@@ -647,169 +673,109 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, _callee4, this);
       }));
 
-      function getTeachers(_x3) {
-        return _getTeachers.apply(this, arguments);
+      function uploadHandler() {
+        return _uploadHandler.apply(this, arguments);
       }
 
-      return getTeachers;
+      return uploadHandler;
     }()
-  }, {
-    key: "getDateString",
-    value: function getDateString(str) {
-      return dateformat__WEBPACK_IMPORTED_MODULE_7___default()(str, 'dd-mm-yyyy');
-    }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this2 = this,
+          _React$createElement,
+          _React$createElement2;
 
-      if (this.state.date) {
-        var formattedDate = this.getDateString(this.state.date);
-      }
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        onSubmit: function onSubmit(event) {
+          event.preventDefault();
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-info mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-info"
-      }, "Select Department "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "fee_structure",
-        className: "col-form-label"
-      }, "Select Department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.department,
-        id: "fee_structure",
-        className: "custom-select form-control",
-        name: "fee_structure",
-        onChange: function onChange(event) {
-          return _this2.setDepartment(event.target.value);
+          _this2.uploadHandler();
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Class"), this.state.departmentOptions.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-          key: val.id,
-          value: val.id
-        }, val.department_name);
-      }))), this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-2 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card col-8 shadow-lg mt-4 p-0 overflow-hidden "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body p-0 m-0 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        className: "d-block w-100",
+        src: this.state.image1Src,
+        alt: "First slide"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "carousel-caption d-none d-md-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, this.state.prevTitle)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, " ", this.state.prevDescription))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group  mt-5 mb-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 mb-3 "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-md-12 col-form-label pl-0"
-      }, "Select Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        className: "form-control",
-        name: "Instalment[]",
-        selected: this.state.date,
-        dateFormat: "dd-M-yyyy",
-        onChange: function onChange(date) {
-          _this2.setState({
-            date: date,
-            teacherList: [],
-            session: ""
-          });
-        }
-      })) : " ", this.state.date && this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "fee_structure",
+        htmlFor: "image",
         className: "col-form-label"
-      }, "Select Session"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.session,
+      }, "Select Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.imageNumber,
         id: "fee_structure",
         className: " custom-select form-control",
         name: "fee_structure",
         onChange: function onChange(event) {
-          return _this2.getTeachers(event.target.value);
+          return _this2.getImage(event.target.value);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Session"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Morning"
-      }, "Morning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "After-Noon"
-      }, "After-Noon"))) : " "))), this.state.teacherList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        action: "/attendance/daily-attendance/teachers/submit",
-        method: "post"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-orange mt-4 mb-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-orange"
-      }, "Student List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
+        value: "1"
+      }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "2"
+      }, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "3"
+      }, "3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 mb-3 ml-3 mt-3 "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "_token",
-        value: csrf_token
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "department",
-        value: this.state.department
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "date",
-        value: formattedDate
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "session",
-        value: this.state.session
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
-        ref: function ref(el) {
-          return _this2.el = el;
-        },
-        className: "table table-bordered  table-hover"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "role"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "custom-control  custom-checkbox"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "checkbox",
-        className: " bg-success custom-control-input",
-        id: "selectAll",
-        checked: this.state.selectAll,
-        onChange: function onChange(event) {
-          return _this2.selectAll(event);
-        },
-        value: "val"
+        type: "file",
+        className: "custom-file-input",
+        id: "customFile",
+        required: true,
+        onChange: this.fileChangedHandler
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "custom-control-label",
-        htmlFor: "selectAll"
-      }, "Select All"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.teacherList.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
-          key: val.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.role), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, _this2.state.selectTeachersList[index] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "badge badge-pill badge-secondary badge-success"
-        }, "Present ")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "badge badge-pill badge-secondary badge-danger"
-        }, "Absent "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "custom-control custom-checkbox"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-          type: "checkbox",
-          className: "custom-control-input",
-          id: "selectTeachersList" + index,
-          name: "selectTeachersList[]",
-          value: val.id,
-          checked: _this2.state.selectTeachersList[index],
-          onChange: function onChange() {
-            return _this2.changeSelection(index);
-          }
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-          className: "custom-control-label",
-          htmlFor: "selectTeachersList" + index
-        }, " Present"))));
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-footer bg-orange"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        className: "custom-file-label",
+        htmlFor: "customFile"
+      }, this.state.image1 ? this.state.image1.name : "Choose file", " "), this.state.isInvalid ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "invalid-feedback is-invalid d-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "Image size should be 1600px x 900px"))) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "col-form-label",
+        htmlFor: "title"
+      }, "Title "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", (_React$createElement = {
+        type: "text",
+        id: "title",
+        className: "form-control"
+      }, _defineProperty(_React$createElement, "id", "title"), _defineProperty(_React$createElement, "value", this.state.title), _defineProperty(_React$createElement, "accept", "image/*"), _defineProperty(_React$createElement, "onChange", function onChange(event) {
+        return _this2.setState({
+          title: event.target.value
+        });
+      }), _defineProperty(_React$createElement, "required", true), _React$createElement))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "col-form-label",
+        htmlFor: "description"
+      }, "Description "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", (_React$createElement2 = {
+        id: "description",
+        className: "form-control",
+        value: this.state.description,
+        onChange: function onChange(event) {
+          return _this2.setState({
+            description: event.target.value
+          });
+        }
+      }, _defineProperty(_React$createElement2, "id", "title"), _defineProperty(_React$createElement2, "required", true), _React$createElement2))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
-        className: "btn float-right btn-primary"
-      }, "Save Changes")))) : "");
+        className: "btn mt-3 ml-3  btn-primary"
+      }, "Save Changes"))));
     }
   }]);
 
-  return TeacherAttendance;
+  return SliderSetting;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TeacherAttendance);
+/* harmony default export */ __webpack_exports__["default"] = (SliderSetting);
 
 /***/ })
 

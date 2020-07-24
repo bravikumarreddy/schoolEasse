@@ -87,7 +87,7 @@ class UploadController extends Controller {
       $tb->save();
     }
 
-    return ($path)?response()->json([
+    return ($path)? response()->json([
         'imgUrlpath' => url('storage/'.$path),
         'path' => 'storage/'.$path,
         'error' => false

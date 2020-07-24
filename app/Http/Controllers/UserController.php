@@ -110,6 +110,17 @@ class UserController extends Controller
         return $search_result;
     }
 
+    public function studentSearch(Request $request,$str){
+        $search_result = User::where('users.school_id',"=",Auth::user()->school_id)
+            ->select('users.*',"class_number as class_name","section_number as section_name")
+            ->join('sections',"section_id","=","sections.id")
+            ->join('classes',"class_id","=","classes.id")
+            ->where('role',"=","student")
+            ->where('name','LIKE', "%".$str.'%')->take(10)->get();
+
+        return $search_result;
+    }
+
     /**
      * @param $section_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

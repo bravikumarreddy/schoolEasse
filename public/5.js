@@ -237,10 +237,10 @@ function kindOf(val) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Attendance/TeacherAttendance.js":
-/*!************************************************************************!*\
-  !*** ./resources/assets/js/components/Attendance/TeacherAttendance.js ***!
-  \************************************************************************/
+/***/ "./resources/assets/js/components/Attendance/StaffAttendance.js":
+/*!**********************************************************************!*\
+  !*** ./resources/assets/js/components/Attendance/StaffAttendance.js ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -425,56 +425,98 @@ function _getPrototypeOf(o) {
 
 
 
-var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
-  _inherits(TeacherAttendance, _React$Component);
+var StaffAttendance = /*#__PURE__*/function (_React$Component) {
+  _inherits(StaffAttendance, _React$Component);
 
-  var _super = _createSuper(TeacherAttendance);
+  var _super = _createSuper(StaffAttendance);
 
-  function TeacherAttendance(props) {
+  function StaffAttendance(props) {
     var _this;
 
-    _classCallCheck(this, TeacherAttendance);
+    _classCallCheck(this, StaffAttendance);
 
     _this = _super.call(this, props);
     _this.state = {
-      departmentOptions: [],
-      department: "",
       session: "",
-      teacherList: [],
+      staffList: [],
       selectAll: true,
-      selectTeachersList: [],
+      selectStaffList: [],
       date: Date.now(),
       checkAttendance: null
     };
-    _this.getSectionsClasses = _this.getSectionsClasses.bind(_assertThisInitialized(_this));
-    _this.getTeachers = _this.getTeachers.bind(_assertThisInitialized(_this));
+    _this.getStaff = _this.getStaff.bind(_assertThisInitialized(_this));
     _this.selectAll = _this.selectAll.bind(_assertThisInitialized(_this));
-    _this.setDepartment = _this.setDepartment.bind(_assertThisInitialized(_this));
     _this.changeSelection = _this.changeSelection.bind(_assertThisInitialized(_this));
     _this.getDateString = _this.getDateString.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(TeacherAttendance, [{
-    key: "componentDidMount",
+  _createClass(StaffAttendance, [{
+    key: "selectAll",
+    value: function selectAll(event) {
+      var selectStaffList = [];
+
+      for (var i = 0; i < this.state.selectStaffList.length; i++) {
+        selectStaffList.push(!this.state.selectAll);
+      }
+
+      console.log(event.target.value);
+      this.setState({
+        "selectAll": !this.state.selectAll,
+        selectStaffList: selectStaffList
+      });
+    }
+  }, {
+    key: "changeSelection",
+    value: function changeSelection(index) {
+      var selectStaffList = this.state.selectStaffList;
+      selectStaffList[index] = !this.state.selectStaffList[index];
+      this.setState({
+        selectStaffList: selectStaffList
+      });
+    }
+  }, {
+    key: "getStaff",
     value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var v;
+      var _getStaff = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(value) {
+        var session, date, v, selectStaffList, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/departments");
+                if (!(value == "")) {
+                  _context.next = 3;
+                  break;
+                }
 
-              case 2:
-                v = _context.sent;
-                console.log(v.data);
                 this.setState({
-                  departmentOptions: v.data
+                  "session": value,
+                  "staffList": []
+                });
+                return _context.abrupt("return");
+
+              case 3:
+                session = value;
+                date = this.getDateString(this.state.date);
+                _context.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/staff/getStaff");
+
+              case 7:
+                v = _context.sent;
+                console.log(v);
+                selectStaffList = [];
+
+                for (i = 0; i < v.data.length; i++) {
+                  selectStaffList.push(true);
+                }
+
+                this.setState({
+                  "session": value,
+                  staffList: v.data,
+                  selectStaffList: selectStaffList
                 });
 
-              case 5:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -482,176 +524,11 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, _callee, this);
       }));
 
-      function componentDidMount() {
-        return _componentDidMount.apply(this, arguments);
+      function getStaff(_x) {
+        return _getStaff.apply(this, arguments);
       }
 
-      return componentDidMount;
-    }()
-  }, {
-    key: "selectAll",
-    value: function selectAll(event) {
-      var selectTeachersList = [];
-
-      for (var i = 0; i < this.state.selectTeachersList.length; i++) {
-        selectTeachersList.push(!this.state.selectAll);
-      }
-
-      console.log(event.target.value);
-      this.setState({
-        "selectAll": !this.state.selectAll,
-        selectTeachersList: selectTeachersList
-      });
-    }
-  }, {
-    key: "getSectionsClasses",
-    value: function () {
-      var _getSectionsClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(value) {
-        var v;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (!(value == "")) {
-                  _context2.next = 3;
-                  break;
-                }
-
-                this.setState({
-                  "class": value,
-                  "teacherList": []
-                });
-                return _context2.abrupt("return");
-
-              case 3:
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/sections", {
-                  params: {
-                    class_id: value
-                  }
-                });
-
-              case 5:
-                v = _context2.sent;
-                console.log(v.data);
-                this.setState({
-                  "class": value,
-                  "sectionOptions": v.data,
-                  "section": "",
-                  "teacherList": []
-                });
-
-              case 8:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getSectionsClasses(_x) {
-        return _getSectionsClasses.apply(this, arguments);
-      }
-
-      return getSectionsClasses;
-    }()
-  }, {
-    key: "setDepartment",
-    value: function () {
-      var _setDepartment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                this.setState({
-                  "department": value,
-                  "teacherList": [],
-                  date: Date.now(),
-                  'session': ""
-                });
-
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function setDepartment(_x2) {
-        return _setDepartment.apply(this, arguments);
-      }
-
-      return setDepartment;
-    }()
-  }, {
-    key: "changeSelection",
-    value: function changeSelection(index) {
-      var selectTeachersList = this.state.selectTeachersList;
-      selectTeachersList[index] = !this.state.selectTeachersList[index];
-      this.setState({
-        selectTeachersList: selectTeachersList
-      });
-    }
-  }, {
-    key: "getTeachers",
-    value: function () {
-      var _getTeachers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(value) {
-        var departmentId, session, date, v, selectTeachersList, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                if (!(value == "")) {
-                  _context4.next = 3;
-                  break;
-                }
-
-                this.setState({
-                  "session": value,
-                  "teacherList": []
-                });
-                return _context4.abrupt("return");
-
-              case 3:
-                departmentId = this.state.department;
-                session = value;
-                date = this.getDateString(this.state.date);
-                _context4.next = 8;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/attendance/daily-attendance/teachers/getTeachers", {
-                  params: {
-                    department_id: departmentId
-                  }
-                });
-
-              case 8:
-                v = _context4.sent;
-                console.log(v);
-                selectTeachersList = [];
-
-                for (i = 0; i < v.data.length; i++) {
-                  selectTeachersList.push(true);
-                }
-
-                this.setState({
-                  "session": value,
-                  teacherList: v.data,
-                  selectTeachersList: selectTeachersList
-                });
-
-              case 13:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function getTeachers(_x3) {
-        return _getTeachers.apply(this, arguments);
-      }
-
-      return getTeachers;
+      return getStaff;
     }()
   }, {
     key: "getDateString",
@@ -676,26 +553,6 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "fee_structure",
-        className: "col-form-label"
-      }, "Select Department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.department,
-        id: "fee_structure",
-        className: "custom-select form-control",
-        name: "fee_structure",
-        onChange: function onChange(event) {
-          return _this2.setDepartment(event.target.value);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: ""
-      }, "Class"), this.state.departmentOptions.map(function (val) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-          key: val.id,
-          value: val.id
-        }, val.department_name);
-      }))), this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-2 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         className: "col-md-12 col-form-label pl-0"
@@ -703,15 +560,14 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         className: "form-control",
         name: "Instalment[]",
         selected: this.state.date,
-        dateFormat: "dd-M-yyyy",
         onChange: function onChange(date) {
           _this2.setState({
             date: date,
-            teacherList: [],
+            staffList: [],
             session: ""
           });
         }
-      })) : " ", this.state.date && this.state.department ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      })), this.state.date ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-3 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         htmlFor: "fee_structure",
@@ -722,7 +578,7 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         className: " custom-select form-control",
         name: "fee_structure",
         onChange: function onChange(event) {
-          return _this2.getTeachers(event.target.value);
+          return _this2.getStaff(event.target.value);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: ""
@@ -730,8 +586,8 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         value: "Morning"
       }, "Morning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: "After-Noon"
-      }, "After-Noon"))) : " "))), this.state.teacherList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        action: "/attendance/daily-attendance/teachers/submit",
+      }, "After-Noon"))) : " "))), this.state.staffList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        action: "/attendance/daily-attendance/staff/submit",
         method: "post"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-orange mt-4 mb-4"
@@ -743,10 +599,6 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         type: "hidden",
         name: "_token",
         value: csrf_token
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "hidden",
-        name: "department",
-        value: this.state.department
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "hidden",
         name: "date",
@@ -774,10 +626,10 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         className: "custom-control-label",
         htmlFor: "selectAll"
-      }, "Select All"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.teacherList.map(function (val, index) {
+      }, "Select All"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.staffList.map(function (val, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
           key: val.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.role), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, _this2.state.selectTeachersList[index] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, val.role), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, _this2.state.selectStaffList[index] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "badge badge-pill badge-secondary badge-success"
         }, "Present ")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "badge badge-pill badge-secondary badge-danger"
@@ -786,16 +638,16 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
           type: "checkbox",
           className: "custom-control-input",
-          id: "selectTeachersList" + index,
-          name: "selectTeachersList[]",
+          id: "selectStaffList" + index,
+          name: "selectStaffList[]",
           value: val.id,
-          checked: _this2.state.selectTeachersList[index],
+          checked: _this2.state.selectStaffList[index],
           onChange: function onChange() {
             return _this2.changeSelection(index);
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
           className: "custom-control-label",
-          htmlFor: "selectTeachersList" + index
+          htmlFor: "selectStaffList" + index
         }, " Present"))));
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-footer bg-orange"
@@ -806,10 +658,10 @@ var TeacherAttendance = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return TeacherAttendance;
+  return StaffAttendance;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (TeacherAttendance);
+/* harmony default export */ __webpack_exports__["default"] = (StaffAttendance);
 
 /***/ })
 

@@ -1,9 +1,52 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./resources/assets/js/components/Multiple/Communicate.js":
-/*!****************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/Communicate.js ***!
-  \****************************************************************/
+/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
+/*!**********************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Loader(props) {
+  var size = "3rem";
+  var margin = "5";
+
+  if (props.size) {
+    size = props.size;
+  }
+
+  if (props.margin) {
+    margin = props.margin;
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border   m-".concat(margin, " "),
+    role: "status",
+    style: {
+      width: size,
+      height: size
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Loading...")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Multiple/TeacherSubjects.js":
+/*!********************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/TeacherSubjects.js ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14,17 +57,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
-/* harmony import */ var _Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Selectors/Group */ "./resources/assets/js/components/Multiple/Components/Selectors/Group.js");
-/* harmony import */ var _Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Selectors/Individual */ "./resources/assets/js/components/Multiple/Components/Selectors/Individual.js");
-/* harmony import */ var _Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Selectors/ClassSection */ "./resources/assets/js/components/Multiple/Components/Selectors/ClassSection.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function _typeof(obj) {
@@ -184,51 +218,64 @@ function _getPrototypeOf(o) {
 
 
 
+var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
+  _inherits(TeacherSubjects, _React$Component);
 
+  var _super = _createSuper(TeacherSubjects);
 
-
-
-
-
-var Communicate = /*#__PURE__*/function (_React$Component) {
-  _inherits(Communicate, _React$Component);
-
-  var _super = _createSuper(Communicate);
-
-  function Communicate(props) {
+  function TeacherSubjects(props) {
     var _this;
 
-    _classCallCheck(this, Communicate);
+    _classCallCheck(this, TeacherSubjects);
 
     _this = _super.call(this, props);
     _this.state = {
-      category: "individual",
-      group: "",
-      section_ids: {},
-      individual_ids: [],
-      message: "",
-      title: "",
-      communicationList: [],
-      pagination: {},
-      success: false
+      mySubjects: [],
+      mySubjectsLoading: false,
+      subjectId: "",
+      classId: "",
+      className: "",
+      sectionId: "",
+      classExams: [],
+      exam: "",
+      studentList: [],
+      maxMarks: 0,
+      studentMarksList: [],
+      gradeList: [],
+      gradeSystems: {},
+      gradeSystem: ""
     };
-    _this.getCommunications = _this.getCommunications.bind(_assertThisInitialized(_this));
-    _this.createMessage = _this.createMessage.bind(_assertThisInitialized(_this));
+    _this.getExams = _this.getExams.bind(_assertThisInitialized(_this));
+    _this.changeMarks = _this.changeMarks.bind(_assertThisInitialized(_this));
+    _this.getStudents = _this.getStudents.bind(_assertThisInitialized(_this));
+    _this.submitMarks = _this.submitMarks.bind(_assertThisInitialized(_this));
+    _this.removeMarks = _this.removeMarks.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Communicate, [{
+  _createClass(TeacherSubjects, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return this.getCommunications();
+                this.setState({
+                  mySubjectsLoading: true
+                });
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/teacher_subjects/my_subjects");
 
-              case 2:
+              case 3:
+                res = _context.sent;
+                this.setState({
+                  mySubjects: res.data,
+                  mySubjectsLoading: false
+                });
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -243,49 +290,45 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "createMessage",
+    key: "getExams",
     value: function () {
-      var _createMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var section_ids, individual_ids, i, key, res;
+      var _getExams = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(subject_id, class_id, section_id, className) {
+        var res, gradeSystems;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                section_ids = [];
-                individual_ids = [];
-
-                if (this.state.category == 'individual') {
-                  for (i = 0; i < this.state.individual_ids.length; i++) {
-                    individual_ids.push(this.state.individual_ids[i].id);
-                  }
-                }
-
-                for (key in this.state.section_ids) {
-                  if (this.state.section_ids[key]) {
-                    section_ids.push(key);
-                  }
-                }
-
-                _context2.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/communicate/create", {
+                this.setState({
+                  exam: "",
+                  maxMarks: 0
+                });
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/class_exams", {
                   params: {
-                    category: this.state.category,
-                    group: this.state.group,
-                    title: this.state.title,
-                    message: this.state.message,
-                    section_ids: section_ids,
-                    individual_ids: individual_ids
+                    class_id: class_id
                   }
                 });
 
-              case 6:
+              case 3:
                 res = _context2.sent;
-                _context2.next = 9;
-                return this.getCommunications();
+                _context2.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exams/grade-system/get");
 
-              case 9:
+              case 6:
+                gradeSystems = _context2.sent;
                 this.setState({
-                  success: true
+                  classId: class_id,
+                  className: className,
+                  subjectId: subject_id,
+                  sectionId: section_id,
+                  gradeSystems: gradeSystems.data,
+                  classExams: res.data
+                });
+                console.log(gradeSystems.data);
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  left: 0,
+                  behavior: 'smooth'
                 });
 
               case 10:
@@ -296,46 +339,48 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function createMessage() {
-        return _createMessage.apply(this, arguments);
+      function getExams(_x, _x2, _x3, _x4) {
+        return _getExams.apply(this, arguments);
       }
 
-      return createMessage;
+      return getExams;
     }()
   }, {
-    key: "getCommunications",
+    key: "getStudents",
     value: function () {
-      var _getCommunications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var url,
-            urlObj,
-            res,
-            _args3 = arguments;
+      var _getStudents = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(exam_id) {
+        var res, arr, gradeList, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                url = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
-                console.log(url);
-
-                if (url == null) {
-                  url = "/api/communicate/get";
-                } else {
-                  urlObj = new URL(url);
-                  url = urlObj.pathname + "?" + urlObj.searchParams;
-                }
-
-                console.log(url);
-                _context3.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(url);
-
-              case 6:
-                res = _context3.sent;
-                this.setState({
-                  communicationList: res.data.data,
-                  pagination: res.data
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/get_students", {
+                  params: {
+                    exam_id: exam_id,
+                    section_id: this.state.sectionId,
+                    subject_id: this.state.subjectId
+                  }
                 });
 
-              case 8:
+              case 2:
+                res = _context3.sent;
+                arr = [];
+                gradeList = [];
+
+                for (i = 0; i < res.data.length; i++) {
+                  arr.push(0);
+                  gradeList.push("None");
+                }
+
+                this.setState({
+                  exam: exam_id,
+                  studentList: res.data,
+                  studentMarksList: arr,
+                  gradeList: gradeList
+                });
+
+              case 7:
               case "end":
                 return _context3.stop();
             }
@@ -343,211 +388,343 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function getCommunications() {
-        return _getCommunications.apply(this, arguments);
+      function getStudents(_x5) {
+        return _getStudents.apply(this, arguments);
       }
 
-      return getCommunications;
+      return getStudents;
     }()
+  }, {
+    key: "submitMarks",
+    value: function () {
+      var _submitMarks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(marks, student_id, grade) {
+        var res, arr, gradeList, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                console.log(marks);
+                console.log(this.state.studentMarksList);
+                _context4.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/submit_marks", {
+                  params: {
+                    exam_id: this.state.exam,
+                    section_id: this.state.sectionId,
+                    subject_id: this.state.subjectId,
+                    student_id: student_id,
+                    marks: marks,
+                    grade: grade,
+                    max_marks: this.state.maxMarks
+                  }
+                });
+
+              case 4:
+                res = _context4.sent;
+                arr = [];
+                gradeList = [];
+
+                for (i = 0; i < res.data.length; i++) {
+                  arr.push(0);
+                  gradeList.push("None");
+                }
+
+                this.setState({
+                  studentList: res.data,
+                  studentMarksList: arr,
+                  gradeList: gradeList
+                });
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function submitMarks(_x6, _x7, _x8) {
+        return _submitMarks.apply(this, arguments);
+      }
+
+      return submitMarks;
+    }()
+  }, {
+    key: "removeMarks",
+    value: function () {
+      var _removeMarks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id) {
+        var res, arr, gradeList, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/exam_marks/remove_marks", {
+                  params: {
+                    exam_id: this.state.exam,
+                    section_id: this.state.sectionId,
+                    subject_id: this.state.subjectId,
+                    record_id: id
+                  }
+                });
+
+              case 2:
+                res = _context5.sent;
+                arr = [];
+                gradeList = [];
+
+                for (i = 0; i < res.data.length; i++) {
+                  arr.push(0);
+                  gradeList.push("None");
+                }
+
+                this.setState({
+                  studentList: res.data,
+                  studentMarksList: arr,
+                  gradeList: gradeList
+                });
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function removeMarks(_x9) {
+        return _removeMarks.apply(this, arguments);
+      }
+
+      return removeMarks;
+    }()
+  }, {
+    key: "changeMarks",
+    value: function changeMarks(index, value) {
+      var studentMarksList = this.state.studentMarksList;
+      var gradeList = this.state.gradeList;
+      var maxMarks = parseFloat(this.state.maxMarks);
+      var grade = 'None';
+      console.log(maxMarks);
+
+      if (maxMarks != 0) {
+        var percent = parseFloat(value) / maxMarks * 100;
+        console.log(percent);
+
+        if (this.state.gradeSystem) {
+          console.log(this.state.gradeSystem);
+          var gradeSystem = this.state.gradeSystems[this.state.gradeSystem];
+
+          for (var i = 0; i < gradeSystem.length; i++) {
+            if (percent >= parseFloat(gradeSystem[i].from) && percent < parseFloat(gradeSystem[i].to)) {
+              grade = gradeSystem[i].grade;
+            }
+          }
+        }
+      }
+
+      studentMarksList[index] = value;
+      gradeList[index] = grade;
+      console.log(gradeList, grade);
+      this.setState({
+        studentMarksList: studentMarksList,
+        gradeList: gradeList
+      });
+    }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log(this.state.pagination);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.success ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "alert alert-success alert-dismissible fade show",
-        role: "alert"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "    Message sent  sucessfully "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        onClick: function onClick() {
-          _this2.setState({
-            success: false
-          });
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-orange"
+      var gradeSystems = this.state.gradeSystems;
+      var gradeSystemsKeys = Object.keys(this.state.gradeSystems);
+      console.log(gradeSystemsKeys);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjectsLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.mySubjects ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-dark mb-5 mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header  bg-orange border-0 text-white"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "nav nav-tabs card-header-tabs nav-fill bg-orange"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "nav-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: this.state.category == 'groups' ? "nav-link active text-orange" : "nav-link ",
-        onClick: function onClick() {
-          return _this2.setState({
-            category: "groups"
-          });
-        }
-      }, "Groups")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "nav-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: this.state.category == 'class' ? "nav-link active text-orange" : "nav-link ",
-        onClick: function onClick() {
-          return _this2.setState({
-            category: "class"
-          });
-        }
-      }, "Class")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "nav-item p-0"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: this.state.category == 'individual' ? "nav-link active text-orange" : "nav-link ",
-        onClick: function onClick() {
-          return _this2.setState({
-            category: "individual"
-          });
-        }
-      }, "Individual")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, this.state.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        group: this.state.group,
-        setGroup: function setGroup(group) {
-          _this2.setState({
-            group: group
-          });
-        }
-      }) : "", this.state.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        setSections: function setSections(section_ids) {
-          _this2.setState({
-            section_ids: section_ids
-          });
-        }
-      }) : "", this.state.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        individuals: this.state.individual_ids,
-        setIndividuals: function setIndividuals(individual_ids) {
-          _this2.setState({
-            individual_ids: individual_ids
-          });
-        }
-      }) : "")), this.state.category == 'groups' && this.state.group || this.state.category == 'individual' && this.state.individual_ids.length !== 0 || this.state.category == 'class' && Object.keys(this.state.section_ids).length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-messenger mt-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-messenger border-0"
-      }, "Message Input"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        onSubmit: function onSubmit(event) {
-          event.preventDefault();
-
-          _this2.createMessage();
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-6 mb-3 form-group row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: " col-4 col-form-label",
-        htmlFor: "title"
-      }, "Message Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        className: "form-control",
-        id: "title",
-        type: "text",
-        required: true,
-        value: this.state.title,
-        onChange: function onChange(event) {
-          _this2.setState({
-            title: event.target.value
-          });
-        },
-        placeholder: "Title"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
-        htmlFor: "from"
-      }, "Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        className: "form-control",
-        id: "message",
-        placeholder: "message",
-        "aria-label": "With textarea",
-        maxLength: 1499,
-        value: this.state.message,
-        onChange: function onChange(event) {
-          _this2.setState({
-            message: event.target.value
-          });
-        }
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-success ml-2"
-      }, "Send Message")))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-indigo mt-3 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-indigo border-0"
-      }, "Communication Log"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-dark "
+      }, " My Subjects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-10"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "list-group-item  d-flex justify-content-between align-items-center "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Index "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Title "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Category ")))), this.state.communicationList.map(function (val, index) {
+        className: "list-group col-12"
+      }, this.state.mySubjects.map(function (val, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: val.id,
-          className: "list-group-item  d-flex justify-content-between align-items-center "
+          key: index,
+          className: "list-group-item "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", (_this2.state.pagination.current_page - 1) * _this2.state.pagination.per_page + index + 1)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-8"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.category, " ")));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
-        "aria-label": "Page navigation example",
-        className: "mt-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "pagination d-inline-flex"
-      }, this.state.pagination.prev_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.prev_page_url);
+          className: "row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, "Class - ", val.class_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, "Section - ", val.section_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn btn-sm btn-info",
+          onClick: function onClick() {
+            _this2.getExams(val.subject_id, val.class_id, val.section_id, val.class_number);
+          }
+        }, "Assign Marks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          className: "btn btn-sm btn-warning",
+          href: "attendance/daily-attendance/".concat(val.class_id, "/").concat(val.section_id)
+        }, "Take Attendance"))));
+      })))) : " No subjects are assigned "), this.state.classId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-indigo mt-4 mb-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-indigo"
+      }, "Class ", this.state.className, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row m-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "classExams",
+        className: "col-form-label"
+      }, "Select exam to assign Marks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.exam,
+        id: "classExams",
+        className: "form-control custom-select",
+        name: "teachers",
+        onChange: function onChange(event) {
+          _this2.getStudents(event.target.value);
+        },
+        required: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: ""
+      }, "Teacher"), this.state.classExams.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+          key: val.id,
+          value: val.id
+        }, val.exam_name);
+      }))), this.state.exam ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "maxValue",
+        className: "col-form-label text-danger"
+      }, "Maximum Marks for this test"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "number",
+        value: this.state.maxMarks,
+        id: "maxValue",
+        className: "form-control",
+        min: 0,
+        onChange: function onChange(event) {
+          return _this2.setState({
+            maxMarks: event.target.value
+          });
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "#",
-        className: "page-link "
-      }, "Previous")) : "", this.state.pagination.next_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.next_page_url);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "fee_structure",
+        className: "col-form-label"
+      }, "Select Grade System"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.gradeSystem,
+        id: "fee_structure",
+        className: "form-control custom-select",
+        name: "fee_structure",
+        onChange: function onChange(event) {
+          return _this2.setState({
+            gradeSystem: event.target.value
+          });
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: "page-link text-white "
-      }, "Next")) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "pagination float-right"
-      }, this.state.pagination.first_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item float-right",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.first_page_url);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: "page-link text-white "
-      }, "First")) : "", this.state.pagination.last_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item float-right",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.last_page_url);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "#",
-        className: "page-link "
-      }, "Last")) : "")))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: ""
+      }, "Grade System"), gradeSystemsKeys.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+          key: val,
+          value: val
+        }, gradeSystems[val][0].grade_system_name);
+      })))) : ""), this.state.exam ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "list-group col-12 m-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "list-group-item "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        className: "form-row col-12 m-0 b-0 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "col-2 d-flex justify-content-between align-items-center text-center"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Name"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "col-2 d-flex justify-content-between align-items-center"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Code"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "col-4 d-flex justify-content-between align-items-center"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "marks / maxMarks ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "col-2 d-flex justify-content-between align-items-center"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Grade ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "col-2 d-flex justify-content-between align-items-center"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Action"), " ")))), this.state.studentList.map(function (val, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+          key: index,
+          className: "list-group-item "
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "row text-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+          className: "form-row col-12 m-0 b-0 ",
+          onSubmit: function onSubmit(event) {
+            event.preventDefault();
+
+            _this2.submitMarks(_this2.state.studentMarksList[index], val.student_user_id, _this2.state.gradeList[index]);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, val.student_code), val.id == null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group col-4  pr-3 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "hidden",
+          name: "grade",
+          value: _this2.state.gradeList[index]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "number",
+          className: "form-control",
+          "aria-label": "Small",
+          min: 0,
+          max: _this2.state.maxMarks,
+          "aria-describedby": "inputGroup-sizing-sm",
+          value: _this2.state.studentMarksList[index] || 0,
+          onChange: function onChange(event) {
+            return _this2.changeMarks(index, event.target.value);
+          },
+          required: true,
+          name: "marks"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group-append"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          "class": "input-group-text"
+        }, "/"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          "class": "input-group-text"
+        }, _this2.state.maxMarks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, _this2.state.gradeList[index]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn btn-sm btn-success",
+          onClick: function onClick() {}
+        }, "Submit"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-4 d-flex justify-content-between align-items-center"
+        }, " ", val.marks, " / ", val.max_marks, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, val.grade), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn btn-sm btn-danger",
+          onClick: function onClick() {
+            _this2.removeMarks(val.id);
+          }
+        }, "Remove"))))));
+      })) : "")) : "");
     }
   }]);
 
-  return Communicate;
+  return TeacherSubjects;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Communicate);
+/* harmony default export */ __webpack_exports__["default"] = (TeacherSubjects);
 
 /***/ })
 

@@ -47,17 +47,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/school_event/get', 'SchoolEventController@apiGetEvents');
     Route::get('/school_event/delete', 'SchoolEventController@apiDeleteEvent');
     Route::get('/users/search/{string}', 'UserController@search');
+    Route::get('/students/search/{string}', 'UserController@studentSearch');
 
 
     Route::get('/communicate/create', 'CommunicationController@apiCreateMessage');
     Route::get('/communicate/get', 'CommunicationController@apiGetCommunications');
 
+    Route::get('/exam-marks/student/{id}', 'ExamMarksController@apiGetStudentMarks');
 
      Route::get('/exams/grade-system/delete/{id}', 'GradesystemController@apiDeleteGradeSystems');
-
-
-
-
+    Route::get('/dashboard/setting/upload-image','HomeController@uploadImage');
+    Route::get('/dashboard/setting/upload-image/get','HomeController@getImage');
 
 });
 /*

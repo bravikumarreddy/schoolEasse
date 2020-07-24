@@ -50558,34 +50558,40 @@ function _getPrototypeOf(o) {
 
 
 var Class = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./Class */ "./resources/assets/js/components/Multiple/Class.js"));
 });
 var Exam = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./Exam */ "./resources/assets/js/components/Multiple/Exam.js"));
 });
 var GradeSystems = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./GradeSystems */ "./resources/assets/js/components/Multiple/GradeSystems.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./GradeSystems */ "./resources/assets/js/components/Multiple/GradeSystems.js"));
+});
+var AllStudentGrades = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./AllStudentGrades */ "./resources/assets/js/components/Multiple/AllStudentGrades.js"));
 });
 var StudentList = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./StudentList */ "./resources/assets/js/components/Multiple/StudentList.js"));
 });
 var TeacherSubjects = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./TeacherSubjects */ "./resources/assets/js/components/Multiple/TeacherSubjects.js"));
 });
 var TeacherAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../Attendance/TeacherAttendance */ "./resources/assets/js/components/Attendance/TeacherAttendance.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../Attendance/TeacherAttendance */ "./resources/assets/js/components/Attendance/TeacherAttendance.js"));
 });
 var StaffAttendance = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../Attendance/StaffAttendance */ "./resources/assets/js/components/Attendance/StaffAttendance.js"));
 });
 var TimeTable = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./TimeTable */ "./resources/assets/js/components/Multiple/TimeTable.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./TimeTable */ "./resources/assets/js/components/Multiple/TimeTable.js"));
 });
 var Communicate = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./Communicate */ "./resources/assets/js/components/Multiple/Communicate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./Communicate */ "./resources/assets/js/components/Multiple/Communicate.js"));
 });
 var SchoolEvent = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./SchoolEvent */ "./resources/assets/js/components/Multiple/SchoolEvent.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./SchoolEvent */ "./resources/assets/js/components/Multiple/SchoolEvent.js"));
+});
+var SliderSetting = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./SliderSetting */ "./resources/assets/js/components/Multiple/SliderSetting.js"));
 });
 
 var Multiple = /*#__PURE__*/function (_React$Component) {
@@ -50603,6 +50609,8 @@ var Multiple = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/grades/all-grades"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AllStudentGrades, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/communicate"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Communicate, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/school_event"
@@ -50624,6 +50632,8 @@ var Multiple = /*#__PURE__*/function (_React$Component) {
         exact: true,
         path: "/exams"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Exam, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/dashboard/setting"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SliderSetting, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/teacher_subjects"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TeacherSubjects, null)))));
     }

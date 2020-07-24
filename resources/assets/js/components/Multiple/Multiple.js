@@ -14,6 +14,8 @@ const Class = loadable(() => import('./Class'))
 const Exam = loadable(() => import('./Exam'))
 const GradeSystems = loadable(() => import('./GradeSystems'))
 
+const AllStudentGrades = loadable(() => import('./AllStudentGrades'))
+
 const StudentList = loadable(() => import('./StudentList'))
 
 const TeacherSubjects = loadable(() => import('./TeacherSubjects'))
@@ -26,6 +28,7 @@ const TimeTable = loadable(() => import('./TimeTable'))
 
 const Communicate = loadable(() => import('./Communicate'))
 const SchoolEvent = loadable(() => import('./SchoolEvent'))
+const SliderSetting = loadable(() => import('./SliderSetting'))
 
 class Multiple extends React.Component {
 
@@ -45,6 +48,11 @@ class Multiple extends React.Component {
           <Router>
             <div>
                 <Switch>
+
+                    <Route path="/grades/all-grades">
+
+                        <AllStudentGrades />
+                    </Route>
                     <Route path="/communicate">
 
                         <Communicate />
@@ -82,6 +90,9 @@ class Multiple extends React.Component {
                         <Exam />
                     </Route>
 
+                    <Route  path="/dashboard/setting">
+                        <SliderSetting />
+                    </Route>
 
 
                     <Route path="/teacher_subjects">

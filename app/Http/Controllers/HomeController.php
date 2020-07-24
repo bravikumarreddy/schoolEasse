@@ -7,6 +7,9 @@ use App\SchoolEvent;
 use App\StaffAttendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -25,6 +28,50 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function sliderSetting(){
+        return view("dashboard.slider-setting");
+    }
+    public function getImage(Request $request){
+        $school_id = Auth::user()->school_id;
+        $image_number = $request->input('image_number');
+        $results = DB::table('slider_images')->where('school_id',"=",$school_id)
+                    ->where('image_number',"=",$image_number)->get()->first();
+        return json_encode($results);
+    }
+    public function uploadImage(Request $request){
+        $file = $request->file('image');
+        //return json_encode($file);
+        $upload_dir = 'school-'.auth()->user()->school_id.'/slider';
+        $path = \Storage::disk('public')->putFile($upload_dir,$file);
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $school_id = Auth::user()->school_id;
+        $url_path = url('storage/'.$path);
+        $image_number = $request->input('image_number');
+        $result = DB::table('slider_images')->where('school_id',"=",$school_id)
+            ->where('image_number',"=",$image_number)->get()->first();
+
+        if($result != null)
+         \Storage::disk('public')->delete($result->path);
+
+        DB::table('slider_images')
+            ->insert(["school_id"=>$school_id,
+                "image_number"=>$image_number,"path"=>$path,
+                "title"=>$title,"description"=>$description,
+                "url_path"=>$url_path ]);
+
+        return ($path)? response()->json([
+            'imgUrlpath' => url('storage/'.$path),
+            'path' => 'storage/'.$path,
+            'error' => false
+        ]):response()->json([
+            'imgUrlpath' => null,
+            'path' => null,
+            'error' => true
+        ]);
+    }
+
+
     public function index()
     {
         
@@ -159,7 +206,14 @@ class HomeController extends Controller
             $all_events = SchoolEvent::where('school_id','=',$school_id)
                 ->where('group_name',"=","all")->get();
 
+            $image1 = DB::table('slider_images')->where('school_id',"=",$school_id)
+                ->where('image_number',"=",1)->get()->first();
 
+            $image2 = DB::table('slider_images')->where('school_id',"=",$school_id)
+                ->where('image_number',"=",2)->get()->first();
+
+            $image3 = DB::table('slider_images')->where('school_id',"=",$school_id)
+                ->where('image_number',"=",3)->get()->first();
 
             return view('home',[
               'totalStudents'=>$totalStudents,
@@ -179,7 +233,10 @@ class HomeController extends Controller
               'teachersHalfDay' => $teachersHalfDay,
               'staffHalfDay' => $staffHalfDay,
               'staffFullDay' => $staffFullDay,
-                'all_events' => $all_events
+                'all_events' => $all_events,
+              'image1'=>$image1,
+                'image2'=>$image2,
+                'image3'=>$image3,
 
               //'messageCount'=>$messageCount,
             ]);

@@ -111,6 +111,8 @@ function Individual(props) {
 
                 </ul>
             </div>
+
+
         </React.Fragment>
     )
 }

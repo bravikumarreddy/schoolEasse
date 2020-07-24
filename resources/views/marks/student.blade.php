@@ -27,6 +27,7 @@
 
                                             <th scope="col">Subject</th>
                                             <th scope="col">Marks</th>
+                                            <th scope="col">Grade</th>
 
                                         </tr>
                                         </thead>
@@ -36,7 +37,7 @@
 
                                                 <td>{{$marks->name}} </td>
                                                 <td>{{$marks->marks}} /{{$marks->max_marks}}</td>
-
+                                            <td>{{$marks->grade}} </td>
 
                                         </tr>
                                         @endforeach

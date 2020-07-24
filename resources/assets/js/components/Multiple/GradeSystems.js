@@ -21,31 +21,34 @@ class GradeSystems extends React.Component {
                 1:""
             }
         }
-
+        this.getGradeSystems = this.getGradeSystems.bind(this);
+        this.deleteGradeSystem = this.deleteGradeSystem.bind(this);
+        this.handleGradeChange = this.handleGradeChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
     }
 
-    getGradeSystems = async () =>{
+    async getGradeSystems (){
         let res = await axios.get(`/api/exams/grade-system/get`);
         this.setState({grade_systems:res.data});
     }
 
     async componentDidMount() {
-        this.getGradeSystems();
+        await this.getGradeSystems();
     }
 
-     deleteGradeSystem = async (id) =>{
+     async deleteGradeSystem (id){
         let res = await axios.get(`/api/exams/grade-system/delete/${id}`);
-        this.getGradeSystems();
+         await this.getGradeSystems();
     }
 
-    handleGradeChange = (value,index) => {
+    handleGradeChange  (value,index)  {
 
             let grade =  {...this.state.grade };
             grade[index]=value;
             console.log(grade)
         this.setState({grade:grade})
     }
-    handleToChange = (value,index) =>{
+    handleToChange (value,index) {
         index = parseInt(index);
         let from = {};
         let to = {};

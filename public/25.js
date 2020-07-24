@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
 
 /***/ "./resources/assets/js/components/Multiple/SchoolEvent.js":
 /*!****************************************************************!*\
