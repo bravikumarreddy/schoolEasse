@@ -22,9 +22,9 @@ class UsersTableSeeder extends Seeder
         ]);
 
         factory(User::class, 1)->states('admin')->create();
-        factory(User::class, 5)->states('accountant')->create();
-        factory(User::class, 5)->states('librarian')->create();
-        factory(User::class, 10)->states('teacher')->create();
-        factory(User::class, 100)->states('student')->create();
+        factory(User::class, 1)->states('accountant')->create();
+        factory(User::class, 1)->states('librarian')->create();
+        factory(User::class, 2)->states('teacher')->create();
+        factory(User::class, 5)->states('student')->create();
     }
 }

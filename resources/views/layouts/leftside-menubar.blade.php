@@ -96,9 +96,11 @@
     <a class="nav-link" href="{{ url('time_table') }}"><i class="material-icons">calendar_today</i> <span class="nav-link-text p-2">@lang('Class Time Table')</span></a>
 
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text p-2">@lang('Syllabus')</span></a>
-  </li>
+
+{{--  <li class="nav-item">--}}
+{{--    <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text p-2">@lang('Syllabus')</span></a>--}}
+{{--  </li>--}}
+
   <li class="nav-item">
 {{--    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">announcement</i> <span class="nav-link-text p-2">@lang('Notice')</span></a>--}}
       <a class="nav-link" href="{{ url('communicate') }}"><i class="material-icons">send</i> <span class="nav-link-text p-2">@lang('Communicate')</span></a>
@@ -149,9 +151,9 @@
       <li>
         <a class="dropdown-item" href="{{ url('fees/all') }}"><i class="material-icons">developer_board</i> <span class="nav-link-text p-2">@lang('Generate Form')</span></a>
       </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('fees/create') }}"><i class="material-icons">note_add</i> <span class="nav-link-text p-2">@lang('Add Fee Field')</span></a>
-      </li>
+{{--      <li>--}}
+{{--        <a class="dropdown-item" href="{{ url('fees/create') }}"><i class="material-icons">note_add</i> <span class="nav-link-text p-2">@lang('Add Fee Field')</span></a>--}}
+{{--      </li>--}}
     </ul>
   </li>
 

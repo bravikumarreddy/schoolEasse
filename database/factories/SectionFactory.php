@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Section::class, function (Faker $faker) {
     return [
-        'section_number' => $faker->randomElement(['A', 'B','C','D','E','F','G','H','I','J','K','L','M']),
+        'section_number' => $faker->randomElement(['A', 'B','C']),
         'room_number'    => $faker->randomDigitNotNull,
         'class_id'       => function() use ($faker) {
             if (Myclass::count())

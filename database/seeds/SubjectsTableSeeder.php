@@ -12,7 +12,7 @@ class SubjectsTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(\App\Subjects::class,100)->create();
+        factory(\App\Subjects::class,4)->create();
 
     }
 }

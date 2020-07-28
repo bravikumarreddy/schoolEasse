@@ -120,16 +120,18 @@ $('.datepicker').datepicker({
   minViewMode: "years",
   autoclose:true,
 });
-$("#btnPrint").on("click", function () {
-            var divContents = $("#printDiv").html();
-            var printWindow = window.open('', '', 'height=400,width=800');
-            printWindow.document.write('<html><head><title>@lang('Expense List')</title>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.document.body.innerHTML = divContents;
-            printWindow.print();
-        });
+{{--$("#btnPrint").on("click", function () {--}}
+{{--            var divContents = $("#printDiv").html();--}}
+{{--            var printWindow = window.open('', '', 'height=400,width=800');--}}
+{{--            printWindow.document.write('<html><head><title>@lang('Expense List')</title>');--}}
+{{--            printWindow.document.write('</head><body>');--}}
+{{--            printWindow.document.close();--}}
+{{--            printWindow.document.body.innerHTML = divContents;--}}
+{{--            printWindow.print();--}}
+{{--            printWindow.document.write('</body></html>');--}}
+
+
+{{--        });--}}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>

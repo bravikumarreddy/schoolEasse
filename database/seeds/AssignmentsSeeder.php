@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SectionsTableSeeder extends Seeder
+class AssignmentsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class SectionsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Section::class, 1)->create();
+        //
     }
 }

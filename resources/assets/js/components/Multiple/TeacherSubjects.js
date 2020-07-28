@@ -184,14 +184,20 @@ class TeacherSubjects extends React.Component {
                                                             <span className="col-2 d-flex justify-content-between align-items-center">Section - {val.section_number}</span>
 
                                                             <span className="col-2 d-flex justify-content-between align-items-center">
-                                                                    <button className="btn btn-sm btn-info" onClick={( )=>{ this.getExams(val.subject_id,val.class_id,val.section_id,val.class_number)}} >
+                                                                    <button className="btn btn-sm btn-success" onClick={( )=>{ this.getExams(val.subject_id,val.class_id,val.section_id,val.class_number)}} >
                                                                             Assign Marks
                                                                         </button>
                                                             </span>
 
                                                             <span className="col-2 d-flex justify-content-between align-items-center">
-                                                                    <a className="btn btn-sm btn-warning" href={`attendance/daily-attendance/${val.class_id}/${val.section_id}` }  >
+                                                                    <a className="btn btn-sm btn-orange" href={`attendance/daily-attendance/${val.class_id}/${val.section_id}` }  >
                                                                             Take Attendance
+                                                                    </a>
+                                                            </span>
+
+                                                            <span className="col-2 d-flex justify-content-between align-items-center">
+                                                                    <a className="btn btn-sm btn-messenger" href={`/assignment/${val.teacher_subject_id}` }  >
+                                                                            Assignments
                                                                     </a>
                                                             </span>
 

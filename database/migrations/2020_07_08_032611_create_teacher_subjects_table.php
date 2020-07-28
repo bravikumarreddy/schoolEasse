@@ -13,6 +13,7 @@ class CreateTeacherSubjectsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('teacher_subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('subject_id')->unsigned();
@@ -21,6 +22,8 @@ class CreateTeacherSubjectsTable extends Migration
             $table->string('teacher_name');
             $table->timestamps();
         });
+
+
         Schema::table('teacher_subjects', function (Blueprint $table) {
 
             $table->foreign('subject_id')->references("id")->on("subjects")->onDelete('cascade');
@@ -28,6 +31,8 @@ class CreateTeacherSubjectsTable extends Migration
             $table->foreign('section_id')->references("id")->on("sections")->onDelete('cascade');
 
         });
+
+
     }
 
     /**

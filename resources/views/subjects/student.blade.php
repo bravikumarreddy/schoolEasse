@@ -22,6 +22,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Section</th>
                                 <th scope="col">Teacher Name</th>
+                                <th scope="col">Assignments</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -34,9 +35,20 @@
 
                                 @if(isset($subject->teacher_name))
                                     <td>{{$subject->teacher_name}}</td>
+                                    <td>
+
+                                        <a class="btn btn-sm btn-messenger" href='/assignment/student/{{$subject->teacher_subject_id}}' >
+                                            Assignments
+                                        </a>
+                                    </td>
                                 @else
                                     <td class="text-danger"> Not assigned </td>
+                                    <td>
+
+                                        -
+                                    </td>
                                 @endif
+
                             </tr>
                            @endforeach
 

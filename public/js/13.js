@@ -561,16 +561,21 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
         }, "Section - ", val.section_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "col-2 d-flex justify-content-between align-items-center"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn btn-sm btn-info",
+          className: "btn btn-sm btn-success",
           onClick: function onClick() {
             _this2.getExams(val.subject_id, val.class_id, val.section_id, val.class_number);
           }
         }, "Assign Marks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "col-2 d-flex justify-content-between align-items-center"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-          className: "btn btn-sm btn-warning",
+          className: "btn btn-sm btn-orange",
           href: "attendance/daily-attendance/".concat(val.class_id, "/").concat(val.section_id)
-        }, "Take Attendance"))));
+        }, "Take Attendance")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          className: "btn btn-sm btn-messenger",
+          href: "/assignment/".concat(val.teacher_subject_id)
+        }, "Assignments"))));
       })))) : " No subjects are assigned "), this.state.classId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-indigo mt-4 mb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

@@ -296,6 +296,10 @@ Route::middleware(['auth', 'staff'])->group(function () {
 Route::middleware(['auth', 'teacher'])->group(function () {
 
     Route::post('calculate-marks', 'GradeController@calculateMarks');
+
+    Route::get('assignment/{teacher_subject_id}','AssignmentsController@index');
+    Route::post('assignment/submit','AssignmentsController@create');
+    Route::get('/assignment/submissions/{assignment_id}','AssignmentSubmissionController@submissions');
    // Route::post('message/students', 'NotificationController@store');
 
 });
@@ -328,6 +332,9 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::get('marks/student','ExamMarksController@studentMarks');
     Route::get('payment', 'PaymentsController@index');
     Route::post('charge', 'CashierController@store');
+    Route::get('/assignment/student/{teacher_subject_id}','AssignmentsController@studentList');
+    Route::get('assignment/student/submit/{assignment_id}','AssignmentsController@studentSubmit');
+    Route::post('assignment/student/submit/{assignment_id}','AssignmentSubmissionController@submitAssignment');
 
 });
 

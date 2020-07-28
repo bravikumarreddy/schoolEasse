@@ -30,8 +30,9 @@ class SubjectsController extends Controller
                 $join->on('sections.id','=',"teachers.section_id")
                     ->on('subjects.id','=','teachers.subject_id');
             })
+            ->select("teachers.id as teacher_subject_id","sections.*","subjects.*" ,"teachers.*")
             ->get()->all();
-       // dd($subjects);
+      //  dd($subjects);
         return view('subjects.student',compact('subjects'));
     }
 

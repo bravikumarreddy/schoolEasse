@@ -27,7 +27,7 @@ class TeacherSubjectController extends Controller
             ->leftJoin("teacher_subjects" ,function ($join) {
                 $join->on("subjects.id","=","teacher_subjects.subject_id")
                     ->on("sections.id","=","teacher_subjects.section_id");
-            })
+                })
             ->get()->all();
     }
 
@@ -80,11 +80,12 @@ class TeacherSubjectController extends Controller
         $user_id = \Auth::user()->id;
 
         $my_subjects = TeacherSubject::where("teacher_id","=",$user_id)
+            ->select("teacher_subjects.id as teacher_subject_id" , "subjects.*" ,"classes.*" ,"sections.*" ,"teacher_subjects.*" )
             ->join("subjects","subject_id","=","subjects.id")
             ->join("classes","class_id","=","classes.id")
             ->join("sections","section_id","=","sections.id")
             ->get();
-
+       // dd($my_subjects);
         return json_encode($my_subjects);
 
     }
