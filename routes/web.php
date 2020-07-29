@@ -27,6 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth'])->group(function () {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('messages', 'MessageController@index');
+    Route::get('transportation', 'TransportationController@index');
+    Route::post('transportation/create', 'TransportationController@create');
+    Route::delete('transportation/delete/{transportation_id}', 'TransportationController@destroy');
     // Route::get('/view-attendance/section/{section_id}',function($section_id){
     //   if($section_id > 0){
     //     $attendances = App\Attendance::with(['student'])->where('section_id', $section_id)->get();

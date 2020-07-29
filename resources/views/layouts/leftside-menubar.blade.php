@@ -255,6 +255,12 @@
 
 
   @endif
+    <li class="nav-item">
+    {{--    <a class="nav-link" href="{{ url('grades/all-exams-grade') }}"><i class="material-icons">assignment</i> <span class="nav-link-text p-2">@lang('Grades')</span></a>--}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('transportation') }}"><i class="material-icons">emoji_transportation</i> <span class="nav-link-text p-2">@lang('Transportation')</span></a>
+        </li>
+    </li>
 </ul>
 <script>
 

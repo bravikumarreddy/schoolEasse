@@ -16,6 +16,7 @@ class AssignmentSubmissionController extends Controller
     public function index()
     {
         //
+        return view('transportation.index');
     }
 
     /**

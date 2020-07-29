@@ -327,7 +327,11 @@
         </div>
     </div>
     <script src="{{asset('js/chart.js')}}"></script>
+
     <script>
+        window.addEventListener('load',(event)=>{
+
+
             @if(Auth::user()->role == 'admin')
         var ctxDoughnut = document.getElementById('doughnut').getContext('2d');
         var doughnut = new Chart(ctxDoughnut, {
@@ -557,7 +561,7 @@
         });
 
         calendar.render();
-
+        });
     </script>
 </div>
 @endsection
