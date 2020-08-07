@@ -32,7 +32,10 @@ function Individual(props) {
     }
     const deleteUser = async (index) =>{
         let newList  = Array.from(selectedUsers);
-        newList = newList.splice(index, 1);
+        console.log(newList);
+        console.log(index);
+        newList.splice(index, 1);
+        console.log(newList);
         updateSelectedUsers(newList);
         props.setIndividuals(newList);
     }
@@ -96,7 +99,7 @@ function Individual(props) {
                                                 <span className="badge badge-messenger">  {val.role}</span>
                                             </div>
                                             <div className="col-3">
-                                                <button type="button" className="btn btn-sm btn-danger ml-2 mr-2 "  onClick={()=>{deleteUser(val.id)}}>
+                                                <button type="button" className="btn btn-sm btn-danger ml-2 mr-2 "  onClick={()=>{deleteUser(index)}}>
                                                     delete
                                                 </button>
                                             </div>

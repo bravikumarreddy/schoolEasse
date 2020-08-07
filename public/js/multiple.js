@@ -50585,10 +50585,10 @@ var TimeTable = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./TimeTable */ "./resources/assets/js/components/Multiple/TimeTable.js"));
 });
 var Communicate = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./Communicate */ "./resources/assets/js/components/Multiple/Communicate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./Communicate */ "./resources/assets/js/components/Multiple/Communicate.js"));
 });
 var SchoolEvent = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./SchoolEvent */ "./resources/assets/js/components/Multiple/SchoolEvent.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./SchoolEvent */ "./resources/assets/js/components/Multiple/SchoolEvent.js"));
 });
 var SliderSetting = Object(_loadable_component__WEBPACK_IMPORTED_MODULE_3__["default"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./SliderSetting */ "./resources/assets/js/components/Multiple/SliderSetting.js"));

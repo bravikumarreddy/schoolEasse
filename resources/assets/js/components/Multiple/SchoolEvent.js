@@ -3,6 +3,7 @@ import Loader from './Components/Loader'
 import Group from "./Components/Selectors/Group";
 import Individual from "./Components/Selectors/Individual";
 import ClassSection from "./Components/Selectors/ClassSection";
+import ExamSelector from "./Components/Selectors/ExamSelector";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import dateformat from 'dateformat';
@@ -16,6 +17,7 @@ class SchoolEvent extends React.Component {
         this.state={
             category:"groups",
             group:"",
+            exam_id:"",
             section_ids:{},
             individual_ids:[],
             to:"",
@@ -71,7 +73,8 @@ class SchoolEvent extends React.Component {
                             from:this.state.from,
                             to:this.state.to,
                             color:this.state.color,
-                            individual_id:individual.id
+                            individual_id:individual.id,
+                            exam_id : this.state.exam_id,
 
                         }
                     }));
@@ -87,7 +90,8 @@ class SchoolEvent extends React.Component {
                     title:this.state.title,
                     from:this.state.from,
                     to:this.state.to,
-                    color:this.state.color
+                    color:this.state.color,
+                    exam_id : this.state.exam_id
 
                 }
             });
@@ -139,6 +143,11 @@ class SchoolEvent extends React.Component {
                                    onClick={()=>this.setState({category:"individual"})}
                                 >Individual</a>
                             </li>
+                            <li className="nav-item p-0">
+                                <a className= { this.state.category == 'exam'? "nav-link active text-orange": "nav-link " }
+                                   onClick={()=>this.setState({category:"exam"})}
+                                >Exam</a>
+                            </li>
                         </ul>
                     </div>
 
@@ -157,6 +166,12 @@ class SchoolEvent extends React.Component {
                     {this.state.category =='individual'?
                         <Individual
                             individuals={this.state.individual_ids} setIndividuals={(individual_ids)=>{this.setState({individual_ids: individual_ids})}}
+                        />:
+                        ""
+                    }
+                    {this.state.category =='exam'?
+                        <ExamSelector
+                            exam_id={this.state.exam_id} setExam={(exam)=>{this.setState({exam_id: exam})}}
                         />:
                         ""
                     }
@@ -210,6 +225,12 @@ class SchoolEvent extends React.Component {
                                                 :
                                                 ""
                                             }
+                                            {val.category =='exam'?
+                                                <span>Class-{val.exam_class_name} {val.exam_name}  </span>
+                                                :
+                                                ""
+                                            }
+
                                         </div>
                                         <div className="col-2">
 
@@ -232,7 +253,10 @@ class SchoolEvent extends React.Component {
                 </div>
                 { this.state.category=='groups' && this.state.group ||
                 this.state.category=='individual' && this.state.individual_ids.length !== 0  ||
-                this.state.category=='class' && Object.keys(this.state.section_ids).length !== 0 ?
+                this.state.category=='class' && Object.keys(this.state.section_ids).length !== 0 ||
+                this.state.category=='exam' && this.state.exam_id
+                    ?
+
                     <div className="card border-messenger mt-3 mb-3">
 
                         <div className="card-header text-white bg-messenger border-0">
@@ -266,9 +290,8 @@ class SchoolEvent extends React.Component {
                                         dateFormat="MMMM d, yyyy h:mm aa"
                                     />
                                     </div>
-
-
                                 </div>
+
                                 <div className="form-group row col-6 mb-3">
                                     <label className="col-4  col-form-label" htmlFor="to">To</label>
                                     <div className="col-8">

@@ -210,10 +210,12 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
       title: "",
       communicationList: [],
       pagination: {},
-      success: false
+      success: false,
+      role: ""
     };
     _this.getCommunications = _this.getCommunications.bind(_assertThisInitialized(_this));
     _this.createMessage = _this.createMessage.bind(_assertThisInitialized(_this));
+    _this.getRole = _this.getRole.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -229,6 +231,10 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
                 return this.getCommunications();
 
               case 2:
+                _context.next = 4;
+                return this.getRole();
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -243,13 +249,46 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "createMessage",
+    key: "getRole",
     value: function () {
-      var _createMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var section_ids, individual_ids, i, key, res;
+      var _getRole = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/users/role");
+
+              case 2:
+                res = _context2.sent;
+                this.setState({
+                  role: res.data
+                });
+                console.log(res.data);
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getRole() {
+        return _getRole.apply(this, arguments);
+      }
+
+      return getRole;
+    }()
+  }, {
+    key: "createMessage",
+    value: function () {
+      var _createMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var section_ids, individual_ids, i, key, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 section_ids = [];
                 individual_ids = [];
@@ -266,7 +305,7 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
                   }
                 }
 
-                _context2.next = 6;
+                _context3.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/communicate/create", {
                   params: {
                     category: this.state.category,
@@ -279,8 +318,8 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
                 });
 
               case 6:
-                res = _context2.sent;
-                _context2.next = 9;
+                res = _context3.sent;
+                _context3.next = 9;
                 return this.getCommunications();
 
               case 9:
@@ -290,10 +329,10 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
 
               case 10:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function createMessage() {
@@ -305,16 +344,16 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getCommunications",
     value: function () {
-      var _getCommunications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var _getCommunications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var url,
             urlObj,
             res,
-            _args3 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+            _args4 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                url = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
+                url = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : null;
                 console.log(url);
 
                 if (url == null) {
@@ -325,11 +364,11 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
                 }
 
                 console.log(url);
-                _context3.next = 6;
+                _context4.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(url);
 
               case 6:
-                res = _context3.sent;
+                res = _context4.sent;
                 this.setState({
                   communicationList: res.data.data,
                   pagination: res.data
@@ -337,10 +376,10 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
 
               case 8:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       function getCommunications() {
@@ -355,7 +394,7 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       console.log(this.state.pagination);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.success ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.success && this.state.role !== "" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "alert alert-success alert-dismissible fade show",
         role: "alert"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "    Message sent  sucessfully "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
@@ -374,7 +413,7 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         className: "card-header  bg-orange border-0 text-white"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
         className: "nav nav-tabs card-header-tabs nav-fill bg-orange"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      }, this.state.role !== "student" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         className: this.state.category == 'groups' ? "nav-link active text-orange" : "nav-link ",
@@ -383,7 +422,7 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
             category: "groups"
           });
         }
-      }, "Groups")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      }, "Groups")) : "", this.state.role !== "student" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         className: this.state.category == 'class' ? "nav-link active text-orange" : "nav-link ",
@@ -392,7 +431,7 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
             category: "class"
           });
         }
-      }, "Class")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      }, "Class")) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "nav-item p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         className: this.state.category == 'individual' ? "nav-link active text-orange" : "nav-link ",

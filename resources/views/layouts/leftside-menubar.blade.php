@@ -101,11 +101,7 @@
 {{--    <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text p-2">@lang('Syllabus')</span></a>--}}
 {{--  </li>--}}
 
-  <li class="nav-item">
-{{--    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">announcement</i> <span class="nav-link-text p-2">@lang('Notice')</span></a>--}}
-      <a class="nav-link" href="{{ url('communicate') }}"><i class="material-icons">send</i> <span class="nav-link-text p-2">@lang('Communicate')</span></a>
 
-  </li>
   <li class="nav-item">
 {{--    <a class="nav-link" href="{{ url('academic/event') }}"><i class="material-icons">event</i> <span class="nav-link-text p-2">@lang('Event')</span></a>--}}
           <a class="nav-link" href="{{ url('/school_event') }}"><i class="material-icons">event</i> <span class="nav-link-text p-2">@lang('Event')</span></a>
@@ -255,11 +251,47 @@
 
 
   @endif
+    @if(Auth::user()->role == 'teacher' )
+        {{--  <li class="nav-item">--}}
+        {{--    <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i class="material-icons">import_contacts</i>--}}
+        {{--      <span class="nav-link-text p-2">@lang('My Courses')</span></a>--}}
+        {{--  </li>--}}
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('leave/teacher') }}"><i class="material-icons">card_travel</i>
+                <span class="nav-link-text p-2">@lang('Apply Leave')</span> </a>
+        </li>
+
+
+    @endif
+
+    @if( Auth::user()->role == 'student')
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('leave/teacher') }}"><i class="material-icons">card_travel</i>
+                <span class="nav-link-text p-2">@lang('Apply Leave')</span>
+            </a>
+        </li>
+    @endif
+
+    <li class="nav-item">
+        {{--    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">announcement</i> <span class="nav-link-text p-2">@lang('Notice')</span></a>--}}
+        <a class="nav-link" href="{{ url('communicate') }}"><i class="material-icons">send</i> <span class="nav-link-text p-2">@lang('Communicate')</span></a>
+
+    </li>
     <li class="nav-item">
     {{--    <a class="nav-link" href="{{ url('grades/all-exams-grade') }}"><i class="material-icons">assignment</i> <span class="nav-link-text p-2">@lang('Grades')</span></a>--}}
         <li class="nav-item">
             <a class="nav-link" href="{{ url('transportation') }}"><i class="material-icons">emoji_transportation</i> <span class="nav-link-text p-2">@lang('Transportation')</span></a>
         </li>
+    </li>
+
+    <li class="nav-item">
+    {{--    <a class="nav-link" href="{{ url('grades/all-exams-grade') }}"><i class="material-icons">assignment</i> <span class="nav-link-text p-2">@lang('Grades')</span></a>--}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('hostel') }}"><i class="material-icons">location_city</i> <span class="nav-link-text p-2">@lang('Hostel')</span></a>
+    </li>
+
+
     </li>
 </ul>
 <script>

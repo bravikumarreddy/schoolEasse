@@ -974,11 +974,14 @@ function Individual(props) {
           switch (_context3.prev = _context3.next) {
             case 0:
               newList = Array.from(selectedUsers);
-              newList = newList.splice(index, 1);
+              console.log(newList);
+              console.log(index);
+              newList.splice(index, 1);
+              console.log(newList);
               updateSelectedUsers(newList);
               props.setIndividuals(newList);
 
-            case 4:
+            case 7:
             case "end":
               return _context3.stop();
           }
@@ -1040,7 +1043,7 @@ function Individual(props) {
       type: "button",
       className: "btn btn-sm btn-danger ml-2 mr-2 ",
       onClick: function onClick() {
-        deleteUser(val.id);
+        deleteUser(index);
       }
     }, "delete")));
   }))));

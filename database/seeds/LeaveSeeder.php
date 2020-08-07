@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ExamMarksTableSeeder extends Seeder
+class LeaveSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,5 @@ class ExamMarksTableSeeder extends Seeder
     public function run()
     {
         //
-        //factory(\App\ExamMarks::class,2000)->create();
     }
 }

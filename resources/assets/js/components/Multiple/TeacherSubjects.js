@@ -304,9 +304,8 @@ class TeacherSubjects extends React.Component {
                                                         <form className="form-row col-12 m-0 b-0 " onSubmit={(event => {event.preventDefault();this.submitMarks(this.state.studentMarksList[index],val.student_user_id,this.state.gradeList[index]) })}>
                                                         <span className="col-2 d-flex justify-content-between align-items-center"> {val.name}</span>
                                                         <span className="col-2 d-flex justify-content-between align-items-center">{val.student_code}</span>
-                                                        {val.id ==null ?
+                                                        {val.id == null ?
                                                             <React.Fragment>
-
                                                                 <div className="input-group col-4  pr-3 d-flex justify-content-between align-items-center">
                                                                             <input type="hidden" name="grade" value={this.state.gradeList[index]} />
                                                                             <input

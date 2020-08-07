@@ -41,7 +41,6 @@ class CreateUserRequest extends FormRequest
             'phone_number' => 'required|string|unique:users',
             'address' => 'required|string',
             'session' => 'required',
-            'fee_structure' => '',
             'birthday' => 'required',
             'religion' => 'required|string',
         ];

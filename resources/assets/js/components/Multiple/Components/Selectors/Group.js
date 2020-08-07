@@ -44,6 +44,7 @@ function Group(props) {
             </div>
             <div className="custom-control custom-radio m-2">
                 <input type="radio" id="staff" name="customRadio" className="custom-control-input"
+
                        onChange={() => {
                            setValue('staff');
                            setGroup('staff');

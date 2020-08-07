@@ -22,16 +22,25 @@ class Communicate extends React.Component {
             title:"",
             communicationList:[],
             pagination: {},
-            success:false
+            success:false,
+            role:"",
         }
         this.getCommunications = this.getCommunications.bind(this);
 
         this.createMessage = this.createMessage.bind(this);
+        this.getRole = this.getRole.bind(this);
 
     }
 
     async componentDidMount() {
         await this.getCommunications();
+        await this.getRole();
+    }
+
+    async getRole(){
+        let res = await axios.get(`/api/users/role`);
+        this.setState({role:res.data})
+        console.log(res.data);
     }
 
     async createMessage(){
@@ -68,6 +77,7 @@ class Communicate extends React.Component {
 
 
 
+
     async getCommunications(url=null){
 
 
@@ -93,10 +103,11 @@ class Communicate extends React.Component {
 
     render() {
         console.log(this.state.pagination);
+
         return (
             <React.Fragment>
 
-                {this.state.success ?
+                {this.state.success && this.state.role !== "" ?
 
                 <div className="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>    Message sent  sucessfully </strong>
@@ -112,17 +123,22 @@ class Communicate extends React.Component {
 
                     <div className="card-header  bg-orange border-0 text-white">
                         <ul className="nav nav-tabs card-header-tabs nav-fill bg-orange">
-                            <li className="nav-item" >
-                                <a className= { this.state.category == 'groups'? "nav-link active text-orange": "nav-link " }
-                                   onClick={()=>this.setState({category:"groups"})}
-                                >Groups</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className=
-                                       { this.state.category == 'class'? "nav-link active text-orange": "nav-link " }
-                                   onClick={()=>this.setState({category:"class"})}
-                                >Class</a>
-                            </li>
+                            {this.state.role !== "student" ?
+                                <li className="nav-item">
+                                    <a className={this.state.category == 'groups' ? "nav-link active text-orange" : "nav-link "}
+                                       onClick={() => this.setState({category: "groups"})}
+                                    >Groups</a>
+                                </li>:""
+                            }
+                            {this.state.role !== "student" ?
+                                <li className="nav-item">
+                                    <a className=
+                                           {this.state.category == 'class' ? "nav-link active text-orange" : "nav-link "}
+                                       onClick={() => this.setState({category: "class"})}
+                                    >Class</a>
+                                </li>:
+                                ""
+                            }
                             <li className="nav-item p-0">
                                 <a className= { this.state.category == 'individual'? "nav-link active text-orange": "nav-link " }
                                    onClick={()=>this.setState({category:"individual"})}
@@ -132,11 +148,11 @@ class Communicate extends React.Component {
                     </div>
 
                     <div className="card-body">
-                        {this.state.category =='groups'?
+                        {this.state.category =='groups' ?
                             <Group group={this.state.group} setGroup={(group)=>{this.setState({group: group})}} />:
                             ""
-
                         }
+
                         {this.state.category =='class'?
                             <ClassSection
                                 setSections={(section_ids)=>{this.setState({section_ids: section_ids})}}

@@ -88,7 +88,10 @@ class CommunicationController extends Controller
     public function apiGetCommunications(){
 
        $school_id = \Auth::user()->school_id;
-       $communication_log = Communication::where('school_id','=',$school_id)->paginate(3);
+       $user_id = \Auth::user()->id;
+       $communication_log = Communication::where('school_id','=',$school_id)
+           ->where("sender_id","=",$user_id)
+           ->paginate(3);
        return json_encode($communication_log);
     }
 

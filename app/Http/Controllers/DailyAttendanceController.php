@@ -109,6 +109,7 @@ class DailyAttendanceController extends Controller
         }
         return json_encode($user);
     }
+
     public function student(){
 
         $role = Auth::user()->role;
@@ -136,12 +137,20 @@ class DailyAttendanceController extends Controller
             $section_events = SchoolEvent::where('school_id','=',$school_id)
                 ->where('section_id',"=","$section_id")->get();
 
+            $exam_events = SchoolEvent::where('school_id','=',$school_id)
+                ->leftJoin("class_exams","exam_id",'=',"school_events.exam_id")
+                ->join('sections',function ($join){
+                    $join->on("sections.class_id","=","class_exams.class_id")
+                    ->where('sections.id',"=",Auth::user()->section_id);
+                })->get();
+
             return view("attendance.calendar",compact('absent_details',
                 'classTimeTable'
                 ,'all_events'
                 , 'student_events'
                 ,'section_events'
                 ,'individual_events'
+                , 'exam_events'
 
             ));
         }

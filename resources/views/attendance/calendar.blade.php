@@ -99,6 +99,19 @@
                             @endforeach
                     @endisset
 
+
+                        @isset($exam_events)
+                        @foreach($exam_events as $event)
+                    {
+                        title: "{{$event->title}}" ,
+                        start:"{{$event->from}}",
+                        end:"{{$event->to}}",
+                        color: '{{$event->color}}'
+                    },
+
+                        @endforeach
+                        @endisset
+
                         @isset($student_events)
                         @foreach($student_events as $event)
                             {

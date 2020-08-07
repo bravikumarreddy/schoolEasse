@@ -63,6 +63,11 @@ class UserController extends Controller
         return view('list.students',compact('role'));
     }
 
+    public function apiGetRole(){
+        $role = Auth::user()->role;
+        return $role;
+    }
+
 
     /**
      * @param $school_code
@@ -105,9 +110,11 @@ class UserController extends Controller
 
 
     public function search(Request $request,$str){
+
         $search_result = User::where('school_id',"=",Auth::user()->school_id)
         ->where('name','LIKE', "%".$str.'%')->take(10)->get();
         return $search_result;
+
     }
 
     public function studentSearch(Request $request,$str){

@@ -37,7 +37,7 @@ class Exam extends React.Component {
 
         this.setState({className:className,classLoading:true });
 
-        var res = await axios.get(`/api/class_exams`,{
+        let res = await axios.get(`/api/class_exams`,{
             params:{
                 class_id : class_id,
             }

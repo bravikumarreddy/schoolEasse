@@ -33,8 +33,15 @@ Route::middleware(['auth', 'staff'])->group(function () {
 
 });
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/message/mark_read/{id}', 'MessageController@apiMarkRead');
+    Route::get('/communicate/create', 'CommunicationController@apiCreateMessage');
+    Route::get('/communicate/get', 'CommunicationController@apiGetCommunications');
+    Route::get('/users/role', 'UserController@apiGetRole');
+    Route::get('/users/search/{string}', 'UserController@search');
+
 });
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/time_table/teacher', 'TimeTableController@apiGetTeacherTimeTable');
     Route::get('/time_table/class', 'TimeTableController@apiGetClassTimeTable');
@@ -46,12 +53,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/school_event/get', 'SchoolEventController@apiGetEvents');
     Route::get('/school_event/delete', 'SchoolEventController@apiDeleteEvent');
-    Route::get('/users/search/{string}', 'UserController@search');
     Route::get('/students/search/{string}', 'UserController@studentSearch');
 
 
-    Route::get('/communicate/create', 'CommunicationController@apiCreateMessage');
-    Route::get('/communicate/get', 'CommunicationController@apiGetCommunications');
+
 
     Route::get('/exam-marks/student/{id}', 'ExamMarksController@apiGetStudentMarks');
 

@@ -30,6 +30,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('transportation', 'TransportationController@index');
     Route::post('transportation/create', 'TransportationController@create');
     Route::delete('transportation/delete/{transportation_id}', 'TransportationController@destroy');
+
+    Route::get('hostel', 'HostelsController@index');
+    Route::post('hostel/create', 'HostelsController@create');
+    Route::delete('hostel/delete/{hostel_id}', 'HostelsController@destroy');
     // Route::get('/view-attendance/section/{section_id}',function($section_id){
     //   if($section_id > 0){
     //     $attendances = App\Attendance::with(['student'])->where('section_id', $section_id)->get();
@@ -118,6 +122,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('section/students/{section_id}', 'UserController@sectionStudents');
 
     Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+    Route::get('communicate', 'CommunicationController@index');
 });
 
 Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth', 'student']);
@@ -218,6 +223,7 @@ Route::middleware(['auth', 'master'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+
     Route::prefix('school')->name('school.')->group(function () {
         Route::post('add-class', 'MyclassController@store');
         Route::post('add-section', 'SectionController@store');
@@ -230,7 +236,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 
     Route::prefix('register')->name('register.')->group(function () {
+
         Route::get('student', 'UserController@redirectToRegisterStudent');
+
                 Route::get('teacher', function () {
                     $departments = \App\Department::where('school_id', \Auth::user()->school_id)->get();
                     $classes = \App\Myclass::where('school_id', \Auth::user()->school->id)->pluck('id');
@@ -248,11 +256,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
             return redirect()->route('register');
         });
+
         Route::get('librarian', function () {
             session(['register_role' => 'librarian']);
-
             return redirect()->route('register');
         });
+
+
         Route::post('student', 'UserController@store');
         Route::post('teacher', 'UserController@storeTeacher');
         Route::post('accountant', 'UserController@storeAccountant');
@@ -263,7 +273,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post("/attendance/daily-attendance/teachers/submit",'StaffAttendanceController@takeTeacherAttendance');
     Route::get('time_table','TimeTableController@create');
     Route::get('school_event','SchoolEventController@create');
-    Route::get('communicate', 'CommunicationController@index');
+
 });
 
 //use PDF;
@@ -299,7 +309,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
 Route::middleware(['auth', 'teacher'])->group(function () {
 
     Route::post('calculate-marks', 'GradeController@calculateMarks');
-
+    Route::get('/leave/teacher', "LeaveController@index");
     Route::get('assignment/{teacher_subject_id}','AssignmentsController@index');
     Route::post('assignment/submit','AssignmentsController@create');
     Route::get('/assignment/submissions/{assignment_id}','AssignmentSubmissionController@submissions');
@@ -314,6 +324,7 @@ Route::middleware(['auth', 'teacher'])->group(function () {
 // });
 
 // View Emails - in browser
+
 Route::prefix('emails')->group(function () {
     // Welcome Email
     Route::get('/welcome', function () {
@@ -324,10 +335,15 @@ Route::prefix('emails')->group(function () {
     });
 });
 
+
+
+
+
+
 Route::middleware(['auth', 'student'])->prefix('stripe')->group(function () {
     Route::get('charge', 'CashierController@index');
     Route::post('charge', 'CashierController@store');
-
+    Route::get('/leave/student', "LeaveController@index");
 });
 
 Route::middleware(['auth', 'student'])->group(function () {

@@ -1,289 +1,282 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
 
-/***/ "./node_modules/dateformat/lib/dateformat.js":
-/*!***************************************************!*\
-  !*** ./node_modules/dateformat/lib/dateformat.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_RESULT__;/*
- * Date Format 1.2.3
- * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
- * MIT license
- *
- * Includes enhancements by Scott Trenda <scott.trenda.net>
- * and Kris Kowal <cixar.com/~kris.kowal/>
- *
- * Accepts a date, a mask, or a date and a mask.
- * Returns a formatted version of the given date.
- * The date defaults to the current date/time.
- * The mask defaults to dateFormat.masks.default.
- */
-
-(function(global) {
-  'use strict';
-
-  var dateFormat = (function() {
-      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|"[^"]*"|'[^']*'/g;
-      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
-      var timezoneClip = /[^-+\dA-Z]/g;
-  
-      // Regexes and supporting functions are cached through closure
-      return function (date, mask, utc, gmt) {
-  
-        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
-        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
-          mask = date;
-          date = undefined;
-        }
-  
-        date = date || new Date;
-  
-        if(!(date instanceof Date)) {
-          date = new Date(date);
-        }
-  
-        if (isNaN(date)) {
-          throw TypeError('Invalid date');
-        }
-  
-        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
-  
-        // Allow setting the utc/gmt argument via the mask
-        var maskSlice = mask.slice(0, 4);
-        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
-          mask = mask.slice(4);
-          utc = true;
-          if (maskSlice === 'GMT:') {
-            gmt = true;
-          }
-        }
-  
-        var _ = utc ? 'getUTC' : 'get';
-        var d = date[_ + 'Date']();
-        var D = date[_ + 'Day']();
-        var m = date[_ + 'Month']();
-        var y = date[_ + 'FullYear']();
-        var H = date[_ + 'Hours']();
-        var M = date[_ + 'Minutes']();
-        var s = date[_ + 'Seconds']();
-        var L = date[_ + 'Milliseconds']();
-        var o = utc ? 0 : date.getTimezoneOffset();
-        var W = getWeek(date);
-        var N = getDayOfWeek(date);
-        var flags = {
-          d:    d,
-          dd:   pad(d),
-          ddd:  dateFormat.i18n.dayNames[D],
-          dddd: dateFormat.i18n.dayNames[D + 7],
-          m:    m + 1,
-          mm:   pad(m + 1),
-          mmm:  dateFormat.i18n.monthNames[m],
-          mmmm: dateFormat.i18n.monthNames[m + 12],
-          yy:   String(y).slice(2),
-          yyyy: y,
-          h:    H % 12 || 12,
-          hh:   pad(H % 12 || 12),
-          H:    H,
-          HH:   pad(H),
-          M:    M,
-          MM:   pad(M),
-          s:    s,
-          ss:   pad(s),
-          l:    pad(L, 3),
-          L:    pad(Math.round(L / 10)),
-          t:    H < 12 ? dateFormat.i18n.timeNames[0] : dateFormat.i18n.timeNames[1],
-          tt:   H < 12 ? dateFormat.i18n.timeNames[2] : dateFormat.i18n.timeNames[3],
-          T:    H < 12 ? dateFormat.i18n.timeNames[4] : dateFormat.i18n.timeNames[5],
-          TT:   H < 12 ? dateFormat.i18n.timeNames[6] : dateFormat.i18n.timeNames[7],
-          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
-          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
-          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
-          W:    W,
-          N:    N
-        };
-  
-        return mask.replace(token, function (match) {
-          if (match in flags) {
-            return flags[match];
-          }
-          return match.slice(1, match.length - 1);
-        });
-      };
-    })();
-
-  dateFormat.masks = {
-    'default':               'ddd mmm dd yyyy HH:MM:ss',
-    'shortDate':             'm/d/yy',
-    'mediumDate':            'mmm d, yyyy',
-    'longDate':              'mmmm d, yyyy',
-    'fullDate':              'dddd, mmmm d, yyyy',
-    'shortTime':             'h:MM TT',
-    'mediumTime':            'h:MM:ss TT',
-    'longTime':              'h:MM:ss TT Z',
-    'isoDate':               'yyyy-mm-dd',
-    'isoTime':               'HH:MM:ss',
-    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
-    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
-    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
-  };
-
-  // Internationalization strings
-  dateFormat.i18n = {
-    dayNames: [
-      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-    ],
-    monthNames: [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-    ],
-    timeNames: [
-      'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
-    ]
-  };
-
-function pad(val, len) {
-  val = String(val);
-  len = len || 2;
-  while (val.length < len) {
-    val = '0' + val;
-  }
-  return val;
-}
-
-/**
- * Get the ISO 8601 week number
- * Based on comments from
- * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
- *
- * @param  {Object} `date`
- * @return {Number}
- */
-function getWeek(date) {
-  // Remove time components of date
-  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-  // Change date to Thursday same week
-  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
-
-  // Take January 4th as it is always in week 1 (see ISO 8601)
-  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
-
-  // Change date to Thursday same week
-  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
-
-  // Check if daylight-saving-time-switch occurred and correct for it
-  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
-  targetThursday.setHours(targetThursday.getHours() - ds);
-
-  // Number of weeks between target Thursday and first Thursday
-  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
-  return 1 + Math.floor(weekDiff);
-}
-
-/**
- * Get ISO-8601 numeric representation of the day of the week
- * 1 (for Monday) through 7 (for Sunday)
- * 
- * @param  {Object} `date`
- * @return {Number}
- */
-function getDayOfWeek(date) {
-  var dow = date.getDay();
-  if(dow === 0) {
-    dow = 7;
-  }
-  return dow;
-}
-
-/**
- * kind-of shortcut
- * @param  {*} val
- * @return {String}
- */
-function kindOf(val) {
-  if (val === null) {
-    return 'null';
-  }
-
-  if (val === undefined) {
-    return 'undefined';
-  }
-
-  if (typeof val !== 'object') {
-    return typeof val;
-  }
-
-  if (Array.isArray(val)) {
-    return 'array';
-  }
-
-  return {}.toString.call(val)
-    .slice(8, -1).toLowerCase();
-};
-
-
-
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-      return dateFormat;
-    }).call(exports, __webpack_require__, exports, module),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
-})(this);
-
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
-/*!**********************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
-  \**********************************************************************/
+/***/ "./resources/assets/js/components/Multiple/Components/Selectors/ExamSelector.js":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Selectors/ExamSelector.js ***!
+  \**************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
 
 
-function Loader(props) {
-  var size = "3rem";
-  var margin = "5";
-
-  if (props.size) {
-    size = props.size;
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
   }
 
-  if (props.margin) {
-    margin = props.margin;
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
   }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "spinner-border   m-".concat(margin, " "),
-    role: "status",
-    style: {
-      width: size,
-      height: size
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Loading...")));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Loader);
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+
+
+
+
+function ExamSelector(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      classes = _useState2[0],
+      setClasses = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      class_id = _useState4[0],
+      setClass = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      classLoading = _useState6[0],
+      setClassLoading = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      exams = _useState8[0],
+      setExams = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      exam_id = _useState10[0],
+      setExam = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      examLoading = _useState12[0],
+      setExamLoading = _useState12[1];
+
+  var getClasses = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setClassLoading(true);
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/classes");
+
+            case 3:
+              res = _context.sent;
+              setClasses(res.data);
+              setClassLoading(false);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getClasses() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var getExams = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              setExamLoading(true);
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/class_exams", {
+                params: {
+                  class_id: class_id
+                }
+              });
+
+            case 3:
+              res = _context2.sent;
+              setExams(res.data);
+              setExamLoading(false);
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getExams() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    getClasses();
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    getExams();
+  }, [class_id]);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    props.setExam(exam_id);
+  }, [exam_id]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, classLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: "2rem",
+    margin: "3"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-4 mb-3 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fee_structure",
+    className: "col-form-label"
+  }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    value: class_id,
+    id: "fee_structure",
+    className: "form-control custom-select",
+    name: "fee_structure",
+    onChange: function onChange(event) {
+      return setClass(event.target.value);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "Class"), classes.map(function (val) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: val.id,
+      value: val.id
+    }, val.class_number);
+  })))), examLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: "2rem",
+    margin: "3"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, class_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-4 mb-3 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fee_structure",
+    className: "col-form-label"
+  }, "Select Exam"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    value: exam_id,
+    id: "fee_structure",
+    className: "form-control custom-select",
+    name: "fee_structure",
+    onChange: function onChange(event) {
+      setExam(event.target.value);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "Exam"), exams.map(function (val) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: val.id,
+      value: val.id
+    }, val.exam_name);
+  }))) : ""));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ExamSelector);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Multiple/SliderSetting.js":
-/*!******************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/SliderSetting.js ***!
-  \******************************************************************/
+/***/ "./resources/assets/js/components/Multiple/SchoolEvent.js":
+/*!****************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/SchoolEvent.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -294,10 +287,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Selectors/Group */ "./resources/assets/js/components/Multiple/Components/Selectors/Group.js");
+/* harmony import */ var _Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Selectors/Individual */ "./resources/assets/js/components/Multiple/Components/Selectors/Individual.js");
+/* harmony import */ var _Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Selectors/ClassSection */ "./resources/assets/js/components/Multiple/Components/Selectors/ClassSection.js");
+/* harmony import */ var _Components_Selectors_ExamSelector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/Selectors/ExamSelector */ "./resources/assets/js/components/Multiple/Components/Selectors/ExamSelector.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_10__);
 
 
 function _typeof(obj) {
@@ -314,21 +315,6 @@ function _typeof(obj) {
   }
 
   return _typeof(obj);
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
 }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -473,97 +459,58 @@ function _getPrototypeOf(o) {
 
 
 
-var SliderSetting = /*#__PURE__*/function (_React$Component) {
-  _inherits(SliderSetting, _React$Component);
 
-  var _super = _createSuper(SliderSetting);
 
-  function SliderSetting(props) {
+
+
+
+
+var SchoolEvent = /*#__PURE__*/function (_React$Component) {
+  _inherits(SchoolEvent, _React$Component);
+
+  var _super = _createSuper(SchoolEvent);
+
+  function SchoolEvent(props) {
     var _this;
 
-    _classCallCheck(this, SliderSetting);
+    _classCallCheck(this, SchoolEvent);
 
     _this = _super.call(this, props);
     _this.state = {
-      image1: "",
-      image1Src: "https://www.dell.org/wp-content/uploads/2020/04/indian-school-children-social-impact.jpeg",
-      prevTitle: "",
-      prevDescription: "",
+      category: "groups",
+      group: "",
+      exam_id: "",
+      section_ids: {},
+      individual_ids: [],
+      to: "",
+      from: "",
       title: "",
-      description: "",
-      imageNumber: 1,
-      isInvalid: false
+      color: "#ff6245",
+      eventList: []
     };
-    _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
-    _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
-    _this.uploadHandler = _this.uploadHandler.bind(_assertThisInitialized(_this));
-    _this.getImage = _this.getImage.bind(_assertThisInitialized(_this));
+    _this.getEventList = _this.getEventList.bind(_assertThisInitialized(_this));
+    _this.deleteEvent = _this.deleteEvent.bind(_assertThisInitialized(_this));
+    _this.createEvent = _this.createEvent.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(SliderSetting, [{
-    key: "getImage",
+  _createClass(SchoolEvent, [{
+    key: "componentDidMount",
     value: function () {
-      var _getImage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(imageNumber) {
-        var res;
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/dashboard/setting/upload-image/get", {
-                  params: {
-                    image_number: imageNumber
-                  }
-                });
+                return this.getEventList();
 
               case 2:
-                res = _context.sent;
-                console.log(res);
-
-                if (res.data != null) {
-                  this.setState({
-                    image1Src: res.data.url_path,
-                    prevTitle: res.data.title,
-                    prevDescription: res.data.description
-                  });
-                }
-
-                this.setState({
-                  imageNumber: imageNumber
-                });
-
-              case 6:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
-      }));
-
-      function getImage(_x) {
-        return _getImage.apply(this, arguments);
-      }
-
-      return getImage;
-    }()
-  }, {
-    key: "componentDidMount",
-    value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return this.getImage(this.state.imageNumber);
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
       }));
 
       function componentDidMount() {
@@ -573,99 +520,168 @@ var SliderSetting = /*#__PURE__*/function (_React$Component) {
       return componentDidMount;
     }()
   }, {
-    key: "fileChangedHandler",
-    value: function fileChangedHandler(event) {
-      var file = event.target.files[0];
-      var width = file.naturalWidth || file.width;
-      var height = file.naturalHeight || file.height;
-      console.log(file);
-      console.log(height);
-      this.setState({
-        image1: event.target.files[0]
-      });
-    }
-  }, {
-    key: "uploadHandler",
+    key: "createEvent",
     value: function () {
-      var _uploadHandler = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var img, imageFile, width, height, thisRef;
+      var _createEvent = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var section_ids, awaitArray, key, individual_ids, _awaitArray, i, individual, res;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(this.state.category == 'class')) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                section_ids = this.state.section_ids;
+                awaitArray = [];
+
+                for (key in section_ids) {
+                  if (section_ids[key]) {
+                    awaitArray.push(axios__WEBPACK_IMPORTED_MODULE_7___default.a.get("/api/school_event/create", {
+                      params: {
+                        category: this.state.category,
+                        group: this.state.group,
+                        title: this.state.title,
+                        from: this.state.from,
+                        to: this.state.to,
+                        color: this.state.color,
+                        section_id: key
+                      }
+                    }));
+                  }
+                }
+
+                _context2.next = 6;
+                return Promise.all(awaitArray);
+
+              case 6:
+                _context2.next = 19;
+                break;
+
+              case 8:
+                if (!(this.state.category == 'individual')) {
+                  _context2.next = 16;
+                  break;
+                }
+
+                individual_ids = this.state.individual_ids;
+                _awaitArray = [];
+
+                for (i = 0; i < individual_ids.length; i++) {
+                  individual = individual_ids[i];
+
+                  _awaitArray.push(axios__WEBPACK_IMPORTED_MODULE_7___default.a.get("/api/school_event/create", {
+                    params: {
+                      category: this.state.category,
+                      group: this.state.group,
+                      title: this.state.title,
+                      from: this.state.from,
+                      to: this.state.to,
+                      color: this.state.color,
+                      individual_id: individual.id,
+                      exam_id: this.state.exam_id
+                    }
+                  }));
+                }
+
+                _context2.next = 14;
+                return Promise.all(_awaitArray);
+
+              case 14:
+                _context2.next = 19;
+                break;
+
+              case 16:
+                _context2.next = 18;
+                return axios__WEBPACK_IMPORTED_MODULE_7___default.a.get("/api/school_event/create", {
+                  params: {
+                    category: this.state.category,
+                    group: this.state.group,
+                    title: this.state.title,
+                    from: this.state.from,
+                    to: this.state.to,
+                    color: this.state.color,
+                    exam_id: this.state.exam_id
+                  }
+                });
+
+              case 18:
+                res = _context2.sent;
+
+              case 19:
+                _context2.next = 21;
+                return this.getEventList();
+
+              case 21:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function createEvent() {
+        return _createEvent.apply(this, arguments);
+      }
+
+      return createEvent;
+    }()
+  }, {
+    key: "deleteEvent",
+    value: function () {
+      var _deleteEvent = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(id) {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_7___default.a.get("/api/school_event/delete", {
+                  params: {
+                    id: id
+                  }
+                });
+
+              case 2:
+                res = _context3.sent;
+                _context3.next = 5;
+                return this.getEventList();
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function deleteEvent(_x) {
+        return _deleteEvent.apply(this, arguments);
+      }
+
+      return deleteEvent;
+    }()
+  }, {
+    key: "getEventList",
+    value: function () {
+      var _getEventList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                window.URL = window.URL || window.webkitURL;
-                img = new Image();
-                imageFile = this.state.image1;
-                img.src = window.URL.createObjectURL(this.state.image1);
-                width = "";
-                height = "";
-                thisRef = this;
-                img.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-                  var width, height, data, res;
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                      switch (_context3.prev = _context3.next) {
-                        case 0:
-                          width = img.naturalWidth;
-                          height = img.naturalHeight;
-                          window.URL.revokeObjectURL(img.src);
-                          data = new FormData();
-                          console.log(width, height);
+                _context4.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_7___default.a.get("/api/school_event/get");
 
-                          if (!(width != 1600)) {
-                            _context3.next = 8;
-                            break;
-                          }
+              case 2:
+                res = _context4.sent;
+                this.setState({
+                  eventList: res.data
+                });
 
-                          thisRef.setState({
-                            isInvalid: true
-                          });
-                          return _context3.abrupt("return");
-
-                        case 8:
-                          if (!(height != 900)) {
-                            _context3.next = 11;
-                            break;
-                          }
-
-                          thisRef.setState({
-                            isInvalid: true
-                          });
-                          return _context3.abrupt("return");
-
-                        case 11:
-                          thisRef.setState({
-                            isInvalid: false
-                          });
-                          data.append('image', imageFile);
-                          data.append('title', thisRef.state.title);
-                          data.append('description', thisRef.state.description);
-                          data.append('image_number', thisRef.state.imageNumber);
-                          _context3.next = 18;
-                          return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/dashboard/setting/upload-image", data, {
-                            method: "POST",
-                            headers: {
-                              'X-CSRF-TOKEN': csrf_token
-                            }
-                          });
-
-                        case 18:
-                          res = _context3.sent;
-                          console.log(res);
-                          thisRef.setState({
-                            image1Src: res.data.imgUrlpath
-                          });
-
-                        case 21:
-                        case "end":
-                          return _context3.stop();
-                      }
-                    }
-                  }, _callee3);
-                }));
-                console.log(this.state.image);
-
-              case 9:
+              case 4:
               case "end":
                 return _context4.stop();
             }
@@ -673,109 +689,210 @@ var SliderSetting = /*#__PURE__*/function (_React$Component) {
         }, _callee4, this);
       }));
 
-      function uploadHandler() {
-        return _uploadHandler.apply(this, arguments);
+      function getEventList() {
+        return _getEventList.apply(this, arguments);
       }
 
-      return uploadHandler;
+      return getEventList;
     }()
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this,
-          _React$createElement,
-          _React$createElement2;
+      var _this2 = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+      console.log(Object.keys(this.state.section_ids).length);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-orange"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header  bg-orange border-0 text-white"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "nav nav-tabs card-header-tabs nav-fill bg-orange"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: this.state.category == 'groups' ? "nav-link active text-orange" : "nav-link ",
+        onClick: function onClick() {
+          return _this2.setState({
+            category: "groups"
+          });
+        }
+      }, "Groups")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: this.state.category == 'class' ? "nav-link active text-orange" : "nav-link ",
+        onClick: function onClick() {
+          return _this2.setState({
+            category: "class"
+          });
+        }
+      }, "Class")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "nav-item p-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: this.state.category == 'individual' ? "nav-link active text-orange" : "nav-link ",
+        onClick: function onClick() {
+          return _this2.setState({
+            category: "individual"
+          });
+        }
+      }, "Individual")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+        className: "nav-item p-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: this.state.category == 'exam' ? "nav-link active text-orange" : "nav-link ",
+        onClick: function onClick() {
+          return _this2.setState({
+            category: "exam"
+          });
+        }
+      }, "Exam")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, this.state.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        group: this.state.group,
+        setGroup: function setGroup(group) {
+          _this2.setState({
+            group: group
+          });
+        }
+      }) : "", this.state.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        setSections: function setSections(section_ids) {
+          _this2.setState({
+            section_ids: section_ids
+          });
+        }
+      }) : "", this.state.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        individuals: this.state.individual_ids,
+        setIndividuals: function setIndividuals(individual_ids) {
+          _this2.setState({
+            individual_ids: individual_ids
+          });
+        }
+      }) : "", this.state.category == 'exam' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_ExamSelector__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        exam_id: this.state.exam_id,
+        setExam: function setExam(exam) {
+          _this2.setState({
+            exam_id: exam
+          });
+        }
+      }) : "")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-indigo mt-3 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-indigo border-0"
+      }, "Event List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+        className: "list-group col-10"
+      }, this.state.eventList.map(function (val, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+          key: val.id,
+          className: "list-group-item  d-flex justify-content-between align-items-center "
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-3"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-4"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, dateformat__WEBPACK_IMPORTED_MODULE_9___default()(val.from, 'mmm d, yyyy h:mm '), " - ", dateformat__WEBPACK_IMPORTED_MODULE_9___default()(val.to, 'mmm d, yyyy h:mm '), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-3"
+        }, val.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.group_name, " ") : "", val.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Class-", val.class_name, " Sec-", val.section_name, "  ") : "", val.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.user_name, "  ") : "", val.category == 'exam' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Class-", val.exam_class_name, " ", val.exam_name, "  ") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-sm btn-danger ml-2 mr-2 ",
+          onClick: function onClick() {
+            _this2.deleteEvent(val.id);
+          }
+        }, "delete")));
+      })))), this.state.category == 'groups' && this.state.group || this.state.category == 'individual' && this.state.individual_ids.length !== 0 || this.state.category == 'class' && Object.keys(this.state.section_ids).length !== 0 || this.state.category == 'exam' && this.state.exam_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-messenger mt-3 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-messenger border-0"
+      }, "Event Input"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: function onSubmit(event) {
           event.preventDefault();
 
-          _this2.uploadHandler();
+          _this2.createEvent();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card col-8 shadow-lg mt-4 p-0 overflow-hidden "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body p-0 m-0 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        className: "d-block w-100",
-        src: this.state.image1Src,
-        alt: "First slide"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "carousel-caption d-none d-md-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, this.state.prevTitle)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, " ", this.state.prevDescription))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group  mt-5 mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3 "
+        className: "col-6 mb-3 form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        htmlFor: "image",
-        className: "col-form-label"
-      }, "Select Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        value: this.state.imageNumber,
-        id: "fee_structure",
-        className: " custom-select form-control",
-        name: "fee_structure",
-        onChange: function onChange(event) {
-          return _this2.getImage(event.target.value);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "1"
-      }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "2"
-      }, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "3"
-      }, "3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3 ml-3 mt-3 "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "file",
-        className: "custom-file-input",
-        id: "customFile",
-        required: true,
-        onChange: this.fileChangedHandler
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "custom-file-label",
-        htmlFor: "customFile"
-      }, this.state.image1 ? this.state.image1.name : "Choose file", " "), this.state.isInvalid ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "invalid-feedback is-invalid d-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "Image size should be 1600px x 900px"))) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-form-label",
+        className: " col-4 col-form-label",
         htmlFor: "title"
-      }, "Title "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", (_React$createElement = {
-        type: "text",
-        id: "title",
-        className: "form-control"
-      }, _defineProperty(_React$createElement, "id", "title"), _defineProperty(_React$createElement, "value", this.state.title), _defineProperty(_React$createElement, "accept", "image/*"), _defineProperty(_React$createElement, "onChange", function onChange(event) {
-        return _this2.setState({
-          title: event.target.value
-        });
-      }), _defineProperty(_React$createElement, "required", true), _React$createElement))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-4 mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-form-label",
-        htmlFor: "description"
-      }, "Description "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", (_React$createElement2 = {
-        id: "description",
+      }, "Event Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-6"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         className: "form-control",
-        value: this.state.description,
+        id: "title",
+        type: "text",
+        required: true,
+        value: this.state.title,
         onChange: function onChange(event) {
-          return _this2.setState({
-            description: event.target.value
+          _this2.setState({
+            title: event.target.value
           });
-        }
-      }, _defineProperty(_React$createElement2, "id", "title"), _defineProperty(_React$createElement2, "required", true), _React$createElement2))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        },
+        placeholder: "Title"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group row col-6 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "col-4  col-form-label",
+        htmlFor: "from"
+      }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-8"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
+        className: "form-control",
+        selected: this.state.from,
+        onChange: function onChange(value) {
+          return _this2.setState({
+            from: value
+          });
+        },
+        showTimeSelect: true,
+        dateFormat: "MMMM d, yyyy h:mm aa"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group row col-6 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "col-4  col-form-label",
+        htmlFor: "to"
+      }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-8"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
+        className: "form-control",
+        selected: this.state.to,
+        onChange: function onChange(value) {
+          return _this2.setState({
+            to: value
+          });
+        },
+        showTimeSelect: true,
+        dateFormat: "MMMM d, yyyy h:mm aa"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group row col-6 mb-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "col-4  col-form-label",
+        htmlFor: "to"
+      }, "Color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        className: "form-control",
+        id: "color",
+        type: "Color",
+        value: this.state.color,
+        onChange: function onChange(event) {
+          _this2.setState({
+            color: event.target.value
+          });
+        },
+        placeholder: "Default input"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
-        className: "btn mt-3 ml-3  btn-primary"
-      }, "Save Changes"))));
+        className: "btn btn-success ml-2"
+      }, "Create Event")))) : "");
     }
   }]);
 
-  return SliderSetting;
+  return SchoolEvent;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (SliderSetting);
+/* harmony default export */ __webpack_exports__["default"] = (SchoolEvent);
 
 /***/ })
 
