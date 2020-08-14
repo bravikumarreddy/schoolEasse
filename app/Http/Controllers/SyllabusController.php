@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Syllabus as Syllabus;
 use App\Http\Resources\SyllabusResource;
+use App\SyllabusStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -16,15 +17,40 @@ class SyllabusController extends Controller
      */
      public function index()
      {
-        $files = Syllabus::with('myclass')
-                          ->bySchool(\Auth::user()->school_id)
-                          ->where('active',1)
-                          ->get();
-        $classes = \App\Myclass::bySchool(\Auth::user()->school->id)
-                          ->get();
-        return view('syllabus.course-syllabus',['files'=>$files,'classes'=>$classes,'class_id' => 0]);
+        return view('syllabus.create');
      }
 
+     public function apiGetSyllabus(Request $request,$subject_id){
+         $syllabus = Syllabus::where('subject_id','=',$subject_id)->get();
+
+         return json_encode($syllabus);
+     }
+
+     public function apiAddSyllabus(Request $request ){
+
+
+        $syllabus = new Syllabus();
+
+         $syllabus->subject_id = $request->subject_id;
+         $syllabus->topic = $request->topic;
+         $syllabus->reference = $request->reference;
+         $syllabus->comments = $request->comments;
+
+         $syllabus->save();
+
+         return [
+             'status' => 'success',
+         ];
+     }
+    public function apiDeleteSyllabus(Request $request ){
+
+        //dd($request);
+        Syllabus::where('id',"=",$request->syllabus_id)->delete();
+
+        return [
+            'status' => 'success',
+        ];
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -32,23 +58,7 @@ class SyllabusController extends Controller
      */
     public function create(int $class_id)
     {
-      try{
-        if(Schema::hasColumn('syllabuses','class_id')){
-          $files = Syllabus::with('myclass')
-                          ->bySchool(\Auth::user()->school_id)
-                          ->where('class_id', $class_id)
-                          ->where('active',1)
-                          ->get();
-          $classes = \App\Myclass::bySchool(\Auth::user()->school->id)
-                          ->get();
-        } else {
-          return '<code>class_id</code> column missing. Run <code>php artisan migrate</code>';
-        }
-      } catch(Exception $ex){
-        return 'Something went wrong!!';
-      }
 
-      return view('syllabus.course-syllabus',['files'=>$files,'classes'=>$classes,'class_id'=>$class_id]);
     }
 
     /**
@@ -59,14 +69,7 @@ class SyllabusController extends Controller
      */
     public function store(Request $request)
     {
-      $tb = new Syllabus;
-      $tb->file_path = $request->file_path;
-      $tb->title = $request->title;
-      $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
-      $tb->save();
-      return back()->with('status', __('Uploaded'));
+
     }
 
     /**
@@ -75,9 +78,28 @@ class SyllabusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($teacherSubjectId,$subjectId)
     {
-        return new SyllabusResource(Syllabus::find($id));
+
+        $syllabus_status = SyllabusStatus::where('teacher_subject_id',$teacherSubjectId);
+
+        $syllabuses = Syllabus::where('subject_id',"=",$subjectId)
+
+//                    ->leftJoin('syllabus_statuses',"syllabus_id",'=',
+//                    'syllabuses.id')
+                    ->leftJoinSub($syllabus_status , "syllabus_status",function($join){
+                        $join->on("syllabus_id","syllabuses.id");
+            })
+            ->select('syllabuses.*','syllabus_status.*','syllabuses.id as syllabus_id',
+                'syllabus_status.id as syllabus_status_id'
+            )
+                    ->get();
+
+
+
+        //$syllabus_status = SyllabusStatus::where();
+        return view('syllabus.show',compact('syllabuses','teacherSubjectId','subjectId'));
+
     }
 
     /**
@@ -100,10 +122,7 @@ class SyllabusController extends Controller
      */
     public function update($id)
     {
-      $tb = Syllabus::find($id);
-      $tb->active = 0;
-      $tb->save();
-      return back()->with('status',__('File removed'));
+
     }
 
     /**
@@ -114,10 +133,6 @@ class SyllabusController extends Controller
      */
     public function destroy($id)
     {
-      return (Syllabus::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+
     }
 }

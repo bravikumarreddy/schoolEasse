@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('transportation/delete/{transportation_id}', 'TransportationController@destroy');
 
     Route::get('hostel', 'HostelsController@index');
+    Route::get('/syllabus/{teacherSubjectId}/{SubjectId}',"SyllabusController@show");
+    Route::post('/syllabus_status/create',"SyllabusStatusController@create");
+
     Route::post('hostel/create', 'HostelsController@create');
     Route::delete('hostel/delete/{hostel_id}', 'HostelsController@destroy');
     // Route::get('/view-attendance/section/{section_id}',function($section_id){
@@ -102,6 +105,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('create-gpa', 'GradesystemController@store');
     Route::post('gpa/delete', 'GradesystemController@destroy');
     Route::post('/dashboard/setting/upload-image','HomeController@uploadImage');
+    Route::get('/leave/requests','LeaveController@requests');
+    Route::post('/leave/approve-request','LeaveController@approveRequests');
 });
 
 Route::middleware(['auth', 'teacher'])->group(function () {
@@ -109,6 +114,7 @@ Route::middleware(['auth', 'teacher'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
     if ('production' != config('app.env')) {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
         Route::post('user/config/impersonate', 'UserController@impersonate');
@@ -123,6 +129,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
     Route::get('communicate', 'CommunicationController@index');
+
 });
 
 Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth', 'student']);
@@ -139,14 +146,13 @@ Route::middleware(['auth', 'teacher'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->prefix('academic')->name('academic.')->group(function () {
 
-    Route::get('syllabus', 'SyllabusController@index');
-    Route::get('syllabus/{class_id}', 'SyllabusController@create');
+
     Route::get('notice', 'NoticeController@create');
     Route::get('event', 'EventController@create');
     Route::get('routine', 'RoutineController@index');
     Route::get('routine/{section_id}', 'RoutineController@create');
     Route::prefix('remove')->name('remove.')->group(function () {
-        Route::get('syllabus/{id}', 'SyllabusController@update');
+
         Route::get('notice/{id}', 'NoticeController@update');
         Route::get('event/{id}', 'EventController@update');
         Route::get('routine/{id}', 'RoutineController@update');
@@ -167,6 +173,7 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('exams/active', 'ExamController@indexActive');
     Route::get('school/classes', 'SectionController@classes');
     Route::get('school/sections', 'SectionController@index');
+    Route::get('delete-expense/{id}', 'AccountController@deleteExpense');
 });
 
 Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
@@ -310,9 +317,14 @@ Route::middleware(['auth', 'teacher'])->group(function () {
 
     Route::post('calculate-marks', 'GradeController@calculateMarks');
     Route::get('/leave/teacher', "LeaveController@index");
+    Route::get('/leave/teacher/requests', "LeaveController@requests");
+    Route::post('/leave/teacher/create', "LeaveController@create");
+    Route::post('/leave/teacher/approve-request','LeaveController@approveRequests');
     Route::get('assignment/{teacher_subject_id}','AssignmentsController@index');
     Route::post('assignment/submit','AssignmentsController@create');
     Route::get('/assignment/submissions/{assignment_id}','AssignmentSubmissionController@submissions');
+    Route::get('/syllabus/create' , "SyllabusController@index");
+
    // Route::post('message/students', 'NotificationController@store');
 
 });
@@ -343,7 +355,7 @@ Route::prefix('emails')->group(function () {
 Route::middleware(['auth', 'student'])->prefix('stripe')->group(function () {
     Route::get('charge', 'CashierController@index');
     Route::post('charge', 'CashierController@store');
-    Route::get('/leave/student', "LeaveController@index");
+
 });
 
 Route::middleware(['auth', 'student'])->group(function () {
@@ -351,6 +363,8 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::get('marks/student','ExamMarksController@studentMarks');
     Route::get('payment', 'PaymentsController@index');
     Route::post('charge', 'CashierController@store');
+    Route::get('/leave/student', "LeaveController@index");
+    Route::post('/leave/student/create', "LeaveController@create");
     Route::get('/assignment/student/{teacher_subject_id}','AssignmentsController@studentList');
     Route::get('assignment/student/submit/{assignment_id}','AssignmentsController@studentSubmit');
     Route::post('assignment/student/submit/{assignment_id}','AssignmentSubmissionController@submitAssignment');

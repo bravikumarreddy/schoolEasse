@@ -1,9 +1,52 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./resources/assets/js/components/Multiple/Communicate.js":
-/*!****************************************************************!*\
-  !*** ./resources/assets/js/components/Multiple/Communicate.js ***!
-  \****************************************************************/
+/***/ "./resources/assets/js/components/Multiple/Components/Loader.js":
+/*!**********************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Components/Loader.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Loader(props) {
+  var size = "3rem";
+  var margin = "5";
+
+  if (props.size) {
+    size = props.size;
+  }
+
+  if (props.margin) {
+    margin = props.margin;
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border   m-".concat(margin, " "),
+    role: "status",
+    style: {
+      width: size,
+      height: size
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Loading...")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Multiple/Syllabus.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/components/Multiple/Syllabus.js ***!
+  \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14,17 +57,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Loader */ "./resources/assets/js/components/Multiple/Components/Loader.js");
-/* harmony import */ var _Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Selectors/Group */ "./resources/assets/js/components/Multiple/Components/Selectors/Group.js");
-/* harmony import */ var _Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Selectors/Individual */ "./resources/assets/js/components/Multiple/Components/Selectors/Individual.js");
-/* harmony import */ var _Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Selectors/ClassSection */ "./resources/assets/js/components/Multiple/Components/Selectors/ClassSection.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-datepicker */ "./node_modules/react-datepicker/dist/react-datepicker.min.js");
-/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
-/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(dateformat__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function _typeof(obj) {
@@ -184,57 +218,64 @@ function _getPrototypeOf(o) {
 
 
 
+var Syllabus = /*#__PURE__*/function (_React$Component) {
+  _inherits(Syllabus, _React$Component);
 
+  var _super = _createSuper(Syllabus);
 
-
-
-
-
-var Communicate = /*#__PURE__*/function (_React$Component) {
-  _inherits(Communicate, _React$Component);
-
-  var _super = _createSuper(Communicate);
-
-  function Communicate(props) {
+  function Syllabus(props) {
     var _this;
 
-    _classCallCheck(this, Communicate);
+    _classCallCheck(this, Syllabus);
 
     _this = _super.call(this, props);
     _this.state = {
-      category: "individual",
-      group: "",
-      section_ids: {},
-      individual_ids: [],
-      message: "",
-      title: "",
-      communicationList: [],
-      pagination: {},
-      success: false,
-      role: ""
+      classes: "",
+      "class": "",
+      classLoading: false,
+      className: "",
+      subjects: [],
+      subject: "",
+      createSubjectName: "",
+      syllabus: [],
+      topic: "",
+      reference: "",
+      comments: ""
     };
-    _this.getCommunications = _this.getCommunications.bind(_assertThisInitialized(_this));
-    _this.createMessage = _this.createMessage.bind(_assertThisInitialized(_this));
-    _this.getRole = _this.getRole.bind(_assertThisInitialized(_this));
+    _this.getClasses = _this.getClasses.bind(_assertThisInitialized(_this));
+    _this.getSubjects = _this.getSubjects.bind(_assertThisInitialized(_this));
+    _this.getSyllabus = _this.getSyllabus.bind(_assertThisInitialized(_this));
+    _this.createSubjects = _this.createSubjects.bind(_assertThisInitialized(_this));
+    _this.addSyllabus = _this.addSyllabus.bind(_assertThisInitialized(_this));
+    _this.deleteSyllabus = _this.deleteSyllabus.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Communicate, [{
+  _createClass(Syllabus, [{
     key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getClasses();
+    }
+  }, {
+    key: "getClasses",
     value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var _getClasses = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getCommunications();
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/classes");
 
               case 2:
-                _context.next = 4;
-                return this.getRole();
+                res = _context.sent;
+                console.log(res.data);
+                this.setState({
+                  classes: res.data
+                });
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -242,30 +283,31 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         }, _callee, this);
       }));
 
-      function componentDidMount() {
-        return _componentDidMount.apply(this, arguments);
+      function getClasses() {
+        return _getClasses.apply(this, arguments);
       }
 
-      return componentDidMount;
+      return getClasses;
     }()
   }, {
-    key: "getRole",
+    key: "getSyllabus",
     value: function () {
-      var _getRole = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var _getSyllabus = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(subject_id, subject_name) {
         var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/users/role");
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/syllabus/".concat(subject_id));
 
               case 2:
                 res = _context2.sent;
+                console.log(res);
                 this.setState({
-                  role: res.data
+                  subject: subject_id,
+                  syllabus: res.data
                 });
-                console.log(res.data);
 
               case 5:
               case "end":
@@ -275,59 +317,43 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         }, _callee2, this);
       }));
 
-      function getRole() {
-        return _getRole.apply(this, arguments);
+      function getSyllabus(_x, _x2) {
+        return _getSyllabus.apply(this, arguments);
       }
 
-      return getRole;
+      return getSyllabus;
     }()
   }, {
-    key: "createMessage",
+    key: "getSubjects",
     value: function () {
-      var _createMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var section_ids, individual_ids, i, key, res;
+      var _getSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(class_id, className) {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                section_ids = [];
-                individual_ids = [];
-
-                if (this.state.category == 'individual') {
-                  for (i = 0; i < this.state.individual_ids.length; i++) {
-                    individual_ids.push(this.state.individual_ids[i].id);
-                  }
-                }
-
-                for (key in this.state.section_ids) {
-                  if (this.state.section_ids[key]) {
-                    section_ids.push(key);
-                  }
-                }
-
-                _context3.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("/api/communicate/create", {
+                this.setState({
+                  className: className,
+                  section: "",
+                  classLoading: true
+                });
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects", {
                   params: {
-                    category: this.state.category,
-                    group: this.state.group,
-                    title: this.state.title,
-                    message: this.state.message,
-                    section_ids: section_ids,
-                    individual_ids: individual_ids
+                    class_id: class_id
                   }
                 });
+
+              case 3:
+                res = _context3.sent;
+                this.setState({
+                  "class": class_id,
+                  subjects: res.data,
+                  classLoading: false
+                });
+                console.log(res.data);
 
               case 6:
-                res = _context3.sent;
-                _context3.next = 9;
-                return this.getCommunications();
-
-              case 9:
-                this.setState({
-                  success: true
-                });
-
-              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -335,46 +361,42 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         }, _callee3, this);
       }));
 
-      function createMessage() {
-        return _createMessage.apply(this, arguments);
+      function getSubjects(_x3, _x4) {
+        return _getSubjects.apply(this, arguments);
       }
 
-      return createMessage;
+      return getSubjects;
     }()
   }, {
-    key: "getCommunications",
+    key: "createSubjects",
     value: function () {
-      var _getCommunications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var url,
-            urlObj,
-            res,
-            _args4 = arguments;
+      var _createSubjects = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                url = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : null;
-                console.log(url);
-
-                if (url == null) {
-                  url = "/api/communicate/get";
-                } else {
-                  urlObj = new URL(url);
-                  url = urlObj.pathname + "?" + urlObj.searchParams;
-                }
-
-                console.log(url);
-                _context4.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.get(url);
-
-              case 6:
-                res = _context4.sent;
                 this.setState({
-                  communicationList: res.data.data,
-                  pagination: res.data
+                  section: "",
+                  classLoading: true
+                });
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/subjects/create", {
+                  params: {
+                    class_id: this.state["class"],
+                    name: this.state.createSubjectName
+                  }
                 });
 
-              case 8:
+              case 3:
+                res = _context4.sent;
+                console.log(res.data);
+                this.setState({
+                  subjects: res.data,
+                  classLoading: false
+                });
+
+              case 6:
               case "end":
                 return _context4.stop();
             }
@@ -382,211 +404,249 @@ var Communicate = /*#__PURE__*/function (_React$Component) {
         }, _callee4, this);
       }));
 
-      function getCommunications() {
-        return _getCommunications.apply(this, arguments);
+      function createSubjects() {
+        return _createSubjects.apply(this, arguments);
       }
 
-      return getCommunications;
+      return createSubjects;
+    }()
+  }, {
+    key: "addSyllabus",
+    value: function () {
+      var _addSyllabus = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/syllabus/add/", {
+                  params: {
+                    subject_id: this.state.subject,
+                    topic: this.state.topic,
+                    reference: this.state.reference,
+                    comments: this.state.comments
+                  }
+                });
+
+              case 2:
+                res = _context5.sent;
+                _context5.next = 5;
+                return this.getSyllabus(this.state.subject, "");
+
+              case 5:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function addSyllabus() {
+        return _addSyllabus.apply(this, arguments);
+      }
+
+      return addSyllabus;
+    }()
+  }, {
+    key: "deleteSyllabus",
+    value: function () {
+      var _deleteSyllabus = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(syllabus_id) {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/syllabus/delete", {
+                  params: {
+                    syllabus_id: syllabus_id
+                  }
+                });
+
+              case 2:
+                res = _context6.sent;
+                _context6.next = 5;
+                return this.getSyllabus(this.state.subject, "");
+
+              case 5:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function deleteSyllabus(_x5) {
+        return _deleteSyllabus.apply(this, arguments);
+      }
+
+      return deleteSyllabus;
     }()
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log(this.state.pagination);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.success && this.state.role !== "" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "alert alert-success alert-dismissible fade show",
-        role: "alert"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "    Message sent  sucessfully "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        onClick: function onClick() {
-          _this2.setState({
-            success: false
-          });
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-orange"
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-info mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header  bg-orange border-0 text-white"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "nav nav-tabs card-header-tabs nav-fill bg-orange"
-      }, this.state.role !== "student" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "nav-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: this.state.category == 'groups' ? "nav-link active text-orange" : "nav-link ",
-        onClick: function onClick() {
-          return _this2.setState({
-            category: "groups"
-          });
-        }
-      }, "Groups")) : "", this.state.role !== "student" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "nav-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: this.state.category == 'class' ? "nav-link active text-orange" : "nav-link ",
-        onClick: function onClick() {
-          return _this2.setState({
-            category: "class"
-          });
-        }
-      }, "Class")) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "nav-item p-0"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: this.state.category == 'individual' ? "nav-link active text-orange" : "nav-link ",
-        onClick: function onClick() {
-          return _this2.setState({
-            category: "individual"
-          });
-        }
-      }, "Individual")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-info"
+      }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
-      }, this.state.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Group__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        group: this.state.group,
-        setGroup: function setGroup(group) {
-          _this2.setState({
-            group: group
-          });
-        }
-      }) : "", this.state.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_ClassSection__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        setSections: function setSections(section_ids) {
-          _this2.setState({
-            section_ids: section_ids
-          });
-        }
-      }) : "", this.state.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Selectors_Individual__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        individuals: this.state.individual_ids,
-        setIndividuals: function setIndividuals(individual_ids) {
-          _this2.setState({
-            individual_ids: individual_ids
-          });
-        }
-      }) : "")), this.state.category == 'groups' && this.state.group || this.state.category == 'individual' && this.state.individual_ids.length !== 0 || this.state.category == 'class' && Object.keys(this.state.section_ids).length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-messenger mt-3 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-messenger border-0"
-      }, "Message Input"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "fee_structure",
+        className: "col-form-label"
+      }, "Select Class"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state["class"],
+        id: "fee_structure",
+        className: "form-control custom-select",
+        name: "fee_structure",
+        onChange: function onChange(event) {
+          _this2.getSubjects(event.target.value, event.target.options[event.target.options.selectedIndex].text);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: ""
+      }, "Class"), this.state.classes.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+          key: val.id,
+          value: val.id
+        }, val.class_number);
+      }))), this.state["class"] && this.state.classLoading == false ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-4 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "subject",
+        className: "col-form-label"
+      }, "Select Subject"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.subject,
+        id: "fee_structure",
+        className: "form-control custom-select",
+        name: "subject",
+        onChange: function onChange(event) {
+          _this2.getSyllabus(event.target.value, event.target.options[event.target.options.selectedIndex].text);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: ""
+      }, "Subject"), this.state.subjects.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+          key: val.id,
+          value: val.id
+        }, val.name);
+      }))) : ""))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null), this.state.subject ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-orange mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-orange"
+      }, "Add Syllabus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        method: "post",
+        autoComplete: "off",
+        action: "/syllabus/add",
         onSubmit: function onSubmit(event) {
           event.preventDefault();
 
-          _this2.createMessage();
+          _this2.addSyllabus();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-6 mb-3 form-group row"
+        className: "form-group col-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: " col-4 col-form-label",
-        htmlFor: "title"
-      }, "Message Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        className: "form-control",
-        id: "title",
+        htmlFor: "topic"
+      }, "Topic Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "text",
-        required: true,
-        value: this.state.title,
+        className: "form-control",
+        id: "topic",
+        placeholder: "Enter Topic Name",
+        value: this.state.topic,
         onChange: function onChange(event) {
           _this2.setState({
-            title: event.target.value
+            topic: event.target.value
           });
         },
-        placeholder: "Title"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group col-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
-        htmlFor: "from"
-      }, "Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        htmlFor: "reference"
+      }, "References"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "text",
         className: "form-control",
-        id: "message",
-        placeholder: "message",
-        "aria-label": "With textarea",
-        maxLength: 1499,
-        value: this.state.message,
+        id: "reference",
+        placeholder: "Textbook / article",
+        value: this.state.reference,
         onChange: function onChange(event) {
           _this2.setState({
-            message: event.target.value
+            reference: event.target.value
+          });
+        },
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group col-6"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        htmlFor: "Comments"
+      }, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        type: "text",
+        className: "form-control",
+        id: "Comments",
+        placeholder: "Info",
+        value: this.state.comments,
+        onChange: function onChange(event) {
+          _this2.setState({
+            comments: event.target.value
           });
         }
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-success ml-2"
-      }, "Send Message")))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-indigo mt-3 mb-3"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-header text-white bg-indigo border-0"
-      }, "Communication Log"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-sm-8 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success"
+      }, "Submit")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card border-messenger mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-header text-white bg-messenger"
+      }, "Add Syllabus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-10"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "list-group-item  d-flex justify-content-between align-items-center "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Index "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Title "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Category ")))), this.state.communicationList.map(function (val, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-          key: val.id,
-          className: "list-group-item  d-flex justify-content-between align-items-center "
+        className: " mt-3 list-group  mb-4"
+      }, this.state.syllabus.map(function (val) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, {
+          key: val.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+          className: "list-group-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", (_this2.state.pagination.current_page - 1) * _this2.state.pagination.per_page + index + 1)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-8"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.category, " ")));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
-        "aria-label": "Page navigation example",
-        className: "mt-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "pagination d-inline-flex"
-      }, this.state.pagination.prev_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.prev_page_url);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "#",
-        className: "page-link "
-      }, "Previous")) : "", this.state.pagination.next_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.next_page_url);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: "page-link text-white "
-      }, "Next")) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "pagination float-right"
-      }, this.state.pagination.first_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item float-right",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.first_page_url);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        className: "page-link text-white "
-      }, "First")) : "", this.state.pagination.last_page_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-        className: "page-item float-right",
-        onClick: function onClick() {
-          return _this2.getCommunications(_this2.state.pagination.last_page_url);
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "#",
-        className: "page-link "
-      }, "Last")) : "")))));
+          className: "d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", {
+          className: "text-messenger"
+        }, "Topic :  \xA0\xA0"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.topic))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: " pt-3 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", {
+          className: "text-messenger"
+        }, "Reference :  \xA0\xA0"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.reference))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: " pt-3 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", {
+          className: "text-messenger"
+        }, "Comments :  \xA0\xA0"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.comments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: " pt-3 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-danger",
+          onClick: function onClick() {
+            return _this2.deleteSyllabus(val.id);
+          }
+        }, "Delete"))));
+      }))))) : "");
     }
   }]);
 
-  return Communicate;
+  return Syllabus;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Communicate);
+/* harmony default export */ __webpack_exports__["default"] = (Syllabus);
 
 /***/ })
 

@@ -556,9 +556,7 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
           className: "col-2 d-flex justify-content-between align-items-center"
         }, " ", val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "col-2 d-flex justify-content-between align-items-center"
-        }, "Class - ", val.class_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "col-2 d-flex justify-content-between align-items-center"
-        }, "Section - ", val.section_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        }, "Class - ", val.class_number, " Section - ", val.section_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "col-2 d-flex justify-content-between align-items-center"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           className: "btn btn-sm btn-success",
@@ -575,7 +573,12 @@ var TeacherSubjects = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
           className: "btn btn-sm btn-messenger",
           href: "/assignment/".concat(val.teacher_subject_id)
-        }, "Assignments"))));
+        }, "Assignments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "col-2 d-flex justify-content-between align-items-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          className: "btn btn-sm btn-indigo",
+          href: "/syllabus/".concat(val.teacher_subject_id, "/").concat(val.subject_id)
+        }, "Syllabus"))));
       })))) : " No subjects are assigned "), this.state.classId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-indigo mt-4 mb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

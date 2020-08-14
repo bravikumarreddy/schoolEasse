@@ -79,14 +79,18 @@
                     year: '2-digit',
                 },
                 events: [
+                        @isset($absent_details)
                     @foreach($absent_details as $absent)
                     {
                         title: "Absent {{$absent->session}}" ,
                         start:"{{Carbon\Carbon::parse($absent->date)->format("Y-m-d")}}",
                         color: '#E74B3C'
                     },
+                        @endforeach
+                    @endisset
 
-                    @endforeach
+
+
                     @isset($teacher_events)
                             @foreach($teacher_events as $event)
                                 {
@@ -98,6 +102,20 @@
 
                             @endforeach
                     @endisset
+
+                        @isset($absent_events)
+                        @foreach($absent_events as $event)
+                    {
+                        title: "{{$event->title}}" ,
+                        start:"{{Carbon\Carbon::parse($event->from)->format("Y-m-d")}}",
+                        end:"{{Carbon\Carbon::parse($event->to)->format("Y-m-d")}}",
+                        color: '{{$event->color}}'
+                    },
+
+                        @endforeach
+
+
+                        @endisset
 
 
                         @isset($exam_events)

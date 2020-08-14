@@ -11,7 +11,7 @@ class ExamMarksTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+
         //factory(\App\ExamMarks::class,2000)->create();
     }
 }

@@ -112,31 +112,8 @@ class HomeController extends Controller
             $totalSections = \Cache::remember('totalSections-'.$school_id, $minutes, function () use ($classes) {
               return \App\Section::whereIn('class_id', $classes)->count();
             });
-            $notices = \Cache::remember('notices-'.$school_id, $minutes, function () use($school_id) {
-              return \App\Notice::bySchool($school_id)
-                                ->where('active',1)
-                                ->get();
-            });
-            $events = \Cache::remember('events-'.$school_id, $minutes, function () use($school_id) {
-              return \App\Event::bySchool($school_id)
-                              ->where('active',1)
-                              ->get();
-            });
-            $routines = \Cache::remember('routines-'.$school_id, $minutes, function () use($school_id) {
-              return \App\Routine::bySchool($school_id)
-                                ->where('active',1)
-                                ->get();
-            });
-            $syllabuses = \Cache::remember('syllabuses-'.$school_id, $minutes, function () use($school_id) {
-              return \App\Syllabus::bySchool($school_id)
-                                  ->where('active',1)
-                                  ->get();
-            });
-            $exams = \Cache::remember('exams-'.$school_id, $minutes, function () use($school_id) {
-              return \App\Exam::bySchool($school_id)
-                              ->where('active',1)
-                              ->get();
-            });
+
+
             // if(\Auth::user()->role == 'student')
             //   $messageCount = \App\Notification::where('student_id',\Auth::user()->id)->count();
             // else
@@ -221,11 +198,6 @@ class HomeController extends Controller
               'totalBooks'=>$totalBooks,
               'totalClasses'=>$totalClasses,
               'totalSections'=>$totalSections,
-              'notices'=>$notices,
-              'events'=>$events,
-              'routines'=>$routines,
-              'syllabuses'=>$syllabuses,
-              'exams'=>$exams,
               'studentsFullDay'=>$studentsFullDay,
               'studentsHalfDay'=>$studentsHalfDay,
               'totalStaff' => $totalStaff,

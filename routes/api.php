@@ -23,6 +23,10 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::get('/attendance/daily-attendance/teachers/departments', 'StaffAttendanceController@apiGetDepartments');
     Route::get('/attendance/daily-attendance/teachers/getTeachers', 'StaffAttendanceController@apiGetTeachers');
     Route::get('/exams/grade-system/get', 'GradesystemController@apiGetGradeSystems');
+    Route::get('/syllabus/add/',"SyllabusController@apiAddSyllabus");
+    Route::get('/syllabus/delete/',"SyllabusController@apiDeleteSyllabus");
+
+    Route::get('/syllabus/{subject_id}', 'SyllabusController@apiGetSyllabus');
 
 });
 

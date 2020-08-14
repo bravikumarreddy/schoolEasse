@@ -180,8 +180,7 @@ class TeacherSubjects extends React.Component {
                                                     <li key={index} className="list-group-item ">
                                                         <div className="row">
                                                             <span className="col-2 d-flex justify-content-between align-items-center"> {val.name}</span>
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">Class - {val.class_number}</span>
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">Section - {val.section_number}</span>
+                                                            <span className="col-2 d-flex justify-content-between align-items-center">Class - {val.class_number} Section - {val.section_number}</span>
 
                                                             <span className="col-2 d-flex justify-content-between align-items-center">
                                                                     <button className="btn btn-sm btn-success" onClick={( )=>{ this.getExams(val.subject_id,val.class_id,val.section_id,val.class_number)}} >
@@ -198,6 +197,12 @@ class TeacherSubjects extends React.Component {
                                                             <span className="col-2 d-flex justify-content-between align-items-center">
                                                                     <a className="btn btn-sm btn-messenger" href={`/assignment/${val.teacher_subject_id}` }  >
                                                                             Assignments
+                                                                    </a>
+                                                            </span>
+
+                                                            <span className="col-2 d-flex justify-content-between align-items-center">
+                                                                    <a className="btn btn-sm btn-indigo" href={`/syllabus/${val.teacher_subject_id}/${val.subject_id}` }  >
+                                                                            Syllabus
                                                                     </a>
                                                             </span>
 

@@ -21,7 +21,7 @@ const StudentList = loadable(() => import('./StudentList'))
 const TeacherSubjects = loadable(() => import('./TeacherSubjects'))
 
 const TeacherAttendance = loadable(() => import('../Attendance/TeacherAttendance'))
-
+const Syllabus = loadable(() => import('./Syllabus'))
 const StaffAttendance = loadable(() => import('../Attendance/StaffAttendance'))
 
 const TimeTable = loadable(() => import('./TimeTable'))
@@ -48,7 +48,10 @@ class Multiple extends React.Component {
           <Router>
             <div>
                 <Switch>
+                    <Route path="/syllabus/create">
 
+                        <Syllabus />
+                    </Route>
                     <Route path="/grades/all-grades">
 
                         <AllStudentGrades />

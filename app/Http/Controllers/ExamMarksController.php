@@ -89,9 +89,8 @@ class ExamMarksController extends Controller
 
         $exam_marks->save();
 
-
-
         return $this->apiGetStudents($request);
+
     }
     public function apiRemoveMarks(Request $request){
 

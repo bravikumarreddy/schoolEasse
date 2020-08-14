@@ -23,6 +23,7 @@
                                 <th scope="col">Section</th>
                                 <th scope="col">Teacher Name</th>
                                 <th scope="col">Assignments</th>
+                                <th scope="col">Syllabus</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,12 @@
 
                                         <a class="btn btn-sm btn-messenger" href='/assignment/student/{{$subject->teacher_subject_id}}' >
                                             Assignments
+                                        </a>
+                                    </td>
+                                    <td>
+
+                                        <a class="btn btn-sm btn-indigo" href='/syllabus/{{$subject->teacher_subject_id}}/{{$subject->subject_id}}' >
+                                            Syllabus
                                         </a>
                                     </td>
                                 @else

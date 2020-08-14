@@ -97,6 +97,12 @@
 
   </li>
 
+
+<li class="nav-item">
+            {{--    <a class="nav-link" href="{{ url('academic/routine') }}"><i class="material-icons">calendar_today</i> <span class="nav-link-text p-2">@lang('Class Routine')</span></a>--}}
+            <a class="nav-link" href="{{ url('leave/requests') }}"><i class="material-icons">ballot</i> <span class="nav-link-text p-2">@lang('Leave Requests')</span></a>
+
+        </li>
 {{--  <li class="nav-item">--}}
 {{--    <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text p-2">@lang('Syllabus')</span></a>--}}
 {{--  </li>--}}
@@ -183,6 +189,8 @@
       </li>
     </ul>
   </li>
+
+
   @endif
   @if(Auth::user()->role == 'student')
 
@@ -203,9 +211,9 @@
   <li class="nav-item">
     <a class="nav-link" href="{{url('payment')}}"><i class="material-icons">payment</i> <span class="nav-link-text p-2">@lang('Payment')</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{url('stripe/receipts')}}"><i class="material-icons">receipt</i> <span class="nav-link-text p-2">@lang('Receipt')</span></a>
-  </li>
+{{--  <li class="nav-item">--}}
+{{--    <a class="nav-link" href="{{url('stripe/receipts')}}"><i class="material-icons">receipt</i> <span class="nav-link-text p-2">@lang('Receipt')</span></a>--}}
+{{--  </li>--}}
   @endif
   {{--<div style="text-align:center;">@lang('Student')</div>--}}
   {{--<div style="text-align:center;">@lang('Teacher')</div>--}}
@@ -262,12 +270,31 @@
                 <span class="nav-link-text p-2">@lang('Apply Leave')</span> </a>
         </li>
 
+        <li class="nav-item">
+            {{--    <a class="nav-link" href="{{ url('academic/routine') }}"><i class="material-icons">calendar_today</i> <span class="nav-link-text p-2">@lang('Class Routine')</span></a>--}}
+            <a class="nav-link" href="{{ url('leave/teacher/requests') }}"><i class="material-icons">ballot</i> <span class="nav-link-text p-2">@lang('Leave Requests')</span></a>
+
+        </li>
+
+        <li class="nav-item dropdown">
+            <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                    class="material-icons">local_library</i> <span class="nav-link-text p-2">@lang('Syllabus')</span> <i class="material-icons float-right">keyboard_arrow_down</i></a>
+            <ul class="dropdown-menu" style="width: 100%;">
+                <!-- Dropdown menu links -->
+                <li>
+                    <a class="dropdown-item" href={{"/syllabus/create"}}><i class="material-icons">local_library</i>
+                        <span class="nav-link-text p-2"> @lang('Add Syllabus') </span></a>
+                </li>
+
+            </ul>
+        </li>
+
 
     @endif
 
     @if( Auth::user()->role == 'student')
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('leave/teacher') }}"><i class="material-icons">card_travel</i>
+            <a class="nav-link" href="{{ url('leave/student') }}"><i class="material-icons">card_travel</i>
                 <span class="nav-link-text p-2">@lang('Apply Leave')</span>
             </a>
         </li>

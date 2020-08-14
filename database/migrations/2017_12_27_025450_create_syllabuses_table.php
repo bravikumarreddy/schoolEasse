@@ -14,14 +14,21 @@ class CreateSyllabusesTable extends Migration
     public function up()
     {
         Schema::create('syllabuses', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->string('file_path');
-            $table->string('title');
-            $table->text('description');
-            $table->tinyInteger('active');
-            $table->integer('school_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->string('topic');
+            $table->text('reference');
+            $table->integer('subject_id')->unsigned();
+            $table->text('comments');
             $table->timestamps();
+
+
+        });
+
+        Schema::table('syllabuses', function (Blueprint $table) {
+
+            $table->foreign('subject_id')->references("id")->on("subjects")->onDelete('cascade');
+
         });
     }
 

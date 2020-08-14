@@ -119,6 +119,7 @@ class DailyAttendanceController extends Controller
                         ->where('group_name',"=","all")->get();
 
         $individual_events = SchoolEvent::where('school_id','=',$school_id)
+            ->where('category',"=",'individual')
             ->where('individual_id',"=",$user_id)->get();
 
 
@@ -144,6 +145,10 @@ class DailyAttendanceController extends Controller
                     ->where('sections.id',"=",Auth::user()->section_id);
                 })->get();
 
+            $absent_events = SchoolEvent::where('school_id','=',$school_id)
+                ->where('category',"=",'absent')
+                ->where('individual_id',"=",$user_id)->get();
+
             return view("attendance.calendar",compact('absent_details',
                 'classTimeTable'
                 ,'all_events'
@@ -151,6 +156,7 @@ class DailyAttendanceController extends Controller
                 ,'section_events'
                 ,'individual_events'
                 , 'exam_events'
+                ,'absent_events'
 
             ));
         }
@@ -165,14 +171,17 @@ class DailyAttendanceController extends Controller
                 $teacher_events = SchoolEvent::where('school_id','=',$school_id)
                     ->where('group_name',"=","teacher")->get();
                 $teacherTimeTable = app(TimeTableController::class)->teacherTimeTable( $user_id);
-
+                $absent_events = SchoolEvent::where('school_id','=',$school_id)
+                    ->where('category',"=",'absent')
+                    ->where('individual_id',"=",$user_id)->get();
 
                 return view("attendance.calendar",compact(
                     'absent_details',
                     'teacherTimeTable',
                     'all_events',
                     'teacher_events',
-                    'individual_events'
+                    'individual_events',
+                    'absent_events'
 
 
                 ));
