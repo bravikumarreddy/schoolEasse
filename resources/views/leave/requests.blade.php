@@ -96,7 +96,7 @@
                         @endforeach
 
                     </ul>
-                    {{$leave->links}}
+                    {{$leaves->links()}}
                 </div>
             </div>
 
