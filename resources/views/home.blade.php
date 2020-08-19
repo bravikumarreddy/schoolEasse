@@ -12,12 +12,14 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
 
-        <div class="col-md-10" id="main-container">
-            <div class="pt-3 card border-0 " >
+
+        <div class="col-lg" id="main-container">
+
+            <div class="pt-lg-3 card border-0 " >
 
                 <div class="card-body">
                     @if (session('status'))
@@ -29,30 +31,28 @@
                             <div class="card border-0 p-0 mb-3 shadow">
 
                                 <div class="card-body p-0 m-0 mb-4">
-                                    <div class="card-header bg-messenger text-white mb-3 border-0">
-                                        <h4 class="d-inline">
+                                    <div class="card-header pl-0 pr-0 ml-0 mr-0  d-flex bg-messenger row justify-content-between text-white mb-3 border-0">
+                                        <h4 class="d-inline-block align-self-center mx-auto text-center pl-3 pr-4 mr-4">
                                             Attendance Overview
                                         </h4>
-                                        <div class="d-flex flex-row float-right">
-                                            <div class="mr-4">
-                                                <h5 class="d-inline mr-1"><span class="badge" style="background-color:#4FE3BF">&nbsp;&nbsp;</span>
-
-                                                </h5>
-                                                <span> Preset </span>
+                                        <div class="d-flex row col-sm  justify-content-around mr-1 pr-1 pl-3 ">
+                                            <div class="mr-1">
+                                                <h5 class="d-inline "><span class="badge" style="background-color:#4FE3BF">&nbsp;&nbsp;</span></h5>
+                                                <span> &nbsp; Preset </span>
 
                                             </div>
-                                            <div class="mr-4">
-                                                <h5 class="d-inline mr-1"><span class="badge" style="background-color:#FFCE56">&nbsp;&nbsp;</span>
+                                            <div class="mr-1 ">
+                                                <h5 class="d-inline "><span class="badge" style="background-color:#FFCE56">&nbsp;&nbsp;</span>
 
                                                 </h5>
-                                                <span> Half Day </span>
+                                                <span > &nbsp; Half Day </span>
 
                                             </div>
-                                            <div class="mr-4">
-                                                <h5 class="d-inline mr-1"><span class="badge" style="background-color:#FF6383">&nbsp;&nbsp;</span>
+                                            <div class=" mr-1 ">
+                                                <h5 class="d-inline "><span class="badge" style="background-color:#FF6383">&nbsp;&nbsp;</span>
 
                                                 </h5>
-                                                <span> Absent </span>
+                                                <span> &nbsp; Absent </span>
 
                                             </div>
 
@@ -60,7 +60,7 @@
                                     </div>
 
 
-                                    <div class="d-flex flex-row justify-content-around">
+                                    <div class="d-flex row justify-content-around p-2 m-2">
                                         <div class="">
                                             <div  style="width: 150px; height: 150px; position: relative;">
                                                 <canvas class="m-auto" id="doughnut" width="100px" height="100px"></canvas>
@@ -136,7 +136,7 @@
 
 
                     <div class="row" >
-                        <div class="col-sm-8">
+                        <div class="col-xl-8 col-lg-6 col-md-6">
                             <div class="card shadow" style="background-color: rgb(255,255,255);">
                                 <div class="card-header text-white bg-yellow"><h4 class="mb-0" > Welcome to {{Auth::user()->school->name}}</h4> </div>
                                 <div class="card-body text-dark">
@@ -155,7 +155,7 @@
                             </div>
 
 
-                            <div class="card shadow-lg mt-4 overflow-hidden ">
+                            <div class="card shadow-lg mt-4 overflow-hidden mb-3">
                                 <div class="card-body p-0 m-0 ">
                                     <div id="carouselExampleControls" class="carousel slide overflow-hidden"  style="" data-ride="carousel">
                                         <div class="carousel-inner" >
@@ -230,10 +230,10 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
-                            <div class="h-100 card mb-3 shadow">
+                        <div class="col-xl-4  col-lg-6  col-md-6 mb-3">
+                            <div class="  card mb-3 shadow" style="height: 500px" >
                                 <div class="card-header mb-2 text-white bg-orange"><h4 class="m-0"> @lang('School Events')</h4></div>
-                                <div class="  card-body mt-2 pt-0 ">
+                                <div class="  card-body  mt-2 pt-0 ">
                                         <div id="calendar"  ></div>
                                 </div>
                             </div>

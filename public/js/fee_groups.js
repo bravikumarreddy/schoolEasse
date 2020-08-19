@@ -63946,7 +63946,7 @@ var FeeGroups = /*#__PURE__*/function (_React$Component) {
       }, " Fee Structures"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-body p-0"
       }, this.state.fee_structures.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
-        className: "table mt-4 table-data-div   table-hover  table-bordered"
+        className: "table mt-4 table-data-div  table-responsive-sm table-hover  table-bordered"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
         className: "thead-light"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Fee Structure Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Instalments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Total Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.fee_structures.map(function (val) {
@@ -64188,7 +64188,7 @@ var FeeGroups = /*#__PURE__*/function (_React$Component) {
         className: "btn btn-primary",
         disabled: isEqual ? false : true
       }, "Submit"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        "class": "card-footer text-muted"
+        className: "card-footer text-muted"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         className: "float-right",
         id: "form-id",

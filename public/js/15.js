@@ -586,7 +586,7 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
       weekday[5] = "Friday";
       weekday[6] = "Saturday";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.state.classes ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Class Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card border-info mt-4"
+        className: "card border-info mt-4 mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-info"
       }, "Select Class And Section"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -634,90 +634,35 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
           value: val.id
         }, val.section_number);
       }))) : ""))), this.state.teacherSubjects.length && this.state.section ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "mt-4 mb-4"
+        className: "m-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-        className: "list-group col-8"
+        className: "list-group col-10"
       }, this.state.teacherSubjects.map(function (val) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
           key: val.teacher_subject_id,
           className: "list-group-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "row"
+          className: "row justify-content-between align-items-center"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
+          className: "col-sm-auto m-2"
         }, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-4"
+          className: "col-sm-auto m-2"
         }, val.teacher_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.teacher_name, " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "text-danger"
         }, "Teacher not assigned")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
+          className: "col-sm-auto m-2"
         }, val.teacher_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "button",
-          className: "btn btn-sm btn-orange ml-2 mr-2 ",
+          className: "btn btn-sm btn-orange  ",
           onClick: function onClick() {
             _this2.getTimeTable(val.teacher_subject_id, val.teacher_id);
           }
         }, "Select Teacher") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "col-sm-auto m-2"
         }, val.teacher_subject_id == _this2.state.teacher_subject ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
           className: "badge badge-pill badge-success"
         }, "Selected")) : "")));
       }))) : "", this.state.teacherLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null) : "", this.state.teacherLoading == false && this.state.teacher ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card col-5 border-0 m-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-        className: "card-header"
-      }, " Teacher Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        plugins: [_fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__["default"]],
-        initialView: "timeGridWeek",
-        themeSystem: "bootstrap",
-        expandRows: true,
-        slotEventOverlap: true,
-        scrollTime: "09:00:00",
-        titleFormat: {
-          month: 'short',
-          year: '2-digit'
-        },
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: ""
-        },
-        footerToolbar: {
-          center: 'timeGridWeek,timeGridDay,listWeek',
-          right: ""
-        },
-        events: teacherEvents
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card col-5 border-0 m-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-        className: "card-header"
-      }, " Class Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        plugins: [_fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__["default"]],
-        initialView: "timeGridWeek",
-        themeSystem: "bootstrap",
-        expandRows: true,
-        slotEventOverlap: true,
-        scrollTime: "09:00:00",
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: ""
-        },
-        titleFormat: {
-          month: 'short',
-          year: '2-digit'
-        },
-        footerToolbar: {
-          center: 'timeGridWeek,timeGridDay,listWeek'
-        },
-        events: classEvents
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card border-indigo mt-4 mb-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-header text-white bg-indigo"
@@ -730,24 +675,26 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
       }, this.state.classEvents.map(function (val) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
           key: val.time_table_id,
-          className: "list-group-item d-flex justify-content-between align-items-center"
+          className: "list-group-item  d-flex justify-content-between align-items-center"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "col-sm-auto m-2"
         }, val.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.teacher_name, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.from + " - " + val.to, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", weekday[val.day_of_the_week], " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "button",
-          className: "btn btn-sm btn-danger ml-2 mr-2 ",
+          className: "btn btn-sm btn-danger  ",
           onClick: function onClick() {
             _this2.deleteTimeTable(val.time_table_id);
           }
-        }, "Delete")));
+        }, "Delete"))));
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-5 p-0 mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
@@ -757,9 +704,9 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
           _this2.createTimeTable();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row"
+        className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-4 mb-3"
+        className: "col-sm-auto mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         className: "col-form-label",
         htmlFor: "week"
@@ -790,11 +737,11 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
       }, "Friday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: "6"
       }, "Saturday"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-4 mb-3"
+        className: "col-sm-auto mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-12 pl-0 col-form-label",
+        className: " d-inline-block pl-0 col-form-label",
         htmlFor: "from"
-      }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
+      }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
         selected: this.state.from,
         onChange: function onChange(value) {
           return _this2.setState({
@@ -809,11 +756,11 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
         className: "form-control",
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-4 mb-3"
+        className: "col-sm-auto mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-12 pl-0 col-form-label",
+        className: " d-inline-block pl-0 col-form-label",
         htmlFor: "to"
-      }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
+      }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
         selected: this.state.to,
         onChange: function onChange(value) {
           return _this2.setState({
@@ -829,8 +776,63 @@ var TimeTable = /*#__PURE__*/function (_React$Component) {
         required: true
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "submit",
-        className: "btn btn-success"
-      }, "Create time table")))))) : "") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+        className: "btn btn-success ml-3 "
+      }, "Create time table"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card col-sm-12 col-md-10 border-0 m-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+        className: "card-header"
+      }, " Teacher Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        plugins: [_fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__["default"]],
+        initialView: "timeGridWeek",
+        themeSystem: "bootstrap",
+        expandRows: true,
+        slotEventOverlap: true,
+        scrollTime: "09:00:00",
+        titleFormat: {
+          month: 'short',
+          year: '2-digit'
+        },
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: ""
+        },
+        footerToolbar: {
+          center: 'timeGridWeek,timeGridDay,listWeek',
+          right: ""
+        },
+        events: teacherEvents
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card  col-sm-12 col-md-10 border-0 m-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+        className: "card-header"
+      }, " Class Time Table"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        plugins: [_fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_6__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_9__["default"]],
+        initialView: "timeGridWeek",
+        themeSystem: "bootstrap",
+        expandRows: true,
+        slotEventOverlap: true,
+        scrollTime: "09:00:00",
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: ""
+        },
+        titleFormat: {
+          month: 'short',
+          year: '2-digit'
+        },
+        footerToolbar: {
+          center: 'timeGridWeek,timeGridDay,listWeek'
+        },
+        events: classEvents
+      }))))) : "") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 

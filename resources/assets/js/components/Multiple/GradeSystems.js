@@ -215,15 +215,15 @@ class GradeSystems extends React.Component {
                                 return (
                                     <React.Fragment key={value}>
                                         <div className="card col-4 p-0 m-2">
-                                            <div className="card-header bg-messenger text-white">
+                                            <div className="card-header bg-messenger row ml-0 mr-0 text-white justify-content-between">
                                                 <h5 className="mb-0 d-inline">{this.state.grade_systems[value][0].grade_system_name}</h5>
-                                                <button className="btn btn-xs p-1 m-0 btn-danger float-right" onClick={( )=>{this.deleteGradeSystem(value)}} >
+                                                <button className="btn btn-xs p-1 m-0 btn-danger " onClick={( )=>{this.deleteGradeSystem(value)}} >
                                                     <small>Delete</small>
                                                 </button>
 
                                             </div>
                                             <div className="card-body">
-                                                <table className="table">
+                                                <table className="table table-responsive">
                                                     <thead>
                                                     <tr>
                                                         <th scope="col">Index</th>

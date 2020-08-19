@@ -8,24 +8,26 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.leftside-menubar')
-            </div>
-            <div class="col-md-10" id="main-container">
+            <div class="col-lg-auto" id="side-navbar">
+            @include('layouts.leftside-menubar')
+        </div>
 
 
-                    <div class="card  col-12 border-0 ">
-                        <h4 class="card-header">My Events</h4>
+        <div class="col-lg mr-3" id="main-container">
+
+
+                    <div class="card p-0 col-12 border-1 border-messenger m-3 ">
+                        <h4 class="card-header bg-messenger text-white">My Events</h4>
                         <div class="card-body">
-                            <div class="row justify-content-start">
-                            <div class="col-6" id="calendar"> </div>
-                            <div class="col-2 mt-auto mb-auto">
+                            <div class="row justify-content-center">
+                            <div class="col-xl-7 col-lg-9 col-md-10 col-sm-12" id="calendar"> </div>
+                            <div class="col-10  mt-3 ">
 
                                     <table class="table  table-bordered">
                                         <thead>
                                         <tr>
 
-                                            <th scope="col">Absent days</th>
+                                            <th class="bg-dark text-white" scope="col">Absent days</th>
 
                                         </tr>
                                         </thead>
@@ -45,11 +47,11 @@
                 </div>
 
                 @if(isset($classTimeTable) || isset($teacherTimeTable))
-                    <div class="card  col-12 border-0 ">
-                        <h4 class="card-header">My Time-Table</h4>
+                    <div class="card p-0 col-12 border-1 border-orange m-3 ">
+                        <h4 class="card-header bg-orange text-white">My Time-Table</h4>
                         <div class="card-body">
-                            <div class="row ">
-                                <div  class="col-6" id="timeTable"></div>
+                            <div class="row justify-content-center">
+                                <div  class="col-xl-7 col-lg-9 col-md-10 col-sm-12" id="timeTable"></div>
                             </div>
                         </div>
                     </div>
@@ -69,9 +71,16 @@
             var calendar = new Calendar(calendarEl, {
                 plugins: [ dayGridPlugin ,listPlugin,bootstrapPlugin ],
                 handleWindowResize: true,
-                headerToolbar: { left: 'prev,next today',
+                headerToolbar: {
+                    left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,listMonth'
+                    right:""
+
+                },
+                footerToolbar:{
+
+                    center: 'dayGridMonth,listMonth'
+
                 },
                 dayMaxEvents: 1, // for all non-TimeGrid views
                 titleFormat:{

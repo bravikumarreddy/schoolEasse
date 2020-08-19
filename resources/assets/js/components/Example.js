@@ -81,7 +81,7 @@ class Example extends React.Component {
                         <div className="card-header text-white bg-warning">Student List</div>
                         <div className="card-body">
 
-                            <table className="table table-data-div table-hover">
+                            <table className="table table-data-div  table-responsive-sm table-hover">
                                 <thead>
                                 <tr>
                                     <th>Name</th>

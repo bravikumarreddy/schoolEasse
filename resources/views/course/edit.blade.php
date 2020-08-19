@@ -5,10 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-10" id="main-container">
+
+
+        <div class="col-lg" id="main-container">
             <h2>@lang('Edit Course Data')</h2>
             @if (session('status'))
                 <div class="alert alert-success">

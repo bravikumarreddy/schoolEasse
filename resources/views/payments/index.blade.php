@@ -9,10 +9,12 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.leftside-menubar')
-            </div>
-            <div class="col-md-10" id="main-container">
+            <div class="col-lg-auto" id="side-navbar">
+            @include('layouts.leftside-menubar')
+        </div>
+
+
+        <div class="col-lg" id="main-container">
                 <div class="card border-0">
                     @if(count(array($user)) > 0)
                         <div class="card-body">
@@ -86,7 +88,7 @@
                     <h4 class="card-heading">Payment List</h4>
                     <div class="card-body">
 
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-responsive-sm table-hover">
                             <thead>
                             <tr>
                                 <th>Fee Structure Name</th>

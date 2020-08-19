@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -17,7 +17,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-10" id="main-container">
+        <div class="col-lg" id="main-container">
             <h2>Admins</h2>
             <div class="panel panel-default">
                 @if(count($admins) > 0)

@@ -187,18 +187,18 @@ class Communicate extends React.Component {
                                 this.createMessage();
                             }}>
 
-                                <div className="col-6 mb-3 form-group row">
-                                    <label className=" col-4 col-form-label" htmlFor="title">Message Title</label>
-                                    <div className="col-6">
+                                <div className="col-10 mb-3 form-group">
+                                    <label className=" col-sm-auto col-form-label" htmlFor="title">Message Title</label>
+                                    <div className="col-12">
                                         <input className="form-control" id="title" type="text" required={true}
                                                value={this.state.title} onChange={(event)=>{this.setState({title:event.target.value})}}
                                                placeholder="Title"/>
                                     </div>
                                 </div>
 
-                                <div className="form-group row col-6 mb-3">
-                                    <label className="col-4  col-form-label" htmlFor="from">Message</label>
-                                    <div className="col-8">
+                                <div className="form-group  col-10 mb-3">
+                                    <label className="col-sm-auto  col-form-label" htmlFor="from">Message</label>
+                                    <div className="col-12">
                                         <textarea className="form-control" id="message" placeholder="message" aria-label="With textarea"
 
                                         maxLength={1499} value={this.state.message}
@@ -214,11 +214,12 @@ class Communicate extends React.Component {
 
 
 
+                                <div className="form-group  col-10 mb-3  ">
 
-
-                                <button type="submit" className="btn btn-success ml-2">
+                                <button type="submit" className="btn ml-3 btn-success ">
                                     Send Message
                                 </button>
+                                    </div>
 
                             </form>
                         </div>
@@ -235,16 +236,16 @@ class Communicate extends React.Component {
                         Communication Log
                     </div>
                     <div className="card-body">
-                        <ul className="list-group col-10">
+                        <ul className="list-group col-12">
                             <li className="list-group-item  d-flex justify-content-between align-items-center ">
 
-                                <div className="col-2">
+                                <div className="col-sm-auto">
 
                                     <b><span> Index </span></b>
 
 
                                 </div>
-                                <div className="col-8">
+                                <div className="col-sm-auto">
 
                                     <b><span> Title </span></b>
 
@@ -252,7 +253,7 @@ class Communicate extends React.Component {
                                 </div>
 
 
-                                <div className="col-2">
+                                <div className="col-sm-auto">
                                     <b><span> Category </span></b>
                                 </div>
 
@@ -266,17 +267,17 @@ class Communicate extends React.Component {
                                         <li key={val.id} className="list-group-item  d-flex justify-content-between align-items-center ">
 
 
-                                            <div className="col-2">
+                                            <div className="col-sm-auto">
                                                 <span> {(this.state.pagination.current_page-1) * (this.state.pagination.per_page) + index + 1 }</span>
                                             </div>
-                                            <div className="col-8">
+                                            <div className="col-sm-auto">
 
                                                 <span>{val.title} </span>
 
 
                                             </div>
 
-                                            <div className="col-2">
+                                            <div className="col-sm-auto">
                                                 <span> {val.category} </span>
                                             </div>
 

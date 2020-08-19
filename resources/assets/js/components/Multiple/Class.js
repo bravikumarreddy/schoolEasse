@@ -180,11 +180,11 @@ class Class extends React.Component {
 
                 {
                     this.state.class && this.state.classLoading==false ?
-                        <div className="card border-dark mt-4">
+                        <div className="card border-dark mt-4 mb-3">
                             <div className="card-header text-white bg-dark ">Class {this.state.className} - Subjects</div>
                             <div className="card-body">
 
-                                    <ul className="list-group col-6">
+                                    <ul className="list-group col-10">
                                         {this.state.subjects.map( val => (
 
                                             <li key={val.id} className="list-group-item d-flex justify-content-between align-items-center ">{val.name}
@@ -199,17 +199,17 @@ class Class extends React.Component {
                                     </ul>
 
 
-                                <div className="col-5 p-0 mt-4">
+                                <div className="col-12 p-0 mt-4">
 
                                         <form className="form-inline " onSubmit={(event)=> {event.preventDefault(); this.createSubjects()} }>
 
-                                            <div className="form-group">
+                                            <div className="form-group m-3 ">
 
                                                 <input type="text" className="form-control" id="createSubjectName"
                                                        placeholder="Subject name"  value={this.state.createSubjectName} required
                                                        onChange={event => this.setState({createSubjectName:event.target.value})}/>
                                             </div>
-                                                <button type="submit"  className="btn btn-success ml-2 ">
+                                                <button type="submit"  className="btn btn-success  m-3">
                                                     Create subject
                                                 </button>
 
@@ -255,7 +255,7 @@ class Class extends React.Component {
                                    <form onSubmit={(event) => this.assignTeacher(event) }>
 
                                        <div className="form-group row">
-                                           <div className="col-md-4 ">
+                                           <div className="col-sm-auto ">
                                                <label htmlFor="teachers" className="col-form-label">Select teacher</label>
                                                <select value={this.state.selectedTeacher} id="teachers"  className="form-control custom-select" name="teachers"
                                                        onChange={ (event)=> { this.setState({selectedTeacher:event.target.value}) }} required>
@@ -269,17 +269,18 @@ class Class extends React.Component {
                                            </div>
 
                                        </div>
-                                    <ul className="list-group col-8">
+                                    <ul className="list-group col-12">
                                         {this.state.teacherSubjects.map( val => (
 
-                                            <li key={val.id} className="list-group-item d-flex justify-content-between align-items-center ">{val.name}
+                                            <li key={val.id} className="list-group-item d-flex justify-content-between align-items-center ">
+                                                <span className="col-sm-auto">{val.name}</span>
                                                 {val.teacher_id ?
                                                     <div className="row">
-                                                    <h4 className="m-0"> <span
-                                                        className="badge badge-secondary">{val.teacher_name}</span></h4>
-                                                    <button type="button" className="btn btn-danger ml-2 mr-2 "  onClick={()=>this.removeTeacher(val.teacher_subject_id)}>
-                                                       Remove Teacher
-                                                    </button>
+                                                        <h4 className="m-0"> <span
+                                                            className="badge badge-secondary">{val.teacher_name}</span></h4>
+                                                        <button type="button" className="btn btn-danger ml-2 mr-2 "  onClick={()=>this.removeTeacher(val.teacher_subject_id)}>
+                                                           Remove Teacher
+                                                        </button>
                                                     </div>
                                                     :
                                                     <button type="submit"  className="btn btn-success ml-2 mr-2 " onClick={()=>{this.setState({subjectId:val.id})}}>

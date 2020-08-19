@@ -7,11 +7,14 @@
 <div class="container{{ (\Auth::user()->role == 'master')? '' : '-fluid' }}">
     <div class="row">
         @if(\Auth::user()->role != 'master')
-            <div class="col-md-2" id="side-navbar">
+            <div class="col-lg-auto" id="side-navbar">
                 @include('layouts.leftside-menubar')
             </div>
+
+
+
         @else
-        <div class="col-md-3 " id="side-navbar">
+        <div class="col-lg-auto " id="side-navbar">
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ route('schools.index') }}"><i class="material-icons">gamepad</i> <span class="nav-link-text">@lang('Back to Manage School')</span></a>
@@ -19,7 +22,7 @@
             </ul>
         </div>
         @endif
-        <div class="col-md-8" id="main-container">
+        <div class="col-lg" id="main-container">
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}

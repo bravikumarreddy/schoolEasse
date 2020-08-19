@@ -193,23 +193,23 @@ class SchoolEvent extends React.Component {
                             this.state.eventList.map((val,index )=>(
 
 
-                                <li key={val.id} className="list-group-item  d-flex justify-content-between align-items-center ">
+                                <li key={val.id} className="list-group-item  d-flex row justify-content-between align-items-center ">
 
 
 
-                                        <div className="col-3">
+                                        <div className="col-sm-auto m-2">
 
                                                 <span>{val.title} </span>
 
 
                                         </div>
-                                    <div className="col-4">
+                                    <div className="col-sm-auto m-2">
 
                                         <span>{dateformat(val.from,'mmm d, yyyy h:mm ')} - { dateformat(val.to ,'mmm d, yyyy h:mm ')} </span>
 
 
                                     </div>
-                                        <div className="col-3">
+                                        <div className="col-sm-auto m-2">
                                             {val.category =='groups'?
                                                 <span>{val.group_name} </span>
                                                 :
@@ -232,9 +232,9 @@ class SchoolEvent extends React.Component {
                                             }
 
                                         </div>
-                                        <div className="col-2">
+                                        <div className="col-sm-auto m-2">
 
-                                                <button type="button" className="btn btn-sm btn-danger ml-2 mr-2 "  onClick={()=>{this.deleteEvent(val.id)}}>
+                                                <button type="button" className="btn btn-sm btn-danger"  onClick={()=>{this.deleteEvent(val.id)}}>
                                                     delete
                                                 </button>
 
@@ -269,18 +269,18 @@ class SchoolEvent extends React.Component {
                                 this.createEvent();
                             }}>
 
-                                <div className="col-6 mb-3 form-group row">
-                                    <label className=" col-4 col-form-label" htmlFor="title">Event Title</label>
-                                    <div className="col-6">
+                                <div className="col-sm-auto mb-3 form-group ">
+                                    <label className=" col-form-label" htmlFor="title">Event Title</label>
+                                    <div className="">
                                         <input className="form-control" id="title" type="text" required={true}
                                                value={this.state.title} onChange={(event)=>{this.setState({title:event.target.value})}}
                                                placeholder="Title"/>
                                     </div>
                                 </div>
 
-                                <div className="form-group row col-6 mb-3">
-                                    <label className="col-4  col-form-label" htmlFor="from">From</label>
-                                    <div className="col-8">
+                                <div className="form-group  col-sm-auto mb-3">
+                                    <label className=" col-form-label" htmlFor="from">From</label>
+                                    <div className="">
                                      <DatePicker
                                          className="form-control"
                                          selected={this.state.from}
@@ -292,9 +292,9 @@ class SchoolEvent extends React.Component {
                                     </div>
                                 </div>
 
-                                <div className="form-group row col-6 mb-3">
-                                    <label className="col-4  col-form-label" htmlFor="to">To</label>
-                                    <div className="col-8">
+                                <div className="form-group  col-sm-auto mb-3">
+                                    <label className="  col-form-label" htmlFor="to">To</label>
+                                    <div className="">
                                     <DatePicker
                                         className="form-control"
                                         selected={this.state.to}
@@ -306,9 +306,9 @@ class SchoolEvent extends React.Component {
                                     </div>
 
                                 </div>
-                                <div className="form-group row col-6 mb-3">
-                                    <label className="col-4  col-form-label" htmlFor="to">Color</label>
-                                    <div className="col-2">
+                                <div className="form-group  col-sm-auto mb-3">
+                                    <label className="  col-form-label" htmlFor="color">Color &nbsp;</label>
+                                    <div className="col-2 col-sm-4 m-0 p-0">
                                     <input className="form-control" id="color" type="Color"
                                            value={this.state.color}
                                            onChange={(event)=>{this.setState({color:event.target.value})}}

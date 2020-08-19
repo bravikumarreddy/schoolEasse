@@ -11,10 +11,12 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-10" id="main-container">
+
+
+        <div class="col-lg" id="main-container">
             @if(count($students) > 0)
             @foreach ($students as $student)
             <h3>@lang('Course Students of Class'): {{$student->student->section->class->class_number}} @lang('Section'):

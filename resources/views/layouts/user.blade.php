@@ -7,10 +7,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-9">
+
+
+        <div class="col-lg" id="main-container">
             <div class="panel panel-default">
               @if(count($user) > 0)
                 <div class="panel-body">

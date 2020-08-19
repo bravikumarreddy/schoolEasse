@@ -783,18 +783,18 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
       }, this.state.eventList.map(function (val, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
           key: val.id,
-          className: "list-group-item  d-flex justify-content-between align-items-center "
+          className: "list-group-item  d-flex row justify-content-between align-items-center "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-4"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, dateformat__WEBPACK_IMPORTED_MODULE_9___default()(val.from, 'mmm d, yyyy h:mm '), " - ", dateformat__WEBPACK_IMPORTED_MODULE_9___default()(val.to, 'mmm d, yyyy h:mm '), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-3"
+          className: "col-sm-auto m-2"
         }, val.category == 'groups' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.group_name, " ") : "", val.category == 'class' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " Class-", val.class_name, " Sec-", val.section_name, "  ") : "", val.category == 'individual' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, " ", val.user_name, "  ") : "", val.category == 'exam' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Class-", val.exam_class_name, " ", val.exam_name, "  ") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "col-2"
+          className: "col-sm-auto m-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "button",
-          className: "btn btn-sm btn-danger ml-2 mr-2 ",
+          className: "btn btn-sm btn-danger",
           onClick: function onClick() {
             _this2.deleteEvent(val.id);
           }
@@ -812,12 +812,12 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
           _this2.createEvent();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-6 mb-3 form-group row"
+        className: "col-sm-auto mb-3 form-group "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: " col-4 col-form-label",
+        className: " col-form-label",
         htmlFor: "title"
       }, "Event Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-6"
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         className: "form-control",
         id: "title",
@@ -831,12 +831,12 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         },
         placeholder: "Title"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
+        className: "form-group  col-sm-auto mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
+        className: " col-form-label",
         htmlFor: "from"
       }, "From"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
         className: "form-control",
         selected: this.state.from,
@@ -848,12 +848,12 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         showTimeSelect: true,
         dateFormat: "MMMM d, yyyy h:mm aa"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
+        className: "form-group  col-sm-auto mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
+        className: "  col-form-label",
         htmlFor: "to"
       }, "To"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-8"
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
         className: "form-control",
         selected: this.state.to,
@@ -865,12 +865,12 @@ var SchoolEvent = /*#__PURE__*/function (_React$Component) {
         showTimeSelect: true,
         dateFormat: "MMMM d, yyyy h:mm aa"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row col-6 mb-3"
+        className: "form-group  col-sm-auto mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-4  col-form-label",
-        htmlFor: "to"
-      }, "Color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-2"
+        className: "  col-form-label",
+        htmlFor: "color"
+      }, "Color \xA0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-2 col-sm-4 m-0 p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         className: "form-control",
         id: "color",

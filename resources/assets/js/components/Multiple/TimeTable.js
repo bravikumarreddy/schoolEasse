@@ -185,7 +185,7 @@ class TimeTable extends React.Component {
                 {this.state.classes ?
                     <div>
                         <h4>Class Time Table</h4>
-                        <div className="card border-info mt-4">
+                        <div className="card border-info mt-4 mb-3" >
                             <div className="card-header text-white bg-info">Select Class And Section</div>
                             <div className="card-body">
                                 <div className="form-group row">
@@ -225,17 +225,17 @@ class TimeTable extends React.Component {
                         {this.state.teacherSubjects.length && this.state.section?
 
 
-                            <div className='mt-4 mb-4'>
-                                <ul className="list-group col-8">
+                            <div className='m-3'>
+                                <ul className="list-group col-10">
                                     {this.state.teacherSubjects.map(val => (
 
                                         <li key={val.teacher_subject_id} className="list-group-item">
 
-                                            <div className="row">
-                                                <div className="col-3">
+                                            <div className="row justify-content-between align-items-center">
+                                                <div className="col-sm-auto m-2">
                                                     {val.name}
                                                 </div>
-                                                <div className="col-4">
+                                                <div className="col-sm-auto m-2">
                                                     {val.teacher_id ?
                                                         <span>{val.teacher_name} </span>
                                                         :
@@ -243,9 +243,9 @@ class TimeTable extends React.Component {
 
                                                     }
                                                 </div>
-                                                <div className="col-3">
+                                                <div className="col-sm-auto m-2">
                                                     {val.teacher_id ?
-                                                        <button type="button" className="btn btn-sm btn-orange ml-2 mr-2 "  onClick={()=>{this.getTimeTable(val.teacher_subject_id,val.teacher_id)}}>
+                                                        <button type="button" className="btn btn-sm btn-orange  "  onClick={()=>{this.getTimeTable(val.teacher_subject_id,val.teacher_id)}}>
                                                             Select Teacher
                                                          </button>
                                                         :
@@ -253,7 +253,7 @@ class TimeTable extends React.Component {
 
                                                     }
                                                 </div>
-                                                <div className="col-2">
+                                                <div className="col-sm-auto m-2">
                                                     {val.teacher_subject_id == this.state.teacher_subject?
                                                         <h5  >
                                                             <span className="badge badge-pill badge-success">Selected</span>
@@ -280,9 +280,133 @@ class TimeTable extends React.Component {
                         }
                         {this.state.teacherLoading == false && this.state.teacher ?
                             <React.Fragment>
+                                <div className="card border-indigo mt-4 mb-4">
+                                    <div className="card-header text-white bg-indigo">Create Time Table</div>
+                                    <div className="card-body">
+
+                                        <div className='mt-4 mb-4'>
+                                            <ul className="list-group col-10  ">
+                                                {this.state.classEvents.map(val => (
+
+                                                    <li key={val.time_table_id} className="list-group-item  d-flex justify-content-between align-items-center">
+                                                        <div className="row">
+
+
+                                                            <div className="col-sm-auto m-2">
+                                                                {val.name}
+                                                            </div>
+                                                            <div className="col-sm-auto m-2">
+
+                                                                <span>{val.teacher_name} </span>
+
+
+                                                            </div>
+
+                                                            <div className="col-sm-auto m-2">
+
+                                                                <span> {val.from + " - " + val.to} </span>
+
+                                                            </div>
+                                                            <div className="col-sm-auto m-2">
+
+                                                                <span> {weekday[val.day_of_the_week]} </span>
+
+                                                            </div>
+                                                            <div className="col-sm-auto m-2">
+
+                                                                <button type="button"
+                                                                        className="btn btn-sm btn-danger  "
+                                                                        onClick={() => {
+                                                                            this.deleteTimeTable(val.time_table_id)
+                                                                        }}>
+                                                                    Delete
+                                                                </button>
+
+
+                                                            </div>
+
+
+                                                        </div></li>
+
+
+                                                ))}
+                                            </ul>
+                                        </div>
+
+
+                                        <div className="col-5 p-0 mt-4">
+
+                                            <form onSubmit={(event) => {
+                                                event.preventDefault();
+                                                this.createTimeTable()
+                                            }}>
+
+                                                <div className="form-group">
+                                                    <div className="col-sm-auto mb-3">
+                                                        <label className="col-form-label" htmlFor="week">Day of the
+                                                            week</label>
+                                                        <select value={this.state.dayOfTheWeek} id="week"
+                                                                className="form-control"
+                                                                onChange={(event) => this.setState({dayOfTheWeek: event.target.value})}
+                                                                required>
+                                                            <option value="">Select</option>
+                                                            <option value="0">Sunday</option>
+                                                            <option value="1">Monday</option>
+                                                            <option value="2">Tuesday</option>
+                                                            <option value="3">Wednesday</option>
+                                                            <option value="4">Thursday</option>
+                                                            <option value="5">Friday</option>
+                                                            <option value="6">Saturday</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-sm-auto mb-3">
+                                                        <label className=" d-inline-block pl-0 col-form-label" htmlFor="from">From</label>
+                                                    <br/>
+                                                        <DatePicker
+                                                            selected={this.state.from}
+                                                            onChange={(value) => this.setState({from: value})}
+                                                            showTimeSelect
+                                                            showTimeSelectOnly
+                                                            timeIntervals={15}
+                                                            timeCaption="Time"
+                                                            dateFormat="h:mm aa"
+                                                            className="form-control"
+                                                            required={true}
+                                                        />
+
+                                                    </div>
+                                                    <div className="col-sm-auto mb-3">
+                                                        <label className=" d-inline-block pl-0 col-form-label" htmlFor="to">To</label>
+                                                        <br/>
+                                                        <DatePicker
+                                                            selected={this.state.to}
+                                                            onChange={(value) => this.setState({to: value})}
+                                                            showTimeSelect
+                                                            showTimeSelectOnly
+                                                            timeIntervals={15}
+                                                            timeCaption="Time"
+                                                            dateFormat="h:mm aa"
+                                                            className="form-control"
+                                                            required={true}
+                                                        />
+
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" className="btn btn-success ml-3 ">
+                                                    Create time table
+                                                </button>
+
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
                                 <div className='row justify-content-center'>
 
-                                    <div className='card col-5 border-0 m-3'>
+                                    <div className='card col-sm-12 col-md-10 border-0 m-3'>
                                         <h4 className="card-header"> Teacher Time Table</h4>
                                         <div className='card-body'>
 
@@ -322,7 +446,7 @@ class TimeTable extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div className='card col-5 border-0 m-3'>
+                                    <div className='card  col-sm-12 col-md-10 border-0 m-3'>
                                         <h4 className="card-header"> Class Time Table</h4>
                                         <div className='card-body'>
 
@@ -364,128 +488,7 @@ class TimeTable extends React.Component {
                                 </div>
 
 
-                                <div className="card border-indigo mt-4 mb-4">
-                                    <div className="card-header text-white bg-indigo">Create Time Table</div>
-                                    <div className="card-body">
 
-                                        <div className='mt-4 mb-4'>
-                                            <ul className="list-group col-10  ">
-                                                {this.state.classEvents.map(val => (
-
-                                                    <li key={val.time_table_id} className="list-group-item d-flex justify-content-between align-items-center">
-
-
-                                                            <div className="col-2">
-                                                                {val.name}
-                                                            </div>
-                                                            <div className="col-2">
-
-                                                                <span>{val.teacher_name} </span>
-
-
-                                                            </div>
-
-                                                            <div className="col-2">
-
-                                                                <span> {val.from + " - " + val.to} </span>
-
-                                                            </div>
-                                                        <div className="col-2">
-
-                                                            <span> {weekday[val.day_of_the_week]} </span>
-
-                                                        </div>
-                                                            <div className="col-2">
-
-                                                                <button type="button"
-                                                                        className="btn btn-sm btn-danger ml-2 mr-2 "
-                                                                        onClick={() => {
-                                                                            this.deleteTimeTable(val.time_table_id)
-                                                                        }}>
-                                                                    Delete
-                                                                </button>
-
-
-                                                            </div>
-
-
-
-                                                    </li>
-
-
-                                                ))}
-                                            </ul>
-                                        </div>
-
-
-                                        <div className="col-5 p-0 mt-4">
-
-                                            <form onSubmit={(event) => {
-                                                event.preventDefault();
-                                                this.createTimeTable()
-                                            }}>
-
-                                                <div className="form-group row">
-                                                    <div className="col-4 mb-3">
-                                                        <label className="col-form-label" htmlFor="week">Day of the
-                                                            week</label>
-                                                        <select value={this.state.dayOfTheWeek} id="week"
-                                                                className="form-control"
-                                                                onChange={(event) => this.setState({dayOfTheWeek: event.target.value})}
-                                                                required>
-                                                            <option value="">Select</option>
-                                                            <option value="0">Sunday</option>
-                                                            <option value="1">Monday</option>
-                                                            <option value="2">Tuesday</option>
-                                                            <option value="3">Wednesday</option>
-                                                            <option value="4">Thursday</option>
-                                                            <option value="5">Friday</option>
-                                                            <option value="6">Saturday</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="col-4 mb-3">
-                                                        <label className="col-12 pl-0 col-form-label" htmlFor="from">From</label>
-                                                        <DatePicker
-                                                            selected={this.state.from}
-                                                            onChange={(value) => this.setState({from: value})}
-                                                            showTimeSelect
-                                                            showTimeSelectOnly
-                                                            timeIntervals={15}
-                                                            timeCaption="Time"
-                                                            dateFormat="h:mm aa"
-                                                            className="form-control"
-                                                            required={true}
-                                                        />
-
-                                                    </div>
-                                                    <div className="col-4 mb-3">
-                                                        <label className="col-12 pl-0 col-form-label" htmlFor="to">To</label>
-                                                        <DatePicker
-                                                            selected={this.state.to}
-                                                            onChange={(value) => this.setState({to: value})}
-                                                            showTimeSelect
-                                                            showTimeSelectOnly
-                                                            timeIntervals={15}
-                                                            timeCaption="Time"
-                                                            dateFormat="h:mm aa"
-                                                            className="form-control"
-                                                            required={true}
-                                                        />
-
-                                                    </div>
-                                                </div>
-
-                                                <button type="submit" className="btn btn-success">
-                                                    Create time table
-                                                </button>
-
-                                            </form>
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
 
                             </React.Fragment>:""
                         }

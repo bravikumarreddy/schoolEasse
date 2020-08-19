@@ -1026,7 +1026,7 @@ function Individual(props) {
       className: "badge badge-messenger"
     }, "  ", val.role)));
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-md-8  mb-3 mt-3 "
+    className: "col-md-10  mb-3 mt-3 "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "list-group pt-1 "
   }, selectedUsers.map(function (val, index) {
@@ -1034,11 +1034,11 @@ function Individual(props) {
       key: val.id,
       className: "list-group-item  d-flex justify-content-between align-items-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "col-6"
+      className: "col-sm-auto"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, val.name, " \xA0\xA0 \xA0\xA0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
       className: "badge badge-messenger"
     }, "  ", val.role)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "col-3"
+      className: "col-sm-auto"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
       type: "button",
       className: "btn btn-sm btn-danger ml-2 mr-2 ",

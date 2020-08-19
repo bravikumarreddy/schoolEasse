@@ -5,10 +5,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-8" id="main-container">
+        <div class="col-lg" id="main-container">
             <h2>@lang('Marks and Grades of All Classes')</h2>
             <div class="card border-0">
               @if(count($classes) > 0)

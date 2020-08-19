@@ -5,17 +5,18 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.leftside-menubar')
-            </div>
+            <div class="col-lg-auto" id="side-navbar">
+            @include('layouts.leftside-menubar')
+        </div>
 
-            <div class="col-md-10" id="main-container">
+
+        <div class="col-lg" id="main-container">
 
 
                 <div class="card border-0" >
                     <div class="card-body">
                         <h4 class="card-title"> @lang('Courses Related to Section')</h4>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-responsive-sm">
                             <thead class="thead-dark">
                             <tr>
 

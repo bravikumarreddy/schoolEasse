@@ -214,7 +214,7 @@ class FeeGroups extends React.Component {
                                     <div className="card-body p-0">
 
                                         {this.state.fee_structures.length ?
-                                            <table className="table mt-4 table-data-div   table-hover  table-bordered">
+                                            <table className="table mt-4 table-data-div  table-responsive-sm table-hover  table-bordered">
                                                 <thead className="thead-light">
                                                 <tr>
                                                     <th>Fee Structure Name</th>
@@ -481,7 +481,7 @@ class FeeGroups extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer text-muted">
+                                    <div className="card-footer text-muted">
                                         <form className="float-right" id="form-id" method="post" action="/fees/fee_groups/delete">
                                             <input type="hidden" name="_token" value={csrf_token} />
                                             <input type="hidden" name="id" value={this.state.fee_group}/>

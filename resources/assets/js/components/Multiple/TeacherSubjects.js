@@ -179,28 +179,28 @@ class TeacherSubjects extends React.Component {
 
                                                     <li key={index} className="list-group-item ">
                                                         <div className="row">
-                                                            <span className="col-2 d-flex justify-content-between align-items-center"> {val.name}</span>
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">Class - {val.class_number} Section - {val.section_number}</span>
+                                                            <span className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> {val.name}</span>
+                                                            <span className="col-sm-auto m-2 d-flex justify-content-between align-items-center">Class - {val.class_number} Section - {val.section_number}</span>
 
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">
+                                                            <span className="col-sm-auto m-2 d-flex justify-content-between align-items-center">
                                                                     <button className="btn btn-sm btn-success" onClick={( )=>{ this.getExams(val.subject_id,val.class_id,val.section_id,val.class_number)}} >
                                                                             Assign Marks
                                                                         </button>
                                                             </span>
 
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">
+                                                            <span className="col-sm-auto m-2 d-flex justify-content-between align-items-center">
                                                                     <a className="btn btn-sm btn-orange" href={`attendance/daily-attendance/${val.class_id}/${val.section_id}` }  >
                                                                             Take Attendance
                                                                     </a>
                                                             </span>
 
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">
+                                                            <span className="col-sm-auto m-2 d-flex justify-content-between align-items-center">
                                                                     <a className="btn btn-sm btn-messenger" href={`/assignment/${val.teacher_subject_id}` }  >
                                                                             Assignments
                                                                     </a>
                                                             </span>
 
-                                                            <span className="col-2 d-flex justify-content-between align-items-center">
+                                                            <span className="col-sm-auto m-2 d-flex justify-content-between align-items-center">
                                                                     <a className="btn btn-sm btn-indigo" href={`/syllabus/${val.teacher_subject_id}/${val.subject_id}` }  >
                                                                             Syllabus
                                                                     </a>
@@ -282,77 +282,114 @@ class TeacherSubjects extends React.Component {
 
 
 
-                                        <ul className="list-group col-12 m-3">
-                                            <li  className="list-group-item ">
+                                        <table className="table-responsive-md  table m-3">
+                                            <thead  >
 
-                                                <div className="row">
-                                                    <form className="form-row col-12 m-0 b-0 ">
-                                                <span
-                                                    className="col-2 d-flex justify-content-between align-items-center text-center"> <b>Name</b> </span>
-                                                <span
-                                                    className="col-2 d-flex justify-content-between align-items-center"> <b>Code</b> </span>
-                                                <span
-                                                    className="col-4 d-flex justify-content-between align-items-center"> <b>marks / maxMarks </b></span>
+                                            <tr>
+                                                <td><span
+                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center text-center"> <b>Name</b> </span>
+                                                </td>
+                                                <td><span
+                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> <b>Code</b> </span>
+                                                </td>
+                                                <td>
 
-                                                <span
-                                                    className="col-2 d-flex justify-content-between align-items-center"> <b>Grade </b></span>
-                                                <span
-                                                    className="col-2 d-flex justify-content-between align-items-center"> <b>Action</b> </span>
-                                                    </form>
-                                                </div>
+                                                    <span
+                                                        className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> <b>marks / maxMarks </b></span>
+                                                </td>
 
-                                            </li>
+                                                <td><span
+                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> <b>Grade </b></span>
+                                                </td>
+                                                <td><span
+                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> <b>Action</b> </span>
+                                                </td>
+
+                                            </tr>
+
+                                            </thead>
+                                            <tbody >
                                             {this.state.studentList.map( (val,index) => (
 
-                                                <li key={index} className="list-group-item ">
-                                                    <div className="row text-center">
-                                                        <form className="form-row col-12 m-0 b-0 " onSubmit={(event => {event.preventDefault();this.submitMarks(this.state.studentMarksList[index],val.student_user_id,this.state.gradeList[index]) })}>
-                                                        <span className="col-2 d-flex justify-content-between align-items-center"> {val.name}</span>
-                                                        <span className="col-2 d-flex justify-content-between align-items-center">{val.student_code}</span>
+
+                                                    <tr key={index}  className=" text-center">
+                                                        <td><span
+                                                            className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> {val.name}</span></td>
+                                                        <td><span
+                                                            className="col-sm-auto m-2 d-flex justify-content-between align-items-center">{val.student_code}</span></td>
                                                         {val.id == null ?
                                                             <React.Fragment>
-                                                                <div className="input-group col-4  pr-3 d-flex justify-content-between align-items-center">
-                                                                            <input type="hidden" name="grade" value={this.state.gradeList[index]} />
+
+                                                                    <td>
+                                                                        <div
+                                                                            className="input-group  ">
+                                                                            <input type="hidden" name="grade"
+                                                                                   value={this.state.gradeList[index]}/>
                                                                             <input
-                                                                            type="number" className="form-control" aria-label="Small" min={0} max={this.state.maxMarks}
-                                                                            aria-describedby="inputGroup-sizing-sm" value={this.state.studentMarksList[index] || 0}
-                                                                            onChange={(event => this.changeMarks(index,event.target.value))} required name="marks"
+                                                                                type="number" className="form-control"
+                                                                                aria-label="Small" min={0}
+                                                                                max={this.state.maxMarks}
+                                                                                aria-describedby="inputGroup-sizing-sm"
+                                                                                value={this.state.studentMarksList[index] || 0}
+                                                                                onChange={(event => this.changeMarks(index, event.target.value))}
+                                                                                required name="marks"
 
                                                                             />
-                                                                    <div className="input-group-append">
-                                                                            <span class="input-group-text" >/</span> <span class="input-group-text">{this.state.maxMarks}</span>
-                                                                    </div>
-                                                                </div>
+                                                                            <div className="input-group-append">
+                                                                                <span
+                                                                                    className="input-group-text">/</span>
+                                                                                <span
+                                                                                    className="input-group-text">{this.state.maxMarks}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
 
 
-                                                                    <span className="col-2 d-flex justify-content-between align-items-center">{this.state.gradeList[index]}</span>
+                                                                    <td><span
+                                                                        className="col-sm-auto m-2 d-flex justify-content-between align-items-center">{this.state.gradeList[index]}</span></td>
 
-                                                                    <span className="col-2 d-flex justify-content-between align-items-center">
-                                                                            <button className="btn btn-sm btn-success" onClick={( )=>{ }} >
-                                                                                    Submit
-                                                                                </button>
-                                                                    </span>
+                                                                    <td><span
+                                                                        className="col-sm-auto m-2 d-flex justify-content-between align-items-center">
+                                                                            <form className="form-row col-12 m-0 b-0 " onSubmit={(event => {event.preventDefault();this.submitMarks(this.state.studentMarksList[index],val.student_user_id,this.state.gradeList[index]) })}>
+
+                                                                                    <button className="btn btn-sm btn-success"
+                                                                                            onClick={() => {
+                                                                                            }}>
+                                                                                            Submit
+                                                                                        </button>
+                                                                            </form>
+                                                                    </span></td>
+
+
 
                                                             </React.Fragment>
                                                         :
 
                                                             <React.Fragment>
-                                                                 <span className="col-4 d-flex justify-content-between align-items-center"> {val.marks} / {val.max_marks} </span>
-                                                                <span className="col-2 d-flex justify-content-between align-items-center">{val.grade}</span>
-                                                                <span className="col-2 d-flex justify-content-between align-items-center">
-                                                                                <button className="btn btn-sm btn-danger" onClick={( )=>{ this.removeMarks(val.id)}} >
+                                                                <td><span
+                                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center"> {val.marks} / {val.max_marks} </span></td>
+                                                                <td><span
+                                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center">{val.grade}</span></td>
+                                                                <td><span
+                                                                    className="col-sm-auto m-2 d-flex justify-content-between align-items-center">
+                                                                                <button
+                                                                                    className="btn btn-sm btn-danger"
+                                                                                    onClick={() => {
+                                                                                        this.removeMarks(val.id)
+                                                                                    }}>
                                                                                         Remove
                                                                                 </button>
-                                                                        </span>
+                                                                        </span></td>
 
                                                             </React.Fragment>
                                                         }
-                                                        </form>
-                                                    </div>
-                                                </li>
+                                                    </tr>
+                                                //</form>
+
 
                                             ))}
-                                        </ul>
+                                            </tbody>
+                                        </table>
 
 
                                         :

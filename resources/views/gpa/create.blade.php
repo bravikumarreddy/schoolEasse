@@ -3,10 +3,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-8" id="main-container">
+        <div class="col-lg" id="main-container">
             <div class="card border-0">
 
 

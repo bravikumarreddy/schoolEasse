@@ -6,11 +6,11 @@
 <div class="container-fluid">
     <div class="row">
         @if(Auth::user()->role !== 'master')
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
         @else
-        <div class="col-md-2">
+        <div class="col-lg-auto">
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('create-school')}}"><i class="material-icons">gamepad</i> @lang('Manage School')</a>
@@ -18,7 +18,7 @@
             </ul>
         </div>
         @endif
-        <div class="col-md-10" id="main-container">
+        <div class="col-lg" id="main-container">
             <div class="panel panel-default">
                 <div class="page-panel-title">
                     @lang('Change Password')

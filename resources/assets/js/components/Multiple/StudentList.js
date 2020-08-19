@@ -73,7 +73,7 @@ class StudentList extends React.Component {
                 {this.state.classes ?
                     <div>
                         <h4>Students List</h4>
-                        <div className="card border-info mt-4">
+                        <div className="card border-info mt-4 mb-3">
                             <div className="card-header text-white bg-info">Select Class And Section</div>
                             <div className="card-body">
                                 <div className="form-group row">
@@ -118,7 +118,7 @@ class StudentList extends React.Component {
                                         <label htmlFor="filterText" className="col-form-label">Filter by name</label>
                                     <input type='text' id='filterText' className="form-control" placeholder="name" value={this.state.filterText} onChange={(event)=>{this.setState({filterText:event.target.value})}} />
                                     </div>
-                                    <table className="table table-bordered table-hover">
+                                    <table className="table table-bordered table-hover table-responsive-sm">
                                         <thead>
                                         <tr>
                                             <th scope="col">Name</th>

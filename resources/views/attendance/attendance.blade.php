@@ -5,10 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-10" id="main-container">
+
+
+        <div class="col-lg" id="main-container">
             <ol class="breadcrumb" style="margin-top: 3%;">
                 <li><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">@lang('All Classes') &amp; @lang('Sections')</a></li>
                 <li class="active">@lang('Attendance')</li>

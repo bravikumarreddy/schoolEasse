@@ -85,7 +85,7 @@ function Individual(props) {
 
             </div>
 
-            <div className="col-md-8  mb-3 mt-3 ">
+            <div className="col-md-10  mb-3 mt-3 ">
                 <ul className="list-group pt-1 ">
                             {
                                 selectedUsers.map((val, index) => (
@@ -94,11 +94,11 @@ function Individual(props) {
                                         <li key={val.id}
                                             className="list-group-item  d-flex justify-content-between align-items-center">
 
-                                            <div className="col-6">
+                                            <div className="col-sm-auto">
                                             <span>{val.name} &nbsp;&nbsp; &nbsp;&nbsp;</span>
                                                 <span className="badge badge-messenger">  {val.role}</span>
                                             </div>
-                                            <div className="col-3">
+                                            <div className="col-sm-auto">
                                                 <button type="button" className="btn btn-sm btn-danger ml-2 mr-2 "  onClick={()=>{deleteUser(index)}}>
                                                     delete
                                                 </button>

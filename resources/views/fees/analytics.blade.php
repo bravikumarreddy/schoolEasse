@@ -6,11 +6,12 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.leftside-menubar')
-            </div>
+            <div class="col-lg-auto" id="side-navbar">
+            @include('layouts.leftside-menubar')
+        </div>
 
-                    <div class="col-md-10" id="main-container">
+
+        <div class="col-lg" id="main-container">
                         <div class="row">
                                 <div class="offset-1 col-md-4" >
                                          <canvas id="myChart" width="100px" height="100px"></canvas>

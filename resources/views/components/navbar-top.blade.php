@@ -1,44 +1,43 @@
-<nav class="navbar navbar-light bg-white navbar-static-top navbar-expand-lg p-0">
-    <div class="container">
-        <div class="navbar-header">
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation" aria-controls="navbarSupportedContent" >
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="  bg-white  p-0 border">
+    <div class="container d-sm-flex ">
+        <div class="d-flex row justify-content-around">
 
-            <a class="navbar-brand" href="{{ url('/home') }}" style="color: #000;">
+            <a class="navbar-brand align-self-center" href="{{ url('/home') }}" style="color: #000;">
                 {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher' ||
                 Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
                 'librarian')) ? Auth::user()->school->name:config('app.name') }}
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex align-items-center justify-content-between ml-md-auto" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
 
             <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav ml-auto">
+
                 <!-- Authentication Links -->
                 @guest
-                <li> <a href="{{ route('login') }}" style="color: #000;">@lang('Login')</a></li>
+                <a href="{{ route('login') }}" style="color: #000;">@lang('Login')</a>
                 @else
 
 
-                <li class="nav-item">
+
                     <a href="{{url('messages')}}" class="nav-link nav-link-align-btn"
                         role="button">
-                        <i class="material-icons text-muted">@lang('email')</i>
+
                         <?php
                             $mc = \App\Message::where('user_id',\Auth::user()->id)->where('read',"=",'0')->count();
                         ?>
                         @if($mc > 0)
-                        <h7><span class="badge badge-danger" style="vertical-align: middle;border-style: none;border-radius: 50%;width: 20px;height: 20px;">{{$mc}}</span></h7>
+                                <div class="row">
+                                    <div class="col-sm-auto"><i class="material-icons  d-inline text-muted">@lang('email')</i><span
+                                            class="badge badge-danger badge-pill d-inline">{{$mc}}</span></div></div>
+                        @else
+                                <i class="material-icons text-muted">@lang('email')</i>
                         @endif
                     </a>
-                </li>
 
-                <li class="nav-item dropdown ">
+
+                <div class="nav-item dropdown ">
                     <a href="#" class="nav-link dropdown-toggle nav-link-align-btn text-dark " id="navbarDropdown" data-toggle="dropdown" role="button"
                         aria-expanded="false" aria-haspopup="true">
                         <span class="badge badge-danger">
@@ -86,9 +85,9 @@
                             </form>
 
                     </div>
-                </li>
+                </div>
                 @endguest
-            </ul>
+
         </div>
     </div>
 </nav>

@@ -10,10 +10,12 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-10" id="main-container">
+
+
+        <div class="col-lg" id="main-container">
             <h2>@lang('All Classes and Sections')</h2>
             <div id="accordion">
                 <div class="card border-0" id="cls-sec">

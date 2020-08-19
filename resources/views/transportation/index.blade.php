@@ -5,11 +5,12 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.leftside-menubar')
-            </div>
+            <div class="col-lg-auto" id="side-navbar">
+            @include('layouts.leftside-menubar')
+        </div>
 
-            <div class="col-md-10" id="main-container">
+
+        <div class="col-lg" id="main-container">
 
                 @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
                     <div class="card  mt-4 overflow-hidden border-yellow ">
@@ -49,7 +50,7 @@
                 </div>
 
                 @endif
-                    <table class="table mt-4 table-bordered">
+                    <table class="table mt-4 table-bordered table-responsive-sm">
                         <thead>
                         <tr>
                             <th scope="col">#</th>

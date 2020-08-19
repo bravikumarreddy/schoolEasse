@@ -5,10 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
+        <div class="col-lg-auto" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-10" id="main-container">
+
+
+        <div class="col-lg" id="main-container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="margin-top: 3%;">
                     @if(isset($_GET['grade']) && $_GET['grade'] == 1)

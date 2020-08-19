@@ -124,7 +124,7 @@ class DailyAttendance extends React.Component {
 
         return (
             <div>
-                <div className="card border-info mt-4">
+                <div className="card border-info mt-4 mb-3">
                     <div className="card-header text-white bg-info">Select Class And Section</div>
                     <div className="card-body">
                         <div className="form-group row">
@@ -214,16 +214,10 @@ class DailyAttendance extends React.Component {
                             <input type="hidden" name="session" value={this.state.session}/>
 
 
-                            <table ref={el => this.el = el} className="table table-bordered  table-hover">
+                            <table ref={el => this.el = el} className="table table-bordered table-responsive-sm table-hover">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Student Code</th>
-                                    <th>Class</th>
-                                    <th>Section</th>
-                                    <th>Status</th>
-
-
                                     <th>
                                         <div className="custom-control  custom-checkbox">
                                             <input type="checkbox" className=" bg-success custom-control-input" id="selectAll"
@@ -235,6 +229,14 @@ class DailyAttendance extends React.Component {
 
                                         </div>
                                     </th>
+                                    <th>Status</th>
+                                    <th>Student Code</th>
+                                    <th>Class</th>
+                                    <th>Section</th>
+
+
+
+
 
 
 
@@ -244,16 +246,6 @@ class DailyAttendance extends React.Component {
                                 { this.state.studentList.map( (val,index) => (
                                     <tr key={val.student_id}>
                                         <td>{val.name}</td>
-                                        <td>{val.student_code}</td>
-                                        <td>{val.class_id}</td>
-                                        <td>{val.section_number}</td>
-                                        <th>
-                                            {this.state.selectStudentsList[index]?
-                                            <h5>  <span className="badge badge-pill badge-secondary badge-success" >Present </span></h5>:
-                                                <h5> <span className="badge badge-pill badge-secondary badge-danger" >Absent </span></h5>
-                                            }
-                                        </th>
-
                                         <td>
 
                                             <div className="custom-control custom-checkbox">
@@ -268,6 +260,18 @@ class DailyAttendance extends React.Component {
                                             </div>
 
                                         </td>
+                                        <th>
+                                            {this.state.selectStudentsList[index]?
+                                                <h5>  <span className="badge badge-pill badge-secondary badge-success" >Present </span></h5>:
+                                                <h5> <span className="badge badge-pill badge-secondary badge-danger" >Absent </span></h5>
+                                            }
+                                        </th>
+                                        <td>{val.student_code}</td>
+                                        <td>{val.class_id}</td>
+                                        <td>{val.section_number}</td>
+
+
+
 
                                     </tr>
                                 ))}
