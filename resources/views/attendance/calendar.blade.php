@@ -240,9 +240,10 @@
 
                     },
                     events: [
+
                             @foreach($classTimeTable as $timetable)
                                 {
-                                    title: "{{$timetable->name}} ({{$timetable.teacher_name}})" ,
+                                    title: "{{$timetable->name}} ({{$timetable->teacher_name}})" ,
                                     daysOfWeek:[{{ $timetable->day_of_the_week }}],
                                     startTime:"{{$timetable->from}}",
                                     endTime:"{{$timetable->to}}",

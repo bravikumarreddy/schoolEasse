@@ -19,7 +19,7 @@
   </li>
 </ul>
 @endif--}}
-<nav class="navbar navbar-expand-lg  border-0  navbar-dark bg-dark p-0 bg-primary" >
+<nav class="navbar navbar-expand-lg           border-0  navbar-dark bg-dark p-0 bg-primary" >
 
 
 

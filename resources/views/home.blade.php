@@ -12,7 +12,7 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-auto" id="side-navbar">
+        <div class="col-lg-auto " id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
 
